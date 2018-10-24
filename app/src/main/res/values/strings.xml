@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">PiontAndPiont2</string>
+    <string name="appName">点滴之间</string>
+    <string name="register">新用户注册</string>
+    <string name="login">登录</string>
+    <string name="username">账号</string>
+    <string name="userpasswd">密码</string>
+    <string name="forgetpasswd">忘记密码</string>
 </resources>
