@@ -1,4 +1,4 @@
-package com.example.zhw.piontandpiont2.Websockets;
+package com.example.zhw.piontandpiont2.Networksockets;
 
 import com.example.zhw.piontandpiont2.Util.WsStatus;
 import com.neovisionaries.ws.client.WebSocket;

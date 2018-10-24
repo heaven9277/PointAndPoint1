@@ -6,4 +6,7 @@
     <string name="username">账号</string>
     <string name="userpasswd">密码</string>
     <string name="forgetpasswd">忘记密码</string>
+    <string name="repasswd">确认密码</string>
+    <string name="telphone">手机号</string>
+    <string name="suiji">随机码</string>
 </resources>

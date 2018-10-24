@@ -6,8 +6,8 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
-import com.example.zhw.piontandpiont2.Websockets.WsManager;
-import static com.example.zhw.piontandpiont2.Websockets.WsManager.getInstance;
+import com.example.zhw.piontandpiont2.Networksockets.WsManager;
+import static com.example.zhw.piontandpiont2.Networksockets.WsManager.getInstance;
 
 
 //服务类
