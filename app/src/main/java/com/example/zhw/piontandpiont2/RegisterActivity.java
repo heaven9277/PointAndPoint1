@@ -1,5 +1,6 @@
 package com.example.zhw.piontandpiont2;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import com.example.zhw.piontandpiont2.Util.Jsonpack;
 import com.example.zhw.piontandpiont2.Util.VifycationCode;
 import com.example.zhw.piontandpiont2.vdieo.CustomVideoView;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -123,19 +125,42 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     public void onResponse(Call call, Response response) throws IOException {
                         //得到服务器返回的具体内容
                         String responseData=response.body().string();
-
                         System.out.println(responseData);
-                       // parseJSONWithGSON(responseData);
-                        //显示UI界面，调用的showResponse方法
-                       // showResponse(responseData.toString());
+                        if (response != null){
+                            String status = parseJSONWithGSON(responseData);
+                            System.out.println(status);
+                            if (status.equals("success")){
+                                //Toast.makeText(RegisterActivity.this,"用户注册成功",Toast.LENGTH_LONG).show();
+                                //跳转到登陆页面
+                                Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+                                startActivity(intent);
+                            }else{
+                               // Toast.makeText(RegisterActivity.this,"用户注册失败",Toast.LENGTH_LONG).show();
+                            }
+                            //显示UI界面，调用的showResponse方法
+                            // showResponse(responseData.toString());
+                        }else
+                            System.out.println("返回数据为空");
                     }
                     @Override
                     public void onFailure(Call call,IOException e){
                         //在这里进行异常情况处理
+                        //Toast.makeText(RegisterActivity.this,"网络出错，请检查网络",Toast.LENGTH_LONG).show();
                     }
                 });
             }
         }).start();
+    }
+    public String parseJSONWithGSON(String json){
+        JSONObject jsonObject;
+        String status = "";
+        try {
+            jsonObject = new JSONObject(json);
+            status = jsonObject.getString("status");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return status;
     }
     //背景视频部分
 

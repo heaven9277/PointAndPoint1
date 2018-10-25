@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         register.setOnClickListener(this);
         forgetpasswd.setOnClickListener(this);
     }
-
     @Override
     public void onClick(View view) {
         int id = view.getId();
@@ -64,6 +63,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intentRegister);
                 break;
             case R.id.forgetpasswd:
+                Intent intentForget = new Intent(this,ForgetPwActivity.class);
+                startActivity(intentForget);
                 break;
             default:
                 break;
