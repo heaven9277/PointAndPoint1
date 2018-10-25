@@ -31,12 +31,13 @@
 
         <service android:name=".Services.MyServer" />
 
-        <activity android:name=".ForgetPwActivity"></activity>
+        <activity android:name=".ForgetPwActivity" />
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity android:name=".UpdatePwActivity"></activity>
     </application>
 
 </manifest>

@@ -14,4 +14,12 @@ public class Jsonpack {
         String json = gson.toJson(userRegister);
         return json;
     }
+    //返回忘记密码的json数据
+    public static String getRepsswdJosn(String telphone,String passwd ){
+        Forgetpw forgetpw = new Forgetpw(passwd,telphone);
+        Gson gson = new Gson();
+        //使用Gson将对象转换为json字符串
+        String repassed_json = gson.toJson(forgetpw);
+        return repassed_json;
+    }
 }
