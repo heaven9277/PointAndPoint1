@@ -2,10 +2,10 @@ package com.example.zhw.piontandpiont2.Util;
 //忘记密码的工具类
 public class Forgetpw {
     String newPassword;
-    String telphone;
+    String telephone;
     public Forgetpw(String password,String telphone){
         this.newPassword = password;
-        this.telphone = telphone;
+        this.telephone = telphone;
     }
 
     public String getNewPassword() {
@@ -17,10 +17,10 @@ public class Forgetpw {
     }
 
     public String getTelphone() {
-        return telphone;
+        return telephone;
     }
 
-    public void setTelphone(String telphone) {
-        this.telphone = telphone;
+    public void setTelphone(String telephone) {
+        this.telephone = telephone;
     }
 }

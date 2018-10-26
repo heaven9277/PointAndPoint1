@@ -12,6 +12,9 @@ import android.widget.Toast;
 import com.example.zhw.piontandpiont2.Networksockets.HttpUtil;
 import com.example.zhw.piontandpiont2.Util.Jsonpack;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -89,7 +92,14 @@ public class UpdatePwActivity extends AppCompatActivity implements View.OnClickL
         }).start();
     }
     public String parseJSONWithGSON(String pareJson){
-
-        return "";
+        JSONObject jsonObject;
+        String status = "";
+        try {
+            jsonObject = new JSONObject(pareJson);
+            status = jsonObject.getString("status");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return status;
     }
 }

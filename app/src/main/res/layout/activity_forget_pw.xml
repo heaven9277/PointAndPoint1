@@ -55,7 +55,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_gravity="center_horizontal"
-        android:text="发送验证码"
+        android:text="点击获取短信验证码"
         android:textColor="#fff"
         android:background="@drawable/btnback"/>
     <LinearLayout

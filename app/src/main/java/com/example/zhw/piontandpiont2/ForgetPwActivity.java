@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.ActivityCompat;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.zhw.piontandpiont2.Util.TeleVify;
 import com.mob.MobSDK;
 
 import cn.smssdk.EventHandler;
@@ -25,7 +27,8 @@ import cn.smssdk.SMSSDK;
 public class ForgetPwActivity extends AppCompatActivity implements View.OnClickListener {
     public Button btn_vify,btn_commitVify;
     public EditText et_usertelphone,et_telVify;
-
+    public CountDownTimer countDownTimer;
+    public   int TIME = 60;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,14 +66,18 @@ public class ForgetPwActivity extends AppCompatActivity implements View.OnClickL
             case R.id.btn_vify:
                 System.out.println("点击 +"+et_usertelphone.getText().toString().length()+"  "+et_usertelphone.getText().toString());
                 if (et_usertelphone.getText().toString() != null & et_usertelphone.getText().toString().trim().length() == 11){
-                    //发送短信权限
-                    if(ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED){
-                        //显示申请权限弹窗
-                        showRequestPermission();
-                    }else{
-                        //弹窗确认
-                        alterWarning();
-                    }
+                   if (TeleVify.isMobileNO(et_usertelphone.getText().toString().trim())){
+                       //发送短信权限
+                       if(ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED){
+                           //显示申请权限弹窗
+                           showRequestPermission();
+                       }else{
+                           //弹窗确认
+                           alterWarning();
+                       }
+                   }else{
+                       Toast.makeText(this,"这不是手机号，请重新输入",Toast.LENGTH_LONG).show();
+                   }
                 }
                 break;
             case R.id.btn_commitVify:
@@ -145,9 +152,26 @@ public class ForgetPwActivity extends AppCompatActivity implements View.OnClickL
                         //通过sdk发送短信验证（请求获取短信验证码，在监听（eventHandle）中返回）
                         SMSSDK.getVerificationCode("86", et_usertelphone.getText().toString().trim());
 
-                        //SMSSDK.getVerificationCode(country, phoneEdit.getText().toString());
+
                         //设置获取验证码按钮不能点击
                         btn_vify.setClickable(false);
+                        btn_vify.setBackgroundResource(R.drawable.btnback_black);
+                        //倒计时，执行次数为（TIME+1）*1000/1000,countDownTimer每次执行间隔：1000（单位为毫秒）
+                        countDownTimer  = new CountDownTimer((TIME+1)*1000, 1000) {
+                             @Override
+                          public void onTick(long millisUntilFinished) {
+                                 btn_vify.setText(TIME-- + "秒后再次获取验证码");
+                          }
+
+                                   @Override
+                            public void onFinish() {
+                                       //设置获取验证码按钮可以点击
+                                    btn_vify.setClickable(true);
+                                    btn_vify.setBackgroundResource(R.drawable.btnback);
+                                    btn_vify.setText("点击获取短信验证码");
+                                                            }
+                         };
+                        countDownTimer.start();
 
                         break;
                     case Dialog.BUTTON_NEGATIVE:
@@ -173,13 +197,13 @@ public class ForgetPwActivity extends AppCompatActivity implements View.OnClickL
             } else if (msg.what == -8) {
                 //btn.setText("获取验证码");
                 btn_vify.setClickable(true);
-
+                btn_vify.setBackgroundResource(R.drawable.btnback);
             } else {
                 int event = msg.arg1;
                 int result = msg.arg2;
                 Object data = msg.obj;
 
-                System.out.println("event=" + event);
+                System.out.println("event=" + event + "  "+ msg.what);
 
                 if (result == SMSSDK.RESULT_COMPLETE) {
                     // 短信注册成功后，返回MainActivity,然后提示

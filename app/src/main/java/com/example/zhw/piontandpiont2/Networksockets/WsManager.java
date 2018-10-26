@@ -99,7 +99,6 @@ public class WsManager {
             setStatus(WsStatus.CONNECT_FAIL);
         }
 
-
         @Override
         public void onDisconnected(WebSocket websocket, WebSocketFrame serverCloseFrame, WebSocketFrame clientCloseFrame, boolean closedByServer)
                 throws Exception {

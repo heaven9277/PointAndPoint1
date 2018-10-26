@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.zhw.piontandpiont2.Networksockets.HttpUtil;
 import com.example.zhw.piontandpiont2.Util.Jsonpack;
+import com.example.zhw.piontandpiont2.Util.TeleVify;
 import com.example.zhw.piontandpiont2.Util.VifycationCode;
 import com.example.zhw.piontandpiont2.vdieo.CustomVideoView;
 
@@ -74,22 +75,26 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     String vify = et_vify.getText().toString().trim();
 
                     if (!username.isEmpty() && !passwd.isEmpty() && !telphone.isEmpty()){
-                        if (passwd.equals(repasswd)){
-                            if (Code.equals(vify)){//验证码是否一样
-                                //开始把信息分装为json数据
-                                json = Jsonpack.getJosn(username,passwd,telphone);
-                                System.out.println(json);
-                                //发送数据
-                                sendOkhttpInfo();
-                            }else{
-                                updateVify();
-                                Toast.makeText(this,"验证码不正确",Toast.LENGTH_LONG).show();
+                       if (TeleVify.isMobileNO(telphone)){
+                           if (passwd.equals(repasswd)){
+                               if (Code.equals(vify)){//验证码是否一样
+                                   //开始把信息分装为json数据
+                                   json = Jsonpack.getJosn(username,passwd,telphone);
+                                   System.out.println(json);
+                                   //发送数据
+                                   sendOkhttpInfo();
+                               }else{
+                                   updateVify();
+                                   Toast.makeText(this,"验证码不正确",Toast.LENGTH_LONG).show();
 
-                            }
-                        }else{
-                            updateVify();
-                            Toast.makeText(this,"两次密码不相同，请重新输入",Toast.LENGTH_LONG).show();
-                        }
+                               }
+                           }else{
+                               updateVify();
+                               Toast.makeText(this,"两次密码不相同，请重新输入",Toast.LENGTH_LONG).show();
+                           }
+                       }else{
+                           Toast.makeText(this,"这不是手机号，请重新输入",Toast.LENGTH_LONG).show();
+                       }
                     }else {
                             updateVify();
                         Toast.makeText(this,"信息不能为空",Toast.LENGTH_LONG).show();

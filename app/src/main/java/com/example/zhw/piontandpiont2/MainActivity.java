@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.IBinder;
@@ -58,11 +59,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 System.out.println("开始测试");
                 break;
             case R.id.register:
+                register.setTextColor(Color.parseColor("#09A3DC"));
                 //跳转到注册页面
                 Intent intentRegister = new Intent(this,RegisterActivity.class);
                 startActivity(intentRegister);
                 break;
             case R.id.forgetpasswd:
+                forgetpasswd.setTextColor(Color.parseColor("#09A3DC"));
                 Intent intentForget = new Intent(this,ForgetPwActivity.class);
                 startActivity(intentForget);
                 break;
@@ -84,5 +87,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void onServiceDisconnected(ComponentName componentName) {
 
         }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        register.setTextColor(Color.parseColor("#000000"));
+        forgetpasswd.setTextColor(Color.parseColor("#ffffff"));
     }
 }

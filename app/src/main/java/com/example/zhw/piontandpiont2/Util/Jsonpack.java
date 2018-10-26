@@ -22,4 +22,12 @@ public class Jsonpack {
         String repassed_json = gson.toJson(forgetpw);
         return repassed_json;
     }
+    //放回登录的json数据
+    public static String getLoginJosn(String operateId,String uuid,String password ){
+        UserRegister userRegister = new UserRegister(operateId,uuid,password);
+        Gson gson = new Gson();
+        //使用Gson将对象转换为json字符串
+        String Login_json = gson.toJson(userRegister);
+        return Login_json;
+    }
 }
