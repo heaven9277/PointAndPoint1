@@ -32,14 +32,20 @@ public class MyServer extends Service {
     public class MyIBider extends Binder {
         //自定义操作
         //初始化WEBASOCKET
+
         public void initWebsocket(){
-            wsManager = getInstance();
+            wsManager = WsManager.getInstance();
             if (wsManager != null){
                 //进行连接
                 wsManager.init();
             }
         }
         //连接Websocket的方法，返回一个boolean类型
+        public void sendData(String username,String userpasswd){
+            if (username != null && userpasswd != null){
+
+            }
+        }
         //得到一个websocket的方法
         //定义两个参数的方法来接受输入框的用户名和密码的方法，来等待WEbscoket连接成功然后把参数传送上去服务器
 

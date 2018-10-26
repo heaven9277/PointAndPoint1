@@ -23,11 +23,11 @@ public class Jsonpack {
         return repassed_json;
     }
     //放回登录的json数据
-    public static String getLoginJosn(String operateId,String uuid,String password ){
-        UserRegister userRegister = new UserRegister(operateId,uuid,password);
+    public static String getLoginJosn(String uuid,String password ){
+        UserLogin userLogin = new UserLogin(1,uuid,password);
         Gson gson = new Gson();
         //使用Gson将对象转换为json字符串
-        String Login_json = gson.toJson(userRegister);
+        String Login_json = gson.toJson(userLogin);
         return Login_json;
     }
 }

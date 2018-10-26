@@ -1,20 +1,20 @@
 package com.example.zhw.piontandpiont2.Util;
 
 public class UserLogin {
-    public String operateId;
+    public int operateId;
     public String uuid;
     public String password;
-    public UserLogin(String operateId,String uuid,String password){
+    public UserLogin(int operateId,String uuid,String password){
         this.operateId = operateId;
         this.uuid = uuid;
         this.password = password;
     }
 
-    public String getOperateId() {
+    public int getOperateId() {
         return operateId;
     }
 
-    public void setOperateId(String operateId) {
+    public void setOperateId(int operateId) {
         this.operateId = operateId;
     }
 
