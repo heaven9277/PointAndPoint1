@@ -38,6 +38,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".UpdatePwActivity"></activity>
+        <service android:name=".Services.MyServer" />
     </application>
 
 </manifest>

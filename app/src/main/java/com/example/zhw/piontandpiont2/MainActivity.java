@@ -2,20 +2,26 @@ package com.example.zhw.piontandpiont2;
 
 import android.app.Service;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.zhw.piontandpiont2.Services.MyServer;
+import com.example.zhw.piontandpiont2.Util.PareJson;
 import com.example.zhw.piontandpiont2.vdieo.CustomVideoView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -26,7 +32,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView register;
     private MyServer.MyIBider myIBinder;
     private MyConn myConn;
-    private CustomVideoView videovie;
+    public static Context context;
+    private static Handler mHandler = new Handler(Looper.getMainLooper()){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            System.out.println("接收到信息");
+            int what = msg.what;
+            String text = (String) msg.obj;
+            switch (what){
+                case 5:
+                    //登陆失败
+                    Toast.makeText(context,PareJson.getJsonInfo(text),Toast.LENGTH_LONG).show();
+                    break;
+                case 6:
+                    //登陆成功
+                    Intent homeIntent = new Intent(context,HomeActivity.class);
+                    homeIntent.putExtra("data",text);
+                    context.startActivity(homeIntent);
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,19 +73,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_login.setOnClickListener(this);
         register.setOnClickListener(this);
         forgetpasswd.setOnClickListener(this);
+        context = this;
+        if (myConn == null){
+            myConn = new MyConn();
+        }
+        //绑定服务
+        Intent intentService  = new Intent(this,MyServer.class);
+        bindService(intentService,myConn, Service.BIND_AUTO_CREATE);
+
+
     }
+
+
     @Override
     public void onClick(View view) {
         int id = view.getId();
         switch (id){
             case  R.id.btn_login:
-                if (myConn == null){
-                    myConn = new MyConn();
-                }
-                //绑定服务
-                Intent intentService  = new Intent(this,MyServer.class);
-                bindService(intentService,myConn, Service.BIND_AUTO_CREATE);
-                System.out.println("开始测试");
+                myIBinder.sendData(username.getText().toString().trim(),userpasswd.getText().toString().trim());
+
                 break;
             case R.id.register:
                 register.setTextColor(Color.parseColor("#09A3DC"));
@@ -80,7 +115,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             myIBinder = (MyServer.MyIBider) iBinder;
             System.out.println("服务成功绑定，等待操作");
-
+            //连接websocket
+            myIBinder.initWebsocket();
         }
         //当服务失去连接调用的方法
         @Override
@@ -94,5 +130,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onRestart();
         register.setTextColor(Color.parseColor("#000000"));
         forgetpasswd.setTextColor(Color.parseColor("#ffffff"));
+    }
+
+    class MyThread extends Thread{
+        @Override
+        public void run() {
+            super.run();
+            //开始发送数据
+            myIBinder.initWebsocket();
+        }
+    }
+    public static Handler getHandler(){
+        return mHandler;
     }
 }
