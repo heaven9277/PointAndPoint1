@@ -49,7 +49,6 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
             android:hint="@string/userpasswd"
-            android:password="true"
             android:paddingLeft="8dp"
             android:background="@drawable/whiteround"/>
         <Button

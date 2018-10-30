@@ -1,8 +1,6 @@
 package com.example.zhw.piontandpiont2;
 
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,29 +24,8 @@ public class UpdatePwActivity extends AppCompatActivity implements View.OnClickL
     public Button btn_updatepw;
     public EditText et_passwd,et_repasswd;
     String telphone;
-    public final String url = "http://172.17.146.120:8080/password/post"; //网址
+    public final String url = "http://172.17.146.19:8080/register/post"; //网址
     String update_passwd_json;
-    Handler handler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what){
-                case 3:
-                    //跳转到登陆页面
-                    Toast.makeText(UpdatePwActivity.this,"密码更改成功，请重新登陆",Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(UpdatePwActivity.this,MainActivity.class);
-                    startActivity(intent);
-                    break;
-                case 4:
-                    et_passwd.setText("");
-                    et_repasswd.setText("");
-                    Toast.makeText(UpdatePwActivity.this,"密码更改失败，请重新输入",Toast.LENGTH_LONG).show();
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,8 +34,7 @@ public class UpdatePwActivity extends AppCompatActivity implements View.OnClickL
         et_passwd =findViewById(R.id.et_passwd);
         et_repasswd = findViewById(R.id.et_repasswd);
         btn_updatepw.setOnClickListener(this);
-       /// telphone = getIntent().getStringExtra("telphone");
-        telphone = "13763034604";
+        telphone = getIntent().getStringExtra("telphone");
     }
 
     @Override
@@ -93,13 +69,13 @@ public class UpdatePwActivity extends AppCompatActivity implements View.OnClickL
                         if (response != null){
                             String status = parseJSONWithGSON(responseData);
                             System.out.println(status);
-                            Message msg = new Message();
                             if (status.equals("success")){
-                                msg.what = 3;
-                                handler.sendMessage(msg);
+                                //Toast.makeText(RegisterActivity.this,"用户注册成功",Toast.LENGTH_LONG).show();
+                                //跳转到登陆页面
+                                Intent intent = new Intent(UpdatePwActivity.this,MainActivity.class);
+                                startActivity(intent);
                             }else{
-                                msg.what = 4;
-                                handler.sendMessage(msg);
+                                // Toast.makeText(RegisterActivity.this,"用户注册失败",Toast.LENGTH_LONG).show();
                             }
                             //显示UI界面，调用的showResponse方法
                             // showResponse(responseData.toString());

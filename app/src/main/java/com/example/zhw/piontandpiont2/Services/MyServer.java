@@ -3,30 +3,17 @@ package com.example.zhw.piontandpiont2.Services;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
-import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 import com.example.zhw.piontandpiont2.Networksockets.WsManager;
-import com.example.zhw.piontandpiont2.Util.Jsonpack;
-import com.neovisionaries.ws.client.WebSocket;
-
-import java.nio.ByteBuffer;
-
 import static com.example.zhw.piontandpiont2.Networksockets.WsManager.getInstance;
-import static com.example.zhw.piontandpiont2.Util.WsStatus.CONNECT_SUCCESS;
 
 
 //服务类
 
 public class MyServer extends Service {
     WsManager wsManager;
-    WebSocket webSocket;
-    //发送心跳包
-    //定义每15分钟想服务器发一条没用的数据
-    private long sendTime = 0L;
-    private final long HEART_BEAT_RATE = 5*60*1000;
-    private Handler mHandler = new Handler();
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -40,36 +27,7 @@ public class MyServer extends Service {
 
     @Override
     public boolean onUnbind(Intent intent) {
-
-        wsManager.disconnect();
         return super.onUnbind(intent);
-    }
-    //发送心跳包
-    private Runnable hreatBeatRunnable = new Runnable() {
-        @Override
-        public void run() {
-            if (System.currentTimeMillis() - sendTime  >= HEART_BEAT_RATE){
-                if (webSocket != null){
-                    boolean isSuccess = getConnStatus();
-                    if (!isSuccess){
-                        mHandler.removeCallbacks(hreatBeatRunnable);
-                        webSocket = null;
-                        new MyIBider().initWebsocket();
-                    }else{
-                        //处于长连接
-                    }
-                    sendTime = System.currentTimeMillis();
-
-                }
-                mHandler.postDelayed(this, HEART_BEAT_RATE);//每隔一定的时间，对长连接进行一次心跳检测
-            }
-        }
-    };
-    private Boolean getConnStatus(){
-        if (wsManager.getStatus() == CONNECT_SUCCESS){
-            return true;
-        }
-        return false;
     }
     public class MyIBider extends Binder {
         //自定义操作
@@ -77,38 +35,25 @@ public class MyServer extends Service {
 
         public void initWebsocket(){
             wsManager = WsManager.getInstance();
-            System.out.println("进入这里外面webscoket");
-            if (wsManager == null){
+            if (wsManager != null){
                 //进行连接
                 wsManager.init();
-                wsManager = WsManager.getInstance();
-                System.out.println("进入这里webscoket");
             }
-            webSocket = wsManager.getWebsocket();
-
-            mHandler.postDelayed(hreatBeatRunnable, HEART_BEAT_RATE);//开启心跳检测
         }
-
-        //发送数据
+        //连接Websocket的方法，返回一个boolean类型
         public void sendData(String username,String userpasswd){
-            initWebsocket();
             if (username != null && userpasswd != null){
-                    String login_json = Jsonpack.getLoginJosn(username,userpasswd);
-                    ByteBuffer bf = getByteBuffer(login_json);
-                    webSocket.sendBinary(bf.array());
 
-                    System.out.println("发送用户名和密码数据");
             }
         }
-        /**
-         * String 转换 ByteBuffer
-         * @param str
-         * @return
-         */
-        public ByteBuffer getByteBuffer(String str)
-        {
-            return ByteBuffer.wrap(str.getBytes());
-        }
-    }
+        //得到一个websocket的方法
+        //定义两个参数的方法来接受输入框的用户名和密码的方法，来等待WEbscoket连接成功然后把参数传送上去服务器
 
+        //定义在接受服务器消息后就接受消息，解析json然后根据返回码对数据进行分类，分发给定义的几个类，进行消息的分发
+
+        //然后在类里面进行操作
+
+        //先定义几个解析json数据的工具类，例如用来存储账号密码的工具类。
+
+    }
 }

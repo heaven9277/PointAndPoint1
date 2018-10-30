@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -34,39 +32,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public Button btn_register;
     public EditText et_username,et_passwd,et_repasswd,et_vify,et_telphone;
     public TextView tv_vifys;//随机验证码
-    public final String url = "http://172.17.147.184:8080/register/post"; //网址
+    public final String url = "http://172.17.146.19:8080/register/post"; //网址
     public String json=""; //josn数据
-    public String TOAST = "";
+
     //随机生成验证码
     VifycationCode vifycationCode;
     String Code="";
     LinearLayout linearLayout;
-    Handler handler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what){
-                case 1:
-                    et_username.setText("");
-                    et_passwd.setText("");
-                    et_repasswd.setText("");
-                    et_telphone.setText("");
-                    et_vify.setText("");
-                    updateVify();
-                    Toast.makeText(RegisterActivity.this,TOAST,Toast.LENGTH_LONG).show();
-                    break;
-                case 2:
-                    Toast.makeText(RegisterActivity.this,TOAST,Toast.LENGTH_LONG).show();
-                    //跳转到登陆页面
-                    Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
-                    startActivity(intent);
-                    break;
-                default:
-                    break;
-
-            }
-        }
-    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -152,29 +124,23 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         new Thread(new Runnable() {
             @Override
             public void run() {
-
                 //在子线程中执行Http请求，并将最终的请求结果回调到okhttp3.Callback中
                 HttpUtil.sendOkHttpRequest(url,json,new okhttp3.Callback(){
-
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
                         //得到服务器返回的具体内容
                         String responseData=response.body().string();
                         System.out.println(responseData);
-                        Message message = new Message();
                         if (response != null){
                             String status = parseJSONWithGSON(responseData);
-                            TOAST = parseJSONWithGSONInfo(responseData);
                             System.out.println(status);
-                            System.out.println(TOAST);
                             if (status.equals("success")){
-
-                                message.what = 2;
-                                handler.sendMessage(message);
-
+                                //Toast.makeText(RegisterActivity.this,"用户注册成功",Toast.LENGTH_LONG).show();
+                                //跳转到登陆页面
+                                Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+                                startActivity(intent);
                             }else{
-                                message.what = 1;
-                                handler.sendMessage(message);
+                               // Toast.makeText(RegisterActivity.this,"用户注册失败",Toast.LENGTH_LONG).show();
                             }
                             //显示UI界面，调用的showResponse方法
                             // showResponse(responseData.toString());
@@ -184,7 +150,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void onFailure(Call call,IOException e){
                         //在这里进行异常情况处理
-
+                        //Toast.makeText(RegisterActivity.this,"网络出错，请检查网络",Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -200,17 +166,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             e.printStackTrace();
         }
         return status;
-    }
-    public String parseJSONWithGSONInfo(String json){
-        JSONObject jsonObject;
-        String info = "";
-        try {
-            jsonObject = new JSONObject(json);
-            info = jsonObject.getString("information");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return info;
     }
     //背景视频部分
 
@@ -253,5 +208,4 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         super.onStop();
         videoview.stopPlayback();
     }
-
 }
