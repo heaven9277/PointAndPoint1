@@ -8,10 +8,24 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+
+    <!--//读取系统信息，包含系统版本等信息，用作统计-->
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <!--//允许sd卡读权限，需读取地图数据，禁用后无法显示地图-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--//获取统计数据
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>-->
+    <!--//鉴权所需该权限获取进程列表-->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <!--//使用步行AR导航，配置Camera权限-->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!--//网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
 
     <application
         android:allowBackup="true"
@@ -28,7 +42,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegisterActivity" />
-
+        <activity android:name=".HomeActivity"/>
         <service android:name=".Services.MyServer" />
 
         <activity android:name=".ForgetPwActivity" />
@@ -38,6 +52,15 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".UpdatePwActivity"></activity>
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote"/>
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="3lNYggyLcPDc9uZ6h4Ii8glu9soceEPW" />
+
     </application>
 
 </manifest>

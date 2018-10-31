@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.Window;
 
 import com.example.zhw.piontandpiont2.Adapter.FragAdapter;
 import com.example.zhw.piontandpiont2.Fragment.ChatFragment;
@@ -30,36 +29,12 @@ public class HomeActivity extends AppCompatActivity {
     MenuItem menuItem1,menuItem2,menuItem3;
     BottomNavigationView navigation;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            //  menuItem=item;
-            switch (item.getItemId()) {
-                case R.id.navigation_chat:
-                    // mTextMessage.setText("白名单");
-                    viewPager.setCurrentItem(0);
-                    return true;
-                case R.id.navigation_message:
-                    //  mTextMessage.setText("黑名单");
-                    viewPager.setCurrentItem(1);
-                    return true;
-                case R.id.navigation_user:
-                    //  mTextMessage.setText("设置");
-                    viewPager.setCurrentItem(2);
-                    return true;
-            }
-            return false;
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // 设置为没有标题栏，也可以在AndroidManifest.xml文件设置
-        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+  //      supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 
 // 请求添加自定义标题栏
 // requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
@@ -70,7 +45,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         //  mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         initView();
@@ -131,5 +106,28 @@ public class HomeActivity extends AppCompatActivity {
         });
 
     }
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            //  menuItem=item;
+            switch (item.getItemId()) {
+                case R.id.navigation_chat:
+                    // mTextMessage.setText("白名单");
+                    viewPager.setCurrentItem(0);
+                    return true;
+                case R.id.navigation_message:
+                    //  mTextMessage.setText("黑名单");
+                    viewPager.setCurrentItem(1);
+                    return true;
+                case R.id.navigation_user:
+                    //  mTextMessage.setText("设置");
+                    viewPager.setCurrentItem(2);
+                    return true;
+            }
+            return false;
+        }
+    };
 
 }

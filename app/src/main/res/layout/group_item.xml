@@ -4,8 +4,8 @@
     android:layout_height="65dp">
     <ImageView
         android:id="@+id/siv_icon"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
