@@ -29,6 +29,8 @@ public class ChatFragment extends Fragment {
         chat_listView = view.findViewById(R.id.chat_listView);
         myBaseAdapter = new MyBaseAdapter();
         chat_listView.setAdapter(myBaseAdapter);
+        String str = getArguments().getString("data");
+        System.out.println("得到界面的数据"+str);
     }
     class MyBaseAdapter extends BaseAdapter{
 

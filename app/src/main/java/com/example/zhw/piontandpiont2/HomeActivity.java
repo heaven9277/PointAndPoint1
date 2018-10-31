@@ -68,9 +68,11 @@ public class HomeActivity extends AppCompatActivity {
         //从登陆界面得到数据
         Intent intent = getIntent();
         data = intent.getStringExtra("data");
+        System.out.println(data+"接收到的信息");
 
         initView();
         initListener();
+        sendDataChatFragemtn(data);
     }
     private void initView() {
         //在主布局中根据id找到ViewPager
@@ -126,6 +128,11 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+    }
+    public void sendDataChatFragemtn(String data){
+        Bundle bundle = new Bundle();
+        bundle.putString("data",data);
+        chatFragment.setArguments(bundle);
     }
 
 }
