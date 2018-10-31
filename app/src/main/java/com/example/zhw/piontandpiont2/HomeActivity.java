@@ -1,5 +1,6 @@
 package com.example.zhw.piontandpiont2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -9,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.Window;
+import android.widget.ListView;
 
 import com.example.zhw.piontandpiont2.Adapter.FragAdapter;
 import com.example.zhw.piontandpiont2.Fragment.ChatFragment;
@@ -18,7 +20,7 @@ import com.example.zhw.piontandpiont2.Fragment.UserFragment;
 import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
-
+    public String data;
     private ArrayList<Fragment> fragments;
     //声明四个导航对应fragment
     ChatFragment chatFragment;
@@ -30,6 +32,7 @@ public class HomeActivity extends AppCompatActivity {
     MenuItem menuItem1,menuItem2,menuItem3;
     BottomNavigationView navigation;
 
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -38,15 +41,15 @@ public class HomeActivity extends AppCompatActivity {
             //  menuItem=item;
             switch (item.getItemId()) {
                 case R.id.navigation_chat:
-                    // mTextMessage.setText("白名单");
+                    // mTextMessage.setText("");
                     viewPager.setCurrentItem(0);
                     return true;
                 case R.id.navigation_message:
-                    //  mTextMessage.setText("黑名单");
+                    //  mTextMessage.setText("");
                     viewPager.setCurrentItem(1);
                     return true;
                 case R.id.navigation_user:
-                    //  mTextMessage.setText("设置");
+                    //  mTextMessage.setText("");
                     viewPager.setCurrentItem(2);
                     return true;
             }
@@ -57,21 +60,14 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // 设置为没有标题栏，也可以在AndroidManifest.xml文件设置
-        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-
-// 请求添加自定义标题栏
-// requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-        //    setContentView(R.layout.activity_main);
-// 设置自定义标题栏布局
-// getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title_bar);
-
         setContentView(R.layout.activity_home);
 
-        //  mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        //从登陆界面得到数据
+        Intent intent = getIntent();
+        data = intent.getStringExtra("data");
 
         initView();
         initListener();

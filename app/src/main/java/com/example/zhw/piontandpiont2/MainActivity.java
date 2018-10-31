@@ -51,13 +51,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int id = view.getId();
         switch (id){
             case  R.id.btn_login:
-                if (myConn == null){
+                Intent intent = new Intent(this,HomeActivity.class);
+                startActivity(intent);
+             /*   if (myConn == null){
                     myConn = new MyConn();
                 }
                 //绑定服务
                 Intent intentService  = new Intent(this,MyServer.class);
                 bindService(intentService,myConn, Service.BIND_AUTO_CREATE);
-                System.out.println("开始测试");
+                System.out.println("开始测试");*/
                 break;
             case R.id.register:
                 register.setTextColor(Color.parseColor("#09A3DC"));

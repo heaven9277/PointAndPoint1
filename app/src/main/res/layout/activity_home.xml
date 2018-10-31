@@ -8,7 +8,7 @@
         android:id="@+id/title"
         android:layout_width="fill_parent"
         android:layout_height="45dp"
-        android:background="#281f1d"
+        android:background="#272A2D"
         android:layout_marginTop="24dp"
         >
         <TextView
@@ -16,9 +16,11 @@
             android:layout_height="50dp"
             android:layout_alignParentLeft="true"
             android:text="点滴之间"
+            android:textStyle="bold"
             android:textColor="#ffffff"
-            android:gravity="center"
-            android:textSize="25px"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="7dp"
+            android:textSize="14sp"
             />
         <Button
             android:id="@+id/home_add"
@@ -44,15 +46,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/title"
         >
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:background="@drawable/icon"
-            android:layout_marginTop="-8dp"
-            android:layout_marginRight="18dp"
-            android:layout_alignParentRight="true"
-            />
         <Button
             android:id="@+id/group_search"
             android:layout_width="60dp"
@@ -76,8 +69,6 @@
             android:background="@drawable/rectangle"
             android:layout_toLeftOf="@id/group_search" />
     </RelativeLayout>
-
-
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
