@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
 import android.view.Window;
 import android.widget.ListView;
 
@@ -32,8 +33,31 @@ public class HomeActivity extends AppCompatActivity {
     MenuItem menuItem1,menuItem2,menuItem3;
     BottomNavigationView navigation;
 
+<<<<<<< HEAD
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
+=======
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // 设置为没有标题栏，也可以在AndroidManifest.xml文件设置
+        //      supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+
+// 请求添加自定义标题栏
+// requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+        //    setContentView(R.layout.activity_main);
+// 设置自定义标题栏布局
+// getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title_bar);
+
+        setContentView(R.layout.activity_home);
+
+        //  mTextMessage = (TextView) findViewById(R.id.message);
+        BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+                = new BottomNavigationView.OnNavigationItemSelectedListener(){
+
+>>>>>>> 2df29da99b5956664b63894848639361ba4fc589
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -56,10 +80,6 @@ public class HomeActivity extends AppCompatActivity {
         }
     };
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
 
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -72,7 +92,7 @@ public class HomeActivity extends AppCompatActivity {
         initListener();
         sendDataChatFragemtn(data);
     }
-    private void initView() {
+    private void initView(){
         //在主布局中根据id找到ViewPager
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         //实例化所属三个fragment
@@ -127,6 +147,31 @@ public class HomeActivity extends AppCompatActivity {
         });
 
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            //  menuItem=item;
+            switch (item.getItemId()) {
+                case R.id.navigation_chat:
+                    // mTextMessage.setText("白名单");
+                    viewPager.setCurrentItem(0);
+                    return true;
+                case R.id.navigation_message:
+                    //  mTextMessage.setText("黑名单");
+                    viewPager.setCurrentItem(1);
+                    return true;
+                case R.id.navigation_user:
+                    //  mTextMessage.setText("设置");
+                    viewPager.setCurrentItem(2);
+                    return true;
+            }
+            return false;
+        }
+    };
+
     public void sendDataChatFragemtn(String data){
         Bundle bundle = new Bundle();
         bundle.putString("data",data);

@@ -37,5 +37,6 @@ dependencies {
     implementation files('libs/MobTools-2018.1009.1056.jar')
     implementation files('libs/SDKWrapper-2018.0801.1824.jar')
     implementation files('libs/SMSSDK-3.2.1.jar')
-    implementation files('libs/android-smart-image-view-1.0.0(1).jar')
+
+    implementation files('libs/BaiduLBS_Android.jar')
 }

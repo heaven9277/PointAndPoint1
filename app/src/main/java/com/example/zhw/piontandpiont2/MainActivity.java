@@ -6,13 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Color;
-
 import android.os.Bundle;
-
-import android.media.MediaPlayer;
-import android.net.Uri;
-
-
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
@@ -95,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int id = view.getId();
         switch (id){
             case  R.id.btn_login:
+<<<<<<< HEAD
                /*if (username.getText().toString().trim()!=null||userpasswd.getText().toString().trim()!=null){
                    myIBinder.sendData(username.getText().toString().trim(),userpasswd.getText().toString().trim());
                }else {
@@ -102,6 +97,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                }*/
                Intent intent = new Intent(this,HomeActivity.class);
                startActivity(intent);
+=======
+                Intent i=new Intent(MainActivity.this , HomeActivity.class);
+                startActivity(i);
+               /* if (myConn == null){
+                    myConn = new MyConn();
+                }
+                //绑定服务
+                Intent intentService  = new Intent(this,MyServer.class);
+                bindService(intentService,myConn, Service.BIND_AUTO_CREATE);
+                System.out.println("开始测试");*/
+
+               if (username.getText().toString().trim()!=null||userpasswd.getText().toString().trim()!=null){
+                   myIBinder.sendData(username.getText().toString().trim(),userpasswd.getText().toString().trim());
+               }else {
+                   Toast.makeText(this,"用户名和密码不能为空",Toast.LENGTH_LONG).show();
+               }
+              /* Intent intent = new Intent(this,HomeActivity.class);
+               startActivity(intent);*/
+
+>>>>>>> 2df29da99b5956664b63894848639361ba4fc589
                 break;
             case R.id.register:
                 register.setTextColor(Color.parseColor("#09A3DC"));
