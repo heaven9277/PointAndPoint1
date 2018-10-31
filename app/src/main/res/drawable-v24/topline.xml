@@ -10,7 +10,7 @@
     <item
             android:top="1dp"> <!--设置只有底部有边框-->
         <shape>
-            <solid android:color="#272A2D" />
+            <solid android:color="#969696" />
         </shape>
     </item>
 </layer-list>

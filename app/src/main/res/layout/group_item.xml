@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:layout_marginTop="30dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
     android:layout_height="65dp">
-    <ImageView
+    <com.loopj.android.image.SmartImageView
         android:id="@+id/siv_icon"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -11,7 +14,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
         android:background="@drawable/user"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop" />
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"

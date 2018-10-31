@@ -1,11 +1,15 @@
 package com.example.zhw.piontandpiont2.Networksockets;
 
+import com.example.zhw.piontandpiont2.MessagePack.MessageNotication;
 import com.example.zhw.piontandpiont2.Util.WsStatus;
 import com.neovisionaries.ws.client.WebSocket;
 import com.neovisionaries.ws.client.WebSocketAdapter;
 import com.neovisionaries.ws.client.WebSocketException;
 import com.neovisionaries.ws.client.WebSocketFactory;
 import com.neovisionaries.ws.client.WebSocketFrame;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,7 +26,7 @@ public class WsManager {
      */
     private static final int FRAME_QUEUE_SIZE = 5;
     private static final int CONNECT_TIMEOUT = 5000;
-    private static final String DEF_TEST_URL = "测试服地址";//测试服默认地址
+    private static final String DEF_TEST_URL = "http://172.18.178.84:8080/ws";//测试服默认地址
 
     //private String url;
 
@@ -79,6 +83,14 @@ public class WsManager {
         public void onTextMessage(WebSocket websocket, String text) throws Exception {
             super.onTextMessage(websocket, text);
             //Logger.t(TAG).d(text);
+
+            System.out.println("接收服务器发送过来的信息"+text);
+            //得到消息，进行解码
+            int id = getOperateId(text);
+            System.out.println("得到操作码"+id);
+            //进行消息分发
+            MessageNotication.sendInfoToActivity(text,id);
+
         }
         @Override
         public void onConnected(WebSocket websocket, Map<String, List<String>> headers)
@@ -112,7 +124,7 @@ public class WsManager {
         this.mStatus = status;
     }
 
-    private WsStatus getStatus(){
+    public WsStatus getStatus(){
         return mStatus;
     }
 
@@ -127,5 +139,17 @@ public class WsManager {
             init();
         }
         return ws;
+    }
+    //得到操作码
+    public int getOperateId(String text){
+        JSONObject jsonObject;
+        int id = 0;
+        try {
+            jsonObject = new JSONObject(text);
+            id = jsonObject.getInt("operateId");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return id;
     }
 }
