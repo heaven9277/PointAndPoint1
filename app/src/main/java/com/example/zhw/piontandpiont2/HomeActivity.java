@@ -32,7 +32,6 @@ public class HomeActivity extends AppCompatActivity {
     MenuItem menuItem1,menuItem2,menuItem3;
     BottomNavigationView navigation;
 
-
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -69,7 +68,6 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = getIntent();
         data = intent.getStringExtra("data");
         System.out.println(data+"接收到的信息");
-
         initView();
         initListener();
         sendDataChatFragemtn(data);

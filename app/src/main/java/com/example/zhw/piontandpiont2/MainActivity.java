@@ -95,13 +95,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int id = view.getId();
         switch (id){
             case  R.id.btn_login:
-               if (username.getText().toString().trim()!=null||userpasswd.getText().toString().trim()!=null){
+               /*if (username.getText().toString().trim()!=null||userpasswd.getText().toString().trim()!=null){
                    myIBinder.sendData(username.getText().toString().trim(),userpasswd.getText().toString().trim());
                }else {
                    Toast.makeText(this,"用户名和密码不能为空",Toast.LENGTH_LONG).show();
-               }
-              /* Intent intent = new Intent(this,HomeActivity.class);
-               startActivity(intent);*/
+               }*/
+               Intent intent = new Intent(this,HomeActivity.class);
+               startActivity(intent);
                 break;
             case R.id.register:
                 register.setTextColor(Color.parseColor("#09A3DC"));

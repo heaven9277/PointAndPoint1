@@ -2,33 +2,35 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="30dp"
+    android:background="#10000000"
     android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_marginTop="8dp"
-        android:background="#d3d7d4">
-        <ImageView
+        android:layout_marginTop="10dp"
+        android:background="#fff">
+        <com.loopj.android.image.SmartImageView
             android:id="@+id/siv_icon"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_alignParentLeft="true"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp"
-            android:background="@drawable/user"
-            android:scaleType="centerCrop"/>
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/users"
+            android:scaleType="centerCrop" />
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="18dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/siv_icon"
             android:ellipsize="end"
             android:maxLength="20"
             android:singleLine="true"
-            android:text="我是用户名"
+            android:text="Demohh"
             android:textColor="#000"
             android:textSize="18sp"/>
         <TextView
@@ -43,7 +45,7 @@
             android:ellipsize="end"
             android:maxLength="16"
             android:singleLine="true"
-            android:text="我是一个个性签名那"
+            android:text="个性签名：为你去看流星雨"
             android:textColor="#000"
             android:textSize="12sp"/>
 
@@ -52,19 +54,20 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/underline">
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/information"/>
+            android:background="@drawable/materianl"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
+            android:textColor="#000"
             android:text="我的资料"/>
     </LinearLayout>
 
@@ -72,19 +75,19 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:layout_marginTop="5dp"
         android:background="@drawable/underline">
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/photo"/>
+            android:background="@drawable/photos"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
+            android:textColor="#000"
             android:text="我的相册"/>
     </LinearLayout>
 
@@ -92,7 +95,6 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:layout_marginTop="5dp"
         android:background="@drawable/underline">
         <ImageView
             android:layout_width="40dp"
@@ -105,6 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
+            android:textColor="#000"
             android:text="关于我们"/>
     </LinearLayout>
     <LinearLayout
@@ -119,7 +122,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:text="退出登录"
+        android:textColor="#fff"
+        android:background="@drawable/btnback"
         android:layout_marginBottom="10dp"/>
 
     </LinearLayout>

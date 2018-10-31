@@ -36,7 +36,7 @@ public class ChatFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return 1;
+            return 3;
         }
 
         @Override

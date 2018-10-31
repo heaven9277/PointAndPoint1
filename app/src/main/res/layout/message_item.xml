@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="65dp">
+    android:layout_marginTop="30dp"
+    android:layout_height="70dp">
     <ImageView
         android:id="@+id/siv_icon"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
-        android:background="@drawable/user"
+        android:background="@drawable/user001"
         android:scaleType="centerCrop"/>
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/siv_icon"
         android:ellipsize="end"
         android:maxLength="20"
         android:singleLine="true"
-        android:text="我是用户名"
+        android:text="星星之火"
         android:textColor="#000"
         android:textSize="18sp"/>
     <TextView
@@ -30,26 +31,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_title"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/siv_icon"
-        android:layout_alignParentBottom="true"
         android:ellipsize="end"
         android:maxLength="16"
         android:singleLine="true"
         android:text="对方请求加入群聊"
-        android:textColor="#000"
+        android:textColor="#333"
         android:textSize="12sp"/>
     <Button
         android:id="@+id/tv_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
+        android:layout_width="75dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="12dp"
         android:layout_marginRight="15dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:text="同意"
+        android:text="接受"
         android:textColor="#ffff"
-        android:background="#65c294"/>
+        android:background="@drawable/btn_green"/>
 
 </RelativeLayout>
