@@ -5,12 +5,13 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Color;
-<<<<<<< HEAD
+
 import android.os.Bundle;
-=======
+
 import android.media.MediaPlayer;
 import android.net.Uri;
->>>>>>> parent of 686caee... 1
+
+
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -30,10 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private MyServer.MyIBider myIBinder;
     private MyConn myConn;
     private CustomVideoView videovie;
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of 686caee... 1
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,10 +57,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int id = view.getId();
         switch (id){
             case  R.id.btn_login:
-<<<<<<< HEAD
+
                 Intent intent = new Intent(this,HomeActivity.class);
                 startActivity(intent);
              /*   if (myConn == null){
+=======
+                if (myConn == null){
+>>>>>>> parent of 686caee... 1
 =======
                 if (myConn == null){
 >>>>>>> parent of 686caee... 1
@@ -72,10 +73,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intentService  = new Intent(this,MyServer.class);
                 bindService(intentService,myConn, Service.BIND_AUTO_CREATE);
 <<<<<<< HEAD
+<<<<<<< HEAD
                 System.out.println("开始测试");*/
-=======
+
                 System.out.println("开始测试");
->>>>>>> parent of 686caee... 1
+
+
+                System.out.println("开始测试");
                 break;
             case R.id.register:
                 register.setTextColor(Color.parseColor("#09A3DC"));
