@@ -26,7 +26,7 @@ public class WsManager {
      */
     private static final int FRAME_QUEUE_SIZE = 5;
     private static final int CONNECT_TIMEOUT = 5000;
-    private static final String DEF_TEST_URL = "http://172.18.178.84:8080/ws";//测试服默认地址
+    private static final String DEF_TEST_URL = "http://172.18.178.73:8080/ws";//测试服默认地址
 
     //private String url;
 
@@ -62,6 +62,7 @@ public class WsManager {
                     .addListener(mListener = new WsListener())//添加回调监听
                     .connectAsynchronously();//异步连接
             setStatus(WsStatus.CONNECTING);
+            System.out.println("进行连接");
            // Logger.t(TAG).d("第一次连接");
         } catch (IOException e) {
             e.printStackTrace();
@@ -99,6 +100,7 @@ public class WsManager {
 
             System.out.println("连接成功");
             setStatus(WsStatus.CONNECT_SUCCESS);
+
         }
 
 
@@ -109,6 +111,7 @@ public class WsManager {
 
             System.out.println("连接错误");
             setStatus(WsStatus.CONNECT_FAIL);
+            init();
         }
 
         @Override

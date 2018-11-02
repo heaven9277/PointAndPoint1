@@ -24,7 +24,7 @@ public class UpdatePwActivity extends AppCompatActivity implements View.OnClickL
     public Button btn_updatepw;
     public EditText et_passwd,et_repasswd;
     String telphone;
-    public final String url = "http://172.17.146.19:8080/register/post"; //网址
+    public final String url = "http://172.18.178.73:8080/register/post"; //网址
     String update_passwd_json;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
