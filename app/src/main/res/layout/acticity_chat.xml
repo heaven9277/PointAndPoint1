@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#c2c2c2"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -10,9 +9,10 @@
         android:layout_width="fill_parent"
         android:layout_height="45dp"
         android:background="#281f1d"
-        android:layout_marginTop="24dp"
-        >
+        android:layout_marginTop="24dp">
+
         <TextView
+            android:id="@+id/le"
             android:layout_width="120dp"
             android:layout_height="50dp"
             android:layout_alignParentLeft="true"
@@ -27,8 +27,8 @@
             android:layout_height="22dp"
             android:layout_marginTop="12dp"
             android:layout_marginRight="20dp"
-            android:background="@drawable/add"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"
+            android:background="@drawable/pointa"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -51,15 +51,25 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="32dp"
+        android:layout_height="49dp"
         android:layout_marginTop="8dp"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:background="@drawable/topline">
+        <Button
+            android:id="@+id/bt_chat_add"
+            android:layout_width="21dp"
+            android:layout_height="20dp"
+            android:gravity="center|left"
+            android:background="@drawable/add"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="5dp"/>
 
         <EditText
             android:id="@+id/et_chat_message"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="3"
+            android:layout_margin="7dp"
             android:textSize="14sp"
             android:background="#ffffff"
             android:gravity="center|left"
@@ -67,12 +77,60 @@
 
         <Button
             android:id="@+id/btn_chat_message_send"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="64dp"
-            android:layout_marginLeft="8dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:layout_gravity="center|right"
-            android:layout_marginRight="4dp" />
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:text="发送"
+            android:background="@drawable/bt_shape"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/underline"
+        android:visibility="visible">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="8dp">
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/photo"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="相片"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="8dp">
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/photo"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="照片"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal"/>
+
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

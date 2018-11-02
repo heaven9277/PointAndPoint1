@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/iv_headPhoto"
+        >
+        <TextView
+            android:id="@+id/tv_name_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:padding="8dp"
+            android:layout_alignParentRight="true"
+            android:text="我是大亮" />
+        <TextView
+            android:id="@+id/tv_content_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_name_right"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="8dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="40dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="@drawable/chat_right"
+            android:text="赵大亮好帅！！！"
+            android:gravity="center"/>
+    </RelativeLayout>
+    <ImageView
+        android:id="@+id/iv_headPhoto"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="top"
+        android:background="@drawable/qq"
+        android:layout_alignParentRight="true"/>
+</RelativeLayout>
+
