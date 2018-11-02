@@ -5,7 +5,6 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/title"
         android:layout_width="fill_parent"
         android:layout_height="45dp"
         android:background="#281f1d"
@@ -53,39 +52,40 @@
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        android:background="@drawable/topline">
+        android:background="@drawable/topline"
+        android:orientation="horizontal">
+
         <Button
             android:id="@+id/bt_chat_add"
             android:layout_width="21dp"
-            android:layout_height="20dp"
-            android:gravity="center|left"
-            android:background="@drawable/add"
+            android:layout_height="22dp"
             android:layout_marginLeft="7dp"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="5dp"
+            android:background="@drawable/add"
+            android:gravity="center|left" />
 
         <EditText
             android:id="@+id/et_chat_message"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
             android:layout_margin="7dp"
-            android:textSize="14sp"
+            android:layout_weight="3"
             android:background="#ffffff"
             android:gravity="center|left"
-            android:padding="8dp" />
+            android:padding="8dp"
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/btn_chat_message_send"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_gravity="center|right"
+            android:layout_marginBottom="7dp"
             android:layout_marginRight="4dp"
             android:layout_marginTop="7dp"
-            android:layout_marginBottom="7dp"
-            android:text="发送"
-            android:background="@drawable/bt_shape"/>
+            android:layout_weight="1"
+            android:background="@drawable/bt_shape"
+            android:text="发送" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/ll"
@@ -129,7 +129,6 @@
                 android:text="照片"
                 android:layout_marginTop="5dp"
                 android:layout_gravity="center_horizontal"/>
-
         </LinearLayout>
     </LinearLayout>
 
