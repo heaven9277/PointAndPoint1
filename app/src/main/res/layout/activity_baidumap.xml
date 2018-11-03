@@ -2,8 +2,50 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="#505050"
+        android:layout_marginTop="24dp"
+        >
+        <Button
+            android:id="@+id/back_icon"
+            android:layout_width="35dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="3dp"
+            android:background="@drawable/leftback"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_toRightOf="@id/back_icon"
+            android:text="返回"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:textSize="14sp"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#f4f4f4"
+        android:layout_below="@id/title">
+
+        <ListView
+            android:id="@+id/lv"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+        </ListView>
+
+    </RelativeLayout>
     <com.baidu.mapapi.map.MapView
         android:id="@+id/bmapView"
+        android:layout_below="@id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/ll"
@@ -11,27 +53,16 @@
     </com.baidu.mapapi.map.MapView>
 
     <LinearLayout
+        android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
-        <Button
-            android:id="@+id/bt"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="复位" />
-        <Button
-            android:id="@+id/button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="卫星" />
-        <Button
-            android:id="@+id/buttons"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="普通" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:text="这是位置信息！！！"/>
     </LinearLayout>
 </RelativeLayout>
