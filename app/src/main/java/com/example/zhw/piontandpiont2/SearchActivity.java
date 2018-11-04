@@ -33,7 +33,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         Toolbar toolbar = (Toolbar) findViewById(R.id.search_toolbar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
-        setDarkStatusIcon(true);
         groupJson = "{\"data\":[" +
                 "{\"group_portarit\":\"avator_0001\",\"group_name\":\"groupOne\",\"group_desc\":\"群1\",\"group_uuid\":\"0001\"}," +
                 "{\"group_portarit\":\"avator_0002\",\"group_name\":\"groupOne\",\"group_desc\":\"群2\",\"group_uuid\":\"0002\"}," +
@@ -43,25 +42,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         initView();
 
     }
-
-    /**
-     * 说明：Android 6.0+ 状态栏图标原生反色操作
-     */
-    protected void setDarkStatusIcon(boolean dark) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            View decorView = getWindow().getDecorView();
-            if (decorView == null) return;
-
-            int vis = decorView.getSystemUiVisibility();
-            if (dark) {
-                vis |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-            } else {
-                vis &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-            }
-            decorView.setSystemUiVisibility(vis);
-        }
-    }
-
     private void initView() {
         button_delete = findViewById(R.id.search_delete_input);
         button_search = findViewById(R.id.search_button_search_group);

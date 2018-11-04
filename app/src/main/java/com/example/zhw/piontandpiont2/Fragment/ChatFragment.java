@@ -1,19 +1,22 @@
 package com.example.zhw.piontandpiont2.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
+import com.example.zhw.piontandpiont2.ChatActivity;
 import com.example.zhw.piontandpiont2.R;
 
 
-public class ChatFragment extends Fragment {
+public class ChatFragment extends Fragment implements AdapterView.OnItemClickListener {
     ListView chat_listView;
     MyBaseAdapter myBaseAdapter;
     @Override
@@ -31,7 +34,17 @@ public class ChatFragment extends Fragment {
         chat_listView.setAdapter(myBaseAdapter);
         String str = getArguments().getString("data");
         System.out.println("得到界面的数据"+str);
+
+        //listView的item的点击事件
+        chat_listView.setOnItemClickListener(this);
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Intent chatActivity = new Intent(getContext(), ChatActivity.class);
+        startActivity(chatActivity);
+    }
+
     class MyBaseAdapter extends BaseAdapter{
 
         @Override

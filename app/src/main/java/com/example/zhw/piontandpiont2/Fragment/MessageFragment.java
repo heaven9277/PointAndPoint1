@@ -1,17 +1,20 @@
 package com.example.zhw.piontandpiont2.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
+import com.example.zhw.piontandpiont2.ApplicationActivity;
 import com.example.zhw.piontandpiont2.R;
 
 
-public class MessageFragment extends Fragment {
+public class MessageFragment extends Fragment implements AdapterView.OnItemClickListener {
     ListView message_listView;
     MyMessageBaseAdapter myMessageBaseAdapter;
     @Override
@@ -25,7 +28,17 @@ public class MessageFragment extends Fragment {
         message_listView = view.findViewById(R.id.message_list);
         myMessageBaseAdapter = new MyMessageBaseAdapter();
         message_listView.setAdapter(myMessageBaseAdapter);
+
+        //message_listView的item点击事件
+        message_listView.setOnItemClickListener(this);
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Intent applicationActivity = new Intent(getContext(), ApplicationActivity.class);
+        startActivity(applicationActivity);
+    }
+
     class MyMessageBaseAdapter extends BaseAdapter {
 
         @Override

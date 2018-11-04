@@ -90,12 +90,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (id){
             case  R.id.btn_login:
 
-               if (username.getText().toString().trim()!=null||userpasswd.getText().toString().trim()!=null){
+             /*  if (username.getText().toString().trim()!=null||userpasswd.getText().toString().trim()!=null){
                    myIBinder.sendData(username.getText().toString().trim(),userpasswd.getText().toString().trim());
                }else {
                    Toast.makeText(this,"用户名和密码不能为空",Toast.LENGTH_LONG).show();
                }
-                btn_login.setBackgroundResource(R.drawable.btn_login_out);
+                btn_login.setBackgroundResource(R.drawable.btn_login_out);*/
+             Intent i = new Intent(this,HomeActivity.class);
+             startActivity(i);
                 break;
             case R.id.register:
                 register.setTextColor(Color.parseColor("#09A3DC"));

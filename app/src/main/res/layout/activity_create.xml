@@ -5,31 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/CRA_action_bar"
+    <LinearLayout
+        android:id="@+id/linear_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/CRA_toolbar"
-            android:layout_width="match_parent"
+        android:background="#505050"
+        android:fitsSystemWindows="true"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/image_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="2dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/leftback"/>
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorGray"
-            android:clipToPadding="true"
-            android:fitsSystemWindows="true"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="创建群"
-                android:textColor="#ffffff"
-                android:textSize="20dp" />
-        </android.support.v7.widget.Toolbar>
-
-    </android.support.design.widget.AppBarLayout>
+            android:textColor="#fff"
+            android:textSize="18sp"
+            android:layout_gravity="center_vertical"
+            android:text="返回"/>
+    </LinearLayout>
 
     <View
         android:id="@+id/topView"
@@ -41,7 +39,7 @@
         android:background="@drawable/rec_input"
         android:clickable="false"
         app:layout_constraintBottom_toTopOf="@id/group_name"
-        app:layout_constraintTop_toBottomOf="@id/CRA_action_bar"
+        app:layout_constraintTop_toBottomOf="@id/linear_top"
         app:layout_constraintVertical_bias="0"
         app:layout_constraintVertical_chainStyle="packed" />
 

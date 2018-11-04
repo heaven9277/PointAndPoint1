@@ -52,14 +52,19 @@
         <activity android:name=".ChatActivity"/>
         <activity android:name=".ApplicationActivity"/>
         <activity android:name=".GroupPositionActivity"/>
-
+        <activity android:name=".SearchActivity"/>
+        <activity android:name=".GroupInfoActivity" />
+        <activity android:name=".ManageGroupActivity" />
+        <activity android:name=".EditGroupActivity" />
+        <activity android:name=".GroupUserInfoActivity"></activity>
+        <activity android:name=".UpdatePwActivity" />
+        <activity android:name=".CreateActivity"/>
+        <activity android:name=".ProfileActivity"/>
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name=".UpdatePwActivity" />
-
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
@@ -69,10 +74,6 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="3lNYggyLcPDc9uZ6h4Ii8glu9soceEPW" />
 
-        <activity android:name=".GroupInfoActivity" />
-        <activity android:name=".ManageGroupActivity" />
-        <activity android:name=".EditGroupActivity" />
-        <activity android:name=".GroupUserInfoActivity"></activity>
     </application>
 
 </manifest>

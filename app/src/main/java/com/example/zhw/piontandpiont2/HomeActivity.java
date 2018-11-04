@@ -171,11 +171,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     display = false;
                 }
                 break;
-            case R.id.group_search:
+            case R.id.linear_search:
                 //搜索群
+                Intent SearchActivity = new Intent(this,SearchActivity.class);
+                startActivity(SearchActivity);
+                System.out.println("点击了搜索群");
                 break;
             case R.id.liear_create:
                 //创建群
+                Intent createActivity = new Intent(this,CreateActivity.class);
+                startActivity(createActivity);
+                System.out.println("点击了create群");
                 break;
             default:
                 relativeLayout.setVisibility(View.INVISIBLE);

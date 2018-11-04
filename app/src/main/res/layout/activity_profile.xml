@@ -4,6 +4,228 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".secondLevel.ProfileActivity">
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".ProfileActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/profile_action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/profile_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#505050"
+            android:clipToPadding="true"
+            android:fitsSystemWindows="true"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="@string/my_profile"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <View
+        android:id="@+id/profile_line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        android:background="#ccf"
+        app:layout_constraintTop_toBottomOf="@id/profile_action_bar" />
+
+    <com.loopj.android.image.SmartImageView
+        android:id="@+id/profile_portrait"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_margin="2dp"
+        android:src="@drawable/avator_0003"
+        app:layout_constraintBottom_toTopOf="@id/profile_line2"
+        app:layout_constraintHorizontal_bias="0.85"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/profile_line1"
+        tools:targetApi="o" />
+
+    <TextView
+        android:id="@+id/profile_text_portrait"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="我的头像"
+        android:textColor="#000"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/profile_portrait"
+        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/profile_portrait" />
+
+    <View
+        android:id="@+id/profile_line2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="1dp"
+        android:background="#ccf"
+        app:layout_constraintTop_toBottomOf="@id/profile_portrait" />
+
+    <TextView
+        android:id="@+id/profile_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="我的昵称"
+        android:textColor="#000"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/profile_line3"
+        app:layout_constraintLeft_toLeftOf="@id/profile_text_portrait"
+        app:layout_constraintRight_toRightOf="@id/profile_text_portrait"
+        app:layout_constraintTop_toBottomOf="@id/profile_line2" />
+
+    <EditText
+        android:id="@+id/profile_edt_name"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:maxLength="6"
+        android:maxLines="1"
+        android:textSize="18sp"
+        android:background="@null"
+        app:layout_constraintBottom_toTopOf="@id/profile_line3"
+        app:layout_constraintLeft_toLeftOf="@id/profile_portrait"
+        app:layout_constraintRight_toRightOf="@id/profile_portrait"
+        app:layout_constraintTop_toBottomOf="@id/profile_line2" />
+
+    <View
+        android:id="@+id/profile_line3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="#ccf"
+        app:layout_constraintTop_toBottomOf="@id/profile_name" />
+
+    <TextView
+        android:id="@+id/profile_descipt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="个性签名"
+        android:textColor="#000"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/profile_line4"
+        app:layout_constraintLeft_toLeftOf="@id/profile_text_portrait"
+        app:layout_constraintRight_toRightOf="@id/profile_text_portrait"
+        app:layout_constraintTop_toBottomOf="@id/profile_line3" />
+
+    <EditText
+        android:id="@+id/profile_edt_descript"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:maxLength="6"
+        android:maxLines="1"
+        android:textSize="18sp"
+        android:background="@null"
+        app:layout_constraintBottom_toTopOf="@id/profile_line4"
+        app:layout_constraintLeft_toLeftOf="@id/profile_portrait"
+        app:layout_constraintRight_toRightOf="@id/profile_portrait"
+        app:layout_constraintTop_toBottomOf="@id/profile_line3" />
+
+    <View
+        android:id="@+id/profile_line4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="#ccf"
+        app:layout_constraintTop_toBottomOf="@id/profile_descipt" />
+
+    <View
+        android:id="@+id/profile_line5"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="#ccf"
+        app:layout_constraintTop_toBottomOf="@id/profile_line4" />
+
+    <TextView
+        android:id="@+id/profile_phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="手机号"
+        android:textColor="#000"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/profile_line6"
+        app:layout_constraintLeft_toLeftOf="@id/profile_text_portrait"
+        app:layout_constraintRight_toRightOf="@id/profile_text_portrait"
+        app:layout_constraintTop_toBottomOf="@id/profile_line5" />
+
+    <EditText
+        android:id="@+id/profile_edt_phone_number"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:maxLength="6"
+        android:maxLines="1"
+        android:textSize="18sp"
+        android:background="@null"
+        app:layout_constraintBottom_toTopOf="@id/profile_line6"
+        app:layout_constraintLeft_toLeftOf="@id/profile_portrait"
+        app:layout_constraintRight_toRightOf="@id/profile_portrait"
+        app:layout_constraintTop_toBottomOf="@id/profile_line5" />
+
+    <View
+        android:id="@+id/profile_line6"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="#ccf"
+        app:layout_constraintTop_toBottomOf="@id/profile_phone_number" />
+
+    <TextView
+        android:id="@+id/profile_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="邮箱"
+        android:textColor="#000"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/profile_line7"
+        app:layout_constraintLeft_toLeftOf="@id/profile_text_portrait"
+        app:layout_constraintRight_toRightOf="@id/profile_text_portrait"
+        app:layout_constraintTop_toBottomOf="@id/profile_line6" />
+
+    <EditText
+        android:id="@+id/profile_edt_email"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:maxLength="6"
+        android:maxLines="1"
+        android:textSize="18sp"
+        android:background="@null"
+        app:layout_constraintBottom_toTopOf="@id/profile_line7"
+        app:layout_constraintLeft_toLeftOf="@id/profile_portrait"
+        app:layout_constraintRight_toRightOf="@id/profile_portrait"
+        app:layout_constraintTop_toBottomOf="@id/profile_line6" />
+
+    <View
+        android:id="@+id/profile_line7"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="#ccf"
+        app:layout_constraintTop_toBottomOf="@id/profile_email" />
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="保存修改"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_line7" />
 
 </android.support.constraint.ConstraintLayout>
