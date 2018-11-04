@@ -1,5 +1,5 @@
 package com.example.zhw.piontandpiont2;
-
+//在地图显示群成员位置界面
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
