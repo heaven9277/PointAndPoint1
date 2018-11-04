@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".secondLevel.ApplicationActivity">
+
+    <com.loopj.android.image.SmartImageView
+        android:id="@+id/application_portrait"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_margin="20dp"
+        android:src="@drawable/avator_0002"
+        app:layout_constraintBottom_toTopOf="@id/application_line1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/application_applicant_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="名称"
+        android:textColor="#000"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toRightOf="@id/application_portrait"
+        app:layout_constraintTop_toTopOf="@id/application_portrait" />
+
+    <View
+        android:id="@+id/application_line1"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="10dp"
+        android:background="#ccc"
+        app:layout_constraintTop_toBottomOf="@id/application_portrait" />
+
+    <TextView
+        android:id="@+id/application_applyDescript"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="申请加群描述"
+        android:textColor="#000"
+        app:layout_constraintBottom_toTopOf="@id/application_line2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/application_line1" />
+
+    <View
+        android:id="@+id/application_line2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="#ccc"
+        app:layout_constraintTop_toBottomOf="@id/application_applyDescript" />
+
+    <View
+        android:id="@+id/application_line3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="30dp"
+        android:background="#ccc"
+        app:layout_constraintTop_toBottomOf="@id/application_line2" />
+
+    <TextView
+        android:id="@+id/application_personalDescript"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="个性签名"
+        android:textColor="#000"
+        app:layout_constraintBottom_toTopOf="@id/application_line4"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/application_line3" />
+
+    <View
+        android:id="@+id/application_line4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="#ccc"
+        app:layout_constraintTop_toBottomOf="@id/application_personalDescript" />
+
+    <View
+        android:id="@+id/application_line5"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="#ccc"
+        app:layout_constraintTop_toBottomOf="@id/application_line4" />
+
+    <TextView
+        android:id="@+id/application_source"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="来源"
+        android:textColor="#000"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/application_line5" />
+
+    <View
+        android:id="@+id/application_line6"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="#ccc"
+        app:layout_constraintTop_toBottomOf="@id/application_source" />
+
+    <Button
+        android:id="@+id/application_button_accept"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rec_button_green"
+        android:text="接受"
+        android:textColor="#fff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.82"
+        app:layout_constraintWidth_percent="0.85" />
+
+    <Button
+        android:id="@+id/application_decline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/rec_white_solid_grey_stroke"
+        android:text="拒绝"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/application_button_accept"
+        app:layout_constraintWidth_percent="0.85" />
+
+</android.support.constraint.ConstraintLayout>

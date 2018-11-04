@@ -9,4 +9,16 @@
     <string name="repasswd">确认密码</string>
     <string name="telphone">手机号</string>
     <string name="suiji">随机码</string>
+    <string name="title_activity_search">SearchActivity</string>
+    <string name="group_name">群名称</string>
+    <string name="group_hobby">群爱好</string>
+    <string name="group_descript">群描述</string>
+    <string name="group_create">创建</string>
+    <string name="group_member">群成员</string>
+    <string name="invite_new_member">邀请</string>
+    <string name="search">搜索</string>
+    <string name="search_apply">加群</string>
+    <string name="search_descript">群描述:666666666666666666666</string>
+    <string name="member_name">成员昵称</string>
+    <string name="search_groupNameAndUuip">群名或群号搜索</string>
 </resources>

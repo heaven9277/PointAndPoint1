@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.loopj.android.image.SmartImageView
+        android:id="@+id/search_avator"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/search_group_name"
+        android:text="@string/group_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/search_group_descript"
+        app:layout_constraintLeft_toRightOf="@id/search_avator"
+        app:layout_constraintTop_toTopOf="@id/search_avator" />
+
+    <TextView
+        android:id="@+id/search_group_descript"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/search_descript"
+        android:layout_marginLeft="15dp"
+        android:maxLength="15"
+        android:ellipsize="end"
+        app:layout_constraintBottom_toBottomOf="@id/search_avator"
+        app:layout_constraintLeft_toRightOf="@id/search_avator"
+        app:layout_constraintTop_toBottomOf="@id/search_group_name" />
+
+    <Button
+        android:id="@+id/search_button_apply"
+        android:layout_width="80dp"
+        android:layout_height="38dp"
+        android:text="@string/search_apply"
+        android:layout_marginRight="15dp"
+        app:layout_constraintBottom_toBottomOf="@id/search_avator"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/search_avator" />
+
+</android.support.constraint.ConstraintLayout>
