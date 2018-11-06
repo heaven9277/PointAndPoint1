@@ -8,6 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+
+import com.baidu.mapapi.SDKInitializer;
+
 public class GroupPositionActivity extends AppCompatActivity{
     private ListView lv;
     private View headerView;
@@ -16,8 +19,8 @@ public class GroupPositionActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_baidumap);
-
         lv = findViewById(R.id.lv);
 
         initheaderView();

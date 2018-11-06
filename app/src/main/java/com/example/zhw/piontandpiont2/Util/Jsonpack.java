@@ -54,4 +54,12 @@ public class Jsonpack {
         }
         return loginSuccessData;
     }
+    //返回首页的json
+    public static String getFisrtData(String username){
+        FirstRequest firstRequest = new FirstRequest(2,username);
+        Gson gson = new Gson();
+        //使用Gson将对象转换为json字符串
+        String First_json = gson.toJson(firstRequest);
+        return First_json;
+    }
 }

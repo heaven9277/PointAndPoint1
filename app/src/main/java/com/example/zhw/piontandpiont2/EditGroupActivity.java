@@ -1,5 +1,6 @@
 package com.example.zhw.piontandpiont2;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -36,6 +37,8 @@ public class EditGroupActivity extends AppCompatActivity implements View.OnClick
         int id = view.getId();
         switch (id){
             case R.id.image_back:  ///返回键
+                Intent groupInfoActivity = new Intent(this,GroupInfoActivity.class);
+                startActivity(groupInfoActivity);
                 break;
             case R.id.btn_saveEdit: //保存修改
                 break;

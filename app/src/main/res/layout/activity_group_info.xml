@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="30dp"
     tools:context=".GroupInfoActivity">
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +12,8 @@
         android:background="#10000000">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
             android:background="#505050"
             android:orientation="horizontal">
             <ImageView
@@ -118,8 +118,8 @@
                             <!--第一行第一列 图片-->
                             <com.loopj.android.image.SmartImageView
                                 android:id="@+id/imageView1"
-                                android:layout_width="66dp"
-                                android:layout_height="66dp"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
                                 android:layout_alignParentTop="true"
                                 android:layout_centerHorizontal="true"
                                 android:background="@drawable/users" />
@@ -133,7 +133,7 @@
                                 android:layout_centerHorizontal="true"
                                 android:text="Demo"
                                 android:textColor="#000"
-                                android:textSize="20dp" />
+                                android:textSize="18dp" />
                         </RelativeLayout>
                     </LinearLayout>
                     <LinearLayout
@@ -158,8 +158,8 @@
                             <!--第一行第一列 图片-->
                             <com.loopj.android.image.SmartImageView
                                 android:id="@+id/user_001"
-                                android:layout_width="66dp"
-                                android:layout_height="66dp"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
                                 android:layout_alignParentTop="true"
                                 android:layout_centerHorizontal="true"
                                 android:background="@drawable/user001" />
@@ -173,7 +173,7 @@
                                 android:layout_centerHorizontal="true"
                                 android:text="赞"
                                 android:textColor="#000"
-                                android:textSize="20dp" />
+                                android:textSize="18dp" />
                         </RelativeLayout>
                     </LinearLayout>
                     <LinearLayout
@@ -198,8 +198,8 @@
                             <!--第一行第一列 图片-->
                             <com.loopj.android.image.SmartImageView
                                 android:id="@+id/invation"
-                                android:layout_width="66dp"
-                                android:layout_height="66dp"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
                                 android:layout_alignParentTop="true"
                                 android:layout_centerHorizontal="true"
                                 android:background="@drawable/add_user" />
@@ -213,7 +213,7 @@
                                 android:layout_centerHorizontal="true"
                                 android:text="邀请"
                                 android:textColor="#0B98F2"
-                                android:textSize="20dp" />
+                                android:textSize="18dp" />
                         </RelativeLayout>
                     </LinearLayout>
                 </TableRow>

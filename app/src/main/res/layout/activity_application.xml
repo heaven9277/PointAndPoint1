@@ -3,110 +3,124 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="#10000000">
 
-    <com.loopj.android.image.SmartImageView
-        android:id="@+id/application_portrait"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_margin="20dp"
-        android:src="@drawable/avator_0002"
-        app:layout_constraintBottom_toTopOf="@id/application_line1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/application_applicant_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:text="名称"
-        android:textColor="#000"
-        android:textSize="18sp"
-        app:layout_constraintLeft_toRightOf="@id/application_portrait"
-        app:layout_constraintTop_toTopOf="@id/application_portrait" />
-
-    <View
-        android:id="@+id/application_line1"
+    <LinearLayout
+        android:id="@+id/linear_top"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="wrap_content"
+        android:background="#505050"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/image_message_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="1dp"
+            android:background="@drawable/leftback" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="详细资料"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="#ccc"
-        app:layout_constraintTop_toBottomOf="@id/application_portrait" />
+        android:layout_marginBottom="10dp"
+        android:background="#fff"
+        app:layout_constraintBottom_toTopOf="@id/linear2"
+        app:layout_constraintTop_toBottomOf="@id/linear_top">
 
-    <TextView
-        android:id="@+id/application_applyDescript"
-        android:layout_width="wrap_content"
+        <com.loopj.android.image.SmartImageView
+            android:id="@+id/application_portrait"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/avator_0002" />
+
+        <TextView
+            android:id="@+id/application_applicant_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="名称"
+            android:textColor="#000"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:text="申请加群描述"
-        android:textColor="#000"
-        app:layout_constraintBottom_toTopOf="@id/application_line2"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/application_line1" />
+        android:background="#fff"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@id/linear3"
+        app:layout_constraintTop_toBottomOf="@id/linear1">
 
-    <View
-        android:id="@+id/application_line2"
+        <TextView
+            android:id="@+id/application_applyDescript"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="申请加群描述"
+            android:textColor="#000" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear3"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="20dp"
-        android:background="#ccc"
-        app:layout_constraintTop_toBottomOf="@id/application_applyDescript" />
-
-    <View
-        android:id="@+id/application_line3"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="30dp"
-        android:background="#ccc"
-        app:layout_constraintTop_toBottomOf="@id/application_line2" />
-
-    <TextView
-        android:id="@+id/application_personalDescript"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:text="个性签名"
-        android:textColor="#000"
-        app:layout_constraintBottom_toTopOf="@id/application_line4"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/application_line3" />
+        android:layout_marginTop="2dp"
+        android:background="#fff"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@id/linear4"
+        app:layout_constraintTop_toBottomOf="@id/linear2">
 
-    <View
-        android:id="@+id/application_line4"
+        <TextView
+            android:id="@+id/application_personalDescript"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="个性签名"
+            android:textColor="#000" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linear4"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="20dp"
-        android:background="#ccc"
-        app:layout_constraintTop_toBottomOf="@id/application_personalDescript" />
-
-    <View
-        android:id="@+id/application_line5"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="20dp"
-        android:background="#ccc"
-        app:layout_constraintTop_toBottomOf="@id/application_line4" />
-
-    <TextView
-        android:id="@+id/application_source"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="来源"
-        android:textColor="#000"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/application_line5" />
+        android:layout_marginTop="2dp"
+        android:background="#fff"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@id/linear4"
+        app:layout_constraintTop_toBottomOf="@id/linear3">
 
-    <View
-        android:id="@+id/application_line6"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="20dp"
-        android:background="#ccc"
-        app:layout_constraintTop_toBottomOf="@id/application_source" />
+        <TextView
+            android:id="@+id/application_source"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="来源"
+            android:textColor="#000" />
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/application_button_accept"

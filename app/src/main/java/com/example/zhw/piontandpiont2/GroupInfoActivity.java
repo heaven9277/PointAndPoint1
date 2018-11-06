@@ -1,5 +1,6 @@
 package com.example.zhw.piontandpiont2;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -53,12 +54,16 @@ public class GroupInfoActivity extends AppCompatActivity implements View.OnClick
         int id = view.getId();
         switch (id){
             case R.id.edit_group: //编辑群资料
+                Intent editGroupActivity = new Intent(this,EditGroupActivity.class);
+                startActivity(editGroupActivity);
                 break;
             case R.id.out_group:  //退出群聊
                 break;
             case R.id.image_back: //群头像
                 break;
             case R.id.manager_group: //管理群
+              Intent managerActivity = new Intent(this,ManageGroupActivity.class);
+              startActivity(managerActivity);
                 break;
             case  R.id.clear_group_message: //清空群资料
                 break;

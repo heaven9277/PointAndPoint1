@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_marginTop="30dp"
+    android:descendantFocusability="blocksDescendants"
     android:layout_height="70dp">
     <ImageView
         android:id="@+id/siv_icon"
@@ -49,6 +50,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:text="接受"
+        android:focusable="false"
         android:textColor="#ffff"
         android:background="@drawable/btn_green"/>
 

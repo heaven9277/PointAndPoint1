@@ -8,9 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.zhw.piontandpiont2.ApplicationActivity;
+import com.example.zhw.piontandpiont2.HomeActivity;
 import com.example.zhw.piontandpiont2.R;
 
 
@@ -37,6 +40,13 @@ public class MessageFragment extends Fragment implements AdapterView.OnItemClick
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Intent applicationActivity = new Intent(getContext(), ApplicationActivity.class);
         startActivity(applicationActivity);
+        System.out.println("点击了item");
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!");
     }
 
     class MyMessageBaseAdapter extends BaseAdapter {
@@ -59,7 +69,7 @@ public class MessageFragment extends Fragment implements AdapterView.OnItemClick
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             View viewList = LayoutInflater.from(getContext()).inflate(R.layout.message_item, null);
-            System.out.println("listView的展开布局文件");
+            System.out.println("进入这里进行店家兄啊过");
             return viewList;
         }
     }

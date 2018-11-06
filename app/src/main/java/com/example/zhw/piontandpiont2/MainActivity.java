@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private MyConn myConn;
     private CustomVideoView videovie;
     public static Context context;
+    //定义一个类型来存储用户名
+    public static String main_username;
     private static Handler mHandler = new Handler(Looper.getMainLooper()){
         @Override
         public void handleMessage(Message msg) {
@@ -48,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     //登陆成功
                     Intent homeIntent = new Intent(context,HomeActivity.class);
                     homeIntent.putExtra("data",text);
+                    homeIntent.putExtra("username",main_username);
+                    System.out.println(main_username+"用户名");
                     context.startActivity(homeIntent);
                     break;
                 default:
@@ -96,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                    Toast.makeText(this,"用户名和密码不能为空",Toast.LENGTH_LONG).show();
                }
                 btn_login.setBackgroundResource(R.drawable.btn_login_out);*/
+             main_username = username.getText().toString().trim();
              Intent i = new Intent(this,HomeActivity.class);
              startActivity(i);
                 break;

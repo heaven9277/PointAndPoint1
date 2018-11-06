@@ -52,13 +52,15 @@
         <activity android:name=".ChatActivity"/>
         <activity android:name=".ApplicationActivity"/>
         <activity android:name=".GroupPositionActivity"/>
-        <activity android:name=".SearchActivity"/>
+        <activity android:name=".SearchActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".GroupInfoActivity" />
         <activity android:name=".ManageGroupActivity" />
         <activity android:name=".EditGroupActivity" />
         <activity android:name=".GroupUserInfoActivity"></activity>
         <activity android:name=".UpdatePwActivity" />
-        <activity android:name=".CreateActivity"/>
+        <activity android:name=".CreateActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ProfileActivity"/>
         <activity
             android:name="com.mob.tools.MobUIShell"
