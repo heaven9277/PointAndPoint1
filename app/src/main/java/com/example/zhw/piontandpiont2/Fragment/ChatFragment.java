@@ -50,23 +50,20 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
     private void initView(View view) {
         chat_listView = view.findViewById(R.id.chat_listView);
         no_group = view.findViewById(R.id.no_group);
-
-            try {
                 //得到Activity发送过来的数组
                 //对接收到的数据进行解析
                 Bundle bundle = getArguments();
                 if(bundle != null){
                     data = bundle.getString("data");
                     username = bundle.getString("username");
+                    System.out.println("接收到的fragment!!!!!!!!!"+data);
                     if (data==null){
                         datalilst = null;
                     }else{
-                        datalilst = Arrays.asList(Jsonpack.getLoginSuccessData(data));
+                        datalilst = Jsonpack.getLoginSuccessData(data);
+                        System.out.println("datalsit的长度"+Jsonpack.getLoginSuccessData(data));
                     }
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
         if (datalilst == null||datalilst.size()==0){
             chat_listView.setVisibility(View.INVISIBLE);
             no_group.setVisibility(View.VISIBLE);
@@ -89,7 +86,7 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
         //得到用户名
         Intent chatActivity = new Intent(getContext(), ChatActivity.class);
         chatActivity.putExtra("GroupName",loginSuccessData.getGroupName());
-        chatActivity.putExtra("GroupId",loginSuccessData.getGroupId());
+        chatActivity.putExtra("GroupId",loginSuccessData.getGroupNumber());
         chatActivity.putExtra("uuid",username);
         startActivity(chatActivity);
 

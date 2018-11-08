@@ -1,10 +1,18 @@
 package com.example.zhw.piontandpiont2.Util;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 //
 //对类进行json分装
@@ -35,25 +43,18 @@ public class Jsonpack {
         return Login_json;
     }
 
-    public static LoginSuccessData[] getLoginSuccessData(String string) throws JSONException {
-        JSONObject jsonObject = new JSONObject(string);
-        JSONArray jsonArray = jsonObject.getJSONArray("groups");
-        System.out.println("jsonArray"+jsonArray + "" +jsonArray.length());
-        LoginSuccessData[] loginSuccessData = new LoginSuccessData[jsonArray.length()];
-        for (int i=0;i<jsonArray.length();i++){
-            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-            LoginSuccessData data = new LoginSuccessData();
-            data.setGroupName(jsonObject1.getString("groupName"));
-            data.setGroupId(jsonObject1.getString("groupId"));
-            data.setGroupPortrait(jsonObject1.getString("groupPortrait"));
-            data.setLastestGroupUser(jsonObject1.getString("lastestGroupUser"));
-            data.setLastGroupNumberName(jsonObject1.getString("lastGroupNumberName"));
-            data.setLastGroupSendTime(jsonObject1.getString("lastGroupSendTime"));
-            data.setLastestGroupMessage(jsonObject1.getString("lastestGroupMessage"));
-            data.setGroupMessageCount(jsonObject1.getString("groupMessageCount"));
-            data.setGroupRole(jsonObject1.getString("groupRole"));
-            loginSuccessData[i] = data;
-        }
+    public static List<LoginSuccessData> getLoginSuccessData(String string) {
+        Gson gson = new Gson();
+        JsonParser jsonParser = new JsonParser();
+        JsonObject gjsonObject = jsonParser.parse(string).getAsJsonObject();
+        System.out.println(gjsonObject);
+        JsonObject data = gjsonObject.getAsJsonObject("data");
+        System.out.println(data);
+        JsonArray gjsonArray = data.getAsJsonArray("groups");
+        System.out.println(gjsonArray);
+        List<LoginSuccessData> loginSuccessData = gson.fromJson(gjsonArray, new TypeToken<List<LoginSuccessData>>() {
+        }.getType());
+        System.out.println(loginSuccessData.get(0).getGroupName());
         return loginSuccessData;
     }
     //返回首页的json

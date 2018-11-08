@@ -1,7 +1,7 @@
 package com.example.zhw.piontandpiont2.Util;
 
 public class LoginSuccessData {
-    private String groupName,groupId,groupPortrait,lastestGroupUser, lastGroupNumberName,
+    private String groupName,groupNumber,groupPortrait,lastestGroupUser, lastGroupNumberName,
             lastGroupSendTime,lastestGroupMessage,groupMessageCount,groupRole;
     public String getGroupName() {
         return groupName;
@@ -11,12 +11,12 @@ public class LoginSuccessData {
         this.groupName = groupName;
     }
 
-    public String getGroupId() {
-        return groupId;
+    public String getGroupNumber() {
+        return groupNumber;
     }
 
-    public void setGroupId(String groupId) {
-        this.groupId = groupId;
+    public void setGroupNumber(String groupNumber) {
+        this.groupNumber = groupNumber;
     }
 
     public String getGroupPortrait() {

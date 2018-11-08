@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Intent homeIntent = new Intent(context,HomeActivity.class);
                     homeIntent.putExtra("data",text);
                     homeIntent.putExtra("username",main_username);
-                    System.out.println(main_username+"用户名");
+                    System.out.println(main_username+"用户名" + text);
                     context.startActivity(homeIntent);
                     break;
                 default:
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int id = view.getId();
         switch (id){
             case  R.id.btn_login:
-
+                main_username = username.getText().toString().trim();
                if (username.getText().toString().trim()!=null||userpasswd.getText().toString().trim()!=null){
                    myIBinder.sendData(username.getText().toString().trim(),userpasswd.getText().toString().trim());
                }else {

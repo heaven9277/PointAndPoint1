@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -33,9 +34,9 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
     private Button button_create_invite, button_create;
     private ListView listView;
     public ImageView create_image_back;//返回键
-    public TextInputLayout group_name_edit;//群名称
-    public TextInputLayout group_hobby_edit;//群爱好
-    public TextInputLayout group_descript_deit;//群描述
+    public TextInputEditText group_name_edit;//群名称
+    public TextInputEditText group_hobby_edit;//群爱好
+    public TextInputEditText group_descript_deit;//群描述
     public WsManager wsManager;
     public WebSocket webSocket;
     public static String userName;
@@ -51,7 +52,7 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
             int what = msg.what;
             String datas = (String) msg.obj;
             switch (what){
-                case 7:
+                case 9:
                     //获取成功
                         Toast.makeText(context, PareJson.getJsonInfo(datas),Toast.LENGTH_LONG).show();
                         Intent homeAvtivity = new Intent(context,HomeActivity.class);
@@ -59,7 +60,7 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
                         homeAvtivity.putExtra("username",userName);
                         context.startActivity(homeAvtivity);
                     break;
-                case 8:
+                case 10:
                     //获取失败
                     Toast.makeText(context, PareJson.getJsonInfo(datas),Toast.LENGTH_LONG).show();
                     break;
@@ -105,22 +106,17 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
                 wsManager = WsManager.getInstance();
                 if (wsManager != null){
                     webSocket = wsManager.getWebsocket();
-                    if (group_name_edit.getEditText().toString().trim() != null&&group_hobby_edit.getEditText().toString().trim() != null
-                             &&  group_descript_deit.getEditText().toString().trim() !=null){
+                    if (group_name_edit.getText().toString().trim() != null&&group_hobby_edit.getText().toString().trim() != null
+                             &&  group_descript_deit.getText().toString().trim() !=null){
                         //发送请求
-                                String create_json = Jsonpack.getCreateGroupData(userName,group_name_edit.getEditText().toString().trim(),
-                                        group_descript_deit.getEditText().toString().trim(),group_hobby_edit.getEditText().toString().trim());
+                                String create_json = Jsonpack.getCreateGroupData(userName,group_name_edit.getText().toString().trim(),
+                                        group_descript_deit.getText().toString().trim(),group_hobby_edit.getText().toString().trim());
                                 ByteBuffer bf_createGroup = BufferChange.getByteBuffer(create_json);
                                 webSocket.sendBinary(bf_createGroup.array());
                                 System.out.println("发送创建群的消息");
                     }else{
                         Toast.makeText(this,"信息不能为空，请填写",Toast.LENGTH_LONG).show();
                     }
-                }
-                try {
-                    getStatus("ss");
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
                 break;
             case R.id.create_image_back:
@@ -130,13 +126,6 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
                 startActivity(homeintent);
                 break;
         }
-    }
-
-    void getStatus(String createRequest) throws JSONException {
-        JSONObject jsonObject = new JSONObject(createRequest);
-        String status = jsonObject.getString("status");
-            Toast.makeText(this,jsonObject.getString("information"),Toast.LENGTH_SHORT).show();
-
     }
     public static Handler getCreateGroupHandler(){
         return  mHandler;

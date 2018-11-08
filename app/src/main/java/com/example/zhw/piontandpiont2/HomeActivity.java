@@ -13,6 +13,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -37,7 +38,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class HomeActivity extends BaseActivity implements View.OnClickListener {
+public class HomeActivity extends BaseActivity implements View.OnClickListener{
     public String data;
     public static String user_name;
     private ArrayList<Fragment> fragments;
@@ -133,8 +134,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         //发送数据给Fragment
         sendDataChatFragemtn(data);
         //发送请求
-        SendFisrtDataThread sendFisrtDataThread = new SendFisrtDataThread(user_name);
-        sendFisrtDataThread.start();
+        //SendFisrtDataThread sendFisrtDataThread = new SendFisrtDataThread(user_name);
+        //sendFisrtDataThread.start();
     }
     private void initView() {
         //在主布局中根据id找到ViewPager
@@ -199,7 +200,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
             bundle.putString("data",data);
             bundle.putString("username",user_name);
             chatFragment.setArguments(bundle);
-
+            System.out.println("发送给Fragment!!!!!!!!!!!!!");
     }
     @Override
     public void onClick(View view) {
@@ -209,12 +210,10 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 //点击加号显示
                 if(display==false) {
                     relativeLayout.setVisibility(View.VISIBLE);
-                    relativeLayout.setEnabled(true);
                     display = true;
                 }else {
 
-                    relativeLayout.setVisibility(View.INVISIBLE);
-                    relativeLayout.setEnabled(false);
+                    relativeLayout.setVisibility(View.GONE);
                     display = false;
                 }
                 break;
@@ -234,8 +233,15 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 display = false;
                 System.out.println("点击了create群");
                 break;
+            case R.id.viewpager:
+                relativeLayout.setVisibility(View.GONE);
+                display = false;
+                System.out.println("viewpager");
+                break;
             default:
-                relativeLayout.setVisibility(View.INVISIBLE);
+                relativeLayout.setVisibility(View.GONE);
+                display = false;
+                System.out.println("defalt");
                 break;
         }
     }
@@ -249,6 +255,14 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
             viewPager.setCurrentItem(1);  //view2是viewPager中的第二个view，因此设置setCurrentItem（1）。
         }
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        relativeLayout.setVisibility(View.GONE);
+        display = false;
+    }
+
     //得到一个handler
     public static Handler getFirst_handler(){
         return First_handler;
