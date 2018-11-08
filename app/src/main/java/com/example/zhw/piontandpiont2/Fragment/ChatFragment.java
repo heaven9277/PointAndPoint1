@@ -1,9 +1,7 @@
 package com.example.zhw.piontandpiont2.Fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,19 +12,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.zhw.piontandpiont2.ChatActivity;
-import com.example.zhw.piontandpiont2.Networksockets.WsManager;
 import com.example.zhw.piontandpiont2.R;
-import com.example.zhw.piontandpiont2.Util.BufferChange;
-import com.example.zhw.piontandpiont2.Util.Jsonpack;
 import com.example.zhw.piontandpiont2.Util.LoginSuccessData;
 import com.loopj.android.image.SmartImageView;
-import com.neovisionaries.ws.client.WebSocket;
 
-import org.json.JSONException;
-
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -49,7 +38,12 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
 
     private void initView(View view) {
         chat_listView = view.findViewById(R.id.chat_listView);
+
         no_group = view.findViewById(R.id.no_group);
+       // no_group = view.findViewById(R.id.no_group);
+
+         /*   try {
+>>>>>>> daf16b85f48d2b62aead2ed058a10e65e2922961
                 //得到Activity发送过来的数组
                 //对接收到的数据进行解析
                 Bundle bundle = getArguments();
@@ -65,6 +59,12 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
                     }
                 }
         if (datalilst == null||datalilst.size()==0){
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }*/
+        /*if (datalilst == null||datalilst.size()==0){
+>>>>>>> daf16b85f48d2b62aead2ed058a10e65e2922961
             chat_listView.setVisibility(View.INVISIBLE);
             no_group.setVisibility(View.VISIBLE);
         }else{
@@ -74,8 +74,11 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
             chat_listView.setAdapter(myBaseAdapter);
             //更新
             myBaseAdapter.notifyDataSetChanged();
-        }
-
+        }*/
+        myBaseAdapter = new MyBaseAdapter();
+        chat_listView.setAdapter(myBaseAdapter);
+        //更新
+     //   myBaseAdapter.notifyDataSetChanged();
         //listView的item的点击事件
         chat_listView.setOnItemClickListener(this);
     }
@@ -95,7 +98,8 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
 
         @Override
         public int getCount() {
-            return datalilst.size();
+           // return datalilst.size();
+            return 3;
         }
 
         @Override
@@ -105,13 +109,14 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
 
         @Override
         public long getItemId(int i) {
-            return 0;
+            return i;
         }
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            //View viewList = LayoutInflater.from(getContext()).inflate(R.layout.group_item, null);
-            System.out.println("listView的展开布局文件");
+            view = LayoutInflater.from(getContext()).inflate(R.layout.group_item,viewGroup,false);
+           // View viewList = LayoutInflater.from(getContext()).inflate(R.layout.group_item, null);
+           /* System.out.println("listView的展开布局文件");
             //展开布局，如何数量为零，则显示textview
             ViewHolder holder;
             if (view == null){
@@ -134,7 +139,7 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
                 holder.tv_title.setText(loginSuccessData.getGroupName());
                 holder.tv_author.setText(loginSuccessData.getLastestGroupUser()+ ":"+loginSuccessData.getLastestGroupMessage());
                 holder.tv_time.setText(loginSuccessData.getLastGroupSendTime());
-            }
+            }*/
             return view;
         }
     }

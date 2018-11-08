@@ -1,6 +1,7 @@
 package com.example.zhw.piontandpiont2.Fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,16 +10,16 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.zhw.piontandpiont2.ApplicationActivity;
-import com.example.zhw.piontandpiont2.HomeActivity;
 import com.example.zhw.piontandpiont2.R;
 
 
 public class MessageFragment extends Fragment implements AdapterView.OnItemClickListener {
     ListView message_listView;
+    Button btn;
+    int a=1;
     MyMessageBaseAdapter myMessageBaseAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class MessageFragment extends Fragment implements AdapterView.OnItemClick
 
         //message_listView的item点击事件
         message_listView.setOnItemClickListener(this);
+
     }
 
     @Override
@@ -49,7 +51,21 @@ public class MessageFragment extends Fragment implements AdapterView.OnItemClick
         System.out.println("!!!!!!!!!!!!!!!!!!!!!!");
     }
 
-    class MyMessageBaseAdapter extends BaseAdapter {
+    /*@Override
+    public void onClick(View view) {
+        if(a==1) {
+            btn.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            btn.setText("已接受");
+            btn.setTextColor(Color.parseColor("#45b97c"));
+            a=0;
+        }else{
+            a=1;
+            btn.setText("接受");
+            btn.setTextColor(Color.parseColor("#000000"));
+        }
+    }*/
+
+    class MyMessageBaseAdapter extends BaseAdapter implements View.OnClickListener{
 
         @Override
         public int getCount() {
@@ -69,8 +85,18 @@ public class MessageFragment extends Fragment implements AdapterView.OnItemClick
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             View viewList = LayoutInflater.from(getContext()).inflate(R.layout.message_item, null);
+            btn=viewList.findViewById(R.id.btn_accept);
+            btn.setOnClickListener(this);
             System.out.println("进入这里进行店家兄啊过");
             return viewList;
+        }
+        @Override
+        public void onClick(View view) {
+            Button btn1=view.findViewById(R.id.btn_accept);
+            btn1.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            btn1.setText("已接受");
+            btn1.setTextColor(Color.parseColor("#45b97c"));
+
         }
     }
 }
