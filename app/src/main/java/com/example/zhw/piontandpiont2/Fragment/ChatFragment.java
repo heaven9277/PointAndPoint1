@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.zhw.piontandpiont2.ChatActivity;
 import com.example.zhw.piontandpiont2.R;
+import com.example.zhw.piontandpiont2.Util.Jsonpack;
 import com.example.zhw.piontandpiont2.Util.LoginSuccessData;
 import com.loopj.android.image.SmartImageView;
 
@@ -28,7 +29,7 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
     List<LoginSuccessData> datalilst;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-       View view = inflater.inflate(R.layout.chat_layout, container, false);
+        View view = inflater.inflate(R.layout.chat_layout, container, false);
         initView(view);
         System.out.println("展开布局");
         System.out.println(getContext());
@@ -38,33 +39,22 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
 
     private void initView(View view) {
         chat_listView = view.findViewById(R.id.chat_listView);
-
         no_group = view.findViewById(R.id.no_group);
-       // no_group = view.findViewById(R.id.no_group);
-
-         /*   try {
->>>>>>> daf16b85f48d2b62aead2ed058a10e65e2922961
-                //得到Activity发送过来的数组
-                //对接收到的数据进行解析
-                Bundle bundle = getArguments();
-                if(bundle != null){
-                    data = bundle.getString("data");
-                    username = bundle.getString("username");
-                    System.out.println("接收到的fragment!!!!!!!!!"+data);
-                    if (data==null){
-                        datalilst = null;
-                    }else{
-                        datalilst = Jsonpack.getLoginSuccessData(data);
-                        System.out.println("datalsit的长度"+Jsonpack.getLoginSuccessData(data));
-                    }
-                }
+        //得到Activity发送过来的数组
+        //对接收到的数据进行解析
+        Bundle bundle = getArguments();
+        if(bundle != null){
+            data = bundle.getString("data");
+            username = bundle.getString("username");
+            System.out.println("接收到的fragment!!!!!!!!!"+data);
+            if (data==null){
+                datalilst = null;
+            }else{
+                datalilst = Jsonpack.getLoginSuccessData(data);
+                System.out.println("datalsit的长度"+Jsonpack.getLoginSuccessData(data));
+            }
+        }
         if (datalilst == null||datalilst.size()==0){
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }*/
-        /*if (datalilst == null||datalilst.size()==0){
->>>>>>> daf16b85f48d2b62aead2ed058a10e65e2922961
             chat_listView.setVisibility(View.INVISIBLE);
             no_group.setVisibility(View.VISIBLE);
         }else{
@@ -74,11 +64,8 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
             chat_listView.setAdapter(myBaseAdapter);
             //更新
             myBaseAdapter.notifyDataSetChanged();
-        }*/
-        myBaseAdapter = new MyBaseAdapter();
-        chat_listView.setAdapter(myBaseAdapter);
-        //更新
-     //   myBaseAdapter.notifyDataSetChanged();
+        }
+
         //listView的item的点击事件
         chat_listView.setOnItemClickListener(this);
     }
@@ -98,8 +85,7 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
 
         @Override
         public int getCount() {
-           // return datalilst.size();
-            return 3;
+            return datalilst.size();
         }
 
         @Override
@@ -109,14 +95,13 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
 
         @Override
         public long getItemId(int i) {
-            return i;
+            return 0;
         }
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            view = LayoutInflater.from(getContext()).inflate(R.layout.group_item,viewGroup,false);
-           // View viewList = LayoutInflater.from(getContext()).inflate(R.layout.group_item, null);
-           /* System.out.println("listView的展开布局文件");
+            //View viewList = LayoutInflater.from(getContext()).inflate(R.layout.group_item, null);
+            System.out.println("listView的展开布局文件");
             //展开布局，如何数量为零，则显示textview
             ViewHolder holder;
             if (view == null){
@@ -139,7 +124,7 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
                 holder.tv_title.setText(loginSuccessData.getGroupName());
                 holder.tv_author.setText(loginSuccessData.getLastestGroupUser()+ ":"+loginSuccessData.getLastestGroupMessage());
                 holder.tv_time.setText(loginSuccessData.getLastGroupSendTime());
-            }*/
+            }
             return view;
         }
     }
