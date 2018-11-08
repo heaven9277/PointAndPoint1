@@ -37,12 +37,14 @@ public class Jsonpack {
 
     public static LoginSuccessData[] getLoginSuccessData(String string) throws JSONException {
         JSONObject jsonObject = new JSONObject(string);
-        JSONArray jsonArray = jsonObject.getJSONArray("data");
+        JSONArray jsonArray = jsonObject.getJSONArray("groups");
+        System.out.println("jsonArray"+jsonArray + "" +jsonArray.length());
         LoginSuccessData[] loginSuccessData = new LoginSuccessData[jsonArray.length()];
         for (int i=0;i<jsonArray.length();i++){
             JSONObject jsonObject1 = jsonArray.getJSONObject(i);
             LoginSuccessData data = new LoginSuccessData();
             data.setGroupName(jsonObject1.getString("groupName"));
+            data.setGroupId(jsonObject1.getString("groupId"));
             data.setGroupPortrait(jsonObject1.getString("groupPortrait"));
             data.setLastestGroupUser(jsonObject1.getString("lastestGroupUser"));
             data.setLastGroupNumberName(jsonObject1.getString("lastGroupNumberName"));
@@ -61,5 +63,26 @@ public class Jsonpack {
         //使用Gson将对象转换为json字符串
         String First_json = gson.toJson(firstRequest);
         return First_json;
+    }
+    /*
+    创建群的json
+     */
+    public static  String getCreateGroupData(String uuid,String groupName,String groupDec,String groupHobby){
+        CreateGroupUtil createGroupUtil = new CreateGroupUtil(3,uuid,groupName,groupDec,groupHobby);
+        Gson gson = new Gson();
+        //使用Gson将对象转换为json字符串
+        String CreateGroup_json = gson.toJson(createGroupUtil);
+        return CreateGroup_json;
+    }
+    /*
+    群聊的json
+     */
+    public static String getChatData(String groupName,String groupUuid,String uuid){
+
+        ChatUtil chatUtil = new ChatUtil(4,groupName,groupUuid,uuid);
+        Gson gson = new Gson();
+        //使用Gson将对象转换为json字符串
+        String chat_json = gson.toJson(chatUtil);
+        return chat_json;
     }
 }

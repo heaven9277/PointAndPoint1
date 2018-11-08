@@ -56,6 +56,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     RelativeLayout relativeLayout;
 
     boolean display=false;
+    public static ChatFragment.MyBaseAdapter myBaseAdapter;
 
     //定义一个handler进行消息接收
     private static Handler First_handler = new Handler(){
@@ -71,6 +72,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                     sendDataChatFragemtn(data);
                     //提示更新listview
                    // chatFragment.getMyBaseAdapter().notifyDataSetChanged();
+                    myBaseAdapter.notifyDataSetChanged();
                     break;
                 case 8:
                     //获取失败
@@ -130,7 +132,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         initListener();
         //发送数据给Fragment
         sendDataChatFragemtn(data);
-
         //发送请求
         SendFisrtDataThread sendFisrtDataThread = new SendFisrtDataThread(user_name);
         sendFisrtDataThread.start();
@@ -149,6 +150,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         fragments.add(messageFragment);
         fragments.add(userFragment);
         fragmentManager = getSupportFragmentManager();
+
+        myBaseAdapter= chatFragment.getMyBaseAdapter();
         //为ViewPager设置适配器用于部署fragments
         viewPager.setAdapter(new FragAdapter(fragmentManager,fragments));
     }
@@ -219,12 +222,16 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 //搜索群
                 Intent SearchActivity = new Intent(this,SearchActivity.class);
                 startActivity(SearchActivity);
+                display = false;
                 System.out.println("点击了搜索群");
                 break;
             case R.id.liear_create:
                 //创建群
                 Intent createActivity = new Intent(this,CreateActivity.class);
+                createActivity.putExtra("username",user_name);
+                createActivity.putExtra("data",data);
                 startActivity(createActivity);
+                display = false;
                 System.out.println("点击了create群");
                 break;
             default:
