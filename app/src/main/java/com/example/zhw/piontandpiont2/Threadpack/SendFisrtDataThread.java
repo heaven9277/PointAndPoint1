@@ -14,13 +14,17 @@ public class SendFisrtDataThread extends Thread {
     public SendFisrtDataThread(String username){
         this.username = username;
     }
-    public void run(){
+
+    @Override
+    public void run() {
+        super.run();
         //向服务器发送请求数据
         sendServeiceData();
     }
+
     /*
-发送首页请求
-*/
+    发送首页请求
+    */
     private void sendServeiceData() {
         wsManager = WsManager.getInstance();
         if (wsManager != null){

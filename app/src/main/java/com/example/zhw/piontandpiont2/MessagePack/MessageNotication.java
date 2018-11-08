@@ -1,7 +1,11 @@
 package com.example.zhw.piontandpiont2.MessagePack;
 
 
+import com.example.zhw.piontandpiont2.CreateActivity;
+import com.example.zhw.piontandpiont2.HomeActivity;
 import com.example.zhw.piontandpiont2.MainActivity;
+import com.example.zhw.piontandpiont2.Threadpack.CreateGroupActivityThread;
+import com.example.zhw.piontandpiont2.Threadpack.FirstActiviityThread;
 import com.example.zhw.piontandpiont2.Threadpack.MainThread;
 
 //消息分发的类
@@ -19,11 +23,15 @@ public class MessageNotication {
                 break;
             case 2:
                 //首页操作
-
+                FirstActiviityThread firstActiviityThread = new FirstActiviityThread(text, HomeActivity.getFirst_handler());
+                firstActiviityThread.start();
+                System.out.println("开始首页线程");
                 break;
             case 3:
                 //创建群操作
-
+                CreateGroupActivityThread createGroupActivityThread = new CreateGroupActivityThread(text, CreateActivity.getCreateGroupHandler());
+                createGroupActivityThread.start();
+                System.out.println("开始创建群的线程");
                 break;
             case 4:
                 //进入群聊

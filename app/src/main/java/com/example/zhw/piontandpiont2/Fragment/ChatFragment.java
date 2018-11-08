@@ -32,7 +32,7 @@ import java.util.List;
 
 public class ChatFragment extends Fragment implements AdapterView.OnItemClickListener {
     ListView chat_listView;
-    MyBaseAdapter myBaseAdapter;
+    public MyBaseAdapter myBaseAdapter;
     public TextView no_group;//显示暂无群聊
     String data;
     String username;
@@ -57,7 +57,7 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
                 Bundle bundle = getArguments();
                 if(bundle != null){
                     data = bundle.getString("data");
-
+                    username = bundle.getString("username");
                     if (data==null){
                         datalilst = null;
                     }else{
@@ -84,11 +84,17 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
     }
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        //等到一些基本信息
+        LoginSuccessData loginSuccessData = datalilst.get(i);
+        //得到用户名
         Intent chatActivity = new Intent(getContext(), ChatActivity.class);
+        chatActivity.putExtra("GroupName",loginSuccessData.getGroupName());
+        chatActivity.putExtra("GroupId",loginSuccessData.getGroupId());
+        chatActivity.putExtra("uuid",username);
         startActivity(chatActivity);
-    }
 
-    class MyBaseAdapter extends BaseAdapter{
+    }
+    public class MyBaseAdapter extends BaseAdapter{
 
         @Override
         public int getCount() {

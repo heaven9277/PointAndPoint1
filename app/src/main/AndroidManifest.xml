@@ -62,6 +62,7 @@
         <activity android:name=".CreateActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ProfileActivity"/>
+        <activity android:name=".ConnectMemberActivity"/>
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"

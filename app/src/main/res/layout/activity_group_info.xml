@@ -61,7 +61,7 @@
                         android:layout_height="wrap_content"
                         android:text="天下纵横"
                         android:textColor="#000"
-                        android:textSize="20sp"/>
+                        android:textSize="18sp"/>
                     <TextView
                         android:id="@+id/group_id"
                         android:layout_width="wrap_content"
@@ -133,7 +133,7 @@
                                 android:layout_centerHorizontal="true"
                                 android:text="Demo"
                                 android:textColor="#000"
-                                android:textSize="18dp" />
+                                android:textSize="16dp" />
                         </RelativeLayout>
                     </LinearLayout>
                     <LinearLayout
@@ -173,7 +173,7 @@
                                 android:layout_centerHorizontal="true"
                                 android:text="赞"
                                 android:textColor="#000"
-                                android:textSize="18dp" />
+                                android:textSize="16dp" />
                         </RelativeLayout>
                     </LinearLayout>
                     <LinearLayout
@@ -213,7 +213,7 @@
                                 android:layout_centerHorizontal="true"
                                 android:text="邀请"
                                 android:textColor="#0B98F2"
-                                android:textSize="18dp" />
+                                android:textSize="16dp" />
                         </RelativeLayout>
                     </LinearLayout>
                 </TableRow>
@@ -231,7 +231,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:background="@drawable/linear_back"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="#000"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
