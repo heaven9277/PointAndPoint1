@@ -16,12 +16,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zhw.piontandpiont2.Networksockets.WsManager;
 import com.example.zhw.piontandpiont2.Util.BufferChange;
 import com.example.zhw.piontandpiont2.Util.Jsonpack;
 import com.example.zhw.piontandpiont2.Util.PareJson;
+import com.loopj.android.image.SmartImageView;
 import com.neovisionaries.ws.client.WebSocket;
 
 import org.json.JSONException;
@@ -32,7 +34,8 @@ import java.util.Objects;
 
 public class CreateActivity extends AppCompatActivity implements View.OnClickListener {
     private Button button_create_invite, button_create;
-    private ListView listView;
+    private SmartImageView gourp_manager_image;//群主头像
+    private TextView tv_group_manager;
     public ImageView create_image_back;//返回键
     public TextInputEditText group_name_edit;//群名称
     public TextInputEditText group_hobby_edit;//群爱好
@@ -42,6 +45,11 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
     public static String userName;
     String data;
     public static Context context;
+    public static String TAG = "Createactivity";
+    public static String TAG2 = "Mainactivity";
+    public static String user_portrait;//头像
+    public static String user_h_name;//昵称
+
     ///接收创建群的消息
 
     private static Handler mHandler = new Handler(){
@@ -58,6 +66,9 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
                         Intent homeAvtivity = new Intent(context,HomeActivity.class);
                         homeAvtivity.putExtra("data",datas);
                         homeAvtivity.putExtra("username",userName);
+                        homeAvtivity.putExtra("TAG",TAG);
+                        homeAvtivity.putExtra("user_portrait",user_portrait);
+                        homeAvtivity.putExtra("user_h_name",user_h_name);
                         context.startActivity(homeAvtivity);
                     break;
                 case 10:
@@ -78,8 +89,10 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
     private void intView() {
         button_create_invite = findViewById(R.id.button_create_invite);
         button_create = findViewById(R.id.button_create);
-        listView = findViewById(R.id.listView_create);
         create_image_back = findViewById(R.id.create_image_back);//返回键
+        gourp_manager_image = findViewById(R.id.gourp_manager_image);
+        tv_group_manager = findViewById(R.id.tv_group_manager);
+
         group_name_edit = findViewById(R.id.group_name_edit);
         group_hobby_edit = findViewById(R.id.group_hobby_edit);
         group_descript_deit = findViewById(R.id.group_descript_deit);
@@ -91,7 +104,12 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
         Intent intent = getIntent();
         userName = intent.getStringExtra("username");
         data = intent.getStringExtra("data");
+        user_portrait = intent.getStringExtra("user_portrait");
+        user_h_name = intent.getStringExtra("user_h_name");
+        System.out.println(user_h_name+"？？？？？？？？？？？？？");
 
+        gourp_manager_image.setImageUrl(user_portrait,R.drawable.users);
+        tv_group_manager.setText(user_h_name.replace("\"", ""));
         context= this;
     }
 
@@ -123,6 +141,9 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
                 Intent homeintent = new Intent(this,HomeActivity.class);
                 homeintent.putExtra("username",userName);
                 homeintent.putExtra("data",data);
+                homeintent.putExtra("TAG",TAG2);
+                homeintent.putExtra("user_portrait",user_portrait);
+                homeintent.putExtra("user_h_name",user_h_name);
                 startActivity(homeintent);
                 break;
         }

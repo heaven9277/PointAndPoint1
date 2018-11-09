@@ -41,6 +41,10 @@ import java.util.List;
 public class HomeActivity extends BaseActivity implements View.OnClickListener{
     public String data;
     public static String user_name;
+    public static String TAG;
+    public String user_portrait;//头像
+    public String user_h_name;//昵称
+
     private ArrayList<Fragment> fragments;
     //声明四个导航对应fragment
     public static ChatFragment chatFragment;
@@ -74,6 +78,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
                     //提示更新listview
                    // chatFragment.getMyBaseAdapter().notifyDataSetChanged();
                     myBaseAdapter.notifyDataSetChanged();
+                    System.out.println("获取首页成功");
                     break;
                 case 8:
                     //获取失败
@@ -127,8 +132,13 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
         Intent intent = getIntent();
         data = intent.getStringExtra("data");
         user_name = intent.getStringExtra("username");
-        System.out.println(data+"接收到的信息"+user_name);
-
+        TAG = intent.getStringExtra("TAG");
+        user_portrait = intent.getStringExtra("user_portrait");
+        user_h_name = intent.getStringExtra("user_h_name");
+        System.out.println("结兽皮"+data+"接收到的信息"+user_name);
+        //if (TAG.equals("Mainactivity")){
+          //  user_portait = Jsonpack.getUserPortrait(data);
+        //}
         initView();
         initListener();
         //发送数据给Fragment
@@ -199,8 +209,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
             Bundle bundle = new Bundle();
             bundle.putString("data",data);
             bundle.putString("username",user_name);
+            bundle.putString("TAG",TAG);
             chatFragment.setArguments(bundle);
-            System.out.println("发送给Fragment!!!!!!!!!!!!!");
     }
     @Override
     public void onClick(View view) {
@@ -229,6 +239,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
                 Intent createActivity = new Intent(this,CreateActivity.class);
                 createActivity.putExtra("username",user_name);
                 createActivity.putExtra("data",data);
+                createActivity.putExtra("user_portrait",user_portrait);
+                createActivity.putExtra("user_h_name",user_h_name);
                 startActivity(createActivity);
                 display = false;
                 System.out.println("点击了create群");
@@ -254,6 +266,12 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
         if(id==2){
             viewPager.setCurrentItem(1);  //view2是viewPager中的第二个view，因此设置setCurrentItem（1）。
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
     }
 
     @Override

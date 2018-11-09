@@ -56,9 +56,9 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         groupId = intent.getStringExtra("GroupId");
         chat_title.setText(groupName);
         //listView
-        lv_chat_dialog = findViewById(R.id.lv_chat_dialog);
-        myChatAdapter = new ChatAdapter(this);
-        lv_chat_dialog.setAdapter(myChatAdapter);
+       // lv_chat_dialog = findViewById(R.id.lv_chat_dialog);
+       // myChatAdapter = new ChatAdapter(this);
+        //lv_chat_dialog.setAdapter(myChatAdapter);
 
 
         btn.setOnClickListener(this);
@@ -70,8 +70,8 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         group_user_connection.setOnClickListener(this);
 
         //向后台发送数据
-        SendChatDataThread sendChatDataThread = new SendChatDataThread(groupName,uuid,groupId);
-        sendChatDataThread.start();
+       // SendChatDataThread sendChatDataThread = new SendChatDataThread(groupName,uuid,groupId);
+        //sendChatDataThread.start();
     }
     @Override
     public void onClick(View v) {

@@ -42,7 +42,9 @@ public class Jsonpack {
         String Login_json = gson.toJson(userLogin);
         return Login_json;
     }
-
+    /*
+    解析
+     */
     public static List<LoginSuccessData> getLoginSuccessData(String string) {
         Gson gson = new Gson();
         JsonParser jsonParser = new JsonParser();
@@ -54,9 +56,46 @@ public class Jsonpack {
         System.out.println(gjsonArray);
         List<LoginSuccessData> loginSuccessData = gson.fromJson(gjsonArray, new TypeToken<List<LoginSuccessData>>() {
         }.getType());
-        System.out.println(loginSuccessData.get(0).getGroupName());
         return loginSuccessData;
     }
+    public static List<LoginSuccessData> creategetLoginSuccessData(String string) {
+        Gson gson = new Gson();
+        JsonParser jsonParser = new JsonParser();
+        JsonObject gjsonObject = jsonParser.parse(string).getAsJsonObject();
+        JsonArray gjsonArray = gjsonObject.getAsJsonArray("groups");
+
+        List<LoginSuccessData> loginSuccessData = gson.fromJson(gjsonArray, new TypeToken<List<LoginSuccessData>>() {
+        }.getType());
+        return loginSuccessData;
+    }
+
+    public static JsonObject getSignal(String string){
+        Gson gson = new Gson();
+        JsonParser jsonParser = new JsonParser();
+        JsonObject gjsonObject = jsonParser.parse(string).getAsJsonObject();
+        System.out.println(gjsonObject);
+        JsonObject data = gjsonObject.getAsJsonObject("data");
+        System.out.println(data);
+        JsonObject signalJson = data.getAsJsonObject("singal");
+        System.out.println(signalJson);
+        return signalJson;
+    }
+
+    public static String getUserPortrait(String string){
+        String userPortrait = getSignal(string).get("userPortrait").toString();
+        return userPortrait;
+    }
+
+    public static String getUserName(String string){
+        String userName = getSignal(string).get("userName").toString();
+        return userName;
+    }
+
+    public static String getUserSign(String string){
+        String userSign = getSignal(string).get("userSign").toString();
+        return userSign;
+    }
+
     //返回首页的json
     public static String getFisrtData(String username){
         FirstRequest firstRequest = new FirstRequest(2,username);

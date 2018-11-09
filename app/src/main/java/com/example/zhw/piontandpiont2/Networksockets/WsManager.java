@@ -26,7 +26,7 @@ public class WsManager {
      */
     private static final int FRAME_QUEUE_SIZE = 5;
     private static final int CONNECT_TIMEOUT = 5000;
-    private static final String DEF_TEST_URL = "http://172.18.178.84:8080/ws";//测试服默认地址
+    private static final String DEF_TEST_URL = AdressHttp.getUrl()+"ws";//测试服默认地址
 
     //private String url;
 

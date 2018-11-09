@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zhw.piontandpiont2.Services.MyServer;
+import com.example.zhw.piontandpiont2.Util.Jsonpack;
 import com.example.zhw.piontandpiont2.Util.PareJson;
 import com.example.zhw.piontandpiont2.vdieo.CustomVideoView;
 
@@ -34,13 +35,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static Context context;
     //定义一个类型来存储用户名
     public static String main_username;
+    public static String TAG = "Mainactivity";
+    public static String user_portrait;//头像
+    public static String user_h_name;//昵称
     private static Handler mHandler = new Handler(Looper.getMainLooper()){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            System.out.println("接收到信息");
+            System.out.println("Mainactivity接收到信息");
             int what = msg.what;
             String text = (String) msg.obj;
+            user_portrait = Jsonpack.getUserPortrait(text);
+            user_h_name = Jsonpack.getUserName(text);
             switch (what){
                 case 5:
                     //登陆失败
@@ -51,6 +57,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Intent homeIntent = new Intent(context,HomeActivity.class);
                     homeIntent.putExtra("data",text);
                     homeIntent.putExtra("username",main_username);
+                    homeIntent.putExtra("TAG",TAG);
+                    homeIntent.putExtra("user_portrait",user_portrait);
+                    homeIntent.putExtra("user_h_name",user_h_name);
                     System.out.println(main_username+"用户名" + text);
                     context.startActivity(homeIntent);
                     break;

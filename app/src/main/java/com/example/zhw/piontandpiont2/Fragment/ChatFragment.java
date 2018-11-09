@@ -26,6 +26,7 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
     public TextView no_group;//显示暂无群聊
     String data;
     String username;
+    String TAG;
     List<LoginSuccessData> datalilst;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,12 +47,17 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
         if(bundle != null){
             data = bundle.getString("data");
             username = bundle.getString("username");
+            TAG = bundle.getString("TAG");
             System.out.println("接收到的fragment!!!!!!!!!"+data);
             if (data==null){
                 datalilst = null;
             }else{
-                datalilst = Jsonpack.getLoginSuccessData(data);
-                System.out.println("datalsit的长度"+Jsonpack.getLoginSuccessData(data));
+                if (TAG.equals("Mainactivity")){
+                    datalilst = Jsonpack.getLoginSuccessData(data);
+                }else{
+                    datalilst = Jsonpack.creategetLoginSuccessData(data);
+                }
+                System.out.println("datalsit的长度"+datalilst.size());
             }
         }
         if (datalilst == null||datalilst.size()==0){
@@ -72,12 +78,13 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         //等到一些基本信息
-        LoginSuccessData loginSuccessData = datalilst.get(i);
+       // LoginSuccessData loginSuccessData = datalilst.get(i);
+        System.out.println(i+"????????????");
         //得到用户名
         Intent chatActivity = new Intent(getContext(), ChatActivity.class);
-        chatActivity.putExtra("GroupName",loginSuccessData.getGroupName());
-        chatActivity.putExtra("GroupId",loginSuccessData.getGroupNumber());
-        chatActivity.putExtra("uuid",username);
+        //chatActivity.putExtra("GroupName",loginSuccessData.getGroupName());
+        //chatActivity.putExtra("GroupId",loginSuccessData.getGroupNumber());
+        //chatActivity.putExtra("uuid",username);
         startActivity(chatActivity);
 
     }
@@ -90,12 +97,12 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
 
         @Override
         public Object getItem(int i) {
-            return null;
+            return datalilst.get(i);
         }
 
         @Override
         public long getItemId(int i) {
-            return 0;
+            return i;
         }
 
         @Override
@@ -108,23 +115,23 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
                 view = LayoutInflater.from(getContext()).inflate(R.layout.group_item,viewGroup,false);
                 holder = new ViewHolder();
                 //进行实例化
-                for (int j = 0;j<datalilst.size();j++){
-                    holder.siv_icon = view.findViewById(R.id.siv_icon);
-                    holder.tv_title = view.findViewById(R.id.tv_title);
-                    holder.tv_author = view.findViewById(R.id.tv_author);
-                    holder.tv_time = view.findViewById(R.id.tv_time);
-                }
+                holder.siv_icon = view.findViewById(R.id.siv_icon);
+                holder.tv_title = view.findViewById(R.id.tv_title);
+                holder.tv_author = view.findViewById(R.id.tv_author);
+                holder.tv_time = view.findViewById(R.id.tv_time);
                 view.setTag(holder);
             }else{
                 holder = (ViewHolder) view.getTag();
             }
-            for (int k=0;k<datalilst.size();k++){
-                LoginSuccessData loginSuccessData = datalilst.get(k);
-                holder.siv_icon.setImageUrl(loginSuccessData.getGroupPortrait(),R.drawable.group003);
-                holder.tv_title.setText(loginSuccessData.getGroupName());
+            LoginSuccessData loginSuccessData = datalilst.get(i);
+            holder.siv_icon.setImageUrl(loginSuccessData.getGroupPortrait(),R.drawable.group003);
+            holder.tv_title.setText(loginSuccessData.getGroupName());
+            if (loginSuccessData.getLastestGroupUser() == null || loginSuccessData.getLastestGroupUser().equals("")){
+                holder.tv_author.setText("");
+            }else{
                 holder.tv_author.setText(loginSuccessData.getLastestGroupUser()+ ":"+loginSuccessData.getLastestGroupMessage());
-                holder.tv_time.setText(loginSuccessData.getLastGroupSendTime());
             }
+            holder.tv_time.setText(loginSuccessData.getLastGroupSendTime());
             return view;
         }
     }
