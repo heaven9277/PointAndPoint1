@@ -14,7 +14,8 @@ import android.widget.TextView;
 import com.example.zhw.piontandpiont2.ChatActivity;
 import com.example.zhw.piontandpiont2.R;
 import com.example.zhw.piontandpiont2.Util.Jsonpack;
-import com.example.zhw.piontandpiont2.Util.LoginSuccessData;
+import com.example.zhw.piontandpiont2.Bean.LoginSuccessData;
+import com.example.zhw.piontandpiont2.Util.TimeParese;
 import com.loopj.android.image.SmartImageView;
 
 import java.util.List;
@@ -78,13 +79,15 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         //等到一些基本信息
-       // LoginSuccessData loginSuccessData = datalilst.get(i);
+        LoginSuccessData loginSuccessData = datalilst.get(i);
         System.out.println(i+"????????????");
         //得到用户名
         Intent chatActivity = new Intent(getContext(), ChatActivity.class);
-        //chatActivity.putExtra("GroupName",loginSuccessData.getGroupName());
-        //chatActivity.putExtra("GroupId",loginSuccessData.getGroupNumber());
-        //chatActivity.putExtra("uuid",username);
+        chatActivity.putExtra("GroupName",loginSuccessData.getGroupName());
+        chatActivity.putExtra("GroupId",loginSuccessData.getGroupNumber());
+        chatActivity.putExtra("uuid",username);
+        chatActivity.putExtra("groupRole",loginSuccessData.getGroupRole());
+        System.out.println(loginSuccessData.getGroupName()+"??????????"+loginSuccessData.getGroupNumber());
         startActivity(chatActivity);
 
     }
@@ -125,13 +128,14 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
             }
             LoginSuccessData loginSuccessData = datalilst.get(i);
             holder.siv_icon.setImageUrl(loginSuccessData.getGroupPortrait(),R.drawable.group003);
+
             holder.tv_title.setText(loginSuccessData.getGroupName());
-            if (loginSuccessData.getLastestGroupUser() == null || loginSuccessData.getLastestGroupUser().equals("")){
+            if (loginSuccessData.getLastestGroupUser() == null || loginSuccessData.getLastestGroupUser().equals("null")){
                 holder.tv_author.setText("");
             }else{
                 holder.tv_author.setText(loginSuccessData.getLastestGroupUser()+ ":"+loginSuccessData.getLastestGroupMessage());
             }
-            holder.tv_time.setText(loginSuccessData.getLastGroupSendTime());
+            holder.tv_time.setText(TimeParese.getTime(loginSuccessData.getLastGroupSendTime()));
             return view;
         }
     }

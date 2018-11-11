@@ -141,10 +141,16 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
                 Intent homeintent = new Intent(this,HomeActivity.class);
                 homeintent.putExtra("username",userName);
                 homeintent.putExtra("data",data);
-                homeintent.putExtra("TAG",TAG2);
+                System.out.println("????????????常量"+HomeActivity.TEST);
+                if (HomeActivity.TEST.equals("GroupOut")){
+                    homeintent.putExtra("TAG",TAG);
+                }else {
+                    homeintent.putExtra("TAG",TAG2);
+                }
                 homeintent.putExtra("user_portrait",user_portrait);
                 homeintent.putExtra("user_h_name",user_h_name);
                 startActivity(homeintent);
+                finish();
                 break;
         }
     }

@@ -17,7 +17,7 @@ import com.example.zhw.piontandpiont2.Networksockets.HttpUtil;
 import com.example.zhw.piontandpiont2.Util.Jsonpack;
 import com.example.zhw.piontandpiont2.Util.TeleVify;
 import com.example.zhw.piontandpiont2.Util.VifycationCode;
-import com.example.zhw.piontandpiont2.vdieo.CustomVideoView;
+import com.example.zhw.piontandpiont2.Video.CustomVideoView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,7 +25,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 import okhttp3.Call;
-import okhttp3.OkHttpClient;
 import okhttp3.Response;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {

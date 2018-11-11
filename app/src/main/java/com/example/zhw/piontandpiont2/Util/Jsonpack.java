@@ -1,16 +1,24 @@
 package com.example.zhw.piontandpiont2.Util;
 
-import android.util.Log;
-
+import com.example.zhw.piontandpiont2.Bean.Applications;
+import com.example.zhw.piontandpiont2.Bean.ChatMessage;
+import com.example.zhw.piontandpiont2.Bean.ChatUtil;
+import com.example.zhw.piontandpiont2.Bean.CreateGroupUtil;
+import com.example.zhw.piontandpiont2.Bean.EditGroupInfo;
+import com.example.zhw.piontandpiont2.Bean.FirstRequest;
+import com.example.zhw.piontandpiont2.Bean.Forgetpw;
+import com.example.zhw.piontandpiont2.Bean.GruopInfo;
+import com.example.zhw.piontandpiont2.Bean.LoginSuccessData;
+import com.example.zhw.piontandpiont2.Bean.ManagerGroupUser;
+import com.example.zhw.piontandpiont2.Bean.OutGroup;
+import com.example.zhw.piontandpiont2.Bean.SeachData;
+import com.example.zhw.piontandpiont2.Bean.UserLogin;
+import com.example.zhw.piontandpiont2.Bean.UserRegister;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -58,6 +66,7 @@ public class Jsonpack {
         }.getType());
         return loginSuccessData;
     }
+
     public static List<LoginSuccessData> creategetLoginSuccessData(String string) {
         Gson gson = new Gson();
         JsonParser jsonParser = new JsonParser();
@@ -124,5 +133,76 @@ public class Jsonpack {
         //使用Gson将对象转换为json字符串
         String chat_json = gson.toJson(chatUtil);
         return chat_json;
+    }
+    /*
+    聊天信息的json
+     */
+    public static String getChatMessage(String uuid,String groupId,String groupMessage){
+        ChatMessage chatMessage = new ChatMessage(21,uuid,groupId,groupMessage);
+        Gson gson = new Gson();
+        String message_json = gson.toJson(chatMessage);
+        return message_json;
+    }
+    /*
+    群资料的json
+     */
+    public static String getGroupInfo(String groupId){
+        GruopInfo gruopInfo = new GruopInfo(5,groupId);
+        Gson gson = new Gson();
+        String groupinfo_json = gson.toJson(gruopInfo);
+        return groupinfo_json;
+    }
+    /*
+    修改群资料的son
+     */
+    public static String getGroupEditInfo(String groupName,String groupId,String groupDesc){
+        EditGroupInfo editGroupInfo = new EditGroupInfo(7,groupName,groupId,groupDesc);
+        Gson gson = new Gson();
+        String editgroupinfo_json = gson.toJson(editGroupInfo);
+        return editgroupinfo_json;
+    }
+    /*
+    退出群的请求json
+     */
+    public static String getOutGroup(String groupRole,String groupId,String uuid){
+        OutGroup outGroup;
+        if (groupRole.equals("0")){
+            //群主
+             outGroup = new OutGroup(20,groupId,uuid);
+        }else{
+            //群成员
+             outGroup = new OutGroup(6,groupId,uuid);
+        }
+        System.out.println("?????????用户名"+uuid);
+        Gson gson = new Gson();
+        String outGroup_json = gson.toJson(outGroup);
+        return outGroup_json;
+    }
+    /*
+    删除群成员请求json
+     */
+    public static String getManagerUser(String groupId,String uuid,String delUuid){
+        ManagerGroupUser managerGroupUser = new ManagerGroupUser(13,groupId,uuid,delUuid);
+        Gson gson = new Gson();
+        String outGroup_json = gson.toJson(managerGroupUser);
+        return outGroup_json;
+    }
+    /*
+    搜索群的json
+     */
+    public static String getSeach(String groupId){
+        SeachData seachData = new SeachData(14,groupId);
+        Gson gson = new Gson();
+        String outGroup_json = gson.toJson(seachData);
+        return outGroup_json;
+    }
+    /*
+    加入群聊的json
+     */
+    public static String getSApplication(String uuid,String groupId){
+        Applications applications = new Applications(10,uuid,groupId);
+        Gson gson = new Gson();
+        String application_json = gson.toJson(applications);
+        return application_json;
     }
 }

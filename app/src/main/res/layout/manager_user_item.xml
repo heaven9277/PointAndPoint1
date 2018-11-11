@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="80dp">
     <com.loopj.android.image.SmartImageView
-        android:id="@+id/user001"
+        android:id="@+id/user_pro"
         android:layout_width="66dp"
         android:layout_height="66dp"
         android:layout_marginTop="5dp"
@@ -18,8 +18,9 @@
         android:textSize="20sp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="15dp"
-        android:layout_toRightOf="@+id/user001"/>
+        android:layout_toRightOf="@+id/user_pro"/>
     <Button
+        android:id="@+id/del_Groupuser"
         android:layout_width="75dp"
         android:layout_height="30dp"
         android:layout_alignParentRight="true"

@@ -7,32 +7,27 @@ import com.neovisionaries.ws.client.WebSocket;
 
 import java.nio.ByteBuffer;
 
-public class SendFisrtDataThread extends Thread {
+public class SendOutGroupThread extends Thread{
+    String groupId;
+    String uuid;
+    String groupRole;
     public WsManager wsManager;
     public WebSocket webSocket;
-    public String username;
-    public SendFisrtDataThread(String username){
-        this.username = username;
+    public SendOutGroupThread( String groupRole,String groupId,String uuid){
+        this.groupId = groupId;
+        this.uuid = uuid;
+        this.groupRole = groupRole;
     }
-
     @Override
     public void run() {
         super.run();
-        //向服务器发送请求数据
-        sendServeiceData();
-    }
-
-    /*
-    发送首页请求
-    */
-    private void sendServeiceData() {
         wsManager = WsManager.getInstance();
         if (wsManager != null){
             webSocket = wsManager.getWebsocket();
-            String fisrt_data = Jsonpack.getFisrtData(username);
-            ByteBuffer bf_first = BufferChange.getByteBuffer(fisrt_data);
-            webSocket.sendBinary(bf_first.array());
-            System.out.println("发送首页数据?????????????????");
+           String outgroup = Jsonpack.getOutGroup(groupRole,groupId,uuid);
+            ByteBuffer bf_chatMessage = BufferChange.getByteBuffer(outgroup);
+            webSocket.sendBinary(bf_chatMessage.array());
+            System.out.println("发送退出群的请求数据");
         }
     }
 }
