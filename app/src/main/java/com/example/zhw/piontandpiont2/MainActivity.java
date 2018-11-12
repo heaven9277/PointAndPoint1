@@ -1,6 +1,5 @@
 package com.example.zhw.piontandpiont2;
 
-import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -84,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         //绑定服务
         Intent intentService  = new Intent(this,MyServer.class);
-        bindService(intentService,myConn, Service.BIND_AUTO_CREATE);
+//        bindService(intentService,myConn, Service.BIND_AUTO_CREATE);
         System.out.println("开始测试");
     }
 
@@ -93,16 +92,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int id = view.getId();
         switch (id){
             case  R.id.btn_login:
-                main_username = username.getText().toString().trim();
+                /*main_username = username.getText().toString().trim();
                if (username.getText().toString().trim()!=null||userpasswd.getText().toString().trim()!=null){
                    myIBinder.sendData(username.getText().toString().trim(),userpasswd.getText().toString().trim());
                }else {
                    Toast.makeText(this,"用户名和密码不能为空",Toast.LENGTH_LONG).show();
                }
-                btn_login.setBackgroundResource(R.drawable.btn_login_out);
-           /*  main_username = username.getText().toString().trim();
+                btn_login.setBackgroundResource(R.drawable.btn_login_out);*/
+             main_username = username.getText().toString().trim();
              Intent i = new Intent(this,HomeActivity.class);
-             startActivity(i);*/
+             startActivity(i);
                 break;
             case R.id.register:
                 register.setTextColor(Color.parseColor("#09A3DC"));
