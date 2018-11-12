@@ -14,8 +14,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.zhw.piontandpiont2.ApplicationActivity;
+import com.example.zhw.piontandpiont2.Bean.LoginSuccessData;
 import com.example.zhw.piontandpiont2.R;
-import com.example.zhw.piontandpiont2.Util.LoginSuccessData;
 import com.loopj.android.image.SmartImageView;
 
 import java.util.List;

@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -21,6 +22,7 @@ import com.example.zhw.piontandpiont2.Adapter.FragAdapter;
 import com.example.zhw.piontandpiont2.Fragment.ChatFragment;
 import com.example.zhw.piontandpiont2.Fragment.MessageFragment;
 import com.example.zhw.piontandpiont2.Fragment.UserFragment;
+import com.example.zhw.piontandpiont2.Threadpack.SendFisrtDataThread;
 import com.example.zhw.piontandpiont2.Util.BaseActivity;
 
 import java.util.ArrayList;
@@ -156,7 +158,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
         menuItem2=navigation.getMenu().findItem(R.id.navigation_message);
         menuItem3=navigation.getMenu().findItem(R.id.navigation_user);
 
-        //为viewpager页面触碰的监听
+        //为viewpager页面触碰的监听，当点击除弹出按钮时，弹出按钮隐藏
         viewPager.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
