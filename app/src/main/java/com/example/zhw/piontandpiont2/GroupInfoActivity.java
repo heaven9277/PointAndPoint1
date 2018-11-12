@@ -67,16 +67,17 @@ public class GroupInfoActivity extends AppCompatActivity implements View.OnClick
                     Toast.makeText(context,"获取失败，请重新获取",Toast.LENGTH_LONG).show();
                     break;
                 case 19:
+                    //退出成功
                     Toast.makeText(context,PareJson.getJsonInfo(data),Toast.LENGTH_LONG).show();
                     HomeActivity.TEST="GroupOut";
                     Intent homeIntent = new Intent(context,HomeActivity.class);
                     homeIntent.putExtra("data",data);
-                    homeIntent.putExtra("username",uuid);
+                    //homeIntent.putExtra("username",uuid);
                     homeIntent.putExtra("TAG",CreateActivity.TAG);
-                    homeIntent.putExtra("user_portrait",MainActivity.user_portrait);
-                    homeIntent.putExtra("user_h_name",MainActivity.user_h_name);
+                    //homeIntent.putExtra("user_portrait",MainActivity.user_portrait);
+                    //homeIntent.putExtra("user_h_name",MainActivity.user_h_name);
                     context.startActivity(homeIntent);
-                    //退出成功
+
                      break;
                 case  20:
                     //退出失败

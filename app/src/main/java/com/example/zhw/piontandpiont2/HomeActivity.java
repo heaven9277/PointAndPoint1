@@ -119,10 +119,10 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
         //从登陆界面得到数据
         Intent intent = getIntent();
         data = intent.getStringExtra("data");
-        user_name = intent.getStringExtra("username");
+        user_name = MainActivity.main_username;
         TAG = intent.getStringExtra("TAG");
-        user_portrait = intent.getStringExtra("user_portrait");
-        user_h_name = intent.getStringExtra("user_h_name");
+        user_portrait = MainActivity.user_portrait;
+        user_h_name = MainActivity.user_h_name;
         System.out.println("结兽皮"+data+"接收到的信息"+user_name);
         initView();
         initListener();
@@ -222,12 +222,11 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
                 Intent createActivity = new Intent(this,CreateActivity.class);
                 createActivity.putExtra("username",user_name);
                 createActivity.putExtra("data",data);
-                createActivity.putExtra("user_portrait",user_portrait);
-                createActivity.putExtra("user_h_name",user_h_name);
+                //createActivity.putExtra("user_portrait",user_portrait);
+                //createActivity.putExtra("user_h_name",user_h_name);
                 startActivity(createActivity);
                 display = false;
                 System.out.println("点击了create群");
-                finish();
                 break;
             case R.id.viewpager:
                 relativeLayout.setVisibility(View.GONE);

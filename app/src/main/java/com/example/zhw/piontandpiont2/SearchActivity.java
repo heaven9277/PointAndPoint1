@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.zhw.piontandpiont2.Threadpack.SendApplicationThread;
@@ -26,6 +27,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     private Button button_search;
     private EditText search_input;//搜索输入框
     private static ListView listView;
+    public static ProgressBar search_pro;
     static Context context ;
     public static ListViewAdapterToSearchGroup listViewAdapterToSearchGroup;
     public static List<SearchGroupDataBean> list;
@@ -42,6 +44,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             System.out.println(data);
             switch (what){
                 case 1:
+                    search_pro.setVisibility(View.INVISIBLE);
+                    listView.setVisibility(View.VISIBLE);
                     //获取成功
                     updateListView(data);
                     break;
@@ -50,12 +54,13 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                     break;
                 case 17:
                     //申请成功
+                    Toast.makeText(context,PareJson.getJsonInfo(data),Toast.LENGTH_LONG).show();
                     break;
                 case 18:
                     //申请失败
+                    Toast.makeText(context,PareJson.getJsonInfo(data),Toast.LENGTH_LONG).show();
                     break;
                 default:
-
                     break;
             }
         }
@@ -72,6 +77,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         button_delete = findViewById(R.id.search_delete_input);
         button_search = findViewById(R.id.search_button_search_group);
         search_input = findViewById(R.id.search_key_words);
+        search_pro = findViewById(R.id.search_pro);
         listView = findViewById(R.id.listView_search);
         list = new ArrayList<>();
         listViewAdapterToSearchGroup = new ListViewAdapterToSearchGroup(this,this);
@@ -89,6 +95,9 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 Toast.makeText(this, "删除", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.search_button_search_group:
+                listView.setVisibility(View.INVISIBLE);
+                search_pro.setVisibility(View.VISIBLE);
+                System.out.println("显示");
                 if (search_input.getText().toString().trim() != null){
                     groupId = search_input.getText().toString().trim();
                     System.out.println(groupId);

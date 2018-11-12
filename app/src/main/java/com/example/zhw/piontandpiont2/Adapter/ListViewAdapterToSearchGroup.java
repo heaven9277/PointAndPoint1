@@ -67,7 +67,7 @@ public class ListViewAdapterToSearchGroup extends BaseAdapter implements View.On
         avator = searchGroupDataBean.getGroupPortarit();
         groupDescript = searchGroupDataBean.getGroupDesc();
         groupName = searchGroupDataBean.getGroupName();
-        viewHolder.groupPortrait.setImageUrl(avator);
+        viewHolder.groupPortrait.setImageUrl(avator,R.drawable.group003);
         viewHolder.groupName.setText(groupName);
         viewHolder.groupDescript.setText(groupDescript);
         viewHolder.apply.setTag(position);

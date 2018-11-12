@@ -57,10 +57,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     user_h_name = Jsonpack.getUserName(text);
                     Intent homeIntent = new Intent(context,HomeActivity.class);
                     homeIntent.putExtra("data",text);
-                    homeIntent.putExtra("username",main_username);
+                    //homeIntent.putExtra("username",main_username);
                     homeIntent.putExtra("TAG",TAG);
-                    homeIntent.putExtra("user_portrait",user_portrait);
-                    homeIntent.putExtra("user_h_name",user_h_name);
+                    //homeIntent.putExtra("user_portrait",user_portrait);
+                   // homeIntent.putExtra("user_h_name",user_h_name);
                     System.out.println(main_username+"用户名" + text);
                     context.startActivity(homeIntent);
                     break;
