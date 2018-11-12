@@ -99,7 +99,6 @@ public class MyServer extends Service {
                     String login_json = Jsonpack.getLoginJosn(username, userpasswd);
                     ByteBuffer bf = getByteBuffer(login_json);
                     webSocket.sendBinary(bf.array());
-
                     System.out.println("发送用户名和密码数据");
                 }
             }

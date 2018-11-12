@@ -133,8 +133,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
         sendDataChatFragemtn(data);
     }
     private void initView() {
-        BDLocationUtils location=new BDLocationUtils(HomeActivity.this);
-        location.initMap();
+     //   BDLocationUtils location=new BDLocationUtils(HomeActivity.this);
+     //   location.initMap();
         //在主布局中根据id找到ViewPager
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         //实例化所属三个fragment
@@ -264,8 +264,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
             viewPager.setCurrentItem(1);  //view2是viewPager中的第二个view，因此设置setCurrentItem（1）。
         }
         //发送请求
-        SendFisrtDataThread sendFisrtDataThread = new SendFisrtDataThread(user_name);
-        sendFisrtDataThread.start();
+        //SendFisrtDataThread sendFisrtDataThread = new SendFisrtDataThread(user_name);
+        //sendFisrtDataThread.start();
     }
     @Override
     protected void onPause() {
