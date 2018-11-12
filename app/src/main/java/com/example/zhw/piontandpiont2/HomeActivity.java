@@ -1,6 +1,7 @@
 package com.example.zhw.piontandpiont2;
 
 //三个首页界面
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -21,6 +23,7 @@ import com.example.zhw.piontandpiont2.Fragment.ChatFragment;
 import com.example.zhw.piontandpiont2.Fragment.MessageFragment;
 import com.example.zhw.piontandpiont2.Fragment.UserFragment;
 import com.example.zhw.piontandpiont2.Threadpack.SendFisrtDataThread;
+import com.example.zhw.piontandpiont2.Util.BDLocationUtils;
 import com.example.zhw.piontandpiont2.Util.BaseActivity;
 
 import java.util.ArrayList;
@@ -130,6 +133,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
         sendDataChatFragemtn(data);
     }
     private void initView() {
+        BDLocationUtils location=new BDLocationUtils(HomeActivity.this);
+        location.initMap();
         //在主布局中根据id找到ViewPager
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         //实例化所属三个fragment
@@ -154,13 +159,21 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
         menuItem2=navigation.getMenu().findItem(R.id.navigation_message);
         menuItem3=navigation.getMenu().findItem(R.id.navigation_user);
 
+        //为viewpager页面触碰的监听，当点击除弹出按钮时，弹出按钮隐藏
+        viewPager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                relativeLayout.setVisibility(View.GONE);
+                display = false;
+                return false;
+            }
+        });
+
         //为viewpager添加页面变化的监听以及事件处理
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
-
             @Override
             public void onPageSelected(int position) {
                 //根据位置直接决定显示哪个fragment
@@ -181,7 +194,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
+                relativeLayout.setVisibility(View.GONE);
+                display = false;
             }
         });
 
@@ -278,4 +292,5 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
     public static Handler getFirst_handler(){
         return First_handler;
     }
+
 }

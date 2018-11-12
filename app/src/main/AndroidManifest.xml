@@ -26,6 +26,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <!-- //网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.BAIDU_LOCATION_SERVICE" />
 
     <application
         android:allowBackup="true"
@@ -75,7 +76,7 @@
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="3lNYggyLcPDc9uZ6h4Ii8glu9soceEPW" />
+            android:value="2rcYLstVv9uvQtSmzzrdL1vvbeVQ0ha7" />
 
     </application>
 
