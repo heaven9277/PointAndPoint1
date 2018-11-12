@@ -19,7 +19,6 @@ public class BDLocationUtils extends AppCompatActivity {
     }
 
     public void initMap() {
-
         mLocationClient = new LocationClient(lcontext.getApplicationContext());     //声明LocationClient类
         //配置定位SDK参数
         initLocation();

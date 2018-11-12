@@ -23,6 +23,7 @@ import com.example.zhw.piontandpiont2.Fragment.ChatFragment;
 import com.example.zhw.piontandpiont2.Fragment.MessageFragment;
 import com.example.zhw.piontandpiont2.Fragment.UserFragment;
 import com.example.zhw.piontandpiont2.Threadpack.SendFisrtDataThread;
+import com.example.zhw.piontandpiont2.Util.BDLocationUtils;
 import com.example.zhw.piontandpiont2.Util.BaseActivity;
 
 import java.util.ArrayList;
@@ -132,8 +133,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
         sendDataChatFragemtn(data);
     }
     private void initView() {
-      //  BDLocationUtils location=new BDLocationUtils(HomeActivity.this);
-    //    location.initMap();
+        BDLocationUtils location=new BDLocationUtils(HomeActivity.this);
+        location.initMap();
         //在主布局中根据id找到ViewPager
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         //实例化所属三个fragment
