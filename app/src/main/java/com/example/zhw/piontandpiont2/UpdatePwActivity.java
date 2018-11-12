@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.zhw.piontandpiont2.Networksockets.AdressHttp;
 import com.example.zhw.piontandpiont2.Networksockets.HttpUtil;
 import com.example.zhw.piontandpiont2.Util.Jsonpack;
 
@@ -24,7 +25,7 @@ public class UpdatePwActivity extends AppCompatActivity implements View.OnClickL
     public Button btn_updatepw;
     public EditText et_passwd,et_repasswd;
     String telphone;
-    public final String url = "http://172.18.178.84:8080/register/post"; //网址
+    public final String url = AdressHttp.getUrl()+"register/post"; //网址
     String update_passwd_json;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

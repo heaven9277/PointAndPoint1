@@ -1,4 +1,4 @@
-package com.example.zhw.piontandpiont2.Util;
+package com.example.zhw.piontandpiont2.Bean;
 //忘记密码的工具类
 public class Forgetpw {
     String newPassword;

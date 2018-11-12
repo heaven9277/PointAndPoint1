@@ -1,4 +1,4 @@
-package com.example.zhw.piontandpiont2.vdieo;
+package com.example.zhw.piontandpiont2.Video;
 
 import android.content.Context;
 import android.media.MediaPlayer;

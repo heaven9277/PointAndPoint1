@@ -50,7 +50,7 @@ public class BDLocationUtils extends AppCompatActivity {
         @Override
         public void onReceiveLocation(BDLocation location) {
 
-            System.out .println(location.getLatitude()+"这是精度和纬度"+location.getLongitude());
+            System.out .println(location.getLatitude()+"这是经度和纬度"+location.getLongitude());
 
         }
     }

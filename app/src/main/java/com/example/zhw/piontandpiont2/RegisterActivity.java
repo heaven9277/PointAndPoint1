@@ -12,11 +12,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.zhw.piontandpiont2.Networksockets.AdressHttp;
 import com.example.zhw.piontandpiont2.Networksockets.HttpUtil;
 import com.example.zhw.piontandpiont2.Util.Jsonpack;
 import com.example.zhw.piontandpiont2.Util.TeleVify;
 import com.example.zhw.piontandpiont2.Util.VifycationCode;
-import com.example.zhw.piontandpiont2.vdieo.CustomVideoView;
+import com.example.zhw.piontandpiont2.Video.CustomVideoView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,7 +25,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 import okhttp3.Call;
-import okhttp3.OkHttpClient;
 import okhttp3.Response;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
@@ -32,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public Button btn_register;
     public EditText et_username,et_passwd,et_repasswd,et_vify,et_telphone;
     public TextView tv_vifys;//随机验证码
-    public final String url = "http://172.18.178.73:8080/register/post"; //网址
+    public final String url = AdressHttp.getUrl()+"register/post"; //网址
     public String json=""; //josn数据
 
     //随机生成验证码

@@ -1,4 +1,4 @@
-package com.example.zhw.piontandpiont2.Util;
+package com.example.zhw.piontandpiont2.Bean;
 /*
 封装群聊的类
  */

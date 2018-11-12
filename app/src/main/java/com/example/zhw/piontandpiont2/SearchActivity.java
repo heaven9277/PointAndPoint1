@@ -1,9 +1,10 @@
 package com.example.zhw.piontandpiont2;
 
-import android.os.Build;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,45 +12,74 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.zhw.piontandpiont2.tools.ListViewAdapterToSearchGroup;
+import com.example.zhw.piontandpiont2.Threadpack.SendApplicationThread;
+import com.example.zhw.piontandpiont2.Threadpack.SendSeachThread;
+import com.example.zhw.piontandpiont2.Util.PareJson;
+import com.example.zhw.piontandpiont2.Bean.SearchGroupDataBean;
+import com.example.zhw.piontandpiont2.Adapter.ListViewAdapterToSearchGroup;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener, ListViewAdapterToSearchGroup.SearchApplyButonCallBack {
     private ImageButton button_delete;
     private Button button_search;
-    private EditText search_input;
-    private ListView listView;
-    String groupJson;
+    private EditText search_input;//搜索输入框
+    private static ListView listView;
+    static Context context ;
+    public static ListViewAdapterToSearchGroup listViewAdapterToSearchGroup;
+    public static List<SearchGroupDataBean> list;
+    public String groupId;
+    public String uuid;
+    //定义一个handler进行消息接收
+    private static Handler seach_handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            System.out.println("接收到搜索群信息");
+            int what = msg.what;
+            String data = (String) msg.obj;
+            System.out.println(data);
+            switch (what){
+                case 1:
+                    //获取成功
+                    updateListView(data);
+                    break;
+                case 2:
+                    //获取失败
+                    break;
+                case 17:
+                    //申请成功
+                    break;
+                case 18:
+                    //申请失败
+                    break;
+                default:
 
+                    break;
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.search_toolbar);
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
-        groupJson = "{\"data\":[" +
-                "{\"group_portarit\":\"avator_0001\",\"group_name\":\"groupOne\",\"group_desc\":\"群1\",\"group_uuid\":\"0001\"}," +
-                "{\"group_portarit\":\"avator_0002\",\"group_name\":\"groupOne\",\"group_desc\":\"群2\",\"group_uuid\":\"0002\"}," +
-                "{\"group_portarit\":\"avator_0003\",\"group_name\":\"groupOne\",\"group_desc\":\"群3\",\"group_uuid\":\"0003\"}," +
-                "{\"group_portarit\":\"avator_0004\",\"group_name\":\"groupOne\",\"group_desc\":\"群4\",\"group_uuid\":\"0004\"}," +
-                "]}";
         initView();
 
     }
     private void initView() {
+        context = this;
         button_delete = findViewById(R.id.search_delete_input);
         button_search = findViewById(R.id.search_button_search_group);
         search_input = findViewById(R.id.search_key_words);
         listView = findViewById(R.id.listView_search);
-
+        list = new ArrayList<>();
+        listViewAdapterToSearchGroup = new ListViewAdapterToSearchGroup(this,this);
         button_delete.setOnClickListener(this);
         button_search.setOnClickListener(this);
+
+        uuid = HomeActivity.user_name;
+        System.out.println("用户名？???"+uuid);
     }
 
     @Override
@@ -59,64 +89,48 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 Toast.makeText(this, "删除", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.search_button_search_group:
-                Toast.makeText(this, "搜索", Toast.LENGTH_SHORT).show();
-                try {
-                    getAndPost();
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if (search_input.getText().toString().trim() != null){
+                    groupId = search_input.getText().toString().trim();
+                    System.out.println(groupId);
+                    SendSeachThread sendSeachThread = new SendSeachThread(groupId);
+                    sendSeachThread.start();
+                }else{
+                    Toast.makeText(this,"输入为空，请输入群号或者群名",Toast.LENGTH_LONG).show();
                 }
+                Toast.makeText(this, "搜索", Toast.LENGTH_SHORT).show();
+
                 break;
         }
     }
 
 
-    //    得到json数据并解析，按照搜索条件筛选，筛选结果传给adapter
-    private void getAndPost() throws JSONException {
-        String keyWords = search_input.getText().toString();
-        JSONArray jsonArrayKeyWords = new JSONArray();
-        int a = 0;
-        try {
-            JSONObject jsonObject = new JSONObject(groupJson);
-            JSONArray jsonArray = jsonObject.getJSONArray("data");
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject group = jsonArray.getJSONObject(i);//索引值，获取数组中包含的值
-//                System.out.println(group.getString("name"));
-//                使用正则表达式判断匹配***
-//                String regex = "*"+group.getString("name")+".*";
-//                Pattern p = Pattern.compile(regex);
-//                Matcher m = p.matcher(keyWords);
-//                if(m.matches()){
-//                    jsonArrayKeyWords.put(a,group);
-//                    a++;
-//                    System.out.println(a);
-//                }
-                if (group.getString("group_name").contains(keyWords) || group.getString("group_uuid").contains(keyWords)) {
-                    jsonArrayKeyWords.put(a, group);
-                    a++;
-                    System.out.println(a + "" + group);
-                }
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
+    //    得到json数据并解析，结果传给adapter,更新listview
+    private static void updateListView(String data) {
+        list = PareJson.getSearchData(data);
+        System.out.println(list.size()+"  "+list);
+        if (list.size()>0){
+            listView.setAdapter(listViewAdapterToSearchGroup);
+            listViewAdapterToSearchGroup.notifyDataSetChanged();
         }
-        ListViewAdapterToSearchGroup listViewAdapterToSearchGroup = new ListViewAdapterToSearchGroup(this, jsonArrayKeyWords,this);
-        listView.setAdapter(listViewAdapterToSearchGroup);
+        else {
+            Toast.makeText(context,"没有搜索到数据",Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
-    public void buttonApplyClicked() {
-        Toast.makeText(this,"按钮被点击了",Toast.LENGTH_SHORT).show();
+    public void buttonApplyClicked(View view) {
+        Toast.makeText(this,"申请加入按钮被点击了"+view.getTag(),Toast.LENGTH_SHORT).show();
+        SearchGroupDataBean bean = list.get((Integer) view.getTag());
+        System.out.println(bean.getGroupUuid());
+        //groupId需要改
+        //发送请求数据
+        groupId = bean.getGroupUuid();
+        SendApplicationThread sendApplicationThread = new SendApplicationThread(uuid,groupId);
+        sendApplicationThread.start();
+        System.out.println("发送申请");
     }
 
-    //使用Gson解析
-//    void getAndPost(String json){
-//        JsonArray jsonArray = new JsonObject().getAsJsonArray("data");
-//        Gson gson = new Gson();
-//        JsonArray jsonArray1 = new JsonArray();
-//        for(int i=0;i<jsonArray.size();i++ ){
-//            JsonObject jsonObject = (JsonObject) jsonArray.get(i);
-//            if ()
-//        }
-//    }
-
+    public static Handler getSeach_handler(){
+        return seach_handler;
+    }
 }

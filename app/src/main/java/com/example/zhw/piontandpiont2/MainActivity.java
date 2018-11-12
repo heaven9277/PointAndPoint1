@@ -18,11 +18,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zhw.piontandpiont2.Services.MyServer;
+import com.example.zhw.piontandpiont2.Util.Jsonpack;
 import com.example.zhw.piontandpiont2.Util.PareJson;
-import com.example.zhw.piontandpiont2.vdieo.CustomVideoView;
+import com.example.zhw.piontandpiont2.Video.CustomVideoView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button btn_login;
+    private static Button btn_login;
     private EditText username;
     private EditText userpasswd;
     private TextView forgetpasswd;
@@ -33,23 +34,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static Context context;
     //定义一个类型来存储用户名
     public static String main_username;
+    public static String TAG = "Mainactivity";
+    public static String user_portrait;//头像
+    public static String user_h_name;//昵称
     private static Handler mHandler = new Handler(Looper.getMainLooper()){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            System.out.println("接收到信息");
+            System.out.println("Mainactivity接收到信息");
             int what = msg.what;
             String text = (String) msg.obj;
             switch (what){
                 case 5:
                     //登陆失败
                     Toast.makeText(context, PareJson.getJsonInfo(text),Toast.LENGTH_LONG).show();
+                    btn_login.setBackgroundResource(R.drawable.btnback);
                     break;
                 case 6:
                     //登陆成功
+                    user_portrait = Jsonpack.getUserPortrait(text);
+                    user_h_name = Jsonpack.getUserName(text);
                     Intent homeIntent = new Intent(context,HomeActivity.class);
                     homeIntent.putExtra("data",text);
                     homeIntent.putExtra("username",main_username);
+                    homeIntent.putExtra("TAG",TAG);
+                    homeIntent.putExtra("user_portrait",user_portrait);
+                    homeIntent.putExtra("user_h_name",user_h_name);
                     System.out.println(main_username+"用户名" + text);
                     context.startActivity(homeIntent);
                     break;
@@ -108,11 +118,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //跳转到注册页面
                 Intent intentRegister = new Intent(this,RegisterActivity.class);
                 startActivity(intentRegister);
+                finish();
                 break;
             case R.id.forgetpasswd:
                 forgetpasswd.setTextColor(Color.parseColor("#09A3DC"));
                 Intent intentForget = new Intent(this,ForgetPwActivity.class);
                 startActivity(intentForget);
+                finish();
                 break;
             default:
                 break;

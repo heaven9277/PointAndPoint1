@@ -32,7 +32,7 @@ public class SendFisrtDataThread extends Thread {
             String fisrt_data = Jsonpack.getFisrtData(username);
             ByteBuffer bf_first = BufferChange.getByteBuffer(fisrt_data);
             webSocket.sendBinary(bf_first.array());
-            System.out.println("发送首页数据");
+            System.out.println("发送首页数据?????????????????");
         }
     }
 }

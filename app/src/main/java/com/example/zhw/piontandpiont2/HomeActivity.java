@@ -12,7 +12,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -27,8 +26,12 @@ import com.example.zhw.piontandpiont2.Util.BaseActivity;
 import java.util.ArrayList;
 
 public class HomeActivity extends BaseActivity implements View.OnClickListener{
-    public String data;
+    public static String data;
     public static String user_name;
+    public static String TAG;
+    public String user_portrait;//头像
+    public String user_h_name;//昵称
+
     private ArrayList<Fragment> fragments;
     //声明四个导航对应fragment
     public static ChatFragment chatFragment;
@@ -46,6 +49,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
 
     boolean display=false;
     public static ChatFragment.MyBaseAdapter myBaseAdapter;
+    public static String TEST =  "";
 
     //定义一个handler进行消息接收
     private static Handler First_handler = new Handler(){
@@ -62,6 +66,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
                     //提示更新listview
                    // chatFragment.getMyBaseAdapter().notifyDataSetChanged();
                     myBaseAdapter.notifyDataSetChanged();
+                    System.out.println("获取首页成功");
                     break;
                 case 8:
                     //获取失败
@@ -115,15 +120,14 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
         Intent intent = getIntent();
         data = intent.getStringExtra("data");
         user_name = intent.getStringExtra("username");
-        System.out.println(data+"接收到的信息"+user_name);
-
+        TAG = intent.getStringExtra("TAG");
+        user_portrait = intent.getStringExtra("user_portrait");
+        user_h_name = intent.getStringExtra("user_h_name");
+        System.out.println("结兽皮"+data+"接收到的信息"+user_name);
         initView();
         initListener();
         //发送数据给Fragment
         sendDataChatFragemtn(data);
-        //发送请求
-        //SendFisrtDataThread sendFisrtDataThread = new SendFisrtDataThread(user_name);
-        //sendFisrtDataThread.start();
     }
     private void initView() {
       //  BDLocationUtils location=new BDLocationUtils(HomeActivity.this);
@@ -198,8 +202,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
             Bundle bundle = new Bundle();
             bundle.putString("data",data);
             bundle.putString("username",user_name);
+            bundle.putString("TAG",TAG);
             chatFragment.setArguments(bundle);
-            System.out.println("发送给Fragment!!!!!!!!!!!!!");
     }
     @Override
     public void onClick(View view) {
@@ -218,19 +222,23 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
                 break;
             case R.id.linear_search:
                 //搜索群
-                Intent SearchActivity = new Intent(this,SearchActivity.class);
-                startActivity(SearchActivity);
+                Intent searchActivity = new Intent(this,SearchActivity.class);
+                startActivity(searchActivity);
                 display = false;
                 System.out.println("点击了搜索群");
+                finish();
                 break;
             case R.id.liear_create:
                 //创建群
                 Intent createActivity = new Intent(this,CreateActivity.class);
                 createActivity.putExtra("username",user_name);
                 createActivity.putExtra("data",data);
+                createActivity.putExtra("user_portrait",user_portrait);
+                createActivity.putExtra("user_h_name",user_h_name);
                 startActivity(createActivity);
                 display = false;
                 System.out.println("点击了create群");
+                finish();
                 break;
             case R.id.viewpager:
                 relativeLayout.setVisibility(View.GONE);
@@ -253,6 +261,14 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
         if(id==2){
             viewPager.setCurrentItem(1);  //view2是viewPager中的第二个view，因此设置setCurrentItem（1）。
         }
+        //发送请求
+        SendFisrtDataThread sendFisrtDataThread = new SendFisrtDataThread(user_name);
+        sendFisrtDataThread.start();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+
     }
 
     @Override
@@ -260,6 +276,14 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
         super.onStop();
         relativeLayout.setVisibility(View.GONE);
         display = false;
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        //发送请求
+        SendFisrtDataThread sendFisrtDataThread = new SendFisrtDataThread(user_name);
+        sendFisrtDataThread.start();
     }
 
     //得到一个handler

@@ -26,7 +26,7 @@
             android:textColor="#fff"
             android:textSize="18sp"
             android:layout_gravity="center_vertical"
-            android:text="返回"/>
+            android:text="创建群"/>
     </LinearLayout>
 
     <View
@@ -55,17 +55,34 @@
         app:layout_constraintStart_toStartOf="@id/topView"
         app:layout_constraintTop_toTopOf="@id/topView"
         app:layout_constraintVertical_bias="0.05" />
-
-    <ListView
-        android:id="@+id/listView_create"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/topView"
         app:layout_constraintEnd_toEndOf="@id/topView"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="@id/topView"
         app:layout_constraintTop_toTopOf="@id/topView"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintVertical_bias="0.5">
+        <com.loopj.android.image.SmartImageView
+            android:id="@+id/gourp_manager_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/users"/>
+        <TextView
+            android:id="@+id/tv_group_manager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/gourp_manager_image"
+            android:textColor="#000"
+            android:text="Demo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+
+            />
+    </RelativeLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -75,19 +92,19 @@
         android:textColor="#1C86EE"
         app:layout_constraintBottom_toBottomOf="@id/topView"
         app:layout_constraintEnd_toEndOf="@id/topView"
-        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="@id/topView"
         app:layout_constraintTop_toTopOf="@id/topView"
         app:layout_constraintVertical_bias="0.95" />
 
     <Button
         android:id="@+id/button_create_invite"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:background="@drawable/button_create_add"
         app:layout_constraintBottom_toBottomOf="@id/topView"
         app:layout_constraintEnd_toEndOf="@id/topView"
-        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="@id/topView"
         app:layout_constraintTop_toTopOf="@id/topView" />
 

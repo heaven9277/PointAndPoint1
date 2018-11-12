@@ -20,6 +20,7 @@ public class MainThread extends Thread {
         //向MianActivity发送数据
         Message msg = mhandler.obtainMessage();
         String status = PareJson.getJsonStatus(text);
+        System.out.println("请求状态："+status +"??"+status.equals("fail"));
         if (status.equals("fail")){
             msg.what = 5;
         }else{
