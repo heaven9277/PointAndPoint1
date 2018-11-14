@@ -1,5 +1,6 @@
 package com.example.zhw.piontandpiont2.Util;
 
+import com.example.zhw.piontandpiont2.Bean.AcceptUserBean;
 import com.example.zhw.piontandpiont2.Bean.Applications;
 import com.example.zhw.piontandpiont2.Bean.ChatMessage;
 import com.example.zhw.piontandpiont2.Bean.ChatUtil;
@@ -234,5 +235,19 @@ public class Jsonpack {
         Gson gson = new Gson();
         String memberBean_json = gson.toJson(memberBean);
         return memberBean_json;
+    }
+    /*
+    返回接受成员请求json
+     */
+    public static String getAccept(int accept,String requestUserUuid,String sendUserUuid,String groupId){
+        AcceptUserBean acceptUserBean;
+        if (accept==1){
+             acceptUserBean = new AcceptUserBean(11,requestUserUuid,sendUserUuid,groupId);
+        }else{
+             acceptUserBean = new AcceptUserBean(12,requestUserUuid,sendUserUuid,groupId);
+        }
+        Gson gson = new Gson();
+        String accept_json = gson.toJson(acceptUserBean);
+        return accept_json;
     }
 }

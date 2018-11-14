@@ -1,5 +1,6 @@
 package com.example.zhw.piontandpiont2.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -19,8 +20,11 @@ import com.example.zhw.piontandpiont2.ApplicationActivity;
 import com.example.zhw.piontandpiont2.Bean.LoginSuccessData;
 import com.example.zhw.piontandpiont2.Bean.NotificationData;
 import com.example.zhw.piontandpiont2.HomeActivity;
+import com.example.zhw.piontandpiont2.MainActivity;
 import com.example.zhw.piontandpiont2.R;
+import com.example.zhw.piontandpiont2.Threadpack.SendAcceptUser;
 import com.example.zhw.piontandpiont2.db.MessageHelper;
+import com.example.zhw.piontandpiont2.db.QueryData;
 import com.loopj.android.image.SmartImageView;
 
 import java.util.ArrayList;
@@ -28,15 +32,20 @@ import java.util.List;
 
 
 public class MessageFragment extends Fragment implements AdapterView.OnItemClickListener {
-    ListView message_listView;
-    TextView no_message;
+    public static ListView message_listView;
+    public static TextView no_message;
     Button btn;//接受加入群聊按钮
-    MyMessageBaseAdapter myMessageBaseAdapter;
+    public static MyMessageBaseAdapter myMessageBaseAdapter;
 
     String data;
     String username;
-    public List<NotificationData> datalilst;
+    public static List<NotificationData> datalilst;
     MessageHelper messageHelper;
+
+    public static String request;
+    public static  String uuid;
+    public static String groupId;
+    public static String request_pro;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.message_layout, container, false);
@@ -52,31 +61,11 @@ public class MessageFragment extends Fragment implements AdapterView.OnItemClick
         Bundle bundle = getArguments();
         if(bundle != null){
           String data = bundle.getString("data");
-          System.out.println("");
+          System.out.println("接收到消息。。。。。");
         }
         datalilst = new ArrayList<>();
         //查询数据
-        messageHelper = new MessageHelper(getContext());
-        SQLiteDatabase db = messageHelper.getReadableDatabase();
-        Cursor cursor = db.query("messageTable",null,null,null,null,null,null);
-        if (cursor.getCount()==0){
-            datalilst = null;
-        }else{
-            cursor.moveToFirst();
-            while (cursor.moveToNext()){
-                NotificationData notificationData = new NotificationData();
-                notificationData.setUserUuid(cursor.getString(cursor.getColumnIndex("userUuid")));
-                notificationData.setNoticeContent(cursor.getString(cursor.getColumnIndex("noticeContent")));
-                notificationData.setNoticeTime(cursor.getString(cursor.getColumnIndex("noticeTime")));
-                notificationData.setGroupName(cursor.getString(cursor.getColumnIndex("groupName")));
-                notificationData.setGroupPortrait(cursor.getString(cursor.getColumnIndex("groupPortrait")));
-                notificationData.setStatus(cursor.getString(cursor.getColumnIndex("groupStatus")));
-                notificationData.setGroupId(cursor.getString(cursor.getColumnIndex("groupId")));
-                datalilst.add(notificationData);
-            }
-        }
-        cursor.close();
-        db.close();
+       datalilst = QueryData.getData(getContext());
         if (datalilst == null||datalilst.size()==0){
             message_listView.setVisibility(View.INVISIBLE);
             no_message.setVisibility(View.VISIBLE);
@@ -93,20 +82,24 @@ public class MessageFragment extends Fragment implements AdapterView.OnItemClick
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Intent applicationActivity = new Intent(getContext(), ApplicationActivity.class);
+        applicationActivity.putExtra("acceptName",datalilst.get(i).getSendUserName());
+        System.out.println(datalilst.get(i).getSendUserName()+"发送名呢");
         startActivity(applicationActivity);
         System.out.println("点击了item");
     }
 
-    public class MyMessageBaseAdapter extends BaseAdapter implements View.OnClickListener{
+    public static class MyMessageBaseAdapter extends BaseAdapter implements View.OnClickListener{
 
         @Override
         public int getCount() {
             if (datalilst == null){
                 return 0;
             }
+            System.out.println(datalilst.size()+"！！！！！！！！！！！！！");
+            no_message.setVisibility(View.INVISIBLE);
+            message_listView.setVisibility(View.VISIBLE);
             return datalilst.size();
         }
-
         @Override
         public Object getItem(int i) {
             return null;
@@ -119,7 +112,6 @@ public class MessageFragment extends Fragment implements AdapterView.OnItemClick
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-         //   View viewList = LayoutInflater.from(getContext()).inflate(R.layout.message_item, null);
 
             System.out.println("进入这里进行店家兄啊过");
             ViewHolder viewHolder = new ViewHolder();
@@ -138,8 +130,9 @@ public class MessageFragment extends Fragment implements AdapterView.OnItemClick
             }
                 NotificationData notificationData = datalilst.get(i);
                 viewHolder.siv_icon.setImageUrl(notificationData.getGroupPortrait(),R.drawable.users);
-                viewHolder.tv_title.setText(notificationData.getUserUuid());
+                viewHolder.tv_title.setText(notificationData.getSendUserName());
                 viewHolder.tv_content.setText("申请加入"+notificationData.getGroupName()+"群聊");
+                System.out.println(notificationData.getSendUserName()+"  "+notificationData.getUserUuid()+" "+notificationData.getSendUuid());
                 if (notificationData.getStatus().equals("1")){
                     viewHolder.btn.setText("已接受");
                     viewHolder.btn.setTextColor(Color.parseColor("#45b97c"));
@@ -147,10 +140,9 @@ public class MessageFragment extends Fragment implements AdapterView.OnItemClick
                 }else{
                     viewHolder.btn.setText("接受");
                 }
-
+                viewHolder.btn.setTag(i);
             return view;
         }
-
         class ViewHolder{
             SmartImageView siv_icon;//头像
             TextView tv_title,tv_content;//群名称
@@ -158,11 +150,29 @@ public class MessageFragment extends Fragment implements AdapterView.OnItemClick
         }
         @Override
         public void onClick(View view) {
+            int positon = (int) view.getTag();
+            System.out.println(positon+"点击了........");
             Button btn1=view.findViewById(R.id.btn_accept);
             btn1.setBackgroundColor(Color.parseColor("#FFFFFF"));
             btn1.setText("已接受");
             btn1.setTextColor(Color.parseColor("#45b97c"));
             btn1.setClickable(false);
+            //发送接受的请求
+             request = datalilst.get(positon).getSendUuid();
+             uuid = datalilst.get(positon).getUserUuid();
+             groupId = datalilst.get(positon).getGroupId();
+            request_pro = datalilst.get(positon).getGroupPortrait();
+            System.out.println(request+"??"+uuid+"groupId");
+            SendAcceptUser sendAcceptUser = new SendAcceptUser(1,request,uuid,groupId);
+            sendAcceptUser.start();
         }
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        System.out.println("我一直在运行");
+    }
+    public static MyMessageBaseAdapter getMyBaseAdapter(){
+        return myMessageBaseAdapter;
     }
 }

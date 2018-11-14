@@ -138,7 +138,7 @@ public class MessageNotication {
                 //消息推送
                 break;
             case 23:
-                //通知消息
+                //在线通知消息
                 //把数据放进数据库
                 MessageHelper messageHelper = new MessageHelper(MainActivity.context);
                 SQLiteDatabase db = messageHelper.getWritableDatabase();
@@ -156,11 +156,12 @@ public class MessageNotication {
                     contentValues.put("groupPortrait",notificationData.getGroupPortrait());
                     contentValues.put("groupStatus",notificationData.getStatus());
                     contentValues.put("groupId",notificationData.getGroupId());
+                    contentValues.put("sendUuid",notificationData.getSendUuid());
+                    contentValues.put("sendUserName",notificationData.getSendUserName());
                     db.insert("messageTable",null,contentValues);
                     System.out.println("插入数据库"+notificationData.getUserUuid()+""+notificationData.getNoticeContent()+""+notificationData.getGroupName());
-
                 }
-              //new NotifyMessage(text,HomeActivity.getFirst_handler());
+                new NotifyMessage(text,HomeActivity.message_handler);
                 break;
 
             default:

@@ -58,14 +58,14 @@ public class BDLocationUtils extends AppCompatActivity {
 
             System.out .println(location.getLatitude()+"这是经度和纬度"+location.getLongitude());
             //发送经纬度信息
-            wsManager = WsManager.getInstance();
+         /*   wsManager = WsManager.getInstance();
             if (wsManager != null){
                 webSocket = wsManager.getWebsocket();
                 String locations = Jsonpack.getLocation(MainActivity.main_username,location.getLongitude(),location.getLatitude());
                 ByteBuffer bf_location = BufferChange.getByteBuffer(locations);
                 webSocket.sendBinary(bf_location.array());
                 System.out.println("发送位置的请求数据");
-            }
+            }*/
         }
     }
 

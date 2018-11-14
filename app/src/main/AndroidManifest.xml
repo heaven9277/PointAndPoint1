@@ -52,7 +52,8 @@
         <service android:name=".Services.MyServer" />
 
         <activity android:name=".ForgetPwActivity" />
-        <activity android:name=".ChatActivity"/>
+        <activity android:name=".ChatActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".ApplicationActivity"/>
         <activity android:name=".GroupPositionActivity"/>
         <activity android:name=".SearchActivity"

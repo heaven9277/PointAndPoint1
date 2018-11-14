@@ -43,10 +43,10 @@
 
         <com.loopj.android.image.SmartImageView
             android:id="@+id/application_portrait"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_margin="20dp"
-            android:src="@drawable/avator_0002" />
+            android:src="@drawable/users" />
 
         <TextView
             android:id="@+id/application_applicant_name"
@@ -75,7 +75,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:text="申请加群描述"
+            android:text="申请加群描述：我想加入群聊"
             android:textColor="#000" />
     </LinearLayout>
 
@@ -96,7 +96,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:text="个性签名"
+            android:text="个性签名: 哈哈哈"
             android:textColor="#000" />
     </LinearLayout>
 
@@ -117,7 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:layout_marginBottom="20dp"
-            android:text="来源"
+            android:text="来源:群搜索"
             android:textColor="#000" />
     </LinearLayout>
 

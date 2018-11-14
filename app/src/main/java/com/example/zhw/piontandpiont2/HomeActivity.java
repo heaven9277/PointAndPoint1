@@ -27,6 +27,7 @@ import com.example.zhw.piontandpiont2.Threadpack.SendFisrtDataThread;
 import com.example.zhw.piontandpiont2.Util.BDLocationUtils;
 import com.example.zhw.piontandpiont2.Util.BaseActivity;
 import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
+import com.example.zhw.piontandpiont2.db.QueryData;
 
 import java.util.ArrayList;
 
@@ -54,9 +55,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
 
     boolean display=false;
     public static ChatFragment.MyBaseAdapter myBaseAdapter;
+    public static MessageFragment.MyMessageBaseAdapter myMessageBaseAdapter;
     public static String TEST =  "";
     public static Context context;
-    public static Bundle bundles = new Bundle();
 
     //定义一个handler进行消息接收
     private static Handler First_handler = new Handler(){
@@ -78,18 +79,27 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
                 case 8:
                     //获取失败
                     break;
+                default:
+                    break;
+            }
+        }
+    };
+    public static Handler message_handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            int what = msg.what;
+            String data = (String) msg.obj;
+            switch (what){
                 case 22:
                     //推送失败
                     break;
                 case 23:
-                    bundles.putString("data",data);
-                    messageFragment.setArguments(bundles);
-                    System.out.println("接收到信息发给fragment");
-                    //MessageFragment.MyMessageBaseAdapter myMessageBaseAdapter = new MessageFragment.MyMessageBaseAdapter();
-                    //myMessageBaseAdapter.notifyDataSetChanged();
+                    System.out.println("接收到消息") ;
+                    MessageFragment.datalilst = QueryData.getData(context);
+                    myMessageBaseAdapter = MessageFragment.getMyBaseAdapter();
+                    myMessageBaseAdapter.notifyDataSetChanged();
                     //推送成功
-                    break;
-                default:
                     break;
             }
         }

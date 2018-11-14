@@ -12,7 +12,7 @@ public class MessageHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //初始化数据库的表结构，执行一条表的SQL语句
-        db.execSQL("CREATE TABLE messageTable(_id INTEGER PRIMARY KEY AUTOINCREMENT,userUuid VARCHAR(50),noticeContent VARCHAR(50), " +
+        db.execSQL("CREATE TABLE messageTable(_id INTEGER PRIMARY KEY AUTOINCREMENT,userUuid VARCHAR(50),sendUuid VARCHAR(50),sendUserName ,noticeContent VARCHAR(50), " +
                 "noticeTime VARCHAR(50),groupName VARCHAR(50),groupPortrait VARCHAR(100),groupStatus VARCHAR(50),groupId VARCHAR(50))");
     }
 
