@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.zhw.piontandpiont2.Util.BaseActivity;
+import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
 
 public class ApplicationActivity extends BaseActivity implements View.OnClickListener {
     public ImageView message_image_back;
@@ -19,6 +20,7 @@ public class ApplicationActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void initView() {
+        DarkStatusBar.setDarkStatusIcon(this);
         message_image_back = findViewById(R.id.image_message_back);
         message_image_back.setOnClickListener(this);
         btn_accept=findViewById(R.id.application_button_accept);

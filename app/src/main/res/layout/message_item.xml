@@ -4,7 +4,7 @@
     android:layout_marginTop="30dp"
     android:descendantFocusability="blocksDescendants"
     android:layout_height="70dp">
-    <ImageView
+    <com.loopj.android.image.SmartImageView
         android:id="@+id/siv_icon"
         android:layout_width="60dp"
         android:layout_height="60dp"

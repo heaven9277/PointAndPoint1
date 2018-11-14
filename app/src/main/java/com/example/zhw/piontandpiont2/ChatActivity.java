@@ -19,6 +19,7 @@ import com.example.zhw.piontandpiont2.Adapter.ChatAdapter;
 import com.example.zhw.piontandpiont2.Threadpack.ChatThread;
 import com.example.zhw.piontandpiont2.Threadpack.SendChatMessageThread;
 import com.example.zhw.piontandpiont2.Bean.EnterGroupData;
+import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
 import com.example.zhw.piontandpiont2.Util.PareJson;
 
 import java.util.ArrayList;
@@ -84,6 +85,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         initView();
     }
     private void initView() {
+        DarkStatusBar.setDarkStatusIcon(this);
         ll= findViewById(R.id.ll);
         home_add = findViewById(R.id.home_add);
         btn=findViewById(R.id.bt_chat_add);

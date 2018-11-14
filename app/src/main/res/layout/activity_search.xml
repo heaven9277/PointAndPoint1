@@ -3,116 +3,107 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#fff"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:theme="@style/AppTheme"
+    android:fitsSystemWindows="true"
+    tools:context=".SearchActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/search_barlayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="50dp"
+        android:background="#ccc"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:layout_constraintBottom_toTopOf="@id/fl"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/search_toolbar"
-            android:layout_width="match_parent"
-            android:fitsSystemWindows="true"
-            android:layout_height="wrap_content"
-            android:background="@color/colorGray"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
+        <ImageView
+            android:id="@+id/button_searchIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/rec_search_input1"
+            android:src="@android:drawable/ic_menu_search"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/search_key_words"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <android.support.constraint.ConstraintLayout
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageButton
-                    android:id="@+id/button_searchIcon"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="start|center_vertical"
-                    android:background="@drawable/rec_search_input1"
-                    android:src="@android:drawable/ic_menu_search"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@id/search_key_words"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <EditText
-                    android:id="@+id/search_key_words"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/rec_search_input2"
-                    android:lines="1"
-                    android:maxLength="15"
-                    android:singleLine="true"
-                    android:textColor="#000"
-                    android:hint="@string/search_groupNameAndUuip"
-                    android:textColorHint="#ccc"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toRightOf="@id/button_searchIcon"
-                    app:layout_constraintRight_toLeftOf="@id/view_for_deleteBG"
-                    app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/search_key_words"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:background="@drawable/rec_search_input2"
+            android:hint="@string/search_groupNameAndUuip"
+            android:lines="1"
+            android:maxLength="15"
+            android:singleLine="true"
+            android:textColor="#000"
+            android:textColorHint="#ccc"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/button_searchIcon"
+            app:layout_constraintRight_toLeftOf="@id/view_for_deleteBG"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-                <View
-                    android:id="@+id/view_for_deleteBG"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/rec_search_input3"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toRightOf="@id/search_key_words"
-                    app:layout_constraintRight_toLeftOf="@id/search_button_search_group"
-                    app:layout_constraintTop_toTopOf="parent" />
+        <View
+            android:id="@+id/view_for_deleteBG"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/rec_search_input3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/search_key_words"
+            app:layout_constraintRight_toLeftOf="@id/search_button_search_group"
+            app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageButton
-                    android:id="@+id/search_delete_input"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginHorizontal="10dp"
-                    android:background="@drawable/oval_delete_for_search"
-                    android:src="@android:drawable/ic_menu_close_clear_cancel"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="@id/view_for_deleteBG"
-                    app:layout_constraintRight_toRightOf="@id/view_for_deleteBG"
-                    app:layout_constraintTop_toTopOf="parent" />
+        <ImageButton
+            android:id="@+id/search_delete_input"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/oval_delete_for_search"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/view_for_deleteBG"
+            app:layout_constraintRight_toRightOf="@id/view_for_deleteBG"
+            app:layout_constraintTop_toTopOf="parent" />
 
-                <Button
-                    android:id="@+id/search_button_search_group"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="end|center_vertical"
-                    android:layout_marginHorizontal="10dp"
-                    android:background="@color/colorGray"
-                    android:text="@string/search"
-                    android:textColor="#1C86EE"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toRightOf="@id/view_for_deleteBG"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/search_button_search_group"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_margin="5dp"
+            android:background="#ccc"
+            android:text="@string/search"
+            android:textColor="#fff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/view_for_deleteBG"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            </android.support.constraint.ConstraintLayout>
 
-        </android.support.v7.widget.Toolbar>
-
-    </android.support.design.widget.AppBarLayout>
+    </android.support.constraint.ConstraintLayout>
 
     <FrameLayout
+        android:id="@+id/fl"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:dividerHeight="1dp"
         android:layout_margin="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/search_barlayout">
-       <ProgressBar
-           android:id="@+id/search_pro"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_gravity="center"
-           android:visibility="invisible"
-          />
+        <ProgressBar
+            android:id="@+id/search_pro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            />
         <ListView
             android:id="@+id/listView_search"
             android:layout_width="match_parent"
@@ -121,5 +112,4 @@
             android:divider="#ccc"
             />
     </FrameLayout>
-
 </android.support.constraint.ConstraintLayout>

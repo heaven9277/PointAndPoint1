@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.zhw.piontandpiont2.Networksockets.AdressHttp;
 import com.example.zhw.piontandpiont2.Networksockets.HttpUtil;
+import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
 import com.example.zhw.piontandpiont2.Util.Jsonpack;
 import com.example.zhw.piontandpiont2.Util.TeleVify;
 import com.example.zhw.piontandpiont2.Util.VifycationCode;
@@ -48,6 +49,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
     //加载组件的方法
     public void init(){
+        DarkStatusBar.setDarkStatusIcon(this);
         btn_register = findViewById(R.id.btn_register);
         et_username  = findViewById(R.id.et_username);
         et_passwd = findViewById(R.id.et_passwd);

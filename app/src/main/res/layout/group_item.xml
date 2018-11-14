@@ -4,6 +4,7 @@
     android:layout_marginTop="30dp"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
+    android:background="#FBFFFE"
     android:layout_height="65dp">
     <com.loopj.android.image.SmartImageView
         android:id="@+id/siv_icon"

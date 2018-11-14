@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
 import com.example.zhw.piontandpiont2.Util.TeleVify;
 import com.mob.MobSDK;
 
@@ -49,6 +50,7 @@ public class ForgetPwActivity extends AppCompatActivity implements View.OnClickL
         SMSSDK.registerEventHandler(eventHandler);   // 注册回调接口
     }
     public void init(){
+        DarkStatusBar.setDarkStatusIcon(this);
         btn_vify = findViewById(R.id.btn_vify);
         btn_commitVify = findViewById(R.id.btn_commitVify);
         et_telVify = findViewById(R.id.et_telVify);

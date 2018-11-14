@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zhw.piontandpiont2.Services.MyServer;
+import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
 import com.example.zhw.piontandpiont2.Util.Jsonpack;
 import com.example.zhw.piontandpiont2.Util.PareJson;
 import com.example.zhw.piontandpiont2.Video.CustomVideoView;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static String TAG = "Mainactivity";
     public static String user_portrait;//头像
     public static String user_h_name;//昵称
-    private static Handler mHandler = new Handler(Looper.getMainLooper()){
+    private static Handler mHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -74,10 +75,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initview();
-
     }
     //初始化组件
     private void initview() {
+        DarkStatusBar.setDarkStatusIcon(this);
         btn_login = findViewById(R.id.btn_login);
         username = findViewById(R.id.username);
         userpasswd = findViewById(R.id.userpasswd);

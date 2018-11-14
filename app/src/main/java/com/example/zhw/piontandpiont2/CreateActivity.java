@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.zhw.piontandpiont2.Networksockets.WsManager;
 import com.example.zhw.piontandpiont2.Util.BufferChange;
+import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
 import com.example.zhw.piontandpiont2.Util.Jsonpack;
 import com.example.zhw.piontandpiont2.Util.PareJson;
 import com.loopj.android.image.SmartImageView;
@@ -85,6 +86,7 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
         intView();
     }
     private void intView() {
+        DarkStatusBar.setDarkStatusIcon(this);
         button_create_invite = findViewById(R.id.button_create_invite);
         button_create = findViewById(R.id.button_create);
         create_image_back = findViewById(R.id.create_image_back);//返回键

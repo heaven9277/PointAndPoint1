@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.zhw.piontandpiont2.Threadpack.SendApplicationThread;
 import com.example.zhw.piontandpiont2.Threadpack.SendSeachThread;
+import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
 import com.example.zhw.piontandpiont2.Util.PareJson;
 import com.example.zhw.piontandpiont2.Bean.SearchGroupDataBean;
 import com.example.zhw.piontandpiont2.Adapter.ListViewAdapterToSearchGroup;
@@ -69,11 +70,11 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        context = this;
         initView();
-
     }
     private void initView() {
-        context = this;
+        DarkStatusBar.setDarkStatusIcon(this);
         button_delete = findViewById(R.id.search_delete_input);
         button_search = findViewById(R.id.search_button_search_group);
         search_input = findViewById(R.id.search_key_words);

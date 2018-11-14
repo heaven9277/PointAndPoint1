@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
 import com.loopj.android.image.SmartImageView;
 
 /*
@@ -27,6 +28,7 @@ public class GroupUserInfoActivity extends AppCompatActivity implements View.OnC
     }
 
     private void initView() {
+        DarkStatusBar.setDarkStatusIcon(this);
         image_back = findViewById(R.id.image_back);
         user_image = findViewById(R.id.user_image);
         user_name = findViewById(R.id.user_name);

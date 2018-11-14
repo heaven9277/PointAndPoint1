@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.zhw.piontandpiont2.Threadpack.SendEditGroupThread;
+import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
 import com.example.zhw.piontandpiont2.Util.PareJson;
 import com.loopj.android.image.SmartImageView;
 
@@ -67,6 +68,7 @@ public class EditGroupActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void initView() {
+        DarkStatusBar.setDarkStatusIcon(this);
         image_back = findViewById(R.id.image_back);
         group_name = findViewById(R.id.group_name);
         group_desc = findViewById(R.id.group_desc);

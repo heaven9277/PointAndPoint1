@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.zhw.piontandpiont2.Adapter.ManagerGourpAdapter;
 import com.example.zhw.piontandpiont2.Threadpack.SendManagerUserThread;
 import com.example.zhw.piontandpiont2.Bean.GroupDataBean;
+import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
 import com.example.zhw.piontandpiont2.Util.PareJson;
 
 import java.util.List;
@@ -66,6 +67,7 @@ public class ManageGroupActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void initViews() {
+        DarkStatusBar.setDarkStatusIcon(this);
         group_user_lsit = findViewById(R.id.group_user_lsit);
         image_back = findViewById(R.id.image_back);
 
@@ -101,7 +103,7 @@ public class ManageGroupActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-    //item的点击事件
+    //item的button的点击事件
     @Override
     public void itemClick(View v) {
             int position;

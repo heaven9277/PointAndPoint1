@@ -8,9 +8,12 @@ import com.example.zhw.piontandpiont2.Bean.EditGroupInfo;
 import com.example.zhw.piontandpiont2.Bean.FirstRequest;
 import com.example.zhw.piontandpiont2.Bean.Forgetpw;
 import com.example.zhw.piontandpiont2.Bean.GruopInfo;
+import com.example.zhw.piontandpiont2.Bean.LocationBean;
 import com.example.zhw.piontandpiont2.Bean.LoginSuccessData;
 import com.example.zhw.piontandpiont2.Bean.ManagerGroupUser;
+import com.example.zhw.piontandpiont2.Bean.MemberBean;
 import com.example.zhw.piontandpiont2.Bean.OutGroup;
+import com.example.zhw.piontandpiont2.Bean.PositionBean;
 import com.example.zhw.piontandpiont2.Bean.SeachData;
 import com.example.zhw.piontandpiont2.Bean.UserLogin;
 import com.example.zhw.piontandpiont2.Bean.UserRegister;
@@ -204,5 +207,32 @@ public class Jsonpack {
         Gson gson = new Gson();
         String application_json = gson.toJson(applications);
         return application_json;
+    }
+    /*
+    返回位置的json
+     */
+    public static String getLocation(String uuid,double longitude,double latitude){
+        LocationBean locationBean = new LocationBean(24,uuid,longitude,latitude);
+        Gson gson = new Gson();
+        String location_json = gson.toJson(locationBean);
+        return location_json;
+    }
+    /*
+    返回定位的json
+     */
+    public static String getposition(String groupId){
+        PositionBean positionBean = new PositionBean(8,groupId);
+        Gson gson = new Gson();
+        String position_json = gson.toJson(positionBean);
+        return position_json;
+    }
+    /*
+    返回联系群成员的json
+     */
+    public static String getMember(String groupId){
+        MemberBean memberBean = new MemberBean(9,groupId);
+        Gson gson = new Gson();
+        String memberBean_json = gson.toJson(memberBean);
+        return memberBean_json;
     }
 }

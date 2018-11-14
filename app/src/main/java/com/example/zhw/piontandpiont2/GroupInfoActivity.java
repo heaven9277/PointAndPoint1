@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.zhw.piontandpiont2.Threadpack.SendGroupInfoThread;
 import com.example.zhw.piontandpiont2.Threadpack.SendOutGroupThread;
+import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
 import com.example.zhw.piontandpiont2.Util.PareJson;
 import com.loopj.android.image.SmartImageView;
 
@@ -96,6 +97,7 @@ public class GroupInfoActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_group_info);
        //初始化组件
         initView();
+        DarkStatusBar.setDarkStatusIcon(this);
     }
 
     private void initView() {

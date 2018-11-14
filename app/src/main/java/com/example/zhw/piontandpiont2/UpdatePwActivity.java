@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.zhw.piontandpiont2.Networksockets.AdressHttp;
 import com.example.zhw.piontandpiont2.Networksockets.HttpUtil;
+import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
 import com.example.zhw.piontandpiont2.Util.Jsonpack;
 
 import org.json.JSONException;
@@ -31,6 +32,7 @@ public class UpdatePwActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_pw);
+        DarkStatusBar.setDarkStatusIcon(this);
         btn_updatepw = findViewById(R.id.btn_updatepw);
         et_passwd =findViewById(R.id.et_passwd);
         et_repasswd = findViewById(R.id.et_repasswd);

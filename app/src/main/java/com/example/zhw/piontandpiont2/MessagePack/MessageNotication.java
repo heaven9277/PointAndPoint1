@@ -1,13 +1,20 @@
 package com.example.zhw.piontandpiont2.MessagePack;
 
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.example.zhw.piontandpiont2.Bean.NotificationData;
 import com.example.zhw.piontandpiont2.ChatActivity;
+import com.example.zhw.piontandpiont2.ConnectMemberActivity;
 import com.example.zhw.piontandpiont2.CreateActivity;
 import com.example.zhw.piontandpiont2.EditGroupActivity;
 import com.example.zhw.piontandpiont2.GroupInfoActivity;
+import com.example.zhw.piontandpiont2.GroupPositionActivity;
 import com.example.zhw.piontandpiont2.HomeActivity;
 import com.example.zhw.piontandpiont2.MainActivity;
 import com.example.zhw.piontandpiont2.ManageGroupActivity;
+import com.example.zhw.piontandpiont2.NotifyActivity.NotifyMessage;
 import com.example.zhw.piontandpiont2.SearchActivity;
 import com.example.zhw.piontandpiont2.Threadpack.ChatDataThread;
 import com.example.zhw.piontandpiont2.Threadpack.ChatMessageThread;
@@ -18,6 +25,10 @@ import com.example.zhw.piontandpiont2.Threadpack.MainThread;
 import com.example.zhw.piontandpiont2.NotifyActivity.NotifyEditGroup;
 import com.example.zhw.piontandpiont2.NotifyActivity.NotifyManagerGroup;
 import com.example.zhw.piontandpiont2.NotifyActivity.NotifyOutGroup;
+import com.example.zhw.piontandpiont2.Util.PareJson;
+import com.example.zhw.piontandpiont2.db.MessageHelper;
+
+import java.util.List;
 
 //消息分发的类
 public class MessageNotication {
@@ -57,25 +68,26 @@ public class MessageNotication {
                 break;
             case 6:
                 //退出群聊
-                NotifyOutGroup notifyOutGroup = new NotifyOutGroup(text,GroupInfoActivity.getGroupInfoHandler());
+                new NotifyOutGroup(text,GroupInfoActivity.getGroupInfoHandler());
                 System.out.println("开始退出群资料的");
                 break;
             case 7:
                 System.out.println("后台数据");
-                NotifyEditGroup notifyEditGroup = new NotifyEditGroup(text, EditGroupActivity.getEditGroupInfoHandler());
+                new NotifyEditGroup(text, EditGroupActivity.getEditGroupInfoHandler());
                 System.out.println("开始修改群资料的");
                 //保存修改群资料
                 break;
             case 8:
                 //查看群成员位置
-
+               new NotifyManagerGroup(text, GroupPositionActivity.positionHandler);
                 break;
             case 9:
                 //电话联系成员
+                new NotifyManagerGroup(text, ConnectMemberActivity.memberHandler);
                 break;
             case 10:
                 //申请加入群聊
-                NotifyEditGroup application = new NotifyEditGroup(text,SearchActivity.getSeach_handler());
+                new NotifyEditGroup(text,SearchActivity.getSeach_handler());
                 System.out.println("开始申请加入群聊的");
                 break;
             case 11:
@@ -87,12 +99,12 @@ public class MessageNotication {
                 break;
             case 13:
                 System.out.println("后台数据");
-                NotifyManagerGroup notifyManagerGroup = new NotifyManagerGroup(text, ManageGroupActivity.getmHandler());
+                new NotifyManagerGroup(text, ManageGroupActivity.getmHandler());
                 System.out.println("开始删除成员资料的");
                 //管理群成员
                 break;
             case 14:
-                NotifyManagerGroup notifyManagerGroup1 = new NotifyManagerGroup(text, SearchActivity.getSeach_handler());
+                new NotifyManagerGroup(text, SearchActivity.getSeach_handler());
                 System.out.println("开始搜索群的");
                 //搜索群
                 break;
@@ -112,13 +124,12 @@ public class MessageNotication {
                 //用户注销
                 break;
             case 20:
-                NotifyOutGroup notifyOutGroup1 = new NotifyOutGroup(text,GroupInfoActivity.getGroupInfoHandler());
+                new NotifyOutGroup(text,GroupInfoActivity.getGroupInfoHandler());
                 System.out.println("开始解散群资料的");
                 //解散群
                 break;
             case 21:
                 //群内发送消息
-
                 ChatMessageThread chatMessageThread = new ChatMessageThread(text, ChatActivity.getChat_handler());
                 chatMessageThread.start();
                 System.out.println("开始聊天内容的线程");
@@ -128,7 +139,30 @@ public class MessageNotication {
                 break;
             case 23:
                 //通知消息
+                //把数据放进数据库
+                MessageHelper messageHelper = new MessageHelper(MainActivity.context);
+                SQLiteDatabase db = messageHelper.getWritableDatabase();
+                ContentValues contentValues = new ContentValues();
+
+                System.out.println("开始插数据了");
+                //开始插数据
+                List<NotificationData> notificationDataList = PareJson.getNotificationData(text);
+                for (int i=0;i<notificationDataList.size();i++){
+                    NotificationData notificationData = notificationDataList.get(i);
+                    contentValues.put("userUuid",notificationData.getUserUuid());
+                    contentValues.put("noticeContent",notificationData.getNoticeContent());
+                    contentValues.put("noticeTime",notificationData.getNoticeTime());
+                    contentValues.put("groupName",notificationData.getGroupName());
+                    contentValues.put("groupPortrait",notificationData.getGroupPortrait());
+                    contentValues.put("groupStatus",notificationData.getStatus());
+                    contentValues.put("groupId",notificationData.getGroupId());
+                    db.insert("messageTable",null,contentValues);
+                    System.out.println("插入数据库"+notificationData.getUserUuid()+""+notificationData.getNoticeContent()+""+notificationData.getGroupName());
+
+                }
+              //new NotifyMessage(text,HomeActivity.getFirst_handler());
                 break;
+
             default:
                 break;
         }

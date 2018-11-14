@@ -6,9 +6,9 @@
 
     <com.loopj.android.image.SmartImageView
         android:id="@+id/connect_portrait"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/avator_0004" />
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/users" />
 
     <TextView
         android:id="@+id/connect_name"
@@ -34,14 +34,15 @@
         app:layout_constraintLeft_toRightOf="@id/connect_portrait"
         app:layout_constraintTop_toBottomOf="@id/connect_name" />
 
-    <ImageView
+    <Button
         android:id="@+id/connect_call"
-        android:src="@drawable/call"
-        android:layout_width="wrap_content"
+        android:background="@drawable/call"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginRight="25dp"
         app:layout_constraintBottom_toBottomOf="@id/connect_portrait"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/connect_portrait"
-        android:layout_height="wrap_content" />
+         />
 
 </android.support.constraint.ConstraintLayout>
