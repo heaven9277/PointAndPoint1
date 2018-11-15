@@ -241,10 +241,13 @@ public class Jsonpack {
      */
     public static String getAccept(int accept,String requestUserUuid,String sendUserUuid,String groupId){
         AcceptUserBean acceptUserBean;
+        String result;
         if (accept==1){
-             acceptUserBean = new AcceptUserBean(11,requestUserUuid,sendUserUuid,groupId);
+             result = "accept";
+             acceptUserBean = new AcceptUserBean(11,requestUserUuid,sendUserUuid,groupId,result);
         }else{
-             acceptUserBean = new AcceptUserBean(12,requestUserUuid,sendUserUuid,groupId);
+            result = "refuse";
+             acceptUserBean = new AcceptUserBean(12,requestUserUuid,sendUserUuid,groupId,result);
         }
         Gson gson = new Gson();
         String accept_json = gson.toJson(acceptUserBean);

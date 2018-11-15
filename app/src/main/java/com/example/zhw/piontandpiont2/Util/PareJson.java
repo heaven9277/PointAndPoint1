@@ -6,6 +6,7 @@ import com.example.zhw.piontandpiont2.Bean.EnterGroupData;
 import com.example.zhw.piontandpiont2.Bean.GroupDataBean;
 import com.example.zhw.piontandpiont2.Bean.GroupLocation;
 import com.example.zhw.piontandpiont2.Bean.LocationBean;
+import com.example.zhw.piontandpiont2.Bean.MessageNotification;
 import com.example.zhw.piontandpiont2.Bean.NotificationData;
 import com.example.zhw.piontandpiont2.Bean.SearchGroupDataBean;
 import com.google.gson.Gson;
@@ -116,6 +117,16 @@ public class PareJson {
         List<ConnectMemberBean> connectMemberBeanList = gson.fromJson(jsonArray, new TypeToken<List<ConnectMemberBean>>() {
         }.getType());
         return connectMemberBeanList;
+    }
+
+//操作码23
+
+    public static List<MessageNotification> getMessagesNotificationData(String string) {
+        JsonObject jsonObject = getJsonObject(string);
+        JsonArray jsonArray = jsonObject.getAsJsonArray("data");
+        List<MessageNotification> messageNotificationList = gson.fromJson(jsonArray, new TypeToken<List<MessageNotification>>() {
+        }.getType());
+        return messageNotificationList;
     }
 
 }

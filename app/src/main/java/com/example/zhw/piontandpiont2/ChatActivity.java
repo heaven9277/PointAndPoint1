@@ -17,11 +17,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zhw.piontandpiont2.Adapter.ChatAdapter;
+import com.example.zhw.piontandpiont2.Bean.ChatMessageData;
+import com.example.zhw.piontandpiont2.Fragment.MessageFragment;
 import com.example.zhw.piontandpiont2.Threadpack.ChatThread;
 import com.example.zhw.piontandpiont2.Threadpack.SendChatMessageThread;
 import com.example.zhw.piontandpiont2.Bean.EnterGroupData;
 import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
 import com.example.zhw.piontandpiont2.Util.PareJson;
+import com.example.zhw.piontandpiont2.db.QueryData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +51,8 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     //数据
     public static String data;
     public static Context context;
-    public static List<EnterGroupData> chatDatas = new ArrayList<>();
+    public static List<EnterGroupData> chatDatas;
+    public static List<ChatMessageData> chatMessageDataList;
     //定义一个handler进行消息接收
     private static Handler chat_handler = new Handler(){
         @Override
@@ -60,8 +64,8 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             switch (what){
                 case 11:
                     //获取成功
-                    chatDatas = PareJson.getEnterGroupData(data);
-                    myChatAdapter.notifyDataSetChanged();
+                    //chatDatas = PareJson.getEnterGroupData(data);
+                    //myChatAdapter.notifyDataSetChanged();
                     break;
                 case 12:
                     //获取失败
@@ -107,11 +111,14 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         groupRole = intent.getStringExtra("groupRole");
         chat_title.setText(groupName);
 
+        context= this;
+        //初始化list数据
+        chatMessageDataList = new ArrayList<>();
+        chatMessageDataList = QueryData.getchatMessageList(this,groupId);
         //listView
         lv_chat_dialog = findViewById(R.id.lv_chat_dialog);
-        myChatAdapter = new ChatAdapter(this,chatDatas,uuid);
+        myChatAdapter = new ChatAdapter(this);
         lv_chat_dialog.setAdapter(myChatAdapter);
-        context= this;
 
         btn.setOnClickListener(this);
         home_add.setOnClickListener(this);
@@ -121,11 +128,6 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
 
         group_user_position.setOnClickListener(this);
         group_user_connection.setOnClickListener(this);
-
-        //发送聊天页面请求
-        ChatThread chatThread = new ChatThread(this,groupName,uuid,groupId);
-        chatThread.start();
-
     }
     @Override
     public void onClick(View v) {
@@ -144,12 +146,8 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                 groupInfoActivity.putExtra("uuid",uuid);
                 groupInfoActivity.putExtra("groupRole",groupRole);
                 startActivity(groupInfoActivity);
-               // SendGroupInfoThread sendGroupInfoThread = new SendGroupInfoThread(groupId);
-               // sendGroupInfoThread.start();
                     break;
             case R.id.chat_image_back:  //返回键
-                   // Intent homeActivity = new Intent(this,HomeActivity.class);
-                   // startActivity(homeActivity);
                     finish();
                     break;
             case R.id.group_user_connection:    //联系
@@ -162,8 +160,19 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(groupposition);
                     break;
             case R.id.btn_chat_message_send://发送
+                String chat_message_content;
                 if (et_chat_message.getText().toString().trim() != null){
-                    SendChatMessageThread sendChatMessageThread = new SendChatMessageThread(uuid,groupId,et_chat_message.getText().toString().trim());
+                    chat_message_content = et_chat_message.getText().toString().trim();
+                    ChatMessageData chatMessageData = new ChatMessageData();
+                    chatMessageData.setGroupMessage(chat_message_content);
+                    chatMessageData.setUuid(MainActivity.main_username);
+                    chatMessageData.setGroupId(groupId);
+                    System.out.println(MainActivity.main_username+ " "+chat_message_content+" "+groupId+" "+chatMessageData);
+                    chatMessageDataList.add(chatMessageData);
+                    myChatAdapter.notifyDataSetChanged();
+                    //将数据放进数据库
+                    QueryData.InsertData(this,uuid,groupId,chat_message_content);
+                    SendChatMessageThread sendChatMessageThread = new SendChatMessageThread(uuid,groupId,chat_message_content);
                     sendChatMessageThread.start();
                 }else{
                     Toast.makeText(this,"内容不能为空",Toast.LENGTH_LONG).show();

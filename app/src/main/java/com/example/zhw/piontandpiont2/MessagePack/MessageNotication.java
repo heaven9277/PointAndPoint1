@@ -95,7 +95,6 @@ public class MessageNotication {
                 break;
             case 12:
                 //拒绝用户加入群聊
-
                 break;
             case 13:
                 System.out.println("后台数据");
@@ -136,6 +135,9 @@ public class MessageNotication {
                 break;
             case 22:
                 //消息推送
+                //将消息放进数据
+
+
                 break;
             case 23:
                 //在线通知消息
@@ -143,7 +145,6 @@ public class MessageNotication {
                 MessageHelper messageHelper = new MessageHelper(MainActivity.context);
                 SQLiteDatabase db = messageHelper.getWritableDatabase();
                 ContentValues contentValues = new ContentValues();
-
                 System.out.println("开始插数据了");
                 //开始插数据
                 List<NotificationData> notificationDataList = PareJson.getNotificationData(text);

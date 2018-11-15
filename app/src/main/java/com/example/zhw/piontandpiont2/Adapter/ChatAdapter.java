@@ -9,6 +9,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.zhw.piontandpiont2.Bean.ChatMessageData;
+import com.example.zhw.piontandpiont2.ChatActivity;
+import com.example.zhw.piontandpiont2.MainActivity;
 import com.example.zhw.piontandpiont2.R;
 import com.example.zhw.piontandpiont2.Bean.EnterGroupData;
 import com.loopj.android.image.SmartImageView;
@@ -17,18 +20,14 @@ import java.util.List;
 
 public class ChatAdapter extends BaseAdapter {
     public Context context;
-    public List<EnterGroupData> chatDatas;
-    public String uuid;
-    public ChatAdapter(Context context,List<EnterGroupData> chatDatas,String uuid){
+    public ChatAdapter(Context context){
         this.context = context;
-        this.chatDatas = chatDatas;
-        this.uuid = uuid;
     }
     @Override
     public int getCount() {
-        if (chatDatas==null)
+        if (ChatActivity.chatMessageDataList==null)
             return 0;
-        return chatDatas.size();
+        return ChatActivity.chatMessageDataList.size();
     }
     @Override
     public Object getItem(int i) {
@@ -55,26 +54,27 @@ public class ChatAdapter extends BaseAdapter {
             holder.tv_content_right = view.findViewById(R.id.tv_content_right);
 
             //使得两个布局会有一个隐藏起来
-            left_ll = view.findViewById(R.id.left_ll);
-            rigt_el = view.findViewById(R.id.rigt_el);
+            holder.right_rl = view.findViewById(R.id.rigt_el);
+            holder.left_ll = view.findViewById(R.id.left_ll);
             view.setTag(holder);
         }else{
             holder = (ViewHolder) view.getTag();
         }
-        EnterGroupData chatData = chatDatas.get(i);
-        System.out.println(uuid+"????????"+chatData.getUsername());
-        if (chatData.getUsername().equals(uuid)){
+        ChatMessageData chatMessageData = ChatActivity.chatMessageDataList.get(i);
+
+        System.out.println(chatMessageData.getUuid()+"????????"+MainActivity.main_username);
+        if (chatMessageData.getUuid().equals(MainActivity.main_username)){
             //左边布局隐藏
-            left_ll.setVisibility(View.GONE);
-            holder.ivicon_right.setImageUrl(chatData.getUserPortrait(),R.drawable.users);
-            holder.tv_name_right.setText(chatData.getUsername());
-            holder.tv_content_right.setText(chatData.getUserMessage());
+            holder.left_ll.setVisibility(View.GONE);
+            holder.ivicon_right.setImageUrl("",R.drawable.users);
+            holder.tv_name_right.setText(chatMessageData.getUuid());
+            holder.tv_content_right.setText(chatMessageData.getGroupMessage());
         }else{
             //右边布局隐藏
-            rigt_el.setVisibility(View.GONE);
-            holder.ivicon_left.setImageUrl(chatData.getUserPortrait(),R.drawable.users);
-            holder.tvname.setText(chatData.getUsername());
-            holder.tvcontent.setText(chatData.getUserMessage());
+            holder.right_rl.setVisibility(View.GONE);
+            holder.ivicon_left.setImageUrl("",R.drawable.users);
+            holder.tvname.setText(chatMessageData.getUuid());
+            holder.tvcontent.setText(chatMessageData.getGroupMessage());
         }
         return view;
     }
@@ -85,5 +85,7 @@ public class ChatAdapter extends BaseAdapter {
         SmartImageView ivicon_right;
         TextView tv_name_right;
         TextView tv_content_right;
+        RelativeLayout right_rl;
+        LinearLayout left_ll;
     }
 }

@@ -161,8 +161,8 @@ public class MessageFragment extends Fragment implements AdapterView.OnItemClick
              request = datalilst.get(positon).getSendUuid();
              uuid = datalilst.get(positon).getUserUuid();
              groupId = datalilst.get(positon).getGroupId();
-            request_pro = datalilst.get(positon).getGroupPortrait();
-            System.out.println(request+"??"+uuid+"groupId");
+             request_pro = datalilst.get(positon).getGroupPortrait();
+            System.out.println(request+"??"+uuid+" "+groupId+"?????");
             SendAcceptUser sendAcceptUser = new SendAcceptUser(1,request,uuid,groupId);
             sendAcceptUser.start();
         }

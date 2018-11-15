@@ -30,7 +30,7 @@ public class SendAcceptUser extends Thread {
             System.out.println(groupId);
             ByteBuffer bf_accept = BufferChange.getByteBuffer(accepts);
             webSocket.sendBinary(bf_accept.array());
-            System.out.println("发送接受或者拒绝的请求数据");
+            System.out.println("发送接受或者拒绝的请求数据"+accepts);
         }
     }
 }
