@@ -1,12 +1,7 @@
 package com.example.zhw.piontandpiont2.MessagePack;
 
-
-import android.app.Activity;
-import android.app.ActivityManager;
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-
 import com.example.zhw.piontandpiont2.Bean.NotificationData;
 import com.example.zhw.piontandpiont2.ChatActivity;
 import com.example.zhw.piontandpiont2.ConnectMemberActivity;
@@ -18,24 +13,21 @@ import com.example.zhw.piontandpiont2.HomeActivity;
 import com.example.zhw.piontandpiont2.MainActivity;
 import com.example.zhw.piontandpiont2.ManageGroupActivity;
 import com.example.zhw.piontandpiont2.NotifyActivity.NotifyChat;
+import com.example.zhw.piontandpiont2.NotifyActivity.NotifyEditGroup;
+import com.example.zhw.piontandpiont2.NotifyActivity.NotifyManagerGroup;
 import com.example.zhw.piontandpiont2.NotifyActivity.NotifyMessage;
+import com.example.zhw.piontandpiont2.NotifyActivity.NotifyOutGroup;
 import com.example.zhw.piontandpiont2.SearchActivity;
 import com.example.zhw.piontandpiont2.Threadpack.ChatDataThread;
-import com.example.zhw.piontandpiont2.Threadpack.ChatMessageThread;
 import com.example.zhw.piontandpiont2.Threadpack.CreateGroupActivityThread;
 import com.example.zhw.piontandpiont2.Threadpack.FirstActiviityThread;
 import com.example.zhw.piontandpiont2.Threadpack.GroupInfoThread;
 import com.example.zhw.piontandpiont2.Threadpack.MainThread;
-import com.example.zhw.piontandpiont2.NotifyActivity.NotifyEditGroup;
-import com.example.zhw.piontandpiont2.NotifyActivity.NotifyManagerGroup;
-import com.example.zhw.piontandpiont2.NotifyActivity.NotifyOutGroup;
 import com.example.zhw.piontandpiont2.Util.PareJson;
 import com.example.zhw.piontandpiont2.db.MessageHelper;
 import com.example.zhw.piontandpiont2.db.QueryData;
 
 import java.util.List;
-
-import static com.example.zhw.piontandpiont2.HomeActivity.context;
 
 //消息分发的类
 public class MessageNotication {
@@ -85,6 +77,7 @@ public class MessageNotication {
                 //保存修改群资料
                 break;
             case 8:
+                System.out.println("开始位置");
                 //查看群成员位置
                new NotifyManagerGroup(text, GroupPositionActivity.positionHandler);
                 break;
@@ -148,6 +141,7 @@ public class MessageNotication {
                     new NotifyChat(text,ChatActivity.getChat_handler());
                 }
                 System.out.println("开始聊天内容的通知");
+                //将消息放进数据
                 break;
             case 23:
                 //在线通知消息

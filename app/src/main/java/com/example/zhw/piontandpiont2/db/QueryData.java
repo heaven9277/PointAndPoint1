@@ -5,12 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.zhw.piontandpiont2.Bean.ChatMessage;
 import com.example.zhw.piontandpiont2.Bean.ChatMessageData;
 import com.example.zhw.piontandpiont2.Bean.MessageNotification;
 import com.example.zhw.piontandpiont2.Bean.NotificationData;
-import com.example.zhw.piontandpiont2.Fragment.MessageFragment;
-import com.example.zhw.piontandpiont2.MainActivity;
 import com.example.zhw.piontandpiont2.Util.PareJson;
 
 import java.util.ArrayList;
@@ -26,7 +23,7 @@ public class QueryData {
         Cursor cursor = db.query("messageTable",null,null,null,null,null,null);
         System.out.println(".......。。。。"+cursor.getCount());
         if (cursor.getCount()==0){
-            datalilst = null;
+            datalilst = new ArrayList<>();
         }else{
             cursor.moveToFirst();
             NotificationData notificationData1 = new NotificationData();
