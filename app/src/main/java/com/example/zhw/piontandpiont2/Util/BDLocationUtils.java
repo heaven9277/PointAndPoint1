@@ -7,11 +7,9 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.example.zhw.piontandpiont2.MainActivity;
 import com.example.zhw.piontandpiont2.Networksockets.WsManager;
-import com.neovisionaries.ws.client.WebSocket;
 
-import java.nio.ByteBuffer;
+import okhttp3.WebSocket;
 
 public class BDLocationUtils extends AppCompatActivity {
     public LocationClient mLocationClient;

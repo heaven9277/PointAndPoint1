@@ -14,7 +14,10 @@ import com.example.zhw.piontandpiont2.GroupPositionActivity;
 import com.example.zhw.piontandpiont2.HomeActivity;
 import com.example.zhw.piontandpiont2.MainActivity;
 import com.example.zhw.piontandpiont2.ManageGroupActivity;
+import com.example.zhw.piontandpiont2.NotifyActivity.NotifyEditGroup;
+import com.example.zhw.piontandpiont2.NotifyActivity.NotifyManagerGroup;
 import com.example.zhw.piontandpiont2.NotifyActivity.NotifyMessage;
+import com.example.zhw.piontandpiont2.NotifyActivity.NotifyOutGroup;
 import com.example.zhw.piontandpiont2.SearchActivity;
 import com.example.zhw.piontandpiont2.Threadpack.ChatDataThread;
 import com.example.zhw.piontandpiont2.Threadpack.ChatMessageThread;
@@ -22,9 +25,6 @@ import com.example.zhw.piontandpiont2.Threadpack.CreateGroupActivityThread;
 import com.example.zhw.piontandpiont2.Threadpack.FirstActiviityThread;
 import com.example.zhw.piontandpiont2.Threadpack.GroupInfoThread;
 import com.example.zhw.piontandpiont2.Threadpack.MainThread;
-import com.example.zhw.piontandpiont2.NotifyActivity.NotifyEditGroup;
-import com.example.zhw.piontandpiont2.NotifyActivity.NotifyManagerGroup;
-import com.example.zhw.piontandpiont2.NotifyActivity.NotifyOutGroup;
 import com.example.zhw.piontandpiont2.Util.PareJson;
 import com.example.zhw.piontandpiont2.db.MessageHelper;
 
@@ -78,6 +78,7 @@ public class MessageNotication {
                 //保存修改群资料
                 break;
             case 8:
+                System.out.println("开始位置");
                 //查看群成员位置
                new NotifyManagerGroup(text, GroupPositionActivity.positionHandler);
                 break;
@@ -136,7 +137,6 @@ public class MessageNotication {
             case 22:
                 //消息推送
                 //将消息放进数据
-
 
                 break;
             case 23:

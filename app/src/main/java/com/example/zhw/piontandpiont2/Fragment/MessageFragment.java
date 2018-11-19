@@ -1,9 +1,6 @@
 package com.example.zhw.piontandpiont2.Fragment;
 
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,10 +14,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.zhw.piontandpiont2.ApplicationActivity;
-import com.example.zhw.piontandpiont2.Bean.LoginSuccessData;
 import com.example.zhw.piontandpiont2.Bean.NotificationData;
 import com.example.zhw.piontandpiont2.HomeActivity;
-import com.example.zhw.piontandpiont2.MainActivity;
 import com.example.zhw.piontandpiont2.R;
 import com.example.zhw.piontandpiont2.Threadpack.SendAcceptUser;
 import com.example.zhw.piontandpiont2.db.MessageHelper;
@@ -65,7 +60,7 @@ public class MessageFragment extends Fragment implements AdapterView.OnItemClick
         }
         datalilst = new ArrayList<>();
         //查询数据
-       datalilst = QueryData.getData(getContext());
+        datalilst = QueryData.getData(getContext());
         if (datalilst == null||datalilst.size()==0){
             message_listView.setVisibility(View.INVISIBLE);
             no_message.setVisibility(View.VISIBLE);
