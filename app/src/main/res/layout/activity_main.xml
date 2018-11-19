@@ -50,6 +50,7 @@
             android:layout_marginTop="15dp"
             android:hint="@string/userpasswd"
             android:paddingLeft="8dp"
+            android:password="true"
             android:background="@drawable/whiteround"/>
         <Button
             android:id="@+id/btn_login"

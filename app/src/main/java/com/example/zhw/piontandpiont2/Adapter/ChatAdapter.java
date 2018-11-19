@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -63,16 +64,21 @@ public class ChatAdapter extends BaseAdapter {
         ChatMessageData chatMessageData = ChatActivity.chatMessageDataList.get(i);
 
         System.out.println(chatMessageData.getUuid()+"????????"+MainActivity.main_username);
+        System.out.println("!!!!!!!"+chatMessageData.getUuid()+">>>>> "+chatMessageData.getGroupMessage()+chatMessageData.getUserPro());
         if (chatMessageData.getUuid().equals(MainActivity.main_username)){
             //左边布局隐藏
             holder.left_ll.setVisibility(View.GONE);
-            holder.ivicon_right.setImageUrl("",R.drawable.users);
+            holder.right_rl.setVisibility(View.VISIBLE);
+
+            holder.ivicon_right.setImageUrl(chatMessageData.getUserPro(),R.drawable.users);
             holder.tv_name_right.setText(chatMessageData.getUuid());
             holder.tv_content_right.setText(chatMessageData.getGroupMessage());
         }else{
             //右边布局隐藏
+            holder.left_ll.setVisibility(View.VISIBLE);
             holder.right_rl.setVisibility(View.GONE);
-            holder.ivicon_left.setImageUrl("",R.drawable.users);
+
+            holder.ivicon_left.setImageUrl(chatMessageData.getUserPro(),R.drawable.qq);
             holder.tvname.setText(chatMessageData.getUuid());
             holder.tvcontent.setText(chatMessageData.getGroupMessage());
         }

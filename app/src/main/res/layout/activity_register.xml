@@ -47,6 +47,7 @@
             android:id="@+id/et_passwd"
             android:layout_width="240dp"
             android:layout_height="35dp"
+            android:password="true"
             android:background="@drawable/whiteround"
             android:hint="@string/userpasswd"
             android:paddingLeft="5dp"
@@ -60,6 +61,7 @@
             android:background="@drawable/whiteround"
             android:hint="@string/repasswd"
             android:paddingLeft="5dp"
+            android:password="true"
             android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal"
             />

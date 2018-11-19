@@ -91,7 +91,6 @@ public class WsManager {
             System.out.println("得到操作码"+id);
             //进行消息分发
             MessageNotication.sendInfoToActivity(text,id);
-
         }
         @Override
         public void onConnected(WebSocket websocket, Map<String, List<String>> headers)
@@ -120,6 +119,8 @@ public class WsManager {
             super.onDisconnected(websocket, serverCloseFrame, clientCloseFrame, closedByServer);
             System.out.println("断开连接");
             setStatus(WsStatus.CONNECT_FAIL);
+            init();
+            System.out.println("进行连接。。。。？？？？");
         }
     }
 

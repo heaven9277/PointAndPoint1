@@ -42,7 +42,7 @@ public class ConnectMemberActivity extends AppCompatActivity implements AdapterV
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            System.out.println("接收到创建群的信息");
+            System.out.println("接收到联系的信息");
             int what = msg.what;
             String datas = (String) msg.obj;
             switch (what){
@@ -79,6 +79,8 @@ public class ConnectMemberActivity extends AppCompatActivity implements AdapterV
         System.out.println("群号：：："+ChatActivity.groupId);
         SendMemberThread sendMemberThread = new SendMemberThread(ChatActivity.groupId);
         sendMemberThread.start();
+        HomeActivity.isHomeActivity="";
+        ChatActivity.isChatActivity ="";
     }
 
     @Override
@@ -91,6 +93,7 @@ public class ConnectMemberActivity extends AppCompatActivity implements AdapterV
     @Override
     public void itemClick(View v) {
         int position = (int) v.getTag();
+        System.out.println("点你////////////////"+position);
         String number = list.get(position).getUserPhone();
         Intent Intent =  new Intent(android.content.Intent.ACTION_DIAL, Uri.parse("tel:" + number));//跳转到拨号界面，同时传递电话号码
         startActivity(Intent);

@@ -41,19 +41,21 @@ public class MemberAdapter extends BaseAdapter implements View.OnClickListener {
     public View getView(int i, View view, ViewGroup viewGroup) {
        ViewHodler viewHodler;
         if (view == null){
-            view = LayoutInflater.from(context).inflate(R.layout.manager_user_item,viewGroup,false);
+            view = LayoutInflater.from(context).inflate(R.layout.list_item_connect,viewGroup,false);
             viewHodler = new ViewHodler();
             viewHodler.connect_portrait = view.findViewById(R.id.connect_portrait);
             viewHodler.connect_name = view.findViewById(R.id.connect_name);
             viewHodler.connect_phone_number = view.findViewById(R.id.connect_phone_number);
 
             viewHodler.connect_call = view.findViewById(R.id.connect_call);
+            viewHodler.connect_call.setOnClickListener(this);
             view.setTag(viewHodler);
         }else{
             viewHodler = (ViewHodler) view.getTag();
         }
         ConnectMemberBean connectMemberBean = ConnectMemberActivity.list.get(i);
-        viewHodler.connect_portrait.setImageUrl(connectMemberBean.getUserPortarit(),R.drawable.group003);
+        System.out.println(">>>>>"+connectMemberBean.getUserName()+">"+connectMemberBean.getUserPhone()+"?"+connectMemberBean.getUserPortarit());
+        viewHodler.connect_portrait.setImageUrl(connectMemberBean.getUserPortarit(),R.drawable.qq);
         viewHodler.connect_name.setText(connectMemberBean.getUserName());
         viewHodler.connect_phone_number.setText(connectMemberBean.getUserPhone());
         viewHodler.connect_call.setTag(i);

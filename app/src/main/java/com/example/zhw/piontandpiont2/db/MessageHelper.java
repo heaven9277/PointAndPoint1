@@ -14,7 +14,7 @@ public class MessageHelper extends SQLiteOpenHelper {
         //初始化数据库的表结构，执行一条表的SQL语句
         db.execSQL("CREATE TABLE messageTable(_id INTEGER PRIMARY KEY AUTOINCREMENT,userUuid VARCHAR(50),sendUuid VARCHAR(50),sendUserName VARCHAR(50),noticeContent VARCHAR(50), " +
                 "noticeTime VARCHAR(50),groupName VARCHAR(50),groupPortrait VARCHAR(100),groupStatus VARCHAR(50),groupId VARCHAR(50))");
-        db.execSQL("CREATE TABLE chatMessageTable(_id INTEGER PRIMARY KEY AUTOINCREMENT,uuid VARCHAR(50),groupId VARCHAR(50),groupMessage VARCHAR(200),userPro VARCHAR(200))" );
+        db.execSQL("CREATE TABLE chatMessageTable(_id INTEGER PRIMARY KEY AUTOINCREMENT,uuid VARCHAR(50),username VARCHAR(50),groupId VARCHAR(50),groupMessage VARCHAR(200),userPro VARCHAR(200))" );
     }
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {

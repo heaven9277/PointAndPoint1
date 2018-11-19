@@ -52,6 +52,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
+                    android:background="#FBFFFE"
                     android:orientation="horizontal">
                     <com.loopj.android.image.SmartImageView
                         android:id="@+id/group_image"
@@ -99,135 +100,14 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
                     android:textColor="#000"/>
-                <TableLayout
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="25dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="5dp">
-                    <TableRow>
-                        <!--第一行第一列       使用layout_weight 属性来规定是否是均分，我这儿使用均分，所有每一列都为1-->
-                        <LinearLayout
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <!--第一行第一列用于布局  RelativeLayout 使用相对布局嵌套在LinearLayout布局中，
-                            可以将文字和图片布局在一起
-                            这样可以做成一个文字可图片混合的按钮，这里只用来做单元格效果
-                            设置背景色，这里的背景色将覆盖表格的背景色，根据你需要的空间，留出空间大小，留出的部分成为单元格边框-->
-                            <RelativeLayout
-                                android:id="@+id/Re_butt1"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@android:color/background_light"
-                                android:layout_marginRight="5dp"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginTop="5dp">
-
-                                <!--第一行第一列 图片-->
-                                <com.loopj.android.image.SmartImageView
-                                    android:id="@+id/imageView1"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:layout_alignParentTop="true"
-                                    android:layout_centerHorizontal="true"
-                                    android:background="@drawable/users" />
-
-                                <!--第一行 第一列 文字-->
-                                <TextView
-                                    android:id="@+id/user_name"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/imageView1"
-                                    android:layout_centerHorizontal="true"
-                                    android:text="Demo"
-                                    android:textColor="#000"
-                                    android:textSize="16dp" />
-                            </RelativeLayout>
-                        </LinearLayout>
-                        <LinearLayout
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <!--第一行第一列用于布局  RelativeLayout 使用相对布局嵌套在LinearLayout布局中，
-                            可以将文字和图片布局在一起
-                            这样可以做成一个文字可图片混合的按钮，这里只用来做单元格效果
-                            设置背景色，这里的背景色将覆盖表格的背景色，根据你需要的空间，留出空间大小，留出的部分成为单元格边框-->
-                            <RelativeLayout
-                                android:id="@+id/Re_butt2"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@android:color/background_light"
-                                android:layout_marginRight="5dp"
-                                android:layout_marginLeft="8dp"
-                                android:layout_marginTop="5dp">
-
-                                <!--第一行第一列 图片-->
-                                <com.loopj.android.image.SmartImageView
-                                    android:id="@+id/user_001"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:layout_alignParentTop="true"
-                                    android:layout_centerHorizontal="true"
-                                    android:background="@drawable/user001" />
-
-                                <!--第一行 第一列 文字-->
-                                <TextView
-                                    android:id="@+id/user_002"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/user_001"
-                                    android:layout_centerHorizontal="true"
-                                    android:text="赞"
-                                    android:textColor="#000"
-                                    android:textSize="16dp" />
-                            </RelativeLayout>
-                        </LinearLayout>
-                        <LinearLayout
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <!--第一行第一列用于布局  RelativeLayout 使用相对布局嵌套在LinearLayout布局中，
-                            可以将文字和图片布局在一起
-                            这样可以做成一个文字可图片混合的按钮，这里只用来做单元格效果
-                            设置背景色，这里的背景色将覆盖表格的背景色，根据你需要的空间，留出空间大小，留出的部分成为单元格边框-->
-                            <RelativeLayout
-                                android:id="@+id/Re_butt3"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@android:color/background_light"
-                                android:layout_marginRight="5dp"
-                                android:layout_marginLeft="8dp"
-                                android:layout_marginTop="5dp">
-
-                                <!--第一行第一列 图片-->
-                                <com.loopj.android.image.SmartImageView
-                                    android:id="@+id/invation"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:layout_alignParentTop="true"
-                                    android:layout_centerHorizontal="true"
-                                    android:background="@drawable/add_user" />
-
-                                <!--第一行 第一列 文字-->
-                                <TextView
-                                    android:id="@+id/user_003"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/invation"
-                                    android:layout_centerHorizontal="true"
-                                    android:text="邀请"
-                                    android:textColor="#0B98F2"
-                                    android:textSize="16dp" />
-                            </RelativeLayout>
-                        </LinearLayout>
-                    </TableRow>
-                </TableLayout>
+                </android.support.v7.widget.RecyclerView>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -275,7 +155,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
-                android:textColor="#fff"
+                android:textColor="#EAFFE9"
                 android:background="@drawable/btn_back"
                 android:text="编辑群聊"/>
             <Button

@@ -40,6 +40,8 @@ public class ApplicationActivity extends BaseActivity implements View.OnClickLis
         String name = intent.getStringExtra("acceptName");
         application_applicant_name.setText(name);
         application_portrait.setImageUrl(MessageFragment.request_pro,R.drawable.users);
+        HomeActivity.isHomeActivity="";
+        ChatActivity.isChatActivity ="";
     }
 
     @Override

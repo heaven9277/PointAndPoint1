@@ -71,6 +71,8 @@ public class GroupPositionActivity extends AppCompatActivity{
         DarkStatusBar.setDarkStatusIcon(this);
         lv = findViewById(R.id.lv);
         mMapView =  findViewById(R.id.bmapView);
+        HomeActivity.isHomeActivity="";
+        ChatActivity.isChatActivity ="";
         initThread();
         initMap();
         initheaderView();

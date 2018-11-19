@@ -34,6 +34,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="#FBFFFE"
         app:layout_constraintTop_toBottomOf="@id/connect_top"
         app:layout_constraintBottom_toBottomOf="parent">
         <ProgressBar
@@ -46,9 +47,8 @@
             android:layout_width="match_parent"
            android:layout_height="match_parent"
             android:divider="#ccc"
-            android:dividerHeight="3dp"
+            android:dividerHeight="0.5dp"
            />
-
     </FrameLayout>
 
 </android.support.constraint.ConstraintLayout>

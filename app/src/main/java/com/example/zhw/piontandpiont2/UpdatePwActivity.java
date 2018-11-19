@@ -38,6 +38,8 @@ public class UpdatePwActivity extends AppCompatActivity implements View.OnClickL
         et_repasswd = findViewById(R.id.et_repasswd);
         btn_updatepw.setOnClickListener(this);
         telphone = getIntent().getStringExtra("telphone");
+        HomeActivity.isHomeActivity="";
+        ChatActivity.isChatActivity ="";
     }
 
     @Override

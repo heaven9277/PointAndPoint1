@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,11 +16,16 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.zhw.piontandpiont2.Adapter.MyRecyAdapter;
+import com.example.zhw.piontandpiont2.Bean.GroupDataBean;
 import com.example.zhw.piontandpiont2.Threadpack.SendGroupInfoThread;
 import com.example.zhw.piontandpiont2.Threadpack.SendOutGroupThread;
 import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
 import com.example.zhw.piontandpiont2.Util.PareJson;
+import com.example.zhw.piontandpiont2.Util.SpaceItemDecoration;
 import com.loopj.android.image.SmartImageView;
+
+import java.util.List;
 
 /*
 群资料的Activity
@@ -44,7 +51,9 @@ public class GroupInfoActivity extends AppCompatActivity implements View.OnClick
     public static String groupName;
     public static String groupDsc;
     public static String groupPro;//头像
-
+    public static RecyclerView recyclerView;//横向布局
+    public static List<GroupDataBean.MembersBean> members; //数据
+    public static MyRecyAdapter myRecyAdapter;
 
     //定义一个handler进行消息接收
     private static Handler GroupInfoHandler = new Handler(){
@@ -73,10 +82,7 @@ public class GroupInfoActivity extends AppCompatActivity implements View.OnClick
                     HomeActivity.TEST="GroupOut";
                     Intent homeIntent = new Intent(context,HomeActivity.class);
                     homeIntent.putExtra("data",data);
-                    //homeIntent.putExtra("username",uuid);
                     homeIntent.putExtra("TAG",CreateActivity.TAG);
-                    //homeIntent.putExtra("user_portrait",MainActivity.user_portrait);
-                    //homeIntent.putExtra("user_h_name",MainActivity.user_h_name);
                     context.startActivity(homeIntent);
 
                      break;
@@ -114,6 +120,14 @@ public class GroupInfoActivity extends AppCompatActivity implements View.OnClick
         progressBar = findViewById(R.id.progressbar);
         scrollView = findViewById(R.id.scrollview);
 
+        recyclerView = findViewById(R.id.recycler);
+        LinearLayoutManager ms= new LinearLayoutManager(this);
+        ms.setOrientation(LinearLayoutManager.HORIZONTAL);// 设置 recyclerview 布局方式为横向布局
+        //LinearLayoutManager 种 含有3 种布局样式  第一个就是最常用的 1.横向 , 2. 竖向,3.偏移
+        recyclerView.setLayoutManager(ms);  //给RecyClerView 添加设置好的布局样式
+        myRecyAdapter = new MyRecyAdapter();
+        recyclerView.addItemDecoration(new SpaceItemDecoration(20));
+        recyclerView.setAdapter(myRecyAdapter);
         //接收上一个activity的信息
         Intent intent = getIntent();
         groupId = intent.getStringExtra("groupId");
@@ -135,6 +149,8 @@ public class GroupInfoActivity extends AppCompatActivity implements View.OnClick
          SendGroupInfoThread sendGroupInfoThread = new SendGroupInfoThread(groupId);
          sendGroupInfoThread.start();
          context = this;
+        HomeActivity.isHomeActivity="";
+        ChatActivity.isChatActivity ="";
     }
 
     @Override
@@ -189,5 +205,8 @@ public class GroupInfoActivity extends AppCompatActivity implements View.OnClick
         groupDsc = PareJson.getGroupData(data).getGroupAnoun();
         groupPro = PareJson.getGroupData(data).getGroupPortrait();
         System.out.println(groupName+" "+groupPro+"  "+groupDsc);
+        members = PareJson.getNumberList(data);
+        //提示更新
+        myRecyAdapter.notifyDataSetChanged();
     }
 }

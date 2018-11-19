@@ -13,14 +13,14 @@
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="8dp"
         android:background="@drawable/group003"
         android:scaleType="centerCrop" />
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/siv_icon"
         android:ellipsize="end"
@@ -34,14 +34,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_title"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/siv_icon"
         android:layout_marginTop="5dp"
         android:ellipsize="end"
         android:maxLength="16"
         android:singleLine="true"
         android:text="贤：哈哈，你们在哪"
-        android:textColor="#333"
+        android:textColor="#898989"
         android:textSize="14sp"/>
     <TextView
         android:id="@+id/tv_time"
@@ -52,6 +52,6 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:text="11：50"
-        android:textColor="#333"
+        android:textColor="#898989"
         android:textSize="14sp"/>
 </RelativeLayout>

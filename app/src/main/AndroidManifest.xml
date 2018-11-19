@@ -30,7 +30,7 @@
     <!-- //网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.BAIDU_LOCATION_SERVICE" />
-
+    <uses-permission android:name="android.permission.GET_TASKS" />
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"
@@ -53,7 +53,7 @@
 
         <activity android:name=".ForgetPwActivity" />
         <activity android:name=".ChatActivity"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ApplicationActivity"/>
         <activity android:name=".GroupPositionActivity"/>
         <activity android:name=".SearchActivity"

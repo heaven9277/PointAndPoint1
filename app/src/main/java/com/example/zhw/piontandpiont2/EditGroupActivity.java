@@ -89,6 +89,8 @@ public class EditGroupActivity extends AppCompatActivity implements View.OnClick
         group_name.setText(groupName);
         group_desc.setText(groupDesc);
         context =this;
+        HomeActivity.isHomeActivity="";
+        ChatActivity.isChatActivity ="";
     }
     @Override
     public void onClick(View view) {

@@ -2,23 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:background="#FBFFFE"
     android:layout_height="match_parent">
     <LinearLayout
         android:id="@+id/left_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
         android:orientation="horizontal">
 
         <com.loopj.android.image.SmartImageView
             android:id="@+id/ivicon"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="top"
+            android:layout_marginTop="5dp"
             android:background="@drawable/qq" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="-10dp"
             android:orientation="vertical">
             <TextView
                 android:id="@+id/tvname"
@@ -33,10 +37,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:paddingRight="10dp"
-                android:paddingLeft="40dp"
+                android:paddingLeft="30dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:background="@drawable/chat_left"
+                android:background="@drawable/left_chat"
                 android:text="赵大亮好帅！！！"
                 android:gravity="center"/>
         </LinearLayout>
@@ -45,11 +49,13 @@
         android:id="@+id/rigt_el"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:layout_marginRight="5dp">
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/iv_headPhoto"
+            android:layout_marginTop="-10dp"
             >
             <TextView
                 android:id="@+id/tv_name_right"
@@ -67,18 +73,19 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="8dp"
                 android:paddingLeft="15dp"
-                android:paddingRight="40dp"
+                android:paddingRight="10dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:background="@drawable/chat_right"
+                android:background="@drawable/right_chat"
                 android:text="智永好帅！！！"
                 android:gravity="center"/>
         </RelativeLayout>
         <com.loopj.android.image.SmartImageView
             android:id="@+id/iv_headPhoto"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="top"
+            android:layout_marginTop="5dp"
             android:background="@drawable/qq"
             android:layout_alignParentRight="true"/>
     </RelativeLayout>

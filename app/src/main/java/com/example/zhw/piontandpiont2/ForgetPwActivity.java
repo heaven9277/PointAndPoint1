@@ -58,7 +58,8 @@ public class ForgetPwActivity extends AppCompatActivity implements View.OnClickL
         //绑定点击事件
         btn_vify.setOnClickListener(this);
         btn_commitVify.setOnClickListener(this);
-
+        HomeActivity.isHomeActivity="";
+        ChatActivity.isChatActivity ="";
     }
 
     @Override

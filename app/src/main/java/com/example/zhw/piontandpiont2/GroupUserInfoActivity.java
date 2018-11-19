@@ -38,6 +38,8 @@ public class GroupUserInfoActivity extends AppCompatActivity implements View.OnC
 
         image_back.setOnClickListener(this);
         content_user.setOnClickListener(this);
+        HomeActivity.isHomeActivity="";
+        ChatActivity.isChatActivity ="";
     }
 
     @Override

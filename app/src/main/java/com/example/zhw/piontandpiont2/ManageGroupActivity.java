@@ -87,7 +87,8 @@ public class ManageGroupActivity extends AppCompatActivity implements View.OnCli
         group_user_lsit.setAdapter(managerGourpAdapter);
         group_user_lsit.setOnItemClickListener(this);
         context = this;
-
+        HomeActivity.isHomeActivity="";
+        ChatActivity.isChatActivity ="";
     }
     @Override
     public void onClick(View view) {

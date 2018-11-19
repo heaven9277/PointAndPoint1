@@ -1,5 +1,6 @@
 package com.example.zhw.piontandpiont2;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import com.example.zhw.piontandpiont2.Fragment.MessageFragment;
 import com.example.zhw.piontandpiont2.Threadpack.ChatThread;
 import com.example.zhw.piontandpiont2.Threadpack.SendChatMessageThread;
 import com.example.zhw.piontandpiont2.Bean.EnterGroupData;
+import com.example.zhw.piontandpiont2.Util.AndroidBug5497Workaround;
 import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
 import com.example.zhw.piontandpiont2.Util.PareJson;
 import com.example.zhw.piontandpiont2.db.QueryData;
@@ -51,8 +53,9 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     //数据
     public static String data;
     public static Context context;
-    public static List<EnterGroupData> chatDatas;
     public static List<ChatMessageData> chatMessageDataList;
+
+    public static String isChatActivity;
     //定义一个handler进行消息接收
     private static Handler chat_handler = new Handler(){
         @Override
@@ -62,12 +65,13 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             int what = msg.what;
             String data = (String) msg.obj;
             switch (what){
-                case 11:
+                case 1:
                     //获取成功
-                    //chatDatas = PareJson.getEnterGroupData(data);
-                    //myChatAdapter.notifyDataSetChanged();
+                   //进行更新
+                    chatMessageDataList = QueryData.getchatMessageList(context,groupId);
+                    myChatAdapter.notifyDataSetChanged();
                     break;
-                case 12:
+                case 2:
                     //获取失败
                     Toast.makeText(context,"获取失败，请重新获取",Toast.LENGTH_LONG).show();
                     break;
@@ -86,8 +90,9 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.acticity_chat);
+        //com.example.zhw.piontandpiont2.Util.AndroidBug5497Workaround.assistActivity(this);
         initView();
     }
     private void initView() {
@@ -112,6 +117,8 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         chat_title.setText(groupName);
 
         context= this;
+        isChatActivity= "Chatactivity";
+        HomeActivity.isHomeActivity="";
         //初始化list数据
         chatMessageDataList = new ArrayList<>();
         chatMessageDataList = QueryData.getchatMessageList(this,groupId);
@@ -167,11 +174,11 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                     chatMessageData.setGroupMessage(chat_message_content);
                     chatMessageData.setUuid(MainActivity.main_username);
                     chatMessageData.setGroupId(groupId);
-                    System.out.println(MainActivity.main_username+ " "+chat_message_content+" "+groupId+" "+chatMessageData);
+                    System.out.println(MainActivity.main_username+ " "+chat_message_content+" "+groupId+" "+chatMessageData+"昵称"+MainActivity.user_h_name+"头像"+MainActivity.user_portrait);
                     chatMessageDataList.add(chatMessageData);
                     myChatAdapter.notifyDataSetChanged();
                     //将数据放进数据库
-                    QueryData.InsertData(this,uuid,groupId,chat_message_content);
+                    //QueryData.InsertData(this,uuid,groupId,chat_message_content,MainActivity.user_h_name,MainActivity.user_portrait);
                     SendChatMessageThread sendChatMessageThread = new SendChatMessageThread(uuid,groupId,chat_message_content);
                     sendChatMessageThread.start();
                 }else{
@@ -184,5 +191,8 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     }
     public static Handler getChat_handler(){
         return chat_handler;
+    }
+
+    private static class AndroidBug5497Workaround {
     }
 }

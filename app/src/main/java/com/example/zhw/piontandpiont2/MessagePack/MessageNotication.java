@@ -1,7 +1,10 @@
 package com.example.zhw.piontandpiont2.MessagePack;
 
 
+import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.zhw.piontandpiont2.Bean.NotificationData;
@@ -14,6 +17,7 @@ import com.example.zhw.piontandpiont2.GroupPositionActivity;
 import com.example.zhw.piontandpiont2.HomeActivity;
 import com.example.zhw.piontandpiont2.MainActivity;
 import com.example.zhw.piontandpiont2.ManageGroupActivity;
+import com.example.zhw.piontandpiont2.NotifyActivity.NotifyChat;
 import com.example.zhw.piontandpiont2.NotifyActivity.NotifyMessage;
 import com.example.zhw.piontandpiont2.SearchActivity;
 import com.example.zhw.piontandpiont2.Threadpack.ChatDataThread;
@@ -27,8 +31,11 @@ import com.example.zhw.piontandpiont2.NotifyActivity.NotifyManagerGroup;
 import com.example.zhw.piontandpiont2.NotifyActivity.NotifyOutGroup;
 import com.example.zhw.piontandpiont2.Util.PareJson;
 import com.example.zhw.piontandpiont2.db.MessageHelper;
+import com.example.zhw.piontandpiont2.db.QueryData;
 
 import java.util.List;
+
+import static com.example.zhw.piontandpiont2.HomeActivity.context;
 
 //消息分发的类
 public class MessageNotication {
@@ -129,15 +136,18 @@ public class MessageNotication {
                 break;
             case 21:
                 //群内发送消息
-                ChatMessageThread chatMessageThread = new ChatMessageThread(text, ChatActivity.getChat_handler());
-                chatMessageThread.start();
-                System.out.println("开始聊天内容的线程");
+                //ChatMessageThread chatMessageThread = new ChatMessageThread(text, ChatActivity.getChat_handler());
+                //chatMessageThread.start();
+                //System.out.println("开始聊天内容的线程");
                 break;
             case 22:
                 //消息推送
-                //将消息放进数据
-
-
+                //将消息放进数据库
+                QueryData.InsertDatas(text,MainActivity.context);
+                if (ChatActivity.isChatActivity.equals("Chatactivity")){
+                    new NotifyChat(text,ChatActivity.getChat_handler());
+                }
+                System.out.println("开始聊天内容的通知");
                 break;
             case 23:
                 //在线通知消息
@@ -162,7 +172,9 @@ public class MessageNotication {
                     db.insert("messageTable",null,contentValues);
                     System.out.println("插入数据库"+notificationData.getUserUuid()+""+notificationData.getNoticeContent()+""+notificationData.getGroupName());
                 }
-                new NotifyMessage(text,HomeActivity.message_handler);
+               if (HomeActivity.isHomeActivity.equals("Homeactivity")){
+                   new NotifyMessage(text,HomeActivity.message_handler);
+               }
                 break;
 
             default:

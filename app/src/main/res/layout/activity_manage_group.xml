@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FBFFFE"
     tools:context=".ManageGroupActivity">
     <LinearLayout
         android:id="@+id/linear"
@@ -39,7 +40,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:text="完成"
-        android:textColor="#fff"
+        android:textColor="#F4FFF3"
         android:background="@drawable/btn_back"
         android:layout_marginBottom="5dp"
         android:layout_alignParentBottom="true" />

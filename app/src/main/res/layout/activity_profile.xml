@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="#fff"
+        android:background="#FBFFFE"
         app:layout_constraintBottom_toTopOf="@id/profile_line2"
         app:layout_constraintTop_toBottomOf="@id/profile_top">
 
@@ -75,7 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="#fff"
+        android:background="#FBFFFE"
         app:layout_constraintBottom_toTopOf="@id/profile_line3"
         app:layout_constraintTop_toBottomOf="@id/profile_line1">
 
@@ -117,7 +117,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="#fff"
+        android:background="#FBFFFE"
         app:layout_constraintBottom_toTopOf="@id/profile_line4"
         app:layout_constraintTop_toBottomOf="@id/profile_line2">
 
@@ -157,7 +157,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="#fff"
+        android:background="#FBFFFE"
         app:layout_constraintBottom_toTopOf="@id/profile_line5"
         app:layout_constraintTop_toBottomOf="@id/profile_line3">
 
@@ -197,7 +197,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="#fff"
+        android:background="#FBFFFE"
         app:layout_constraintTop_toBottomOf="@id/profile_line4">
 
         <TextView

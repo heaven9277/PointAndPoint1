@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:theme="@style/AppTheme"
     android:fitsSystemWindows="true"
+    android:background="#FBFFFE"
     tools:context=".SearchActivity">
 
     <android.support.constraint.ConstraintLayout
@@ -94,7 +95,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:dividerHeight="1dp"
-        android:layout_margin="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="#FBFFFE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/search_barlayout">
         <ProgressBar
@@ -108,7 +112,6 @@
             android:id="@+id/listView_search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
             android:divider="#ccc"
             />
     </FrameLayout>

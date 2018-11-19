@@ -86,6 +86,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         button_search.setOnClickListener(this);
 
         uuid = HomeActivity.user_name;
+        HomeActivity.isHomeActivity="";
+        ChatActivity.isChatActivity ="";
         System.out.println("用户名？???"+uuid);
     }
 

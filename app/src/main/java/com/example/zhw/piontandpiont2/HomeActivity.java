@@ -59,6 +59,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
     public static String TEST =  "";
     public static Context context;
 
+    public static String isHomeActivity;
+
     //定义一个handler进行消息接收
     private static Handler First_handler = new Handler(){
         @Override
@@ -71,10 +73,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
                 case 7:
                     //获取成功
                     sendDataChatFragemtn(data);
-                    //提示更新listview
-                   // chatFragment.getMyBaseAdapter().notifyDataSetChanged();
-                    //myBaseAdapter.notifyDataSetChanged();
-                   // System.out.println("获取首页成功");
                     break;
                 case 8:
                     //获取失败
@@ -153,6 +151,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
         user_h_name = MainActivity.user_h_name;
         System.out.println("结兽皮"+data+"接收到的信息"+user_name);
         context = this;
+        isHomeActivity="Homeactivity";
+        ChatActivity.isChatActivity="";
         initView();
         initListener();
         //发送数据给Fragment
@@ -261,8 +261,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
                 Intent createActivity = new Intent(this,CreateActivity.class);
                 createActivity.putExtra("username",user_name);
                 createActivity.putExtra("data",data);
-                //createActivity.putExtra("user_portrait",user_portrait);
-                //createActivity.putExtra("user_h_name",user_h_name);
                 startActivity(createActivity);
                 display = false;
                 System.out.println("点击了create群");

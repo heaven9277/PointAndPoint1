@@ -60,7 +60,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         linearLayout = findViewById(R.id.line);
         btn_register.setOnClickListener(this);
         linearLayout.setOnClickListener(this);
-
+        HomeActivity.isHomeActivity="";
+        ChatActivity.isChatActivity ="";
         //生成验证码
        updateVify();
     }

@@ -64,10 +64,8 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
                         Toast.makeText(context, PareJson.getJsonInfo(datas),Toast.LENGTH_LONG).show();
                         Intent homeAvtivity = new Intent(context,HomeActivity.class);
                         homeAvtivity.putExtra("data",datas);
-                        //homeAvtivity.putExtra("username",userName);
+
                         homeAvtivity.putExtra("TAG",TAG);
-                        //homeAvtivity.putExtra("user_portrait",user_portrait);
-                        //homeAvtivity.putExtra("user_h_name",user_h_name);
                         context.startActivity(homeAvtivity);
                     break;
                 case 10:
@@ -104,13 +102,12 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
         Intent intent = getIntent();
         userName = MainActivity.main_username;
         data = intent.getStringExtra("data");
-        //user_portrait = intent.getStringExtra("user_portrait");
-        //user_h_name = intent.getStringExtra("user_h_name");
-       // System.out.println(user_h_name+"？？？？？？？？？？？？？");
 
         gourp_manager_image.setImageUrl(MainActivity.user_portrait,R.drawable.users);
         tv_group_manager.setText(MainActivity.user_h_name.replace("\"", ""));
         context= this;
+        HomeActivity.isHomeActivity="";
+        ChatActivity.isChatActivity ="";
     }
 
     @Override
@@ -139,7 +136,6 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.create_image_back:
                 Intent homeintent = new Intent(this,HomeActivity.class);
-               // homeintent.putExtra("username",userName);
                 homeintent.putExtra("data",data);
                 System.out.println("????????????常量"+HomeActivity.TEST);
                 if (HomeActivity.TEST.equals("GroupOut")){
@@ -147,8 +143,6 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
                 }else {
                     homeintent.putExtra("TAG",TAG2);
                 }
-                //homeintent.putExtra("user_portrait",user_portrait);
-               // homeintent.putExtra("user_h_name",user_h_name);
                 startActivity(homeintent);
                 finish();
                 break;

@@ -7,11 +7,11 @@
         android:endColor="#ffffff"
         android:startColor="#ffffff" />
 
-    <solid android:color="#00FF00" />
+    <solid android:color="#1AAC19" />
 
     <stroke
         android:width="2dp"
-        android:color="#00FF00" />
+        android:color="#1AAC19" />
 
     <corners
         android:bottomLeftRadius="5dp"

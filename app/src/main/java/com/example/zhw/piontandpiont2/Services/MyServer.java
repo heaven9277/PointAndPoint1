@@ -50,16 +50,15 @@ public class MyServer extends Service {
         public void run() {
             if (System.currentTimeMillis() - sendTime  >= HEART_BEAT_RATE){
                 if (webSocket != null){
-                    boolean isSuccess = getConnStatus();
                     System.out.println(wsManager.getStatus()+"状态：");
-                    if (isSuccess==false){
+                    if (webSocket.isOpen()){
+                        //处于长连接
+                        System.out.println("处于连接中");
+                    }else{
                         mHandler.removeCallbacks(hreatBeatRunnable);
                         webSocket = null;
                         new MyIBider().initWebsocket();
                         System.out.println("进入重连");
-                    }else{
-                        //处于长连接
-                        System.out.println("处于连接？？？");
                     }
                     sendTime = System.currentTimeMillis();
 

@@ -18,7 +18,8 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         DarkStatusBar.setDarkStatusIcon(this);
-
+        HomeActivity.isHomeActivity="";
+        ChatActivity.isChatActivity ="";
     }
 
 }

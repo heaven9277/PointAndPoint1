@@ -58,10 +58,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     user_h_name = Jsonpack.getUserName(text);
                     Intent homeIntent = new Intent(context,HomeActivity.class);
                     homeIntent.putExtra("data",text);
-                    //homeIntent.putExtra("username",main_username);
+
                     homeIntent.putExtra("TAG",TAG);
-                    //homeIntent.putExtra("user_portrait",user_portrait);
-                   // homeIntent.putExtra("user_h_name",user_h_name);
                     System.out.println(main_username+"用户名" + text);
                     context.startActivity(homeIntent);
                     break;
@@ -97,6 +95,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intentService  = new Intent(this,MyServer.class);
         bindService(intentService,myConn, Service.BIND_AUTO_CREATE);
         System.out.println("开始测试");
+
+        //用于测试是否该Acitivity是否处于栈顶
+        HomeActivity.isHomeActivity="";
+        ChatActivity.isChatActivity ="";
     }
 
     @Override
