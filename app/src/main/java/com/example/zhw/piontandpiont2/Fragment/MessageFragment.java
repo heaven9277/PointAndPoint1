@@ -132,12 +132,14 @@ public class MessageFragment extends Fragment implements AdapterView.OnItemClick
                 viewHolder.tv_title.setText(notificationData.getSendUserName());
                 viewHolder.tv_content.setText("申请加入"+notificationData.getGroupName()+"群聊");
                 System.out.println(notificationData.getSendUserName()+"  "+notificationData.getUserUuid()+" "+notificationData.getSendUuid());
-                if (notificationData.getStatus().equals("1")){
-                    viewHolder.btn.setText("已接受");
-                    viewHolder.btn.setTextColor(Color.parseColor("#45b97c"));
-                    viewHolder.btn.setClickable(false);
-                }else{
-                    viewHolder.btn.setText("接受");
+                if(notificationData.getStatus()!=null) {
+                    if (notificationData.getStatus().equals("1")) {
+                        viewHolder.btn.setText("已接受");
+                        viewHolder.btn.setTextColor(Color.parseColor("#45b97c"));
+                        viewHolder.btn.setClickable(false);
+                    } else {
+                        viewHolder.btn.setText("接受");
+                    }
                 }
                 viewHolder.btn.setTag(i);
             return view;
