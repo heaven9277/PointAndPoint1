@@ -6,12 +6,14 @@ public class AcceptUserBean {
     public String sendUserUuid;
     public String groupUuid;
     public String result;
-    public AcceptUserBean(int operateId,String requestUserUuid,String sendUserUuid,String groupUuid,String result){
+    public long noticeId;
+    public AcceptUserBean(int operateId,String requestUserUuid,String sendUserUuid,String groupUuid,String result,long noticeId){
         this.operateId = operateId;
         this.requestUserUuid = requestUserUuid;
         this.sendUserUuid = sendUserUuid;
         this.groupUuid = groupUuid;
         this.result =result;
+        this.noticeId = noticeId;
     }
 
     public int getOperateId() {
@@ -51,5 +53,13 @@ public class AcceptUserBean {
     }
     public void setResult(String result) {
         this.result = result;
+    }
+
+    public long getNoticeId() {
+        return noticeId;
+    }
+
+    public void setNoticeId(long noticeId) {
+        this.noticeId = noticeId;
     }
 }

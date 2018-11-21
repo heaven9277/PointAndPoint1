@@ -48,7 +48,6 @@ public class ManageGroupActivity extends AppCompatActivity implements View.OnCli
                     //提示更新
                     mumbers = PareJson.getNumberList(datas);
                     managerGourpAdapter.notifyDataSetChanged();
-
                     break;
                 case 2:
                     //获取失败

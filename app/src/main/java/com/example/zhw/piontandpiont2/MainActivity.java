@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,6 +40,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static String TAG = "Mainactivity";
     public static String user_portrait;//头像
     public static String user_h_name;//昵称
+    public static String email;//邮箱
+    public static String sign;//个性签名
+    public static String phone;//电话号码
+
     private static Handler mHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -56,11 +61,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     //登陆成功
                     user_portrait = Jsonpack.getUserPortrait(text);
                     user_h_name = Jsonpack.getUserName(text);
+                    sign = Jsonpack.getUserSign(text);
+                    email = Jsonpack.getUserEmail(text);
+                    phone = Jsonpack.getUserPhone(text);
                     Intent homeIntent = new Intent(context,HomeActivity.class);
                     homeIntent.putExtra("data",text);
-
                     homeIntent.putExtra("TAG",TAG);
                     System.out.println(main_username+"用户名" + text);
+                    SharedPreferences.Editor editor = App.getEditor();
+                    editor.putString("data",text);
                     context.startActivity(homeIntent);
                     break;
                 default:

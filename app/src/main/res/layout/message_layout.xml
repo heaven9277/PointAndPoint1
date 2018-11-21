@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="30dp"
-    android:background="#FBFFFE"
     android:orientation="vertical">
     <TextView
         android:id="@+id/no_message"
@@ -11,8 +10,9 @@
         android:layout_height="wrap_content"
         android:text="暂无消息"
         android:textSize="20sp"
+        android:textColor="#000"
         android:layout_centerInParent="true"
-        android:visibility="invisible"/>
+        />
     <ListView
         android:id="@+id/message_list"
         android:layout_width="match_parent"

@@ -6,11 +6,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.zhw.piontandpiont2.HomeActivity;
+import com.example.zhw.piontandpiont2.MainActivity;
 import com.example.zhw.piontandpiont2.ProfileActivity;
 import com.example.zhw.piontandpiont2.R;
+import com.example.zhw.piontandpiont2.Threadpack.SendOutLoginThread;
 import com.loopj.android.image.SmartImage;
 import com.loopj.android.image.SmartImageView;
 
@@ -22,7 +26,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     public LinearLayout lin_self_data;//我的资料
     public LinearLayout ll_photos;//相册
     public LinearLayout about_our;//关于我们
-
+    public Button out_login;//退出登陆
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.user_layout, container, false);
@@ -48,6 +52,11 @@ public class UserFragment extends Fragment implements View.OnClickListener {
             case R.id.lin_self_data:        //我的资料
                 Intent proflieActivity = new Intent(getContext(), ProfileActivity.class);
                 startActivity(proflieActivity);
+                break;
+            case R.id.out_login:
+                //退出登陆
+                SendOutLoginThread sendOutLoginThread = new SendOutLoginThread(HomeActivity.user_name);
+                sendOutLoginThread.start();
                 break;
         }
     }

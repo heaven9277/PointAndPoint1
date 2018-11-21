@@ -5,6 +5,7 @@ import com.example.zhw.piontandpiont2.Bean.ConnectMemberBean;
 import com.example.zhw.piontandpiont2.Bean.EnterGroupData;
 import com.example.zhw.piontandpiont2.Bean.GroupDataBean;
 import com.example.zhw.piontandpiont2.Bean.GroupLocation;
+import com.example.zhw.piontandpiont2.Bean.GroupMemberInfo;
 import com.example.zhw.piontandpiont2.Bean.LocationBean;
 import com.example.zhw.piontandpiont2.Bean.MessageNotification;
 import com.example.zhw.piontandpiont2.Bean.NotificationData;
@@ -127,6 +128,14 @@ public class PareJson {
         List<MessageNotification> messageNotificationList = gson.fromJson(jsonArray, new TypeToken<List<MessageNotification>>() {
         }.getType());
         return messageNotificationList;
+    }
+
+
+    public static GroupMemberInfo getGroupMemberInfo(String string){
+        JsonObject jsonObject = getJsonObject(string);
+        JsonObject data = jsonObject.getAsJsonObject("data");
+        GroupMemberInfo groupMemberInfo = gson.fromJson(data,GroupMemberInfo.class);
+        return  groupMemberInfo;
     }
 
 }

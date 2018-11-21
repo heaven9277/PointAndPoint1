@@ -46,8 +46,8 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     public static ChatAdapter myChatAdapter;//适配器
 
     //接收上一个activity传过来的数据
-    public String uuid;
-    public String groupName;
+    public static String uuid;
+    public static String groupName;
     public static String groupId;
     public static String groupRole;
     //数据
@@ -90,7 +90,6 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.acticity_chat);
         //com.example.zhw.piontandpiont2.Util.AndroidBug5497Workaround.assistActivity(this);
         initView();
@@ -193,6 +192,4 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         return chat_handler;
     }
 
-    private static class AndroidBug5497Workaround {
-    }
 }

@@ -14,11 +14,13 @@ public class SendAcceptUser extends Thread {
     public WsManager wsManager;
     public WebSocket webSocket;
     public int accept;
-    public SendAcceptUser(int accept,String requestUserUuid,String sendUserUuid,String groupId){
+    public long noticeId;
+    public SendAcceptUser(int accept,String requestUserUuid,String sendUserUuid,String groupId,long noticeId){
         this.requestUserUuid = requestUserUuid;
         this.sendUserUuid = sendUserUuid;
         this.groupId = groupId;
         this.accept =accept;//判断接受还是i拒绝
+        this.noticeId = noticeId;
     }
     @Override
     public void run() {
@@ -26,7 +28,7 @@ public class SendAcceptUser extends Thread {
         wsManager = WsManager.getInstance();
         if (wsManager != null){
             webSocket = wsManager.getWebsocket();
-            String accepts = Jsonpack.getAccept(accept,requestUserUuid,sendUserUuid,groupId);
+            String accepts = Jsonpack.getAccept(accept,requestUserUuid,sendUserUuid,groupId,noticeId);
             System.out.println(groupId);
             ByteBuffer bf_accept = BufferChange.getByteBuffer(accepts);
             webSocket.sendBinary(bf_accept.array());

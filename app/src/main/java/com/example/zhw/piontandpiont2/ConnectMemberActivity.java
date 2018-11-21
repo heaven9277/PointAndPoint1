@@ -86,6 +86,7 @@ public class ConnectMemberActivity extends AppCompatActivity implements AdapterV
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Intent GroupUserInfo = new Intent(this,GroupInfoActivity.class);
+        GroupUserInfo.putExtra("uuid",list.get(i).getUuid());
         startActivity(GroupUserInfo);
     }
 

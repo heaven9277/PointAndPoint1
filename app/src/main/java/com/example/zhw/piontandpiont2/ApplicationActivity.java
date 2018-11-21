@@ -11,6 +11,7 @@ import com.example.zhw.piontandpiont2.Fragment.MessageFragment;
 import com.example.zhw.piontandpiont2.Threadpack.SendAcceptUser;
 import com.example.zhw.piontandpiont2.Util.BaseActivity;
 import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
+import com.example.zhw.piontandpiont2.db.QueryData;
 import com.loopj.android.image.SmartImageView;
 
 public class ApplicationActivity extends BaseActivity implements View.OnClickListener {
@@ -48,18 +49,16 @@ public class ApplicationActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.image_message_back:  //返回键
-                // Intent homeActivity = new Intent(ApplicationActivity.this, HomeActivity.class);
-                // homeActivity.putExtra("id",2);
-                //  startActivity(homeActivity);
                 this.finish();
                 break;
             case R.id.application_button_accept:  //接受
-                    SendAcceptUser sendAcceptUser = new SendAcceptUser(1,MessageFragment.request,MessageFragment.uuid,MessageFragment.groupId);
+                    SendAcceptUser sendAcceptUser = new SendAcceptUser(1,MessageFragment.request,MessageFragment.uuid,MessageFragment.groupId,MessageFragment.noticeId);
                     sendAcceptUser.start();
+                QueryData.updateAccept(HomeActivity.context,MessageFragment.noticeId+"");
                 btn_decline.setVisibility(View.GONE);
                 break;
             case R.id.application_decline:   //拒绝
-                SendAcceptUser sendAcceptUser1 = new SendAcceptUser(2,MessageFragment.request,MessageFragment.uuid,MessageFragment.groupId);
+                SendAcceptUser sendAcceptUser1 = new SendAcceptUser(2,MessageFragment.request,MessageFragment.uuid,MessageFragment.groupId,MessageFragment.noticeId);
                 sendAcceptUser1.start();
                 btn_accept.setText("邀请进群");
                 btn_decline.setVisibility(View.GONE);

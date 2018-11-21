@@ -36,6 +36,7 @@ public class QueryData {
             notificationData1.setGroupId(cursor.getString(cursor.getColumnIndex("groupId")));
             notificationData1.setSendUuid(cursor.getString(cursor.getColumnIndex("sendUuid")));
             notificationData1.setSendUserName(cursor.getString(cursor.getColumnIndex("sendUserName")));
+            notificationData1.setNoticeId(cursor.getString(cursor.getColumnIndex("noticeId")));
             datalilst.add(notificationData1);
             while (cursor.moveToNext()){
                 NotificationData notificationData = new NotificationData();
@@ -48,6 +49,7 @@ public class QueryData {
                 notificationData.setGroupId(cursor.getString(cursor.getColumnIndex("groupId")));
                 notificationData.setSendUuid(cursor.getString(cursor.getColumnIndex("sendUuid")));
                 notificationData.setSendUserName(cursor.getString(cursor.getColumnIndex("sendUserName")));
+                notificationData.setNoticeId(cursor.getString(cursor.getColumnIndex("noticeId")));
                 datalilst.add(notificationData);
             }
         }
@@ -126,5 +128,16 @@ public class QueryData {
         }
         db.close();
         System.out.println("开始把收到的信息插进数据库????");
+    }
+    /*
+    更新消息通知
+     */
+    public static void updateAccept(Context context,String noticeId){
+        MessageHelper messageHelper = new MessageHelper(context);
+        SQLiteDatabase db = messageHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("groupStatus","1");
+        db.update("messageTable",contentValues,"noticeId=?",new String[]{noticeId} );
+        System.out.println("更新了");
     }
 }

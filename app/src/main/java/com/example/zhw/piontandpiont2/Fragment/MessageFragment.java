@@ -41,6 +41,7 @@ public class MessageFragment extends Fragment implements AdapterView.OnItemClick
     public static  String uuid;
     public static String groupId;
     public static String request_pro;
+    public static long noticeId;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.message_layout, container, false);
@@ -61,9 +62,11 @@ public class MessageFragment extends Fragment implements AdapterView.OnItemClick
         datalilst = new ArrayList<>();
         //查询数据
         datalilst = QueryData.getData(getContext());
+        System.out.println(datalilst+"涵盖爱爱"+datalilst.size());
         if (datalilst == null||datalilst.size()==0){
             message_listView.setVisibility(View.INVISIBLE);
             no_message.setVisibility(View.VISIBLE);
+            System.out.println("显示。。。");
         }else{
             no_message.setVisibility(View.INVISIBLE);
             message_listView.setVisibility(View.VISIBLE);
@@ -72,6 +75,7 @@ public class MessageFragment extends Fragment implements AdapterView.OnItemClick
         message_listView.setAdapter(myMessageBaseAdapter);
         //message_listView的item点击事件
         message_listView.setOnItemClickListener(this);
+        System.out.println("进入这里/////////////////");
     }
 
     @Override
@@ -157,9 +161,11 @@ public class MessageFragment extends Fragment implements AdapterView.OnItemClick
              uuid = datalilst.get(positon).getUserUuid();
              groupId = datalilst.get(positon).getGroupId();
              request_pro = datalilst.get(positon).getGroupPortrait();
-            System.out.println(request+"??"+uuid+" "+groupId+"?????");
-            SendAcceptUser sendAcceptUser = new SendAcceptUser(1,request,uuid,groupId);
+            System.out.println(request+"??"+uuid+" "+groupId+"?????"+datalilst.get(positon).getNoticeId());
+             noticeId = Long.parseLong(datalilst.get(positon).getNoticeId());
+            SendAcceptUser sendAcceptUser = new SendAcceptUser(1,request,uuid,groupId,noticeId);
             sendAcceptUser.start();
+            QueryData.updateAccept(HomeActivity.context,datalilst.get(positon).getNoticeId());
         }
     }
     @Override

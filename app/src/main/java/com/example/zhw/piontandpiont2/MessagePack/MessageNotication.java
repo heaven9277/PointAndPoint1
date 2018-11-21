@@ -9,6 +9,7 @@ import com.example.zhw.piontandpiont2.CreateActivity;
 import com.example.zhw.piontandpiont2.EditGroupActivity;
 import com.example.zhw.piontandpiont2.GroupInfoActivity;
 import com.example.zhw.piontandpiont2.GroupPositionActivity;
+import com.example.zhw.piontandpiont2.GroupUserInfoActivity;
 import com.example.zhw.piontandpiont2.HomeActivity;
 import com.example.zhw.piontandpiont2.MainActivity;
 import com.example.zhw.piontandpiont2.ManageGroupActivity;
@@ -109,6 +110,8 @@ public class MessageNotication {
                 break;
             case 15:
                 //查看群成员个人信息
+                new NotifyManagerGroup(text, GroupUserInfoActivity.userinfo_handler);
+                System.out.println("开始查看群成员个人信息的");
                 break;
             case 16:
                 //我
@@ -129,9 +132,9 @@ public class MessageNotication {
                 break;
             case 21:
                 //群内发送消息
-                //ChatMessageThread chatMessageThread = new ChatMessageThread(text, ChatActivity.getChat_handler());
-                //chatMessageThread.start();
-                //System.out.println("开始聊天内容的线程");
+                //                //ChatMessageThread chatMessageThread = new ChatMessageThread(text, ChatActivity.getChat_handler());
+                //                //chatMessageThread.start();
+                //                //System.out.println("开始聊天内容的线程");
                 break;
             case 22:
                 //消息推送
@@ -163,8 +166,10 @@ public class MessageNotication {
                     contentValues.put("groupId",notificationData.getGroupId());
                     contentValues.put("sendUuid",notificationData.getSendUuid());
                     contentValues.put("sendUserName",notificationData.getSendUserName());
+                    contentValues.put("noticeId",notificationData.getNoticeId());
                     db.insert("messageTable",null,contentValues);
                     System.out.println("插入数据库"+notificationData.getUserUuid()+""+notificationData.getNoticeContent()+""+notificationData.getGroupName());
+                    System.out.println("通知编号"+notificationData.getNoticeId());
                 }
                if (HomeActivity.isHomeActivity.equals("Homeactivity")){
                    new NotifyMessage(text,HomeActivity.message_handler);

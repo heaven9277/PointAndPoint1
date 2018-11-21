@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.zhw.piontandpiont2.ChatActivity;
+import com.example.zhw.piontandpiont2.HomeActivity;
 import com.example.zhw.piontandpiont2.R;
 import com.example.zhw.piontandpiont2.Util.Jsonpack;
 import com.example.zhw.piontandpiont2.Bean.LoginSuccessData;
@@ -23,12 +24,12 @@ import java.util.List;
 
 public class ChatFragment extends Fragment implements AdapterView.OnItemClickListener {
     ListView chat_listView;
-    public MyBaseAdapter myBaseAdapter;
+    public static MyBaseAdapter myBaseAdapter;
     public TextView no_group;//显示暂无群聊
     String data;
     String username;
     String TAG;
-    List<LoginSuccessData> datalilst;
+    public static List<LoginSuccessData> datalilst;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.chat_layout, container, false);
@@ -91,7 +92,7 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
         startActivity(chatActivity);
 
     }
-    public class MyBaseAdapter extends BaseAdapter{
+    public static class MyBaseAdapter extends BaseAdapter{
 
         @Override
         public int getCount() {
@@ -115,7 +116,7 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
             //展开布局，如何数量为零，则显示textview
             ViewHolder holder;
             if (view == null){
-                view = LayoutInflater.from(getContext()).inflate(R.layout.group_item,viewGroup,false);
+                view = LayoutInflater.from(HomeActivity.context).inflate(R.layout.group_item,viewGroup,false);
                 holder = new ViewHolder();
                 //进行实例化
                 holder.siv_icon = view.findViewById(R.id.siv_icon);
@@ -128,9 +129,8 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
             }
             LoginSuccessData loginSuccessData = datalilst.get(i);
             holder.siv_icon.setImageUrl(loginSuccessData.getGroupPortrait(),R.drawable.group003);
-
             holder.tv_title.setText(loginSuccessData.getGroupName());
-            if (loginSuccessData.getLastestGroupUser() == null || loginSuccessData.getLastestGroupUser().equals("null")){
+            if (loginSuccessData.getLastestGroupUser() == null || loginSuccessData.getLastestGroupUser().equals("")){
                 holder.tv_author.setText("");
             }else{
                 holder.tv_author.setText(loginSuccessData.getLastestGroupUser()+ ":"+loginSuccessData.getLastestGroupMessage());
@@ -140,11 +140,11 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
         }
     }
     //得到适配器
-    public MyBaseAdapter getMyBaseAdapter() {
+    public  static MyBaseAdapter getMyBaseAdapter() {
         return myBaseAdapter;
     }
 
-    class ViewHolder{
+   final static class ViewHolder{
         SmartImageView siv_icon;//头像
         TextView tv_title;//群名称
         TextView tv_author;//最新的发言人和内容

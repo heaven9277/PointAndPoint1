@@ -4,7 +4,7 @@ package com.example.zhw.piontandpiont2.Bean;
 //通知消息得到的数据bean
 //操作码23
 public class NotificationData {
-    private String userUuid,sendUuid,sendUserName,noticeContent,noticeTime,groupName,groupPortrait,status,groupId;
+    private String userUuid,sendUuid,sendUserName,noticeContent,noticeTime,groupName,groupPortrait,status,groupId,noticeId;
     public String getUserUuid() {
         return userUuid;
     }
@@ -75,5 +75,13 @@ public class NotificationData {
 
     public void setGroupId(String groupId) {
         this.groupId = groupId;
+    }
+
+    public String getNoticeId() {
+        return noticeId;
+    }
+
+    public void setNoticeId(String noticeId) {
+        this.noticeId = noticeId;
     }
 }

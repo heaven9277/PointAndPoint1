@@ -16,6 +16,7 @@ import com.example.zhw.piontandpiont2.Bean.MemberBean;
 import com.example.zhw.piontandpiont2.Bean.OutGroup;
 import com.example.zhw.piontandpiont2.Bean.PositionBean;
 import com.example.zhw.piontandpiont2.Bean.SeachData;
+import com.example.zhw.piontandpiont2.Bean.UserInfo;
 import com.example.zhw.piontandpiont2.Bean.UserLogin;
 import com.example.zhw.piontandpiont2.Bean.UserRegister;
 import com.google.gson.Gson;
@@ -95,17 +96,27 @@ public class Jsonpack {
     }
 
     public static String getUserPortrait(String string){
-        String userPortrait = getSignal(string).get("userPortrait").toString();
+        String userPortrait = getSignal(string).get("userPortrait").getAsString();
         return userPortrait;
     }
 
     public static String getUserName(String string){
-        String userName = getSignal(string).get("userName").toString();
+        String userName = getSignal(string).get("userName").getAsString();
         return userName;
     }
 
     public static String getUserSign(String string){
-        String userSign = getSignal(string).get("userSign").toString();
+        String userSign = getSignal(string).get("userSign").getAsString();
+        return userSign;
+    }
+
+    public static String getUserEmail(String string){
+        String userSign = getSignal(string).get("userEmail").getAsString();
+        return userSign;
+    }
+
+    public static String getUserPhone(String string){
+        String userSign = getSignal(string).get("userPhone").getAsString();
         return userSign;
     }
 
@@ -239,18 +250,38 @@ public class Jsonpack {
     /*
     返回接受成员请求json
      */
-    public static String getAccept(int accept,String requestUserUuid,String sendUserUuid,String groupId){
+    public static String getAccept(int accept,String requestUserUuid,String sendUserUuid,String groupId,long noticeId){
         AcceptUserBean acceptUserBean;
         String result;
         if (accept==1){
              result = "accept";
-             acceptUserBean = new AcceptUserBean(11,requestUserUuid,sendUserUuid,groupId,result);
+             acceptUserBean = new AcceptUserBean(11,requestUserUuid,sendUserUuid,groupId,result,noticeId);
         }else{
             result = "refuse";
-             acceptUserBean = new AcceptUserBean(12,requestUserUuid,sendUserUuid,groupId,result);
+             acceptUserBean = new AcceptUserBean(12,requestUserUuid,sendUserUuid,groupId,result,noticeId);
         }
         Gson gson = new Gson();
         String accept_json = gson.toJson(acceptUserBean);
         return accept_json;
+    }
+    /*
+    群成员用户详细资料
+    操作码为15
+     */
+    public static String getUserInfo(String uuid){
+        UserInfo userInfo = new UserInfo(15,uuid);
+        Gson gson = new Gson();
+        String userinfo_json = gson.toJson(userInfo);
+        return userinfo_json;
+    }
+    /*
+    退出登陆
+    操作码为17
+     */
+    public static String getOutLogin(String uuid){
+        UserInfo userInfo = new UserInfo(17,uuid);
+        Gson gson = new Gson();
+        String ouotlogin_json = gson.toJson(userInfo);
+        return ouotlogin_json;
     }
 }

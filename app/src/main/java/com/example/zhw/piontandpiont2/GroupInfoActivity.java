@@ -172,7 +172,14 @@ public class GroupInfoActivity extends AppCompatActivity implements View.OnClick
                     sendOutGroupThread.start();
                     System.out.println("群号？？？？"+uuid);
                 break;
-            case R.id.image_back: //群头像
+            case R.id.image_back: //返回
+                    Intent chatIntent = new Intent(this,ChatActivity.class);
+                    chatIntent.putExtra("groupName",ChatActivity.groupName);
+                    chatIntent.putExtra("uuid",ChatActivity.uuid);
+                    chatIntent.putExtra("GroupId",ChatActivity.groupId);
+                    chatIntent.putExtra("groupRole",ChatActivity.groupRole);
+                    startActivity(chatIntent);
+                    finish();
                 break;
             case R.id.manager_group: //管理群
                 if (groupRole.equals("0")){

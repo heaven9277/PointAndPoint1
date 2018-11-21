@@ -27,6 +27,7 @@ import com.example.zhw.piontandpiont2.Threadpack.SendFisrtDataThread;
 import com.example.zhw.piontandpiont2.Util.BDLocationUtils;
 import com.example.zhw.piontandpiont2.Util.BaseActivity;
 import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
+import com.example.zhw.piontandpiont2.Util.Jsonpack;
 import com.example.zhw.piontandpiont2.db.QueryData;
 
 import java.util.ArrayList;
@@ -60,7 +61,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
     public static Context context;
 
     public static String isHomeActivity;
-
+    public static ChatFragment.MyBaseAdapter myBaseAdapters;
     //定义一个handler进行消息接收
     private static Handler First_handler = new Handler(){
         @Override
@@ -72,7 +73,11 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
             switch (what){
                 case 7:
                     //获取成功
-                    sendDataChatFragemtn(data);
+                   System.out.println("收到首页数据。。。"+data);
+                   ChatFragment.datalilst = Jsonpack.getLoginSuccessData(data);
+                   //更新数据
+                   // myBaseAdapters = ChatFragment.getMyBaseAdapter();
+                    //myBaseAdapters.notifyDataSetChanged();
                     break;
                 case 8:
                     //获取失败
@@ -110,15 +115,12 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
             //  menuItem=item;
             switch (item.getItemId()) {
                 case R.id.navigation_chat:
-                    // mTextMessage.setText("");
                     viewPager.setCurrentItem(0);
                     return true;
                 case R.id.navigation_message:
-                    //  mTextMessage.setText("");
                     viewPager.setCurrentItem(1);
                     return true;
                 case R.id.navigation_user:
-                    //  mTextMessage.setText("");
                     viewPager.setCurrentItem(2);
                     return true;
             }
