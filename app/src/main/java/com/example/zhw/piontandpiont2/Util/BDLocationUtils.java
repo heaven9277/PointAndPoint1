@@ -39,12 +39,19 @@ public class BDLocationUtils extends AppCompatActivity {
         LocationClientOption option = new LocationClientOption();
         option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy
         );//可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
+        option.setAddrType("all");
         option.setCoorType("bd09ll");//可选，默认gcj02，设置返回的定位结果坐标系
+        //可选，设置是否需要地址信息，默认不需要
+        option.setIsNeedAddress(true);
+        //可选，设置是否需要地址描述
+        option.setIsNeedLocationDescribe(true);
+        //可选，设置是否需要设备方向结果
+        option.setNeedDeviceDirect(true);
+        option.setOpenGps(true); // 打开gps
+        option.setIgnoreKillProcess(false);
         int span = 15000;
         option.setScanSpan(span);//可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
         option.setIgnoreKillProcess(false);
-        option.setOpenGps(true); // 打开gps
-
         mLocationClient.setLocOption(option);
     }
 

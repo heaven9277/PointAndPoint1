@@ -66,6 +66,9 @@ public class GroupPositionActivity extends AppCompatActivity{
     private BitmapDescriptor mIconLocation;//自定义方向图标
     private boolean isFirst=true;//判断是否第一次进入地图
     MyLocationConfiguration.LocationMode locationMode;
+    private String user_adress;//用户的所在位置
+
+    GeoCoder geoCoder;// 创建地理编码检索实例
 
     public static List<String> lontitudeList,latitudeList,userPortarit;
     public int a;//获取第a个lontitudeList,latitudeList；
@@ -101,6 +104,7 @@ public class GroupPositionActivity extends AppCompatActivity{
         lv = findViewById(R.id.lv);
         mMapView =  findViewById(R.id.bmapView);
         tv_position=findViewById(R.id.tv_position);
+        geoCoder=GeoCoder.newInstance();
         HomeActivity.isHomeActivity="";
         ChatActivity.isChatActivity ="";
         initMyLoc();
@@ -135,7 +139,7 @@ public class GroupPositionActivity extends AppCompatActivity{
     //配置定位SDK参数
     private void initLocation() {
         LocationClientOption option = new LocationClientOption();
-        locationMode=MyLocationConfiguration.LocationMode.COMPASS;
+        locationMode=MyLocationConfiguration.LocationMode.NORMAL;
         option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy
         );//可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
         option.setAddrType("all");
@@ -149,7 +153,7 @@ public class GroupPositionActivity extends AppCompatActivity{
 
         option.setIgnoreKillProcess(false);
         option.setOpenGps(true); // 打开gps
-        int span = 10000;
+        int span = 1000;
         option.setScanSpan(span);//可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
         mLocationClient.setLocOption(option);
 
@@ -174,9 +178,11 @@ public class GroupPositionActivity extends AppCompatActivity{
 
     //实现BDLocationListener接口,BDLocationListener为结果监听接口，异步获取定位结果
     public class MyLocationListener implements BDLocationListener {
-
         @Override
         public void onReceiveLocation(BDLocation location) {
+            System.out.println("获取得到Address()："+location.getAddress());
+            //获取用户所在位置
+            user_adress=location.getAddrStr();
             // 构造定位数据
             // 此处设置开发者获取到的方向信息，顺时针0-360
             MyLocationData locData = new MyLocationData.Builder()
@@ -186,11 +192,13 @@ public class GroupPositionActivity extends AppCompatActivity{
                     .longitude(location.getLongitude()).build();
             // 设置定位数据
             mBaiduMap.setMyLocationData(locData);
-            MyLocationConfiguration configuration
-                    =new MyLocationConfiguration(locationMode,true,mIconLocation);
-            //设置定位图层配置信息，只有先允许定位图层后设置定位图层配置信息才会生效，参见 setMyLocationEnabled(boolean)
-                    mBaiduMap.setMyLocationConfigeration(configuration);
-            if (isFirst == true) {
+
+            if (isFirst) {
+                isFirst = false;
+                MyLocationConfiguration configuration
+                        =new MyLocationConfiguration(locationMode,true,mIconLocation);
+                //设置定位图层配置信息，只有先允许定位图层后设置定位图层配置信息才会生效，参见setMyLocationEnabled(boolean);
+                mBaiduMap.setMyLocationConfigeration(configuration);
                 System.out.println(location.getAddrStr()+"qqq");
                 LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
                 MapStatus.Builder builder = new MapStatus.Builder();
@@ -198,8 +206,7 @@ public class GroupPositionActivity extends AppCompatActivity{
                 System.out.println(location.getAddrStr());
                 mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
                 System.out.println("这是有啦");
-                isFirst = false;
-                tv_position.setText(location.getAddrStr());
+                tv_position.setText(user_adress+"\n位置描述："+location.getLocationDescribe());
             }
 
             //清除所有绘制点
@@ -217,7 +224,7 @@ public class GroupPositionActivity extends AppCompatActivity{
             }
             //在地图上批量添加
             mBaiduMap.addOverlays(options);
-            System.out.println(location.getLatitude() + "这是经度和纬度" + location.getLongitude());
+            System.out.println(location.getLatitude() + "这是经度，，，，纬度" + location.getLongitude());
 
         }
     }
@@ -232,6 +239,7 @@ public class GroupPositionActivity extends AppCompatActivity{
             ImageView icon = (ImageView) coupon_home_ad_item
                     .findViewById(R.id.coupon_ad_iv);// 拿个这行的icon 就可以设置图片
             header_ll.addView(coupon_home_ad_item);
+            System.out.println("这里是没有头像的！！！！");
         }else{
             for (int i = 0; i < userPortarit.size(); i++) {
                 View coupon_home_ad_item = LayoutInflater.from(this).inflate(
@@ -251,8 +259,6 @@ public class GroupPositionActivity extends AppCompatActivity{
                         builder.target(point);
                         mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
 
-                        // 创建地理编码检索实例
-                        GeoCoder geoCoder = GeoCoder.newInstance();
                         OnGetGeoCoderResultListener listener = new OnGetGeoCoderResultListener() {
                             // 反地理编码查询结果回调函数
                             @Override
@@ -286,9 +292,7 @@ public class GroupPositionActivity extends AppCompatActivity{
             }
         }
         lv.addHeaderView(headerView);// 通过listview的addHeaderView方法 将header添加到listview里面
-
         ArrayAdapter adapter = new ArrayAdapter(this, R.layout.map_home_item);
-
         lv.setAdapter(adapter);
     }
     public static void AddUserPosition(String data){
@@ -310,7 +314,24 @@ public class GroupPositionActivity extends AppCompatActivity{
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        geoCoder.destroy();
         mMapView.onDestroy();
+        mLocationClient.stop();
+        myOrientationListener.stop();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //在activity执行onResume时执行mMapView. onResume ()，实现地图生命周期管理
+        mMapView.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //在activity执行onPause时执行mMapView. onPause ()，实现地图生命周期管理
+        mMapView.onPause();
     }
 
     // 检查权限是否已经获取

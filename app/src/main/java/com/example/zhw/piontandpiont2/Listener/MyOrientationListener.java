@@ -10,7 +10,7 @@ import android.hardware.SensorManager;
 public class MyOrientationListener implements SensorEventListener{
 
     private SensorManager mSensorManager;
-    private Sensor mSensor;
+    private Sensor mSensor,aSensor,bSensor;
     private Context mContext;
     private float lastX;
     private OnOrientationListener mOnOrientationListener;
@@ -32,7 +32,6 @@ public class MyOrientationListener implements SensorEventListener{
         {
             //注册监听器
             mSensorManager.registerListener(this,mSensor,SensorManager.SENSOR_DELAY_UI);
-
         }
 
 
@@ -58,7 +57,6 @@ public class MyOrientationListener implements SensorEventListener{
             lastX=x;
 
         }
-
     }
     public void setOnOrientationListener(OnOrientationListener listener)
     {

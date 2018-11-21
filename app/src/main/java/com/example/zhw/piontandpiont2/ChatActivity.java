@@ -1,6 +1,5 @@
 package com.example.zhw.piontandpiont2;
 
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +7,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,13 +17,8 @@ import android.widget.Toast;
 
 import com.example.zhw.piontandpiont2.Adapter.ChatAdapter;
 import com.example.zhw.piontandpiont2.Bean.ChatMessageData;
-import com.example.zhw.piontandpiont2.Fragment.MessageFragment;
-import com.example.zhw.piontandpiont2.Threadpack.ChatThread;
 import com.example.zhw.piontandpiont2.Threadpack.SendChatMessageThread;
-import com.example.zhw.piontandpiont2.Bean.EnterGroupData;
-import com.example.zhw.piontandpiont2.Util.AndroidBug5497Workaround;
 import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
-import com.example.zhw.piontandpiont2.Util.PareJson;
 import com.example.zhw.piontandpiont2.db.QueryData;
 
 import java.util.ArrayList;
@@ -92,7 +85,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.acticity_chat);
-        //com.example.zhw.piontandpiont2.Util.AndroidBug5497Workaround.assistActivity(this);
+        com.example.zhw.piontandpiont2.Util.AndroidBug5497Workaround.assistActivity(this);
         initView();
     }
     private void initView() {
