@@ -68,8 +68,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     homeIntent.putExtra("data",text);
                     homeIntent.putExtra("TAG",TAG);
                     System.out.println(main_username+"用户名" + text);
-                    SharedPreferences.Editor editor = App.getEditor();
-                    editor.putString("data",text);
+                //    SharedPreferences.Editor editor = App.getEditor();
+                //    editor.putString("data",text);
                     context.startActivity(homeIntent);
                     break;
                 default:
