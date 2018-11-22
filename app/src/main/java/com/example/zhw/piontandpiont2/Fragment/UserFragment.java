@@ -11,11 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.zhw.piontandpiont2.HomeActivity;
-import com.example.zhw.piontandpiont2.MainActivity;
 import com.example.zhw.piontandpiont2.ProfileActivity;
 import com.example.zhw.piontandpiont2.R;
 import com.example.zhw.piontandpiont2.Threadpack.SendOutLoginThread;
-import com.loopj.android.image.SmartImage;
 import com.loopj.android.image.SmartImageView;
 
 
@@ -42,9 +40,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         lin_self_data = view.findViewById(R.id.lin_self_data);
         ll_photos = view.findViewById(R.id.ll_photos);
         about_our = view.findViewById(R.id.about_our);
-
         lin_self_data.setOnClickListener(this);
-
     }
     @Override
     public void onClick(View view) {
