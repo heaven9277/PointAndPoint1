@@ -5,12 +5,10 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
-import android.os.Looper;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -22,7 +20,7 @@ import android.widget.Toast;
 import com.example.zhw.piontandpiont2.Services.MyServer;
 import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
 import com.example.zhw.piontandpiont2.Util.Jsonpack;
-import com.example.zhw.piontandpiont2.Util.PareJson;
+import com.example.zhw.piontandpiont2.Util.PaseJson;
 import com.example.zhw.piontandpiont2.Video.CustomVideoView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -54,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             switch (what){
                 case 5:
                     //登陆失败
-                    Toast.makeText(context, PareJson.getJsonInfo(text),Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, PaseJson.getJsonInfo(text),Toast.LENGTH_LONG).show();
                     btn_login.setBackgroundResource(R.drawable.btnback);
                     break;
                 case 6:

@@ -159,8 +159,13 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(groupposition);
                     break;
             case R.id.btn_chat_message_send://发送
-                String chat_message_content;
-                if (et_chat_message.getText().toString().trim() != null){
+                String chat_message_content=et_chat_message.getText().toString();
+                if (chat_message_content.equals("")){
+                    System.out.println("221234hhdhhdddhdhdhdh");
+                    Toast.makeText(this,"内容不能为空",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    System.out.println(et_chat_message.getText().toString().trim()+"hhdhhdddhdhdhdh");
                     chat_message_content = et_chat_message.getText().toString().trim();
                     ChatMessageData chatMessageData = new ChatMessageData();
                     chatMessageData.setGroupMessage(chat_message_content);
@@ -173,8 +178,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                     //QueryData.InsertData(this,uuid,groupId,chat_message_content,MainActivity.user_h_name,MainActivity.user_portrait);
                     SendChatMessageThread sendChatMessageThread = new SendChatMessageThread(uuid,groupId,chat_message_content);
                     sendChatMessageThread.start();
-                }else{
-                    Toast.makeText(this,"内容不能为空",Toast.LENGTH_LONG).show();
+                    et_chat_message.setText("");
                 }
                 break;
             default :

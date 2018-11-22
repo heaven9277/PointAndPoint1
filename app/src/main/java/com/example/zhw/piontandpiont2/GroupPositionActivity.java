@@ -47,7 +47,7 @@ import com.example.zhw.piontandpiont2.Bean.GroupLocation;
 import com.example.zhw.piontandpiont2.Listener.MyOrientationListener;
 import com.example.zhw.piontandpiont2.Threadpack.PositionThread;
 import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
-import com.example.zhw.piontandpiont2.Util.PareJson;
+import com.example.zhw.piontandpiont2.Util.PaseJson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -297,7 +297,7 @@ public class GroupPositionActivity extends AppCompatActivity{
     }
     public static void AddUserPosition(String data){
         List<GroupLocation> groupLocations = new ArrayList<>();
-        groupLocations = PareJson.getGroupLocationData(data);
+        groupLocations = PaseJson.getGroupLocationData(data);
         System.out.println("接收到的位置信息aaaaaa"+data);
         userPortarit = new ArrayList<>();
         lontitudeList = new ArrayList<>();

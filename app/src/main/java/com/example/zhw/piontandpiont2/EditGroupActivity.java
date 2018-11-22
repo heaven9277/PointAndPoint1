@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.example.zhw.piontandpiont2.Threadpack.SendEditGroupThread;
 import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
-import com.example.zhw.piontandpiont2.Util.PareJson;
+import com.example.zhw.piontandpiont2.Util.PaseJson;
 import com.loopj.android.image.SmartImageView;
 
 /*
@@ -44,7 +44,7 @@ public class EditGroupActivity extends AppCompatActivity implements View.OnClick
             switch (what){
                 case 17:
                     //成功
-                    Toast.makeText(context, PareJson.getJsonInfo(data),Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, PaseJson.getJsonInfo(data),Toast.LENGTH_LONG).show();
                     Intent groupInfo = new Intent(context,GroupInfoActivity.class);
                     groupInfo.putExtra("groupId",groupId);
                     groupInfo.putExtra("uuid",uuid);
@@ -53,7 +53,7 @@ public class EditGroupActivity extends AppCompatActivity implements View.OnClick
                     break;
                 case 18:
                     //获取失败
-                    Toast.makeText(context,PareJson.getJsonInfo(data),Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, PaseJson.getJsonInfo(data),Toast.LENGTH_LONG).show();
                     break;
                 default:
                     break;

@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.example.zhw.piontandpiont2.Threadpack.SendApplicationThread;
 import com.example.zhw.piontandpiont2.Threadpack.SendSeachThread;
 import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
-import com.example.zhw.piontandpiont2.Util.PareJson;
+import com.example.zhw.piontandpiont2.Util.PaseJson;
 import com.example.zhw.piontandpiont2.Bean.SearchGroupDataBean;
 import com.example.zhw.piontandpiont2.Adapter.ListViewAdapterToSearchGroup;
 
@@ -55,11 +55,11 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                     break;
                 case 17:
                     //申请成功
-                    Toast.makeText(context,PareJson.getJsonInfo(data),Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, PaseJson.getJsonInfo(data),Toast.LENGTH_LONG).show();
                     break;
                 case 18:
                     //申请失败
-                    Toast.makeText(context,PareJson.getJsonInfo(data),Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, PaseJson.getJsonInfo(data),Toast.LENGTH_LONG).show();
                     break;
                 default:
                     break;
@@ -118,7 +118,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     //    得到json数据并解析，结果传给adapter,更新listview
     private static void updateListView(String data) {
-        list = PareJson.getSearchData(data);
+        list = PaseJson.getSearchData(data);
         System.out.println(list.size()+"  "+list);
         if (list.size()>0){
             listView.setAdapter(listViewAdapterToSearchGroup);

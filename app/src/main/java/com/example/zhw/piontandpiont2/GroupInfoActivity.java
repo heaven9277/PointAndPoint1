@@ -21,7 +21,7 @@ import com.example.zhw.piontandpiont2.Bean.GroupDataBean;
 import com.example.zhw.piontandpiont2.Threadpack.SendGroupInfoThread;
 import com.example.zhw.piontandpiont2.Threadpack.SendOutGroupThread;
 import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
-import com.example.zhw.piontandpiont2.Util.PareJson;
+import com.example.zhw.piontandpiont2.Util.PaseJson;
 import com.example.zhw.piontandpiont2.Util.SpaceItemDecoration;
 import com.loopj.android.image.SmartImageView;
 
@@ -78,7 +78,7 @@ public class GroupInfoActivity extends AppCompatActivity implements View.OnClick
                     break;
                 case 19:
                     //退出成功
-                    Toast.makeText(context,PareJson.getJsonInfo(data),Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, PaseJson.getJsonInfo(data),Toast.LENGTH_LONG).show();
                     HomeActivity.TEST="GroupOut";
                     Intent homeIntent = new Intent(context,HomeActivity.class);
                     homeIntent.putExtra("data",data);
@@ -90,7 +90,7 @@ public class GroupInfoActivity extends AppCompatActivity implements View.OnClick
                     //退出失败
                     data =datas;
                     initview(data);
-                    Toast.makeText(context,PareJson.getJsonInfo(data),Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, PaseJson.getJsonInfo(data),Toast.LENGTH_LONG).show();
                     break;
                 default:
                     break;
@@ -126,7 +126,7 @@ public class GroupInfoActivity extends AppCompatActivity implements View.OnClick
         //LinearLayoutManager 种 含有3 种布局样式  第一个就是最常用的 1.横向 , 2. 竖向,3.偏移
         recyclerView.setLayoutManager(ms);  //给RecyClerView 添加设置好的布局样式
         myRecyAdapter = new MyRecyAdapter();
-        recyclerView.addItemDecoration(new SpaceItemDecoration(20));
+        recyclerView.addItemDecoration(new SpaceItemDecoration(15));
         recyclerView.setAdapter(myRecyAdapter);
         //接收上一个activity的信息
         Intent intent = getIntent();
@@ -204,15 +204,15 @@ public class GroupInfoActivity extends AppCompatActivity implements View.OnClick
         return GroupInfoHandler;
     }
     public static void initview(String data){
-        group_name.setText(PareJson.getGroupData(data).getGroupName());
-        group_id.setText(PareJson.getGroupData(data).getGroupNumber());
-        group_desc.setText(PareJson.getGroupData(data).getGroupAnoun());
-        group_image.setImageUrl(PareJson.getGroupData(data).getGroupPortrait(),R.drawable.group003);
-        groupName = PareJson.getGroupData(data).getGroupName();
-        groupDsc = PareJson.getGroupData(data).getGroupAnoun();
-        groupPro = PareJson.getGroupData(data).getGroupPortrait();
+        group_name.setText(PaseJson.getGroupData(data).getGroupName());
+        group_id.setText(PaseJson.getGroupData(data).getGroupNumber());
+        group_desc.setText(PaseJson.getGroupData(data).getGroupAnoun());
+        group_image.setImageUrl(PaseJson.getGroupData(data).getGroupPortrait(),R.drawable.group003);
+        groupName = PaseJson.getGroupData(data).getGroupName();
+        groupDsc = PaseJson.getGroupData(data).getGroupAnoun();
+        groupPro = PaseJson.getGroupData(data).getGroupPortrait();
         System.out.println(groupName+" "+groupPro+"  "+groupDsc);
-        members = PareJson.getNumberList(data);
+        members = PaseJson.getMemberList(data);
         //提示更新
         myRecyAdapter.notifyDataSetChanged();
     }

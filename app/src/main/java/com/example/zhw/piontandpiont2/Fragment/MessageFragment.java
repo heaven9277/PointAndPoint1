@@ -127,14 +127,17 @@ public class MessageFragment extends Fragment implements AdapterView.OnItemClick
             } else {
                 viewHolder = (ViewHolder) view.getTag();
             }
-                NotificationData notificationData = datalilst.get(i);
+                NotificationData notificationData = datalilst.get(datalilst.size()-(i+1));
                 viewHolder.siv_icon.setImageUrl(notificationData.getGroupPortrait(),R.drawable.users);
                 viewHolder.tv_title.setText(notificationData.getSendUserName());
                 viewHolder.tv_content.setText("申请加入"+notificationData.getGroupName()+"群聊");
+                System.out.println(notificationData.getGroupPortrait()+"头像：");
                 System.out.println(notificationData.getSendUserName()+"  "+notificationData.getUserUuid()+" "+notificationData.getSendUuid());
                 if(notificationData.getStatus()!=null) {
+                    System.out.println(notificationData.getStatus()+"状态：");
                     if (notificationData.getStatus().equals("1")) {
                         viewHolder.btn.setText("已接受");
+                        viewHolder.btn.setBackgroundColor(Color.parseColor("#FFFFFF"));
                         viewHolder.btn.setTextColor(Color.parseColor("#45b97c"));
                         viewHolder.btn.setClickable(false);
                     } else {
@@ -159,12 +162,13 @@ public class MessageFragment extends Fragment implements AdapterView.OnItemClick
             btn1.setTextColor(Color.parseColor("#45b97c"));
             btn1.setClickable(false);
             //发送接受的请求
-             request = datalilst.get(positon).getSendUuid();
-             uuid = datalilst.get(positon).getUserUuid();
-             groupId = datalilst.get(positon).getGroupId();
-             request_pro = datalilst.get(positon).getGroupPortrait();
-            System.out.println(request+"??"+uuid+" "+groupId+"?????"+datalilst.get(positon).getNoticeId());
+             request = datalilst.get(datalilst.size()-(positon+1)).getSendUuid();
+             uuid = datalilst.get(datalilst.size()-(positon+1)).getUserUuid();
+             groupId = datalilst.get(datalilst.size()-(positon+1)).getGroupId();
+             request_pro = datalilst.get(datalilst.size()-(positon+1)).getGroupPortrait();
+            System.out.println(request+"??"+uuid+" "+groupId+"?????"+datalilst.get(datalilst.size()-(positon+1)).getNoticeId());
              noticeId = Long.parseLong(datalilst.get(positon).getNoticeId());
+             System.out.println(noticeId+"编号");
             SendAcceptUser sendAcceptUser = new SendAcceptUser(1,request,uuid,groupId,noticeId);
             sendAcceptUser.start();
             QueryData.updateAccept(HomeActivity.context,datalilst.get(positon).getNoticeId());
