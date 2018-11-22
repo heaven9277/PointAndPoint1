@@ -13,10 +13,12 @@ public class SendEditGroupThread extends Thread {
     String groupName;
     String groupId;
     String groupDesc;
-    public SendEditGroupThread(String groupName,String groupId,String groupDesc){
+    String groupPortrait;
+    public SendEditGroupThread(String groupName, String groupId, String groupDesc, String portrait){
         this.groupName = groupName;
         this.groupId = groupId;
         this.groupDesc = groupDesc;
+        this.groupPortrait = portrait;
     }
     @Override
     public void run() {
@@ -24,7 +26,7 @@ public class SendEditGroupThread extends Thread {
         wsManager = WsManager.getInstance();
         if (wsManager != null){
             webSocket = wsManager.getWebsocket();
-            String EditInfo = Jsonpack.getGroupEditInfo(groupName,groupId,groupDesc);
+            String EditInfo = Jsonpack.getGroupEditInfo(groupName,groupId,groupDesc,groupPortrait);
             ByteBuffer bf_chatMessage = BufferChange.getByteBuffer(EditInfo);
             webSocket.sendBinary(bf_chatMessage.array());
             System.out.println("发送修改群资料的请求数据");

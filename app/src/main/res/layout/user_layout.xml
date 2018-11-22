@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_title"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/siv_icon"
             android:layout_alignParentBottom="true"
             android:ellipsize="end"
@@ -47,7 +47,7 @@
             android:singleLine="true"
             android:text="个性签名：为你去看流星雨"
             android:textColor="#000"
-            android:textSize="12sp"/>
+            android:textSize="14sp"/>
 
     </RelativeLayout>
     <LinearLayout

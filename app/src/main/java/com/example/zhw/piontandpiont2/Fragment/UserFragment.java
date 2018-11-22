@@ -43,6 +43,10 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         ll_photos = view.findViewById(R.id.ll_photos);
         about_our = view.findViewById(R.id.about_our);
 
+        siv_icon.setImageUrl(MainActivity.user_portrait,R.drawable.avator_0003);
+        tv_title.setText(MainActivity.user_h_name);
+        tv_author.setText(MainActivity.sign);
+
         lin_self_data.setOnClickListener(this);
 
     }

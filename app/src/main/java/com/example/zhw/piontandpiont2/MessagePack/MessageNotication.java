@@ -18,10 +18,12 @@ import com.example.zhw.piontandpiont2.NotifyActivity.NotifyEditGroup;
 import com.example.zhw.piontandpiont2.NotifyActivity.NotifyManagerGroup;
 import com.example.zhw.piontandpiont2.NotifyActivity.NotifyMessage;
 import com.example.zhw.piontandpiont2.NotifyActivity.NotifyOutGroup;
+import com.example.zhw.piontandpiont2.ProfileActivity;
 import com.example.zhw.piontandpiont2.SearchActivity;
 import com.example.zhw.piontandpiont2.Threadpack.ChatDataThread;
 import com.example.zhw.piontandpiont2.Threadpack.CreateGroupActivityThread;
 import com.example.zhw.piontandpiont2.Threadpack.FirstActiviityThread;
+import com.example.zhw.piontandpiont2.Threadpack.GetResultChangeProfile;
 import com.example.zhw.piontandpiont2.Threadpack.GroupInfoThread;
 import com.example.zhw.piontandpiont2.Threadpack.MainThread;
 import com.example.zhw.piontandpiont2.Util.PareJson;
@@ -121,6 +123,8 @@ public class MessageNotication {
                 break;
             case 18:
                 //保存资料
+                GetResultChangeProfile getResultChangeProfile = new GetResultChangeProfile(text,ProfileActivity.getHandler());
+                getResultChangeProfile.start();
                 break;
             case 19:
                 //用户注销
