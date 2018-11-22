@@ -167,7 +167,7 @@ public class MessageFragment extends Fragment implements AdapterView.OnItemClick
              groupId = datalilst.get(datalilst.size()-(positon+1)).getGroupId();
              request_pro = datalilst.get(datalilst.size()-(positon+1)).getGroupPortrait();
             System.out.println(request+"??"+uuid+" "+groupId+"?????"+datalilst.get(datalilst.size()-(positon+1)).getNoticeId());
-             noticeId = Long.parseLong(datalilst.get(positon).getNoticeId());
+             noticeId = Long.parseLong(datalilst.get(datalilst.size()-(positon+1)).getNoticeId());
              System.out.println(noticeId+"编号");
             SendAcceptUser sendAcceptUser = new SendAcceptUser(1,request,uuid,groupId,noticeId);
             sendAcceptUser.start();
