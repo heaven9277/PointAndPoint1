@@ -34,6 +34,7 @@ import java.nio.ByteBuffer;
 import java.util.Objects;
 
 public class CreateActivity extends AppCompatActivity implements View.OnClickListener {
+       
     private Button button_create_invite, button_create;
     private SmartImageView gourp_manager_image;//群主头像
     private TextView tv_group_manager;

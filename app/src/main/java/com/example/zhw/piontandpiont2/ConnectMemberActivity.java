@@ -34,6 +34,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class ConnectMemberActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,MemberAdapter.InnerItemOnclitckListener {
+
     public ListView member_list;
     public static MemberAdapter menuAdapter;
     public static List<ConnectMemberBean> list;

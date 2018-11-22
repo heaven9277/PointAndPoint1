@@ -87,6 +87,8 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         com.example.zhw.piontandpiont2.Util.AndroidBug5497Workaround.assistActivity(this);
         initView();
     }
+
+
     private void initView() {
         DarkStatusBar.setDarkStatusIcon(this);
         ll= findViewById(R.id.ll);
