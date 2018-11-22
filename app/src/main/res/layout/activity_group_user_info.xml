@@ -44,6 +44,8 @@
            android:layout_below="@id/linear"
            android:layout_width="match_parent"
            android:layout_height="80dp"
+           android:layout_marginLeft="10dp"
+           android:layout_marginRight="10dp"
            android:layout_marginTop="10dp"
            android:orientation="horizontal"
            android:background="@drawable/linear_back">
@@ -82,6 +84,8 @@
            android:layout_width="match_parent"
            android:layout_height="50dp"
            android:layout_below="@+id/userInfo"
+           android:layout_marginLeft="10dp"
+           android:layout_marginRight="10dp"
            android:layout_marginTop="10dp"
            android:background="@drawable/linear_back"
            android:orientation="horizontal">
@@ -99,6 +103,8 @@
            android:layout_width="match_parent"
            android:layout_height="50dp"
            android:layout_below="@+id/self_wieter"
+           android:layout_marginLeft="10dp"
+           android:layout_marginRight="10dp"
            android:layout_marginTop="10dp"
            android:background="@drawable/linear_back"
            android:orientation="horizontal">

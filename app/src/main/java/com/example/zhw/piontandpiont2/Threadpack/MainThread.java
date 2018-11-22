@@ -4,7 +4,7 @@ package com.example.zhw.piontandpiont2.Threadpack;
 import android.os.Handler;
 import android.os.Message;
 
-import com.example.zhw.piontandpiont2.Util.PaseJson;
+import com.example.zhw.piontandpiont2.Util.PareJson;
 
 //通知首页的UI的线程
 public class MainThread extends Thread {
@@ -19,7 +19,7 @@ public class MainThread extends Thread {
         super.run();
         //向MianActivity发送数据
         Message msg = mhandler.obtainMessage();
-        String status = PaseJson.getJsonStatus(text);
+        String status = PareJson.getJsonStatus(text);
         System.out.println("请求状态："+status +"??"+status.equals("fail"));
         if (status.equals("fail")){
             msg.what = 5;

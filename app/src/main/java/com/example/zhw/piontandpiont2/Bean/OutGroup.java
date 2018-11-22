@@ -3,11 +3,11 @@ package com.example.zhw.piontandpiont2.Bean;
 public class OutGroup {
     public int operateId;
     public String groupId;
-    public String userUuid;
-    public OutGroup(int operateId,String groupId,String userUuid){
+    public String uuid;
+    public OutGroup(int operateId,String groupId,String uuid){
         this.operateId = operateId;
         this.groupId = groupId;
-        this.userUuid = userUuid;
+        this.uuid = uuid;
     }
 
     public int getOperateId() {
@@ -27,10 +27,10 @@ public class OutGroup {
     }
 
     public String getUuid() {
-        return userUuid;
+        return uuid;
     }
 
-    public void setUuid(String userUuid) {
-        this.userUuid = userUuid;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 }

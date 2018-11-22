@@ -19,9 +19,6 @@
         android:textSize="20sp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="15dp"
-        android:maxEms="4"
-        android:maxLines="1"
-        android:ellipsize="end"
         android:layout_toRightOf="@+id/user_pro"/>
     <Button
         android:id="@+id/del_Groupuser"

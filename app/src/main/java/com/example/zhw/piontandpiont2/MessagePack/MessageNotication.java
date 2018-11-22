@@ -24,7 +24,7 @@ import com.example.zhw.piontandpiont2.Threadpack.CreateGroupActivityThread;
 import com.example.zhw.piontandpiont2.Threadpack.FirstActiviityThread;
 import com.example.zhw.piontandpiont2.Threadpack.GroupInfoThread;
 import com.example.zhw.piontandpiont2.Threadpack.MainThread;
-import com.example.zhw.piontandpiont2.Util.PaseJson;
+import com.example.zhw.piontandpiont2.Util.PareJson;
 import com.example.zhw.piontandpiont2.db.MessageHelper;
 import com.example.zhw.piontandpiont2.db.QueryData;
 
@@ -154,7 +154,7 @@ public class MessageNotication {
                 ContentValues contentValues = new ContentValues();
                 System.out.println("开始插数据了");
                 //开始插数据
-                List<NotificationData> notificationDataList = PaseJson.getNotificationData(text);
+                List<NotificationData> notificationDataList = PareJson.getNotificationData(text);
                 for (int i=0;i<notificationDataList.size();i++){
                     NotificationData notificationData = notificationDataList.get(i);
                     contentValues.put("userUuid",notificationData.getUserUuid());

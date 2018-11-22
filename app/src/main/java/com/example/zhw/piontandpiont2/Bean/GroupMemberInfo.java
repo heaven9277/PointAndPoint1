@@ -1,7 +1,7 @@
 package com.example.zhw.piontandpiont2.Bean;
 
 public class GroupMemberInfo {
-    private String userName,userPortrait,userEmail,userSign,userPhone;
+    private String userName,userPortarit,userEmail,userSign,userPhone;
 
     public String getUserName() {
         return userName;
@@ -11,12 +11,12 @@ public class GroupMemberInfo {
         this.userName = userName;
     }
 
-    public String getUserPortrait() {
-        return userPortrait;
+    public String getUserPortarit() {
+        return userPortarit;
     }
 
-    public void setUserPortrait(String userPortrait) {
-        this.userPortrait = userPortrait;
+    public void setUserPortarit(String userPortarit) {
+        this.userPortarit = userPortarit;
     }
 
     public String getUserEmail() {

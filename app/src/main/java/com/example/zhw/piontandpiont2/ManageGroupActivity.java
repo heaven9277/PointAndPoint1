@@ -16,7 +16,7 @@ import com.example.zhw.piontandpiont2.Adapter.ManagerGourpAdapter;
 import com.example.zhw.piontandpiont2.Threadpack.SendManagerUserThread;
 import com.example.zhw.piontandpiont2.Bean.GroupDataBean;
 import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
-import com.example.zhw.piontandpiont2.Util.PaseJson;
+import com.example.zhw.piontandpiont2.Util.PareJson;
 
 import java.util.List;
 
@@ -25,12 +25,12 @@ import java.util.List;
  */
 
 public class ManageGroupActivity extends AppCompatActivity implements View.OnClickListener,ManagerGourpAdapter.InnerItemOnclitckListener,AdapterView.OnItemClickListener {
-    public static ListView group_user_lsit;
+    public ListView group_user_lsit;
     public ImageView image_back;//返回键
     public static String groupId;
     public static String uuid;
     public static String data;
-    public static List<GroupDataBean.MembersBean> members;//成员数组
+    public static List<GroupDataBean.MembersBean> mumbers;//成员数组
     public static ManagerGourpAdapter managerGourpAdapter;
     public static Context context;
     ///接收删除群成员的消息
@@ -44,17 +44,14 @@ public class ManageGroupActivity extends AppCompatActivity implements View.OnCli
             String datas = (String) msg.obj;
             switch (what){
                 case 1:
-                    Toast.makeText(context, PaseJson.getJsonInfo(datas),Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, PareJson.getJsonInfo(datas),Toast.LENGTH_LONG).show();
                     //提示更新
-                    members = PaseJson.getMemberListForDelete(datas);
-                    System.out.println(members +"dsfasfafadfsdfsdfsd成员数组");
-                    managerGourpAdapter = new ManagerGourpAdapter(context,members);
-                    group_user_lsit.setAdapter(managerGourpAdapter);
+                    mumbers = PareJson.getNumberList(datas);
                     managerGourpAdapter.notifyDataSetChanged();
                     break;
                 case 2:
                     //获取失败
-                    Toast.makeText(context, PaseJson.getJsonInfo(datas),Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, PareJson.getJsonInfo(datas),Toast.LENGTH_LONG).show();
                     break;
                 default:
                     break;
@@ -80,11 +77,11 @@ public class ManageGroupActivity extends AppCompatActivity implements View.OnCli
         data  = intent.getStringExtra("data");
         System.out.println(data==null +" "+data+"?????????????");
         if (data==null){
-            members = null;
+            mumbers = null;
         }else{
-            members = PaseJson.getMemberList(data);
+            mumbers = PareJson.getNumberList(data);
         }
-        managerGourpAdapter = new ManagerGourpAdapter(this, members);
+        managerGourpAdapter = new ManagerGourpAdapter(this,mumbers);
         managerGourpAdapter.setOnInnerItemOnClickListener(this);
         group_user_lsit.setAdapter(managerGourpAdapter);
         group_user_lsit.setOnItemClickListener(this);
@@ -112,8 +109,7 @@ public class ManageGroupActivity extends AppCompatActivity implements View.OnCli
             int position;
              position = (int) v.getTag();
              System.out.println("???????点击btn"+position);
-             String delUuid = members.get(position).getGroupUserUuid();
-
+             String delUuid = mumbers.get(position).getGroupUserUuid();
              if (delUuid.equals(uuid)){
                  Toast.makeText(this,"不能删除自己",Toast.LENGTH_LONG).show();
              }else{
