@@ -47,6 +47,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         tv_author.setText(MainActivity.sign);
         out_login.setOnClickListener(this);
         System.out.println("进入这里??????????????????????????????????????"+ HomeActivity.isHomeActivity);
+        System.out.println("?????"+ MainActivity.user_portrait);
     }
     @Override
     public void onClick(View view) {
@@ -62,5 +63,17 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 System.out.println("发送退出登陆");
                 break;
         }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        siv_icon.setImageUrl(MainActivity.user_portrait,R.drawable.avator_0003);
+        System.out.println("?????头像?"+MainActivity.user_portrait);
+    }
+    public static  void updateView(){
+        siv_icon.setImageUrl(MainActivity.user_portrait,R.drawable.avator_0003);
+        tv_title.setText(MainActivity.user_h_name);
+        tv_author.setText(MainActivity.sign);
+        System.out.println("?????头像?"+MainActivity.user_portrait+siv_icon);
     }
 }

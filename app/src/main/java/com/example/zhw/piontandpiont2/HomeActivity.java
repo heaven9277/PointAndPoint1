@@ -87,9 +87,12 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
                     MainActivity.sign = Jsonpack.getUserSign(data);
                     MainActivity.email = Jsonpack.getUserEmail(data);
                     MainActivity.phone = Jsonpack.getUserPhone(data);
-                    //userFragment.siv_icon.setImageUrl(MainActivity.user_portrait,R.drawable.users);
-                    //userFragment.tv_title.setText(MainActivity.user_h_name);
-                    //userFragment.tv_author.setText(MainActivity.sign);
+
+                    userFragment = new UserFragment();
+                    userFragment.siv_icon.setImageUrl(MainActivity.user_portrait,R.drawable.users);
+                    userFragment.tv_title.setText(MainActivity.user_h_name);
+                    userFragment.tv_author.setText(MainActivity.sign);
+                    userFragment.updateView();
                     myBaseAdapters = ChatFragment.getMyBaseAdapter();
                     myBaseAdapters.notifyDataSetChanged();
                     System.out.println("提示更新。。");
@@ -130,11 +133,11 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
             String data = (String) msg.obj;
             switch (what){
                 case 2:
-                    //推送失败
+                    //退出失败
                     Toast.makeText(context, ParseJson.getJsonInfo(data),Toast.LENGTH_SHORT).show();
                     break;
                 case 1:
-                    //推送成功
+                    //退出成功
                     System.out.println("接收到消息") ;
                     Toast.makeText(context, ParseJson.getJsonInfo(data),Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(context,MainActivity.class);
@@ -204,7 +207,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
         chatFragment = new ChatFragment();
         messageFragment = new MessageFragment();
         userFragment = new UserFragment();
-        System.out.println("实例化完毕。。。。。。。。。。。。。。");
         fragments = new ArrayList<>();
         //添加fragments到集合中
         fragments.add(chatFragment);
@@ -213,6 +215,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
         fragmentManager = getSupportFragmentManager();
 
         myBaseAdapters= chatFragment.getMyBaseAdapter();
+        myMessageBaseAdapter = messageFragment.getMyBaseAdapter();
         //为ViewPager设置适配器用于部署fragments
         viewPager.setAdapter(new FragAdapter(fragmentManager,fragments));
 

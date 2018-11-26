@@ -18,7 +18,7 @@
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/users"
+            android:src="@drawable/avator_0003"
             android:scaleType="centerCrop" />
         <TextView
             android:id="@+id/tv_title"

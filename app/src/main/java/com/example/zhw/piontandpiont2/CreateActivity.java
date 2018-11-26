@@ -24,7 +24,7 @@ import com.neovisionaries.ws.client.WebSocket;
 import java.nio.ByteBuffer;
 
 public class CreateActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button button_create_invite, button_create;
+    private Button button_create;
     private SmartImageView gourp_manager_image;//群主头像
     private TextView tv_group_manager;
     public ImageView create_image_back;//返回键
@@ -75,7 +75,6 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
     }
     private void intView() {
         DarkStatusBar.setDarkStatusIcon(this);
-        button_create_invite = findViewById(R.id.button_create_invite);
         button_create = findViewById(R.id.button_create);
         create_image_back = findViewById(R.id.create_image_back);//返回键
         gourp_manager_image = findViewById(R.id.gourp_manager_image);
@@ -85,7 +84,6 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
         group_hobby_edit = findViewById(R.id.group_hobby_edit);
         group_descript_deit = findViewById(R.id.group_descript_deit);
 
-        button_create_invite.setOnClickListener(this);
         button_create.setOnClickListener(this);
         create_image_back.setOnClickListener(this);
 
@@ -103,9 +101,6 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.button_create_invite:
-
-                break;
             case R.id.button_create:
                 //将数据发送给后台服务器
                 wsManager = WsManager.getInstance();
