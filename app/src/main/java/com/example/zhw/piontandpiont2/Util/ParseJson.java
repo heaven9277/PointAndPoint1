@@ -6,7 +6,6 @@ import com.example.zhw.piontandpiont2.Bean.EnterGroupData;
 import com.example.zhw.piontandpiont2.Bean.GroupDataBean;
 import com.example.zhw.piontandpiont2.Bean.GroupLocation;
 import com.example.zhw.piontandpiont2.Bean.GroupMemberInfo;
-import com.example.zhw.piontandpiont2.Bean.LocationBean;
 import com.example.zhw.piontandpiont2.Bean.MessageNotification;
 import com.example.zhw.piontandpiont2.Bean.NotificationData;
 import com.example.zhw.piontandpiont2.Bean.SearchGroupDataBean;
@@ -22,7 +21,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 //解析服务器发过来的数据
-public class PareJson {
+public class ParseJson {
     static Gson gson = new Gson();
     static JsonParser jsonParser = new JsonParser();
 
@@ -76,9 +75,18 @@ public class PareJson {
     }
 
     //仅获取群成员资料
-    public static List<GroupDataBean.MembersBean> getNumberList(String json) {
-        List<GroupDataBean.MembersBean> numbersBeanList = getGroupData(json).getMembers();
-        return numbersBeanList;
+    public static List<GroupDataBean.MembersBean> getMemberList(String json) {
+        List<GroupDataBean.MembersBean> membersBeanList = getGroupData(json).getMembers();
+        return membersBeanList;
+    }
+
+    //删除群成员后使用
+    public static List<GroupDataBean.MembersBean> getMemberListForDelete(String json){
+        JsonObject jsonObject = getJsonObject(json);
+        JsonArray jsonArray = jsonObject.getAsJsonArray("numbers");
+        List<GroupDataBean.MembersBean> membersBeanList = gson.fromJson(jsonArray, new TypeToken<List<GroupDataBean.MembersBean>>() {
+        }.getType());
+        return membersBeanList;
     }
 
     //搜索群获取数据
@@ -129,7 +137,6 @@ public class PareJson {
         }.getType());
         return messageNotificationList;
     }
-
 
     public static GroupMemberInfo getGroupMemberInfo(String string){
         JsonObject jsonObject = getJsonObject(string);

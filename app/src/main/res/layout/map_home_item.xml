@@ -11,12 +11,12 @@
     android:gravity="center"
     android:orientation="horizontal" >
 
-    <ImageView
+    <com.loopj.android.image.SmartImageView
         android:id="@+id/coupon_ad_iv"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_margin="5dp"
-        android:background="@drawable/users"
+        android:src="@drawable/users"
         android:scaleType="centerCrop" />
 
 

@@ -10,7 +10,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
-import android.os.Looper;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -22,7 +21,7 @@ import android.widget.Toast;
 import com.example.zhw.piontandpiont2.Services.MyServer;
 import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
 import com.example.zhw.piontandpiont2.Util.Jsonpack;
-import com.example.zhw.piontandpiont2.Util.PareJson;
+import com.example.zhw.piontandpiont2.Util.ParseJson;
 import com.example.zhw.piontandpiont2.Video.CustomVideoView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -43,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static String email;//邮箱
     public static String sign;//个性签名
     public static String phone;//电话号码
-
+    SharedPreferences share;
     private static Handler mHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -54,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             switch (what){
                 case 5:
                     //登陆失败
-                    Toast.makeText(context, PareJson.getJsonInfo(text),Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, ParseJson.getJsonInfo(text),Toast.LENGTH_LONG).show();
                     btn_login.setBackgroundResource(R.drawable.btnback);
                     break;
                 case 6:
@@ -108,6 +107,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //用于测试是否该Acitivity是否处于栈顶
         HomeActivity.isHomeActivity="";
         ChatActivity.isChatActivity ="";
+        share = App.getShared();
+        username.setText(share.getString("username",""));
+        userpasswd.setText(share.getString("userpasswd",""));
     }
 
     @Override
@@ -118,6 +120,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 main_username = username.getText().toString().trim();
                if (username.getText().toString().trim()!=null||userpasswd.getText().toString().trim()!=null){
                    myIBinder.sendData(username.getText().toString().trim(),userpasswd.getText().toString().trim());
+                   SharedPreferences.Editor editor = App.getEditor();
+                   editor.putString("username",username.getText().toString().trim());
+                   editor.putString("userpasswd",userpasswd.getText().toString().trim());
+                   editor.commit();
                }else {
                    Toast.makeText(this,"用户名和密码不能为空",Toast.LENGTH_LONG).show();
                }
@@ -147,7 +153,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             myIBinder = (MyServer.MyIBider) iBinder;
             System.out.println("服务成功绑定，等待操作");
-
             MyThread myThread = new MyThread();
             myThread.start();
         }

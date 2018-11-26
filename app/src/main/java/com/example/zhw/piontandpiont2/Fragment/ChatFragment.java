@@ -130,7 +130,8 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
             LoginSuccessData loginSuccessData = datalilst.get(i);
             holder.siv_icon.setImageUrl(loginSuccessData.getGroupPortrait(),R.drawable.group003);
             holder.tv_title.setText(loginSuccessData.getGroupName());
-            if (loginSuccessData.getLastestGroupUser() == null || loginSuccessData.getLastestGroupUser().equals("")){
+            if (loginSuccessData.getLastestGroupUser() == null || loginSuccessData.getLastestGroupUser().equals("")||
+                    loginSuccessData.getLastestGroupUser().equals("null")){
                 holder.tv_author.setText("");
             }else{
                 holder.tv_author.setText(loginSuccessData.getLastestGroupUser()+ ":"+loginSuccessData.getLastestGroupMessage());

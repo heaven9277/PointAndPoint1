@@ -40,6 +40,7 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".App"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -49,25 +50,29 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".HomeActivity"/>
+        <activity android:name=".HomeActivity" />
+
         <service android:name=".Services.MyServer" />
 
         <activity android:name=".ForgetPwActivity" />
-        <activity android:name=".ChatActivity"
-            android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".ApplicationActivity"/>
-        <activity android:name=".GroupPositionActivity"/>
-        <activity android:name=".SearchActivity"
-            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".ChatActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity android:name=".ApplicationActivity" />
+        <activity android:name=".GroupPositionActivity" />
+        <activity
+            android:name=".SearchActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".GroupInfoActivity" />
         <activity android:name=".ManageGroupActivity" />
         <activity android:name=".EditGroupActivity" />
-        <activity android:name=".GroupUserInfoActivity"/>
+        <activity android:name=".GroupUserInfoActivity" />
         <activity android:name=".UpdatePwActivity" />
-        <activity android:name=".CreateActivity"
+        <activity
+            android:name=".CreateActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ProfileActivity"/>
-        <activity android:name=".ConnectMemberActivity"/>
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".ConnectMemberActivity" />
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -80,9 +85,16 @@
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote" >
-        </service>
-
+            android:process=":remote"></service>
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.example.zhw.piontandpiont2.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
     </application>
 
 </manifest>

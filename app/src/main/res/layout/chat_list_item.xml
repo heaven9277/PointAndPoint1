@@ -37,12 +37,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:paddingRight="10dp"
-                android:paddingLeft="25dp"
+                android:paddingLeft="13dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:background="@drawable/left_chat"
                 android:text="赵大亮好帅！！！"
-                android:gravity="center"/>
+                android:gravity="left"/>
         </LinearLayout>
     </LinearLayout>
     <RelativeLayout
@@ -72,13 +72,13 @@
                 android:layout_below="@+id/tv_name_right"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="8dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="10dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="14dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:background="@drawable/right_chat"
                 android:text="智永好帅！！！"
-                android:gravity="center"/>
+                android:gravity="left"/>
         </RelativeLayout>
         <com.loopj.android.image.SmartImageView
             android:id="@+id/iv_headPhoto"

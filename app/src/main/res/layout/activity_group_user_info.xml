@@ -44,8 +44,6 @@
            android:layout_below="@id/linear"
            android:layout_width="match_parent"
            android:layout_height="80dp"
-           android:layout_marginLeft="10dp"
-           android:layout_marginRight="10dp"
            android:layout_marginTop="10dp"
            android:orientation="horizontal"
            android:background="@drawable/linear_back">
@@ -53,7 +51,7 @@
                android:id="@+id/user_image"
                android:layout_width="66dp"
                android:layout_height="66dp"
-               android:background="@drawable/users"
+               android:src="@drawable/users"
                android:layout_marginLeft="10dp"
                android:layout_marginTop="5dp"/>
            <RelativeLayout
@@ -84,8 +82,6 @@
            android:layout_width="match_parent"
            android:layout_height="50dp"
            android:layout_below="@+id/userInfo"
-           android:layout_marginLeft="10dp"
-           android:layout_marginRight="10dp"
            android:layout_marginTop="10dp"
            android:background="@drawable/linear_back"
            android:orientation="horizontal">
@@ -103,8 +99,6 @@
            android:layout_width="match_parent"
            android:layout_height="50dp"
            android:layout_below="@+id/self_wieter"
-           android:layout_marginLeft="10dp"
-           android:layout_marginRight="10dp"
            android:layout_marginTop="10dp"
            android:background="@drawable/linear_back"
            android:orientation="horizontal">

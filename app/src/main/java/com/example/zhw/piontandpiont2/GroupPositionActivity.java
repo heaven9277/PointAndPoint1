@@ -3,9 +3,8 @@ package com.example.zhw.piontandpiont2;
 
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -47,18 +46,19 @@ import com.example.zhw.piontandpiont2.Bean.GroupLocation;
 import com.example.zhw.piontandpiont2.Listener.MyOrientationListener;
 import com.example.zhw.piontandpiont2.Threadpack.PositionThread;
 import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
-import com.example.zhw.piontandpiont2.Util.PareJson;
+import com.example.zhw.piontandpiont2.Util.ParseJson;
+import com.loopj.android.image.SmartImageView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GroupPositionActivity extends AppCompatActivity{
-    private ListView lv;
-    private TextView tv_position;//显示位置信息
-    private View headerView;
-    private LinearLayout header_ll;
-    private MapView mMapView;
-    private BaiduMap mBaiduMap;
+    private static ListView lv;
+    private static TextView tv_position;//显示位置信息
+    private static View headerView;
+    private static LinearLayout header_ll;
+    private static MapView mMapView;
+    private static BaiduMap mBaiduMap;
     public LocationClient mLocationClient;
     public BDLocationListener myListener = new MyLocationListener();
     private MyOrientationListener myOrientationListener;//方向传感器与定位图标方向匹配操作
@@ -68,11 +68,11 @@ public class GroupPositionActivity extends AppCompatActivity{
     MyLocationConfiguration.LocationMode locationMode;
     private String user_adress;//用户的所在位置
 
-    GeoCoder geoCoder;// 创建地理编码检索实例
-
-    public static List<String> lontitudeList,latitudeList,userPortarit;
-    public int a;//获取第a个lontitudeList,latitudeList；
-
+    static GeoCoder geoCoder;// 创建地理编码检索实例
+    static Context context;
+    public static List<String> lontitudeList,latitudeList,userPortarit,userName;//存放群里用户的经度、纬度、头像、用户名
+    public static int a;//获取第a个lontitudeList,latitudeList；
+    public static String username;
     public static String groupId;
     public static Handler positionHandler = new Handler(){
         @Override
@@ -85,6 +85,8 @@ public class GroupPositionActivity extends AppCompatActivity{
                     //成功
                     AddUserPosition(data);
                     System.out.println("接收到的位置信息"+data);
+                    initheaderView();
+                    System.out.println("initheaderView();运行结束了了");
                     break;
                 case 2:
                     //失败
@@ -101,6 +103,8 @@ public class GroupPositionActivity extends AppCompatActivity{
         judgePermission();
         System.out.println("setView了啊");
         DarkStatusBar.setDarkStatusIcon(this);
+        context=this;
+        username=ChatActivity.uuid;
         lv = findViewById(R.id.lv);
         mMapView =  findViewById(R.id.bmapView);
         tv_position=findViewById(R.id.tv_position);
@@ -110,7 +114,6 @@ public class GroupPositionActivity extends AppCompatActivity{
         initMyLoc();
         initThread();
         initMap();
-        initheaderView();
     }
 
     private void initThread() {
@@ -194,19 +197,26 @@ public class GroupPositionActivity extends AppCompatActivity{
             mBaiduMap.setMyLocationData(locData);
 
             if (isFirst) {
-                isFirst = false;
+                System.out.println("1111111111111111");
                 MyLocationConfiguration configuration
-                        =new MyLocationConfiguration(locationMode,true,mIconLocation);
+                        = new MyLocationConfiguration(locationMode, true, mIconLocation);
                 //设置定位图层配置信息，只有先允许定位图层后设置定位图层配置信息才会生效，参见setMyLocationEnabled(boolean);
                 mBaiduMap.setMyLocationConfigeration(configuration);
-                System.out.println(location.getAddrStr()+"qqq");
+                System.out.println(location.getAddrStr() + "qqq");
                 LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
                 MapStatus.Builder builder = new MapStatus.Builder();
                 builder.target(ll).zoom(18.0f);
                 System.out.println(location.getAddrStr());
                 mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-                System.out.println("这是有啦");
-                tv_position.setText(user_adress+"\n位置描述："+location.getLocationDescribe());
+                System.out.println("这是有啦" + location.getLocationDescribe());
+                tv_position.setText(user_adress + "\n位置描述：" + location.getLocationDescribe());
+                if (location.getLocationDescribe().equals("")){
+
+                }else{
+                    isFirst = false;
+                    System.out.println("2222222222222222222222222222");
+                }
+
             }
 
             //清除所有绘制点
@@ -214,13 +224,25 @@ public class GroupPositionActivity extends AppCompatActivity{
             //绘制点
             List<OverlayOptions> options = new ArrayList<OverlayOptions>();
             //设置群内其他成员的坐标点，并绘制在地图上
-            for(int n=0;n<latitudeList.size();n++){
-                System.out.println("这是有进for循环里啦");
-                LatLng point = new LatLng(Double.parseDouble(latitudeList.get(n)), Double.parseDouble(lontitudeList.get(n)));
-                OverlayOptions option = new MarkerOptions()
-                        .position(point)
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.sign));
-                options.add(option);
+            if(latitudeList==null){
+
+            }else {
+                for(int n=0;n<latitudeList.size();n++) {
+                    System.out.println(username + "获取username");
+                    System.out.println(userName.get(n) + "获取userName.get(n)");
+                    System.out.println(n + "获取n是多少");
+                    if (username.equals(userName.get(n))) {
+                        //判断该用户的坐标点是否已绘制在地图上了
+                        System.out.println(n);
+                    } else {
+                        System.out.println("这是有进for循环里啦");
+                        LatLng point = new LatLng(Double.parseDouble(latitudeList.get(n)), Double.parseDouble(lontitudeList.get(n)));
+                        OverlayOptions option = new MarkerOptions()
+                                .position(point)
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.sign));
+                        options.add(option);
+                    }
+                }
             }
             //在地图上批量添加
             mBaiduMap.addOverlays(options);
@@ -229,12 +251,12 @@ public class GroupPositionActivity extends AppCompatActivity{
         }
     }
 
-    private void initheaderView() {
-        headerView = LayoutInflater.from(this).inflate(
+    private static void initheaderView() {
+        headerView = LayoutInflater.from(context).inflate(
                 R.layout.map_item_home_header, null);
         header_ll = (LinearLayout) headerView.findViewById(R.id.header_ll);
         if (userPortarit == null) {
-            View coupon_home_ad_item = LayoutInflater.from(this).inflate(
+            View coupon_home_ad_item = LayoutInflater.from(context).inflate(
                     R.layout.map_home_item, null);
             ImageView icon = (ImageView) coupon_home_ad_item
                     .findViewById(R.id.coupon_ad_iv);// 拿个这行的icon 就可以设置图片
@@ -242,13 +264,15 @@ public class GroupPositionActivity extends AppCompatActivity{
             System.out.println("这里是没有头像的！！！！");
         }else{
             for (int i = 0; i < userPortarit.size(); i++) {
-                View coupon_home_ad_item = LayoutInflater.from(this).inflate(
+                View coupon_home_ad_item = LayoutInflater.from(context).inflate(
                         R.layout.map_home_item, null);
                 String img_path = userPortarit.get(i);
-                Bitmap bmp = BitmapFactory.decodeFile(img_path);
-                ImageView icon = (ImageView) coupon_home_ad_item
+                System.out.println(userPortarit.get(i)+"3333333333333333333333");
+                //Bitmap bmp = BitmapFactory.decodeFile(img_path);
+                SmartImageView icon = (SmartImageView) coupon_home_ad_item
                         .findViewById(R.id.coupon_ad_iv);// 拿个这行的icon 就可以设置图片
-                    icon.setImageBitmap(bmp);
+               //     icon.setImageBitmap(bmp);
+                icon.setImageUrl(img_path,R.drawable.users);
                 a = i;
                 coupon_home_ad_item.setOnClickListener(new View.OnClickListener() {// 每个item的点击事件加在这里
                     @Override
@@ -292,24 +316,27 @@ public class GroupPositionActivity extends AppCompatActivity{
             }
         }
         lv.addHeaderView(headerView);// 通过listview的addHeaderView方法 将header添加到listview里面
-        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.map_home_item);
+        ArrayAdapter adapter = new ArrayAdapter(context, R.layout.map_home_item);
         lv.setAdapter(adapter);
     }
     public static void AddUserPosition(String data){
         List<GroupLocation> groupLocations = new ArrayList<>();
-        groupLocations = PareJson.getGroupLocationData(data);
+        groupLocations = ParseJson.getGroupLocationData(data);
         System.out.println("接收到的位置信息aaaaaa"+data);
+
         userPortarit = new ArrayList<>();
         lontitudeList = new ArrayList<>();
         latitudeList = new ArrayList<>();
-        System.out.println("数据"+groupLocations);
+        userName = new ArrayList<>();
+        System.out.println("数据"+groupLocations+"长度"+groupLocations.size());
         for(int i=0;i<groupLocations.size();i++){
             userPortarit.add(groupLocations.get(i).getUserPortrait());
             lontitudeList.add(groupLocations.get(i).getUserLocationLongitude());
             latitudeList.add(groupLocations.get(i).getUserLocationLatitude());
+            userName.add(groupLocations.get(i).getUserName());
             System.out.println(groupLocations.get(i).getUserPortrait()+"经度"+groupLocations.get(i).getUserLocationLongitude());
         }
-        System.out.println("获取得到的"+userPortarit);
+        System.out.println("获取得到的头像"+userPortarit);
     }
     @Override
     protected void onDestroy() {

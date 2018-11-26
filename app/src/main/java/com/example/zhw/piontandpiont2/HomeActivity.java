@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.zhw.piontandpiont2.Adapter.FragAdapter;
 import com.example.zhw.piontandpiont2.Fragment.ChatFragment;
@@ -28,6 +29,7 @@ import com.example.zhw.piontandpiont2.Util.BDLocationUtils;
 import com.example.zhw.piontandpiont2.Util.BaseActivity;
 import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
 import com.example.zhw.piontandpiont2.Util.Jsonpack;
+import com.example.zhw.piontandpiont2.Util.ParseJson;
 import com.example.zhw.piontandpiont2.db.QueryData;
 
 import java.util.ArrayList;
@@ -43,7 +45,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
     //声明四个导航对应fragment
     public static ChatFragment chatFragment;
     public static MessageFragment messageFragment;
-    UserFragment userFragment;
+    public static UserFragment userFragment;
     //声明ViewPager
     private ViewPager viewPager;
     FragmentManager fragmentManager;//声明fragment管理
@@ -55,7 +57,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
     RelativeLayout relativeLayout;
 
     boolean display=false;
-    public static ChatFragment.MyBaseAdapter myBaseAdapter;
+
     public static MessageFragment.MyMessageBaseAdapter myMessageBaseAdapter;
     public static String TEST =  "";
     public static Context context;
@@ -75,9 +77,22 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
                     //获取成功
                    System.out.println("收到首页数据。。。"+data);
                    ChatFragment.datalilst = Jsonpack.getLoginSuccessData(data);
+                  // System.out.println("获得数据。。"+ChatFragment.datalilst);
+
                    //更新数据
-                   // myBaseAdapters = ChatFragment.getMyBaseAdapter();
-                    //myBaseAdapters.notifyDataSetChanged();
+                    MainActivity.user_portrait = Jsonpack.getUserPortrait(data);
+                    System.out.println("头像。。。。。。。。。。。。。。。。："+MainActivity.user_portrait);
+                    System.out.println("是吗？？？？？？？？？？"+isHomeActivity);
+                    MainActivity.user_h_name = Jsonpack.getUserName(data);
+                    MainActivity.sign = Jsonpack.getUserSign(data);
+                    MainActivity.email = Jsonpack.getUserEmail(data);
+                    MainActivity.phone = Jsonpack.getUserPhone(data);
+                    //userFragment.siv_icon.setImageUrl(MainActivity.user_portrait,R.drawable.users);
+                    //userFragment.tv_title.setText(MainActivity.user_h_name);
+                    //userFragment.tv_author.setText(MainActivity.sign);
+                    myBaseAdapters = ChatFragment.getMyBaseAdapter();
+                    myBaseAdapters.notifyDataSetChanged();
+                    System.out.println("提示更新。。");
                     break;
                 case 8:
                     //获取失败
@@ -103,6 +118,27 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
                     myMessageBaseAdapter = MessageFragment.getMyBaseAdapter();
                     myMessageBaseAdapter.notifyDataSetChanged();
                     //推送成功
+                    break;
+            }
+        }
+    };
+    public static Handler outlogin_handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            int what = msg.what;
+            String data = (String) msg.obj;
+            switch (what){
+                case 2:
+                    //推送失败
+                    Toast.makeText(context, ParseJson.getJsonInfo(data),Toast.LENGTH_SHORT).show();
+                    break;
+                case 1:
+                    //推送成功
+                    System.out.println("接收到消息") ;
+                    Toast.makeText(context, ParseJson.getJsonInfo(data),Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context,MainActivity.class);
+                    context.startActivity(intent);
                     break;
             }
         }
@@ -151,10 +187,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
         TAG = intent.getStringExtra("TAG");
         user_portrait = MainActivity.user_portrait;
         user_h_name = MainActivity.user_h_name;
-        System.out.println("结兽皮"+data+"接收到的信息"+user_name);
+        System.out.println("结兽皮"+data+"接收到的信息"+user_name+"第一次登陆");
         context = this;
-        isHomeActivity="Homeactivity";
-        ChatActivity.isChatActivity="";
         initView();
         initListener();
         //发送数据给Fragment
@@ -170,7 +204,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
         chatFragment = new ChatFragment();
         messageFragment = new MessageFragment();
         userFragment = new UserFragment();
-
+        System.out.println("实例化完毕。。。。。。。。。。。。。。");
         fragments = new ArrayList<>();
         //添加fragments到集合中
         fragments.add(chatFragment);
@@ -178,9 +212,12 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
         fragments.add(userFragment);
         fragmentManager = getSupportFragmentManager();
 
-        myBaseAdapter= chatFragment.getMyBaseAdapter();
+        myBaseAdapters= chatFragment.getMyBaseAdapter();
         //为ViewPager设置适配器用于部署fragments
         viewPager.setAdapter(new FragAdapter(fragmentManager,fragments));
+
+        HomeActivity.isHomeActivity="Homeactivity";
+        ChatActivity.isChatActivity="";
     }
 
     private void initListener() {
@@ -288,9 +325,16 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
         if(id==2){
             viewPager.setCurrentItem(1);  //view2是viewPager中的第二个view，因此设置setCurrentItem（1）。
         }
-        //发送请求
-        //SendFisrtDataThread sendFisrtDataThread = new SendFisrtDataThread(user_name);
-        //sendFisrtDataThread.start();
+
+     /*   try {
+            Thread.sleep(5000);
+            //发送请求
+            SendFisrtDataThread sendFisrtDataThread = new SendFisrtDataThread(user_name);
+            sendFisrtDataThread.start();
+            System.out.println("睡眠5秒");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
     }
     @Override
     protected void onPause() {
@@ -308,11 +352,13 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
     @Override
     protected void onRestart() {
         super.onRestart();
+        HomeActivity.isHomeActivity="Homeactivity";
+        ChatActivity.isChatActivity="";
         //发送请求
         SendFisrtDataThread sendFisrtDataThread = new SendFisrtDataThread(user_name);
         sendFisrtDataThread.start();
-    }
 
+    }
     //得到一个handler
     public static Handler getFirst_handler(){
         return First_handler;

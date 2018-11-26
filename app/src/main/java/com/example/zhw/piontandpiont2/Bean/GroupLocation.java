@@ -4,7 +4,7 @@ package com.example.zhw.piontandpiont2.Bean;
 //操作码8
 public class GroupLocation {
 
-    private String userName,userPortrait,userLocationLongitude,userLocationLatitude,userLocationCorner,userLocationTime;
+    private String userName,userPortrait,userLocationLongitude,userLocationLatitude,userLocationTime;
 
     public String getUserName() {
         return userName;
@@ -20,10 +20,6 @@ public class GroupLocation {
 
     public String getUserLocationLatitude() {
         return userLocationLatitude;
-    }
-
-    public String getUserLocationCorner() {
-        return userLocationCorner;
     }
 
     public String getUserLocationTime() {

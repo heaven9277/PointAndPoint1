@@ -13,17 +13,14 @@ import com.example.zhw.piontandpiont2.Bean.SearchGroupDataBean;
 import com.example.zhw.piontandpiont2.SearchActivity;
 import com.loopj.android.image.SmartImageView;
 
-import java.util.List;
 
 public class ListViewAdapterToSearchGroup extends BaseAdapter implements View.OnClickListener {
-//    List<SearchGroupDataBean> searchGroupDataBeanList;
     Context context;
-    String avator, groupName, groupDescript;
+    String avator, groupName,groupId, groupDescript;
     SearchApplyButonCallBack searchApplyButonCallBack;
 
 
     public ListViewAdapterToSearchGroup(Context context, SearchApplyButonCallBack searchApplyButonCallBack) {
-//        this.searchGroupDataBeanList = list;
         this.context = context;
         this.searchApplyButonCallBack = searchApplyButonCallBack;
     }
@@ -31,10 +28,6 @@ public class ListViewAdapterToSearchGroup extends BaseAdapter implements View.On
 
     @Override
     public int getCount() {
-//        if (searchGroupDataBeanList==null){
-//            return 0;
-//        }
-        //System.out.println("??????????adapter????"+searchGroupDataBeanList+"dfdsf"+ SearchActivity.list);
         return SearchActivity.list.size();
     }
 
@@ -57,6 +50,7 @@ public class ListViewAdapterToSearchGroup extends BaseAdapter implements View.On
             viewHolder = new ViewHolder();
             viewHolder.groupPortrait = convertView.findViewById(R.id.search_avator);
             viewHolder.groupName = convertView.findViewById(R.id.search_group_name);
+            viewHolder.groupId = convertView.findViewById(R.id.search_groupId2);
             viewHolder.groupDescript = convertView.findViewById(R.id.search_group_descript);
             viewHolder.apply = convertView.findViewById(R.id.search_button_apply);
             convertView.setTag(viewHolder);
@@ -67,8 +61,10 @@ public class ListViewAdapterToSearchGroup extends BaseAdapter implements View.On
         avator = searchGroupDataBean.getGroupPortarit();
         groupDescript = searchGroupDataBean.getGroupDesc();
         groupName = searchGroupDataBean.getGroupName();
+        groupId = searchGroupDataBean.getGroupUuid();
         viewHolder.groupPortrait.setImageUrl(avator,R.drawable.group003);
         viewHolder.groupName.setText(groupName);
+        viewHolder.groupId.setText(groupId);
         viewHolder.groupDescript.setText(groupDescript);
         viewHolder.apply.setTag(position);
         viewHolder.apply.setOnClickListener(this);
@@ -82,11 +78,11 @@ public class ListViewAdapterToSearchGroup extends BaseAdapter implements View.On
 
     private class ViewHolder {
         SmartImageView groupPortrait;
-        TextView groupName, groupDescript;
+        TextView groupName,groupId, groupDescript;
         Button apply;
     }
 
-    public static interface SearchApplyButonCallBack {
+    public interface SearchApplyButonCallBack {
         public void buttonApplyClicked(View view);
     }
 

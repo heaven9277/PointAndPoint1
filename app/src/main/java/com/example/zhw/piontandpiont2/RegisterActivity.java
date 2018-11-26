@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import com.example.zhw.piontandpiont2.Networksockets.AdressHttp;
 import com.example.zhw.piontandpiont2.Networksockets.HttpUtil;
 import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
 import com.example.zhw.piontandpiont2.Util.Jsonpack;
+import com.example.zhw.piontandpiont2.Util.ParseJson;
 import com.example.zhw.piontandpiont2.Util.TeleVify;
 import com.example.zhw.piontandpiont2.Util.VifycationCode;
 import com.example.zhw.piontandpiont2.Video.CustomVideoView;
@@ -138,12 +140,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             String status = parseJSONWithGSON(responseData);
                             System.out.println(status);
                             if (status.equals("success")){
-                                //Toast.makeText(RegisterActivity.this,"用户注册成功",Toast.LENGTH_LONG).show();
+                                Looper.prepare();
+                                Toast.makeText(RegisterActivity.this, ParseJson.getJsonInfo(responseData),Toast.LENGTH_LONG).show();
+                                Looper.loop();
                                 //跳转到登陆页面
                                 Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
                                 startActivity(intent);
                             }else{
-                               // Toast.makeText(RegisterActivity.this,"用户注册失败",Toast.LENGTH_LONG).show();
+                                Looper.prepare();
+                               Toast.makeText(RegisterActivity.this, ParseJson.getJsonInfo(responseData),Toast.LENGTH_LONG).show();
+                                Looper.loop();
                             }
                             //显示UI界面，调用的showResponse方法
                             // showResponse(responseData.toString());

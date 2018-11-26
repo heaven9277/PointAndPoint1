@@ -14,7 +14,6 @@ import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
 import com.example.zhw.piontandpiont2.db.QueryData;
 import com.loopj.android.image.SmartImageView;
 
-
 public class ApplicationActivity extends BaseActivity implements View.OnClickListener {
     public ImageView message_image_back;
     private Button btn_accept,btn_decline;

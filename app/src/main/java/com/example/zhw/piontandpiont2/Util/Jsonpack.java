@@ -13,6 +13,7 @@ import com.example.zhw.piontandpiont2.Bean.LocationBean;
 import com.example.zhw.piontandpiont2.Bean.LoginSuccessData;
 import com.example.zhw.piontandpiont2.Bean.ManagerGroupUser;
 import com.example.zhw.piontandpiont2.Bean.MemberBean;
+import com.example.zhw.piontandpiont2.Bean.MyProfileToSend;
 import com.example.zhw.piontandpiont2.Bean.OutGroup;
 import com.example.zhw.piontandpiont2.Bean.PositionBean;
 import com.example.zhw.piontandpiont2.Bean.SeachData;
@@ -170,8 +171,8 @@ public class Jsonpack {
     /*
     修改群资料的son
      */
-    public static String getGroupEditInfo(String groupName,String groupId,String groupDesc){
-        EditGroupInfo editGroupInfo = new EditGroupInfo(7,groupName,groupId,groupDesc);
+    public static String getGroupEditInfo(String groupName, String groupId, String groupDesc,String groupPortrait) {
+        EditGroupInfo editGroupInfo = new EditGroupInfo(7, groupName, groupId, groupDesc,groupPortrait);
         Gson gson = new Gson();
         String editgroupinfo_json = gson.toJson(editGroupInfo);
         return editgroupinfo_json;
@@ -279,9 +280,20 @@ public class Jsonpack {
     操作码为17
      */
     public static String getOutLogin(String uuid){
-        UserInfo userInfo = new UserInfo(17,uuid);
+        UserInfo userInfo = new UserInfo(19,uuid);
         Gson gson = new Gson();
         String ouotlogin_json = gson.toJson(userInfo);
         return ouotlogin_json;
     }
+    /*
+    保存个人资料
+    操作码：18
+     */
+    public static String getSMyProfile(String uuid, String uuidPic, String userName, String userQianming, String userPhone, String userEmail) {
+        MyProfileToSend myProfileToSend = new MyProfileToSend(uuid, uuidPic, userName, userQianming, userPhone, userEmail);
+        Gson gson = new Gson();
+        String proJson = gson.toJson(myProfileToSend);
+        return proJson;
+    }
+
 }

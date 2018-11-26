@@ -18,13 +18,16 @@ import com.example.zhw.piontandpiont2.NotifyActivity.NotifyEditGroup;
 import com.example.zhw.piontandpiont2.NotifyActivity.NotifyManagerGroup;
 import com.example.zhw.piontandpiont2.NotifyActivity.NotifyMessage;
 import com.example.zhw.piontandpiont2.NotifyActivity.NotifyOutGroup;
+import com.example.zhw.piontandpiont2.ProfileActivity;
 import com.example.zhw.piontandpiont2.SearchActivity;
 import com.example.zhw.piontandpiont2.Threadpack.ChatDataThread;
 import com.example.zhw.piontandpiont2.Threadpack.CreateGroupActivityThread;
 import com.example.zhw.piontandpiont2.Threadpack.FirstActiviityThread;
+import com.example.zhw.piontandpiont2.Threadpack.GetResultChangeProfile;
 import com.example.zhw.piontandpiont2.Threadpack.GroupInfoThread;
 import com.example.zhw.piontandpiont2.Threadpack.MainThread;
-import com.example.zhw.piontandpiont2.Util.PareJson;
+import com.example.zhw.piontandpiont2.Threadpack.SendFisrtDataThread;
+import com.example.zhw.piontandpiont2.Util.ParseJson;
 import com.example.zhw.piontandpiont2.db.MessageHelper;
 import com.example.zhw.piontandpiont2.db.QueryData;
 
@@ -44,7 +47,7 @@ public class MessageNotication {
                 break;
             case 2:
                 //首页操作
-                FirstActiviityThread firstActiviityThread = new FirstActiviityThread(text, HomeActivity.getFirst_handler());
+                 FirstActiviityThread firstActiviityThread = new FirstActiviityThread(text, HomeActivity.getFirst_handler());
                 firstActiviityThread.start();
                 System.out.println("开始首页线程");
                 break;
@@ -93,6 +96,8 @@ public class MessageNotication {
                 break;
             case 11:
                 //接收用户加入群聊
+                SendFisrtDataThread sendFisrtDataThread = new SendFisrtDataThread(HomeActivity.user_name);
+                sendFisrtDataThread.start();
                 break;
             case 12:
                 //拒绝用户加入群聊
@@ -121,9 +126,12 @@ public class MessageNotication {
                 break;
             case 18:
                 //保存资料
+                GetResultChangeProfile getResultChangeProfile = new GetResultChangeProfile(text, ProfileActivity.getHandler());
+                getResultChangeProfile.start();
                 break;
             case 19:
                 //用户注销
+                new NotifyManagerGroup(text,HomeActivity.outlogin_handler);
                 break;
             case 20:
                 new NotifyOutGroup(text,GroupInfoActivity.getGroupInfoHandler());
@@ -154,7 +162,7 @@ public class MessageNotication {
                 ContentValues contentValues = new ContentValues();
                 System.out.println("开始插数据了");
                 //开始插数据
-                List<NotificationData> notificationDataList = PareJson.getNotificationData(text);
+                List<NotificationData> notificationDataList = ParseJson.getNotificationData(text);
                 for (int i=0;i<notificationDataList.size();i++){
                     NotificationData notificationData = notificationDataList.get(i);
                     contentValues.put("userUuid",notificationData.getUserUuid());
@@ -171,6 +179,8 @@ public class MessageNotication {
                     System.out.println("插入数据库"+notificationData.getUserUuid()+""+notificationData.getNoticeContent()+""+notificationData.getGroupName());
                     System.out.println("通知编号"+notificationData.getNoticeId());
                 }
+                System.out.println("运行到这里");
+                System.out.println("状态呢说的话"+HomeActivity.isHomeActivity);
                if (HomeActivity.isHomeActivity.equals("Homeactivity")){
                    new NotifyMessage(text,HomeActivity.message_handler);
                }

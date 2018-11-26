@@ -1,12 +1,11 @@
 package com.example.zhw.piontandpiont2;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zhw.piontandpiont2.Networksockets.AdressHttp;
@@ -26,7 +25,7 @@ public class UpdatePwActivity extends AppCompatActivity implements View.OnClickL
     public Button btn_updatepw;
     public EditText et_passwd,et_repasswd;
     String telphone;
-    public final String url = AdressHttp.getUrl()+"register/post"; //网址
+    public final String url = AdressHttp.getUrl()+"password/post"; //网址
     String update_passwd_json;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

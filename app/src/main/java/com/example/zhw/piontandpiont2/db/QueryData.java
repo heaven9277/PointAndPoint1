@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.zhw.piontandpiont2.Bean.ChatMessageData;
 import com.example.zhw.piontandpiont2.Bean.MessageNotification;
 import com.example.zhw.piontandpiont2.Bean.NotificationData;
-import com.example.zhw.piontandpiont2.Util.PareJson;
+import com.example.zhw.piontandpiont2.Util.ParseJson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,7 +110,7 @@ public class QueryData {
         ContentValues contentValues = new ContentValues();
         //从数据里面得到数据
         //得到外面的对象
-        List<MessageNotification> notificationList = PareJson.getMessagesNotificationData(text);
+        List<MessageNotification> notificationList = ParseJson.getMessagesNotificationData(text);
         for (int i=0;i<notificationList.size();i++){
             //得到里面的消息对象
             List<MessageNotification.MessagesBean> messagesBeans = notificationList.get(i).getMessages();

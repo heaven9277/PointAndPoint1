@@ -24,7 +24,7 @@ public class SendOutLoginThread extends Thread {
             System.out.println(outlogin);
             ByteBuffer bf_outlogin = BufferChange.getByteBuffer(outlogin);
             webSocket.sendBinary(bf_outlogin.array());
-            System.out.println("发送退出群的请求数据");
+            System.out.println("发送退出登陆的请求数据");
         }
     }
 }

@@ -17,7 +17,7 @@ public class TimeParese {
         if (d2 == null){
             return "";
         }
-        return sdf.format(d2).substring(12,18);
+        return sdf.format(d2).substring(12,17);
     }
 
 }

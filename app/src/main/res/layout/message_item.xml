@@ -13,7 +13,7 @@
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
-        android:background="@drawable/user001"
+        android:src="@drawable/user001"
         android:scaleType="centerCrop"/>
     <TextView
         android:id="@+id/tv_title"

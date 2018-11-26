@@ -2,20 +2,14 @@ package com.example.zhw.piontandpiont2;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,18 +17,13 @@ import com.example.zhw.piontandpiont2.Networksockets.WsManager;
 import com.example.zhw.piontandpiont2.Util.BufferChange;
 import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
 import com.example.zhw.piontandpiont2.Util.Jsonpack;
-import com.example.zhw.piontandpiont2.Util.PareJson;
+import com.example.zhw.piontandpiont2.Util.ParseJson;
 import com.loopj.android.image.SmartImageView;
 import com.neovisionaries.ws.client.WebSocket;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.nio.ByteBuffer;
-import java.util.Objects;
 
 public class CreateActivity extends AppCompatActivity implements View.OnClickListener {
-       
     private Button button_create_invite, button_create;
     private SmartImageView gourp_manager_image;//群主头像
     private TextView tv_group_manager;
@@ -62,7 +51,7 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
             switch (what){
                 case 9:
                     //获取成功
-                        Toast.makeText(context, PareJson.getJsonInfo(datas),Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, ParseJson.getJsonInfo(datas),Toast.LENGTH_LONG).show();
                         Intent homeAvtivity = new Intent(context,HomeActivity.class);
                         homeAvtivity.putExtra("data",datas);
 
@@ -71,7 +60,7 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
                     break;
                 case 10:
                     //获取失败
-                    Toast.makeText(context, PareJson.getJsonInfo(datas),Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, ParseJson.getJsonInfo(datas),Toast.LENGTH_LONG).show();
                     break;
                 default:
                     break;

@@ -70,7 +70,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="25dp"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/users"/>
+            android:src="@drawable/users"/>
         <TextView
             android:id="@+id/tv_group_manager"
             android:layout_width="wrap_content"
@@ -83,30 +83,6 @@
 
             />
     </RelativeLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="@string/invite_new_member"
-        android:textColor="#1C86EE"
-        app:layout_constraintBottom_toBottomOf="@id/topView"
-        app:layout_constraintEnd_toEndOf="@id/topView"
-        app:layout_constraintHorizontal_bias="0.25"
-        app:layout_constraintStart_toStartOf="@id/topView"
-        app:layout_constraintTop_toTopOf="@id/topView"
-        app:layout_constraintVertical_bias="0.95" />
-
-    <Button
-        android:id="@+id/button_create_invite"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/button_create_add"
-        app:layout_constraintBottom_toBottomOf="@id/topView"
-        app:layout_constraintEnd_toEndOf="@id/topView"
-        app:layout_constraintHorizontal_bias="0.25"
-        app:layout_constraintStart_toStartOf="@id/topView"
-        app:layout_constraintTop_toTopOf="@id/topView" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/group_name"
