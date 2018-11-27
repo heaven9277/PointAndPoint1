@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -52,7 +53,8 @@ import com.loopj.android.image.SmartImageView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GroupPositionActivity extends AppCompatActivity{
+public class GroupPositionActivity extends AppCompatActivity implements View.OnClickListener{
+    private Button back_icon;//返回按钮
     private static ListView lv;
     private static TextView tv_position;//显示位置信息
     private static View headerView;
@@ -68,8 +70,9 @@ public class GroupPositionActivity extends AppCompatActivity{
     MyLocationConfiguration.LocationMode locationMode;
     private String user_adress;//用户的所在位置
 
-    static GeoCoder geoCoder;// 创建地理编码检索实例
-    static Context context;
+   // public static View coupon_home_ad_item;
+    public static GeoCoder geoCoder;// 创建地理编码检索实例
+    public static Context context;
     public static List<String> lontitudeList,latitudeList,userPortarit,userName;//存放群里用户的经度、纬度、头像、用户名
     public static int a;//获取第a个lontitudeList,latitudeList；
     public static String username;
@@ -106,6 +109,8 @@ public class GroupPositionActivity extends AppCompatActivity{
         context=this;
         username=ChatActivity.uuid;
         lv = findViewById(R.id.lv);
+        back_icon=findViewById(R.id.back_icon);
+        back_icon.setOnClickListener(this);
         mMapView =  findViewById(R.id.bmapView);
         tv_position=findViewById(R.id.tv_position);
         geoCoder=GeoCoder.newInstance();
@@ -145,7 +150,7 @@ public class GroupPositionActivity extends AppCompatActivity{
         locationMode=MyLocationConfiguration.LocationMode.NORMAL;
         option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy
         );//可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
-        option.setAddrType("all");
+        //option.setAddrType("all");
         option.setCoorType("bd09ll");//可选，默认gcj02，设置返回的定位结果坐标系
         //可选，设置是否需要地址信息，默认不需要
         option.setIsNeedAddress(true);
@@ -179,11 +184,21 @@ public class GroupPositionActivity extends AppCompatActivity{
         myOrientationListener.start();
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.back_icon:
+                finish();
+                break;
+        }
+    }
+
     //实现BDLocationListener接口,BDLocationListener为结果监听接口，异步获取定位结果
     public class MyLocationListener implements BDLocationListener {
         @Override
         public void onReceiveLocation(BDLocation location) {
-            System.out.println("获取得到Address()："+location.getAddress());
+            System.out.println("获取得到weizhi信息："+location.getAddrStr());
+            System.out.println("获取得到经纬度："+location.getLatitude());
             //获取用户所在位置
             user_adress=location.getAddrStr();
             // 构造定位数据
@@ -211,7 +226,7 @@ public class GroupPositionActivity extends AppCompatActivity{
                 System.out.println("这是有啦" + location.getLocationDescribe());
                 tv_position.setText(user_adress + "\n位置描述：" + location.getLocationDescribe());
                 if (location.getLocationDescribe().equals("")){
-
+                    isFirst = false;
                 }else{
                     isFirst = false;
                     System.out.println("2222222222222222222222222222");
@@ -268,33 +283,30 @@ public class GroupPositionActivity extends AppCompatActivity{
                         R.layout.map_home_item, null);
                 String img_path = userPortarit.get(i);
                 System.out.println(userPortarit.get(i)+"3333333333333333333333");
-                //Bitmap bmp = BitmapFactory.decodeFile(img_path);
                 SmartImageView icon = (SmartImageView) coupon_home_ad_item
                         .findViewById(R.id.coupon_ad_iv);// 拿个这行的icon 就可以设置图片
-               //     icon.setImageBitmap(bmp);
                 icon.setImageUrl(img_path,R.drawable.users);
-                a = i;
+                coupon_home_ad_item.setTag(i);
                 coupon_home_ad_item.setOnClickListener(new View.OnClickListener() {// 每个item的点击事件加在这里
                     @Override
                     public void onClick(View v) {
+                        //获取头像所在的位置
+                        a=(Integer)v.getTag();
                         //当点击头像时定位头像所在的位置
                         LatLng point = new LatLng(Double.parseDouble(latitudeList.get(a)), Double.parseDouble(lontitudeList.get(a)));
                         MapStatus.Builder builder = new MapStatus.Builder();
                         builder.target(point);
                         mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-
                         OnGetGeoCoderResultListener listener = new OnGetGeoCoderResultListener() {
                             // 反地理编码查询结果回调函数
                             @Override
                             public void onGetReverseGeoCodeResult(ReverseGeoCodeResult result) {
                                 if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
                                     // 没有检测到结果
-
                                 }
                                 System.out.println("位置：" + result.getAddress());
-                                tv_position.setText(result.getAddress());
+                                tv_position.setText(result.getAddress()+"\n位置描述："+result.getSematicDescription());
                             }
-
                             // 地理编码查询结果回调函数
                             @Override
                             public void onGetGeoCodeResult(GeoCodeResult result) {
