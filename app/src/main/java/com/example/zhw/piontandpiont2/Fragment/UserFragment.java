@@ -77,3 +77,16 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         System.out.println("?????头像?"+MainActivity.user_portrait+siv_icon);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

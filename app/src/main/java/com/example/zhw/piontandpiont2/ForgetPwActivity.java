@@ -218,6 +218,7 @@ public class ForgetPwActivity extends AppCompatActivity implements View.OnClickL
                               UpdatePwActivity.class);
                         intent.putExtra("telphone",et_usertelphone.getText().toString().trim());
                         startActivity(intent);
+                        finish();
                     } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
                         Toast.makeText(getApplicationContext(), "正在获取验证码",
                                 Toast.LENGTH_SHORT).show();

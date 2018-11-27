@@ -147,9 +147,9 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(groupInfoActivity);
                     break;
             case R.id.chat_image_back:  //返回键
-                    Intent intent = new Intent(this,HomeActivity.class);
-                    intent.putExtra("data",HomeActivity.data);
-                    intent.putExtra("TAG",HomeActivity.TAG);
+//                    Intent intent = new Intent(this,HomeActivity.class);
+//                    intent.putExtra("data",HomeActivity.data);
+//                    intent.putExtra("TAG",HomeActivity.TAG);
                     System.out.print("点击返回....");
                     finish();
                     break;
@@ -194,4 +194,15 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         return chat_handler;
     }
 
+    @Override
+    protected void onNewIntent(Intent intent){
+        super.onNewIntent(intent);
+
+    }
+
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        chat_title.setText(groupName);
+    }
 }

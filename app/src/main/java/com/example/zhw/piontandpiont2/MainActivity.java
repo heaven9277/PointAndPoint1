@@ -134,13 +134,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //跳转到注册页面
                 Intent intentRegister = new Intent(this,RegisterActivity.class);
                 startActivity(intentRegister);
-                finish();
+
                 break;
             case R.id.forgetpasswd:
                 forgetpasswd.setTextColor(Color.parseColor("#09A3DC"));
                 Intent intentForget = new Intent(this,ForgetPwActivity.class);
                 startActivity(intentForget);
-                finish();
+
                 break;
             default:
                 break;

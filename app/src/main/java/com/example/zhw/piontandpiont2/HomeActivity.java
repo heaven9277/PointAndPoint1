@@ -88,12 +88,12 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
                     MainActivity.email = Jsonpack.getUserEmail(data);
                     MainActivity.phone = Jsonpack.getUserPhone(data);
 
-                    userFragment = new UserFragment();
-                    userFragment.siv_icon.setImageUrl(MainActivity.user_portrait,R.drawable.users);
-                    userFragment.tv_title.setText(MainActivity.user_h_name);
-                    userFragment.tv_author.setText(MainActivity.sign);
-                    userFragment.updateView();
-                    myBaseAdapters = ChatFragment.getMyBaseAdapter();
+                   // userFragment = new UserFragment();
+                   // userFragment.siv_icon.setImageUrl(MainActivity.user_portrait,R.drawable.users);
+                    //userFragment.tv_title.setText(MainActivity.user_h_name);
+                    //userFragment.tv_author.setText(MainActivity.sign);
+                   // userFragment.updateView();
+                    myBaseAdapters = chatFragment.getMyBaseAdapter();
                     myBaseAdapters.notifyDataSetChanged();
                     System.out.println("提示更新。。");
                     break;
@@ -365,6 +365,17 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
     //得到一个handler
     public static Handler getFirst_handler(){
         return First_handler;
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent){
+        super.onNewIntent(intent);
+        data = intent.getStringExtra("data");
+        TAG = intent.getStringExtra("TAG");
+        initView();
+        initListener();
+        //发送数据给Fragment
+        sendDataChatFragemtn(data);
     }
 
 }
