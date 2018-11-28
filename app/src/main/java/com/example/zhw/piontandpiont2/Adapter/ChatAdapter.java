@@ -70,7 +70,7 @@ public class ChatAdapter extends BaseAdapter {
             holder.left_ll.setVisibility(View.GONE);
             holder.right_rl.setVisibility(View.VISIBLE);
 
-            holder.ivicon_right.setImageUrl(chatMessageData.getUserPro(),R.drawable.users);
+            holder.ivicon_right.setImageUrl(chatMessageData.getUserPro(),Integer.parseInt(MainActivity.user_portrait));
             holder.tv_name_right.setText(chatMessageData.getUuid());
             holder.tv_content_right.setText(chatMessageData.getGroupMessage());
         }else{
