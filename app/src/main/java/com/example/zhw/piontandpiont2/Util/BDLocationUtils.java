@@ -51,7 +51,7 @@ public class BDLocationUtils extends AppCompatActivity {
         option.setNeedDeviceDirect(true);
         option.setOpenGps(true); // 打开gps
         option.setIgnoreKillProcess(false);
-        int span = 15000;
+        int span = 40000;
         option.setScanSpan(span);//可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
         option.setIgnoreKillProcess(false);
         mLocationClient.setLocOption(option);
