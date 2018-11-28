@@ -70,7 +70,6 @@ public class GroupPositionActivity extends AppCompatActivity implements View.OnC
     MyLocationConfiguration.LocationMode locationMode;
     private String user_adress;//用户的所在位置
 
-   // public static View coupon_home_ad_item;
     public static GeoCoder geoCoder;// 创建地理编码检索实例
     public static Context context;
     public static List<String> lontitudeList,latitudeList,userPortarit,userName;//存放群里用户的经度、纬度、头像、用户名
@@ -150,7 +149,7 @@ public class GroupPositionActivity extends AppCompatActivity implements View.OnC
         locationMode=MyLocationConfiguration.LocationMode.NORMAL;
         option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy
         );//可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
-        //option.setAddrType("all");
+        option.setAddrType("all");
         option.setCoorType("bd09ll");//可选，默认gcj02，设置返回的定位结果坐标系
         //可选，设置是否需要地址信息，默认不需要
         option.setIsNeedAddress(true);
@@ -225,12 +224,7 @@ public class GroupPositionActivity extends AppCompatActivity implements View.OnC
                 mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
                 System.out.println("这是有啦" + location.getLocationDescribe());
                 tv_position.setText(user_adress + "\n位置描述：" + location.getLocationDescribe());
-                if (location.getLocationDescribe().equals("")){
-                    isFirst = false;
-                }else{
-                    isFirst = false;
-                    System.out.println("2222222222222222222222222222");
-                }
+                isFirst = false;
 
             }
 

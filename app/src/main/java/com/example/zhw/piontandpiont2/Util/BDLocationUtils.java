@@ -7,8 +7,11 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.example.zhw.piontandpiont2.MainActivity;
 import com.example.zhw.piontandpiont2.Networksockets.WsManager;
 import com.neovisionaries.ws.client.WebSocket;
+
+import java.nio.ByteBuffer;
 
 public class BDLocationUtils extends AppCompatActivity {
     public LocationClient mLocationClient;
@@ -62,14 +65,14 @@ public class BDLocationUtils extends AppCompatActivity {
 
             System.out .println(location.getLatitude()+"这是经度和纬度"+location.getLongitude());
             //发送经纬度信息
-           /* wsManager = WsManager.getInstance();
+            wsManager = WsManager.getInstance();
             if (wsManager != null){
                 webSocket = wsManager.getWebsocket();
                 String locations = Jsonpack.getLocation(MainActivity.main_username,location.getLongitude(),location.getLatitude());
                 ByteBuffer bf_location = BufferChange.getByteBuffer(locations);
                 webSocket.sendBinary(bf_location.array());
                 System.out.println("发送位置的请求数据");
-            }*/
+            }
         }
     }
 
