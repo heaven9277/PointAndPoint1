@@ -57,7 +57,7 @@
         <activity android:name=".ForgetPwActivity" />
         <activity
             android:name=".ChatActivity"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ApplicationActivity" />
         <activity android:name=".GroupPositionActivity" />
         <activity
