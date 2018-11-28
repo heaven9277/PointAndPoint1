@@ -1,7 +1,9 @@
 package com.example.zhw.piontandpiont2.MessagePack;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import com.example.zhw.piontandpiont2.Bean.NotificationData;
 import com.example.zhw.piontandpiont2.ChatActivity;
 import com.example.zhw.piontandpiont2.ConnectMemberActivity;
@@ -163,23 +165,42 @@ public class MessageNotication {
                 SQLiteDatabase db = messageHelper.getWritableDatabase();
                 ContentValues contentValues = new ContentValues();
                 System.out.println("开始插数据了");
+                boolean isApplicaton=false;//判断用户是否已申请加入群聊。
                 //开始插数据
                 List<NotificationData> notificationDataList = ParseJson.getNotificationData(text);
                 for (int i=0;i<notificationDataList.size();i++){
                     NotificationData notificationData = notificationDataList.get(i);
-                    contentValues.put("userUuid",notificationData.getUserUuid());
-                    contentValues.put("noticeContent",notificationData.getNoticeContent());
-                    contentValues.put("noticeTime",notificationData.getNoticeTime());
-                    contentValues.put("groupName",notificationData.getGroupName());
-                    contentValues.put("groupPortrait",notificationData.getGroupPortrait());
-                    contentValues.put("groupStatus",notificationData.getStatus());
-                    contentValues.put("groupId",notificationData.getGroupId());
-                    contentValues.put("sendUuid",notificationData.getSendUuid());
-                    contentValues.put("sendUserName",notificationData.getSendUserName());
-                    contentValues.put("noticeId",notificationData.getNoticeId());
-                    db.insert("messageTable",null,contentValues);
-                    System.out.println("插入数据库"+notificationData.getUserUuid()+""+notificationData.getNoticeContent()+""+notificationData.getGroupName());
-                    System.out.println("通知编号"+notificationData.getNoticeId());
+                    Cursor cursor = db.query ("usertable",null,null,null,null,null,null);
+                    //判断游标是否为空
+                   cursor.moveToFirst();
+                    //遍历游标
+                    for(int n=0;n<cursor.getCount();n++) {
+                        cursor.move(n);
+                        //获得用户ID
+                        String userUuid = cursor.getString(1);
+                        //获得群名
+                        String groupName = cursor.getString(7);
+                        System.out.println(userUuid + "aaaaaaaaaa" + groupName + "mmmmmmm");
+                        if (notificationData.getUserUuid().equals(userUuid)&&notificationData.getGroupName().equals(groupName)){
+                            isApplicaton=true;
+                        }
+                    }
+                    if(isApplicaton==false){
+                        contentValues.put("userUuid",notificationData.getUserUuid());
+                        contentValues.put("noticeContent",notificationData.getNoticeContent());
+                        contentValues.put("noticeTime",notificationData.getNoticeTime());
+                        contentValues.put("groupName",notificationData.getGroupName());
+                        contentValues.put("groupPortrait",notificationData.getGroupPortrait());
+                        contentValues.put("groupStatus",notificationData.getStatus());
+                        contentValues.put("groupId",notificationData.getGroupId());
+                        contentValues.put("sendUuid",notificationData.getSendUuid());
+                        contentValues.put("sendUserName",notificationData.getSendUserName());
+                        contentValues.put("noticeId",notificationData.getNoticeId());
+                        db.insert("messageTable",null,contentValues);
+                        System.out.println("插入数据库"+notificationData.getUserUuid()+""+notificationData.getNoticeContent()+""+notificationData.getGroupName());
+                        System.out.println("通知编号"+notificationData.getNoticeId());
+                    }
+                    isApplicaton=false;
                 }
                 System.out.println("运行到这里");
                 System.out.println("状态呢说的话"+HomeActivity.isHomeActivity);

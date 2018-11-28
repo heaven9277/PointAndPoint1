@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.zhw.piontandpiont2.Adapter.ChatAdapter;
 import com.example.zhw.piontandpiont2.Bean.ChatMessageData;
+import com.example.zhw.piontandpiont2.Listener.KeyboardChangeListener;
 import com.example.zhw.piontandpiont2.Threadpack.SendChatMessageThread;
 import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
 import com.example.zhw.piontandpiont2.db.QueryData;
@@ -24,7 +25,7 @@ import com.example.zhw.piontandpiont2.db.QueryData;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatActivity extends AppCompatActivity implements View.OnClickListener{
+public class ChatActivity extends AppCompatActivity implements View.OnClickListener, KeyboardChangeListener.KeyBoardListener{
     private Button btn,home_add;//群资料
     public Button bt_chat_add;//加号
     public Button btn_chat_message_send;//发送按钮
@@ -47,6 +48,9 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     public static String data;
     public static Context context;
     public static List<ChatMessageData> chatMessageDataList;
+
+    //监听键盘是否收起
+    private KeyboardChangeListener mKeyboardChangeListener;
 
     public static String isChatActivity;
     //定义一个handler进行消息接收
@@ -84,7 +88,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acticity_chat);
-       // com.example.zhw.piontandpiont2.Util.AndroidBug5497Workaround.assistActivity(this);
+        com.example.zhw.piontandpiont2.Util.AndroidBug5497Workaround.assistActivity(this);
         initView();
     }
     private void initView() {
@@ -127,6 +131,10 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
 
         group_user_position.setOnClickListener(this);
         group_user_connection.setOnClickListener(this);
+
+        //设置键盘的监听事件
+        mKeyboardChangeListener = new KeyboardChangeListener(this);
+        mKeyboardChangeListener.setKeyBoardListener(this);
     }
     @Override
     public void onClick(View v) {
@@ -147,9 +155,9 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(groupInfoActivity);
                     break;
             case R.id.chat_image_back:  //返回键
-//                    Intent intent = new Intent(this,HomeActivity.class);
-//                    intent.putExtra("data",HomeActivity.data);
-//                    intent.putExtra("TAG",HomeActivity.TAG);
+                    Intent intent = new Intent(this,HomeActivity.class);
+                    intent.putExtra("data",HomeActivity.data);
+                    intent.putExtra("TAG",HomeActivity.TAG);
                     System.out.print("点击返回....");
                     finish();
                     break;
@@ -190,19 +198,18 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+    //键盘的监听事件
+    @Override
+    public void onKeyboardChange(boolean isShow, int keyboardHeight) {
+        if(isShow){
+            ll.setVisibility(ll.GONE);
+        }else{
+           // ll.setVisibility(ll.VISIBLE);
+        }
+    }
+
     public static Handler getChat_handler(){
         return chat_handler;
     }
 
-    @Override
-    protected void onNewIntent(Intent intent){
-        super.onNewIntent(intent);
-
-    }
-
-    @Override
-    protected void onRestart(){
-        super.onRestart();
-        chat_title.setText(groupName);
-    }
 }
