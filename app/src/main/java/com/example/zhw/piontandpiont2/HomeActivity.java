@@ -64,8 +64,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
 
     public static String isHomeActivity;
     public static ChatFragment.MyBaseAdapter myBaseAdapters;
-    public static ChatFragment.MyBaseAdapter myChatAdapter;
-    public static MessageFragment.MyMessageBaseAdapter myMessageAdapter;
     //定义一个handler进行消息接收
     private static Handler First_handler = new Handler(){
         @Override
@@ -116,6 +114,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
                     //推送成功
                     System.out.println("接收到消息") ;
                     MessageFragment.datalilst = QueryData.getData(context);
+                   // myMessageBaseAdapter = MessageFragment.getMyBaseAdapter();
+                    //myMessageBaseAdapter.notifyDataSetChanged();
+                    //推送成功
                     break;
             }
         }
@@ -213,6 +214,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
         myMessageBaseAdapter = messageFragment.getMyBaseAdapter();
         //为ViewPager设置适配器用于部署fragments
         viewPager.setAdapter(new FragAdapter(fragmentManager,fragments));
+
+
     }
     private void initListener() {
         menuItem1=navigation.getMenu().findItem(R.id.navigation_chat);
@@ -353,6 +356,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
         //发送请求
         SendFisrtDataThread sendFisrtDataThread = new SendFisrtDataThread(user_name);
         sendFisrtDataThread.start();
+
     }
     //得到一个handler
     public static Handler getFirst_handler(){

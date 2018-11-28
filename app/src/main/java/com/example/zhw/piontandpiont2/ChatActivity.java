@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -145,6 +146,10 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                     ll.setVisibility(ll.GONE);
                 else
                     ll.setVisibility(ll.VISIBLE);
+                InputMethodManager imm = (InputMethodManager) ChatActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                // 隐藏软键盘
+                imm.hideSoftInputFromWindow(ChatActivity.this.getWindow().getDecorView().getWindowToken(), 0);
+
                 break;
             case R.id.home_add: ///群资料
 

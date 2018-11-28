@@ -76,6 +76,10 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
 
         //listView的item的点击事件
         chat_listView.setOnItemClickListener(this);
+
+        HomeActivity.isHomeActivity="Homeactivity";
+        ChatActivity.isChatActivity="";
+
     }
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
