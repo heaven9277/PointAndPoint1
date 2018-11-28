@@ -78,7 +78,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
                    System.out.println("收到首页数据。。。"+data);
                    ChatFragment.datalilst = Jsonpack.getLoginSuccessData(data);
                   // System.out.println("获得数据。。"+ChatFragment.datalilst);
-
+                    myBaseAdapters = ChatFragment.getMyBaseAdapter();
+                    myBaseAdapters.notifyDataSetChanged();
+                    System.out.println("提示更新。。");
                    //更新数据
                     MainActivity.user_portrait = Jsonpack.getUserPortrait(data);
                     System.out.println("头像。。。。。。。。。。。。。。。。："+MainActivity.user_portrait);
@@ -87,15 +89,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
                     MainActivity.sign = Jsonpack.getUserSign(data);
                     MainActivity.email = Jsonpack.getUserEmail(data);
                     MainActivity.phone = Jsonpack.getUserPhone(data);
-
-                    userFragment = new UserFragment();
-                    userFragment.siv_icon.setImageUrl(MainActivity.user_portrait,R.drawable.users);
-                    userFragment.tv_title.setText(MainActivity.user_h_name);
-                    userFragment.tv_author.setText(MainActivity.sign);
-                    userFragment.updateView();
-                    myBaseAdapters = ChatFragment.getMyBaseAdapter();
-                    myBaseAdapters.notifyDataSetChanged();
-                    System.out.println("提示更新。。");
                     break;
                 case 8:
                     //获取失败
@@ -118,8 +111,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
                 case 23:
                     System.out.println("接收到消息") ;
                     MessageFragment.datalilst = QueryData.getData(context);
-                    myMessageBaseAdapter = MessageFragment.getMyBaseAdapter();
-                    myMessageBaseAdapter.notifyDataSetChanged();
+                   // myMessageBaseAdapter = MessageFragment.getMyBaseAdapter();
+                    //myMessageBaseAdapter.notifyDataSetChanged();
                     //推送成功
                     break;
             }
@@ -219,8 +212,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
         //为ViewPager设置适配器用于部署fragments
         viewPager.setAdapter(new FragAdapter(fragmentManager,fragments));
 
-        HomeActivity.isHomeActivity="Homeactivity";
-        ChatActivity.isChatActivity="";
+
     }
 
     private void initListener() {
@@ -355,8 +347,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
     @Override
     protected void onRestart() {
         super.onRestart();
-        HomeActivity.isHomeActivity="Homeactivity";
-        ChatActivity.isChatActivity="";
         //发送请求
         SendFisrtDataThread sendFisrtDataThread = new SendFisrtDataThread(user_name);
         sendFisrtDataThread.start();
