@@ -64,6 +64,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
 
     public static String isHomeActivity;
     public static ChatFragment.MyBaseAdapter myBaseAdapters;
+    public static ChatFragment.MyBaseAdapter myChatAdapter;
+    public static MessageFragment.MyMessageBaseAdapter myMessageAdapter;
     //定义一个handler进行消息接收
     private static Handler First_handler = new Handler(){
         @Override
@@ -77,7 +79,11 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
                     //获取成功
                    System.out.println("收到首页数据。。。"+data);
                    ChatFragment.datalilst = Jsonpack.getLoginSuccessData(data);
-                  // System.out.println("获得数据。。"+ChatFragment.datalilst);
+                   System.out.println("获得数据。。"+ChatFragment.datalilst);
+                    myBaseAdapters =ChatFragment.getMyBaseAdapter();
+                    System.out.println("你哈皮"+myBaseAdapters);
+                    myBaseAdapters.notifyDataSetChanged();
+                    System.out.println("提示更新。。");
 
                    //更新数据
                     MainActivity.user_portrait = Jsonpack.getUserPortrait(data);
@@ -87,15 +93,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
                     MainActivity.sign = Jsonpack.getUserSign(data);
                     MainActivity.email = Jsonpack.getUserEmail(data);
                     MainActivity.phone = Jsonpack.getUserPhone(data);
-
-                   // userFragment = new UserFragment();
-                   // userFragment.siv_icon.setImageUrl(MainActivity.user_portrait,R.drawable.users);
-                    //userFragment.tv_title.setText(MainActivity.user_h_name);
-                    //userFragment.tv_author.setText(MainActivity.sign);
-                   // userFragment.updateView();
-                    myBaseAdapters = chatFragment.getMyBaseAdapter();
-                    myBaseAdapters.notifyDataSetChanged();
-                    System.out.println("提示更新。。");
                     break;
                 case 8:
                     //获取失败
@@ -116,11 +113,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
                     //推送失败
                     break;
                 case 23:
+                    //推送成功
                     System.out.println("接收到消息") ;
                     MessageFragment.datalilst = QueryData.getData(context);
-                    myMessageBaseAdapter = MessageFragment.getMyBaseAdapter();
-                    myMessageBaseAdapter.notifyDataSetChanged();
-                    //推送成功
                     break;
             }
         }
@@ -218,11 +213,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
         myMessageBaseAdapter = messageFragment.getMyBaseAdapter();
         //为ViewPager设置适配器用于部署fragments
         viewPager.setAdapter(new FragAdapter(fragmentManager,fragments));
-
-        HomeActivity.isHomeActivity="Homeactivity";
-        ChatActivity.isChatActivity="";
     }
-
     private void initListener() {
         menuItem1=navigation.getMenu().findItem(R.id.navigation_chat);
         menuItem2=navigation.getMenu().findItem(R.id.navigation_message);
@@ -328,7 +319,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
         if(id==2){
             viewPager.setCurrentItem(1);  //view2是viewPager中的第二个view，因此设置setCurrentItem（1）。
         }
-
      /*   try {
             Thread.sleep(5000);
             //发送请求
@@ -355,12 +345,14 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
     @Override
     protected void onRestart() {
         super.onRestart();
-        HomeActivity.isHomeActivity="Homeactivity";
-        ChatActivity.isChatActivity="";
+        //chatFragment = new ChatFragment();
+      //  messageFragment = new MessageFragment();
+       // userFragment = new UserFragment();
+        //HomeActivity.isHomeActivity="Homeactivity";
+        //ChatActivity.isChatActivity="";
         //发送请求
         SendFisrtDataThread sendFisrtDataThread = new SendFisrtDataThread(user_name);
         sendFisrtDataThread.start();
-
     }
     //得到一个handler
     public static Handler getFirst_handler(){
