@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.zhw.piontandpiont2.ApplicationActivity;
 import com.example.zhw.piontandpiont2.Bean.NotificationData;
+import com.example.zhw.piontandpiont2.ChatActivity;
 import com.example.zhw.piontandpiont2.HomeActivity;
 import com.example.zhw.piontandpiont2.R;
 import com.example.zhw.piontandpiont2.Threadpack.SendAcceptUser;
@@ -48,7 +49,6 @@ public class MessageFragment extends Fragment implements AdapterView.OnItemClick
         initMessageView(view);
         return view;
     }
-
     private void initMessageView(View view) {
         message_listView = view.findViewById(R.id.message_list);
         no_message=view.findViewById(R.id.no_message);
@@ -76,8 +76,10 @@ public class MessageFragment extends Fragment implements AdapterView.OnItemClick
         message_listView.setAdapter(myMessageBaseAdapter);
         //message_listView的item点击事件
         message_listView.setOnItemClickListener(this);
-    }
 
+        HomeActivity.isHomeActivity="Homeactivity";
+        ChatActivity.isChatActivity="";
+    }
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Intent applicationActivity = new Intent(getContext(), ApplicationActivity.class);

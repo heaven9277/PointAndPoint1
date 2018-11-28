@@ -89,6 +89,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acticity_chat);
+        com.example.zhw.piontandpiont2.Util.AndroidBug5497Workaround.assistActivity(this);
         initView();
     }
     private void initView() {
@@ -215,4 +216,5 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     public static Handler getChat_handler(){
         return chat_handler;
     }
+
 }

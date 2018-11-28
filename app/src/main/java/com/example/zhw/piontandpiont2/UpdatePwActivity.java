@@ -78,6 +78,7 @@ public class UpdatePwActivity extends AppCompatActivity implements View.OnClickL
                                 //跳转到登陆页面
                                 Intent intent = new Intent(UpdatePwActivity.this,MainActivity.class);
                                 startActivity(intent);
+                                finish();
                             }else{
                                 // Toast.makeText(RegisterActivity.this,"用户注册失败",Toast.LENGTH_LONG).show();
                             }

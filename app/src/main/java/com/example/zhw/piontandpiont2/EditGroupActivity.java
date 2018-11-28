@@ -50,7 +50,7 @@ public class EditGroupActivity extends AppCompatActivity implements View.OnClick
     public SmartImageView gourp_pro;//群头像
     public Button btn_saveEdit;//保存修改
     public String group_pro;//头像
-    public String groupName;
+    public static String groupName;
     public String groupDesc;//群公告
     public static String groupId;
     public static Context context;
@@ -77,9 +77,10 @@ public class EditGroupActivity extends AppCompatActivity implements View.OnClick
                     //成功
                     Toast.makeText(context, ParseJson.getJsonInfo(data),Toast.LENGTH_LONG).show();
                     Intent groupInfo = new Intent(context,GroupInfoActivity.class);
-                    groupInfo.putExtra("groupId",groupId);
-                    groupInfo.putExtra("uuid",uuid);
-                    groupInfo.putExtra("groupRole",groupRole);
+                    groupInfo.putExtra("groupName",groupName);
+//                    groupInfo.putExtra("groupId",groupId);
+//                    groupInfo.putExtra("uuid",uuid);
+//                    groupInfo.putExtra("groupRole",groupRole);
                     context.startActivity(groupInfo);
                     break;
                 case 18:
@@ -137,11 +138,11 @@ public class EditGroupActivity extends AppCompatActivity implements View.OnClick
         int id = view.getId();
         switch (id){
             case R.id.image_back:  ///返回键
-                Intent groupInfoActivity = new Intent(this,GroupInfoActivity.class);
-                groupInfoActivity.putExtra("groupId",groupId);
-                groupInfoActivity.putExtra("uuid",uuid);
-                groupInfoActivity.putExtra("groupRole",groupRole);
-                startActivity(groupInfoActivity);
+//                Intent groupInfoActivity = new Intent(this,GroupInfoActivity.class);
+//                groupInfoActivity.putExtra("groupId",groupId);
+//                groupInfoActivity.putExtra("uuid",uuid);
+//                groupInfoActivity.putExtra("groupRole",groupRole);
+//                startActivity(groupInfoActivity);
                 finish();
                 break;
             case R.id.btn_saveEdit: //保存修改
@@ -242,6 +243,7 @@ public class EditGroupActivity extends AppCompatActivity implements View.OnClick
 //        }
 //        byte[] data2 = Base64.decode(portraitData, Base64.DEFAULT);
         LogUtil.e("群头像字符串", portraitData);
+        groupName = group_name.getText().toString().trim();
         SendEditGroupThread sendEditGroupThread = new SendEditGroupThread(group_name.getText().toString().trim(),groupId,group_desc.getText().toString().trim(),portraitData);
         sendEditGroupThread.start();
     }

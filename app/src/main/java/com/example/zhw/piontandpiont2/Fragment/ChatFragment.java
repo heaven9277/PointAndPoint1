@@ -23,9 +23,9 @@ import java.util.List;
 
 
 public class ChatFragment extends Fragment implements AdapterView.OnItemClickListener {
-    ListView chat_listView;
+    public static ListView chat_listView;
     public static MyBaseAdapter myBaseAdapter;
-    public TextView no_group;//显示暂无群聊
+    public static TextView no_group;//显示暂无群聊
     String data;
     String username;
     String TAG;
@@ -100,6 +100,15 @@ public class ChatFragment extends Fragment implements AdapterView.OnItemClickLis
 
         @Override
         public int getCount() {
+
+            if (datalilst == null||datalilst.size()==0){
+                chat_listView.setVisibility(View.INVISIBLE);
+                no_group.setVisibility(View.VISIBLE);
+                return 0;
+            }
+            no_group.setVisibility(View.INVISIBLE);
+            chat_listView.setVisibility(View.VISIBLE);
+            System.out.println(datalilst.size()+"！！！！！！！！！！！！！");
             return datalilst.size();
         }
 

@@ -77,10 +77,12 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
                     //获取成功
                    System.out.println("收到首页数据。。。"+data);
                    ChatFragment.datalilst = Jsonpack.getLoginSuccessData(data);
-                  // System.out.println("获得数据。。"+ChatFragment.datalilst);
-                    myBaseAdapters = ChatFragment.getMyBaseAdapter();
+                   System.out.println("获得数据。。"+ChatFragment.datalilst);
+                    myBaseAdapters =ChatFragment.getMyBaseAdapter();
+                    System.out.println("你哈皮"+myBaseAdapters);
                     myBaseAdapters.notifyDataSetChanged();
                     System.out.println("提示更新。。");
+
                    //更新数据
                     MainActivity.user_portrait = Jsonpack.getUserPortrait(data);
                     System.out.println("头像。。。。。。。。。。。。。。。。："+MainActivity.user_portrait);
@@ -109,6 +111,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
                     //推送失败
                     break;
                 case 23:
+                    //推送成功
                     System.out.println("接收到消息") ;
                     MessageFragment.datalilst = QueryData.getData(context);
                    // myMessageBaseAdapter = MessageFragment.getMyBaseAdapter();
@@ -214,7 +217,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
 
 
     }
-
     private void initListener() {
         menuItem1=navigation.getMenu().findItem(R.id.navigation_chat);
         menuItem2=navigation.getMenu().findItem(R.id.navigation_message);
@@ -320,7 +322,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
         if(id==2){
             viewPager.setCurrentItem(1);  //view2是viewPager中的第二个view，因此设置setCurrentItem（1）。
         }
-
      /*   try {
             Thread.sleep(5000);
             //发送请求
@@ -347,6 +348,11 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
     @Override
     protected void onRestart() {
         super.onRestart();
+        //chatFragment = new ChatFragment();
+      //  messageFragment = new MessageFragment();
+       // userFragment = new UserFragment();
+        //HomeActivity.isHomeActivity="Homeactivity";
+        //ChatActivity.isChatActivity="";
         //发送请求
         SendFisrtDataThread sendFisrtDataThread = new SendFisrtDataThread(user_name);
         sendFisrtDataThread.start();
@@ -355,6 +361,17 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
     //得到一个handler
     public static Handler getFirst_handler(){
         return First_handler;
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent){
+        super.onNewIntent(intent);
+        data = intent.getStringExtra("data");
+        TAG = intent.getStringExtra("TAG");
+        initView();
+        initListener();
+        //发送数据给Fragment
+        sendDataChatFragemtn(data);
     }
 
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -13,7 +14,10 @@ import com.example.zhw.piontandpiont2.Bean.ChatMessageData;
 import com.example.zhw.piontandpiont2.ChatActivity;
 import com.example.zhw.piontandpiont2.MainActivity;
 import com.example.zhw.piontandpiont2.R;
+import com.example.zhw.piontandpiont2.Bean.EnterGroupData;
 import com.loopj.android.image.SmartImageView;
+
+import java.util.List;
 
 public class ChatAdapter extends BaseAdapter {
     public Context context;
@@ -66,7 +70,7 @@ public class ChatAdapter extends BaseAdapter {
             holder.left_ll.setVisibility(View.GONE);
             holder.right_rl.setVisibility(View.VISIBLE);
 
-            holder.ivicon_right.setImageUrl(chatMessageData.getUserPro(),R.drawable.avator_0001);
+            holder.ivicon_right.setImageUrl(chatMessageData.getUserPro(),R.drawable.users);
             holder.tv_name_right.setText(chatMessageData.getUuid());
             holder.tv_content_right.setText(chatMessageData.getGroupMessage());
         }else{

@@ -84,7 +84,6 @@ public class GroupInfoActivity extends AppCompatActivity implements View.OnClick
                     homeIntent.putExtra("data",data);
                     homeIntent.putExtra("TAG",CreateActivity.TAG);
                     context.startActivity(homeIntent);
-
                      break;
                 case  20:
                     //退出失败
@@ -173,12 +172,12 @@ public class GroupInfoActivity extends AppCompatActivity implements View.OnClick
                     System.out.println("群号？？？？"+uuid+"用户"+groupId);
                 break;
             case R.id.image_back: //返回
-                    Intent chatIntent = new Intent(this,ChatActivity.class);
-                    chatIntent.putExtra("groupName",ChatActivity.groupName);
-                    chatIntent.putExtra("uuid",ChatActivity.uuid);
-                    chatIntent.putExtra("GroupId",ChatActivity.groupId);
-                    chatIntent.putExtra("groupRole",ChatActivity.groupRole);
-                    startActivity(chatIntent);
+//                    Intent chatIntent = new Intent(this,ChatActivity.class);
+//                    chatIntent.putExtra("groupName",ChatActivity.groupName);
+//                    chatIntent.putExtra("uuid",ChatActivity.uuid);
+//                    chatIntent.putExtra("GroupId",ChatActivity.groupId);
+//                    chatIntent.putExtra("groupRole",ChatActivity.groupRole);
+//                    startActivity(chatIntent);
                     finish();
                 break;
             case R.id.manager_group: //管理群
@@ -215,5 +214,13 @@ public class GroupInfoActivity extends AppCompatActivity implements View.OnClick
         members = ParseJson.getMemberList(data);
         //提示更新
         myRecyAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent){
+        super.onNewIntent(intent);
+        ChatActivity.groupName = intent.getStringExtra("groupName");
+        SendGroupInfoThread sendGroupInfoThread = new SendGroupInfoThread(groupId);
+        sendGroupInfoThread.start();
     }
 }

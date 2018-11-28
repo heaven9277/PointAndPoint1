@@ -153,7 +153,7 @@ public class MessageNotication {
                 if (ChatActivity.isChatActivity.equals("Chatactivity")){
                     new NotifyChat(text,ChatActivity.getChat_handler());
                 }
-                SendFisrtDataThread sendFisrtDataThread1 = new SendFisrtDataThread( MainActivity.main_username);
+                SendFisrtDataThread sendFisrtDataThread1 = new SendFisrtDataThread(MainActivity.main_username);
                 sendFisrtDataThread1.start();
                 System.out.println("开始聊天内容的通知");
                 //将消息放进数据
