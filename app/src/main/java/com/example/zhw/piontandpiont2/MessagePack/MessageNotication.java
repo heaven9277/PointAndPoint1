@@ -180,8 +180,9 @@ public class MessageNotication {
                         String userUuid = cursor.getString(1);
                         //获得群名
                         String groupName = cursor.getString(7);
+                        String groupStatus = cursor.getString(9);
                         System.out.println(userUuid + "aaaaaaaaaa" + groupName + "mmmmmmm");
-                        if (notificationData.getUserUuid().equals(userUuid)&&notificationData.getGroupName().equals(groupName)){
+                        if (notificationData.getUserUuid().equals(userUuid)&&notificationData.getGroupName().equals(groupName)&&groupStatus.equals("1")){
                             isApplicaton=true;
                         }
                     }
