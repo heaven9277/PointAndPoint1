@@ -206,7 +206,7 @@ public class GroupInfoActivity extends AppCompatActivity implements View.OnClick
         group_name.setText(ParseJson.getGroupData(data).getGroupName());
         group_id.setText(ParseJson.getGroupData(data).getGroupNumber());
         group_desc.setText(ParseJson.getGroupData(data).getGroupAnoun());
-        group_image.setImageUrl(ParseJson.getGroupData(data).getGroupPortrait(),R.drawable.group003);
+        group_image.setImageUrl(ParseJson.getGroupData(data).getGroupPortrait(),R.drawable.loading);
         groupName = ParseJson.getGroupData(data).getGroupName();
         groupDsc = ParseJson.getGroupData(data).getGroupAnoun();
         groupPro = ParseJson.getGroupData(data).getGroupPortrait();

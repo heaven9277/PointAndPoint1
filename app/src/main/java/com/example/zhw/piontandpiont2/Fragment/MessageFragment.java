@@ -132,7 +132,7 @@ public class MessageFragment extends Fragment implements AdapterView.OnItemClick
                 viewHolder = (ViewHolder) view.getTag();
             }
                 NotificationData notificationData = datalilst.get(datalilst.size()-(i+1));
-                viewHolder.siv_icon.setImageUrl(notificationData.getGroupPortrait(),R.drawable.users);
+                viewHolder.siv_icon.setImageUrl(notificationData.getGroupPortrait(),R.drawable.loading);
                 viewHolder.tv_title.setText(notificationData.getSendUserName());
                 viewHolder.tv_content.setText("申请加入"+notificationData.getGroupName()+"群聊");
                 System.out.println(notificationData.getGroupPortrait()+"头像？？？？？？？：");

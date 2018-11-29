@@ -107,7 +107,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         id.setText(MainActivity.main_username);
         phone.setText(MainActivity.phone);
         email.setText(MainActivity.email);
-        portrait.setImageUrl(MainActivity.user_portrait,R.drawable.avator_0003);
+        portrait.setImageUrl(MainActivity.user_portrait,R.drawable.loading);
         HomeActivity.isHomeActivity="";
         ChatActivity.isChatActivity ="";
     }

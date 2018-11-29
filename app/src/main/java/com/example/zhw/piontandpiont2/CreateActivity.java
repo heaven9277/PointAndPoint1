@@ -91,7 +91,7 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
         userName = MainActivity.main_username;
         data = intent.getStringExtra("data");
 
-        gourp_manager_image.setImageUrl(MainActivity.user_portrait,R.drawable.users);
+        gourp_manager_image.setImageUrl(MainActivity.user_portrait,R.drawable.loading);
         tv_group_manager.setText(MainActivity.user_h_name.replace("\"", ""));
         context= this;
         HomeActivity.isHomeActivity="";

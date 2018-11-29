@@ -279,7 +279,7 @@ public class GroupPositionActivity extends AppCompatActivity implements View.OnC
                 System.out.println(userPortarit.get(i)+"3333333333333333333333");
                 SmartImageView icon = (SmartImageView) coupon_home_ad_item
                         .findViewById(R.id.coupon_ad_iv);// 拿个这行的icon 就可以设置图片
-                icon.setImageUrl(img_path,R.drawable.users);
+                icon.setImageUrl(img_path,R.drawable.loading);
                 coupon_home_ad_item.setTag(i);
                 coupon_home_ad_item.setOnClickListener(new View.OnClickListener() {// 每个item的点击事件加在这里
                     @Override

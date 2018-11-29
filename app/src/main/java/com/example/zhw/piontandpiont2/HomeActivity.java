@@ -28,6 +28,7 @@ import com.example.zhw.piontandpiont2.Threadpack.SendFisrtDataThread;
 import com.example.zhw.piontandpiont2.Util.BDLocationUtils;
 import com.example.zhw.piontandpiont2.Util.BaseActivity;
 import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
+import com.example.zhw.piontandpiont2.Util.DeleteCache;
 import com.example.zhw.piontandpiont2.Util.Jsonpack;
 import com.example.zhw.piontandpiont2.Util.ParseJson;
 import com.example.zhw.piontandpiont2.db.QueryData;
@@ -84,6 +85,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
                     System.out.println("提示更新。。");
 
                    //更新数据
+                    DeleteCache deleteCache = new DeleteCache(context);
+                    deleteCache.clear();
+                    deleteCache.remove( MainActivity.user_portrait);
                     MainActivity.user_portrait = Jsonpack.getUserPortrait(data);
                     System.out.println("头像。。。。。。。。。。。。。。。。："+MainActivity.user_portrait);
                     System.out.println("是吗？？？？？？？？？？"+isHomeActivity);
@@ -114,8 +118,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
                     //推送成功
                     System.out.println("接收到消息") ;
                     MessageFragment.datalilst = QueryData.getData(context);
-                   // myMessageBaseAdapter = MessageFragment.getMyBaseAdapter();
-                    //myMessageBaseAdapter.notifyDataSetChanged();
                     //推送成功
                     break;
             }
@@ -246,9 +248,22 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
                         break;
                     case 1:
                         menuItem2.setChecked(true);
+                        System.out.println("哈哈哈哈"+myMessageBaseAdapter);
+                        if (myMessageBaseAdapter==null){
+
+                        }else{
+                            myMessageBaseAdapter.notifyDataSetChanged();
+                        }
                         break;
                     case 2:
                         menuItem3.setChecked(true);
+                        if (userFragment != null){
+                            userFragment.siv_icon.setImageUrl(MainActivity.user_portrait,R.drawable.loading);
+                            userFragment.tv_title.setText(MainActivity.user_h_name);
+                            userFragment.tv_author.setText(MainActivity.sign);
+                        }
+                        System.out.println("地方撒反对发"+userFragment);
+                        System.out.println("头像："+userFragment.siv_icon+"  "+MainActivity.user_portrait);
                         break;
 
                 }
@@ -322,6 +337,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
         if(id==2){
             viewPager.setCurrentItem(1);  //view2是viewPager中的第二个view，因此设置setCurrentItem（1）。
         }
+
      /*   try {
             Thread.sleep(5000);
             //发送请求

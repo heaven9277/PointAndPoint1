@@ -46,7 +46,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_margin="20dp"
-            android:src="@drawable/users" />
+            android:src="@drawable/loading" />
 
         <TextView
             android:id="@+id/application_applicant_name"

@@ -27,7 +27,7 @@ public class MyRecyAdapter extends RecyclerView.Adapter<MyRecyAdapter.ViewHolder
             //填充数据
         GroupDataBean.MembersBean membersBean = GroupInfoActivity.members.get(position);
         System.out.println("头次"+membersBean.getGroupUserPortrait()+"的发射点"+membersBean.getGroupUserName());
-        holder.smartImageView.setImageUrl(membersBean.getGroupUserPortrait(),R.drawable.qq);
+        holder.smartImageView.setImageUrl(membersBean.getGroupUserPortrait(),R.drawable.loading);
         holder.textView.setText(membersBean.getGroupUserName());
     }
 

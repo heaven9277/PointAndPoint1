@@ -55,7 +55,7 @@ public class MemberAdapter extends BaseAdapter implements View.OnClickListener {
         }
         ConnectMemberBean connectMemberBean = ConnectMemberActivity.list.get(i);
         System.out.println(">>>>>"+connectMemberBean.getUserName()+">"+connectMemberBean.getUserPhone()+"?"+connectMemberBean.getUserPortrait());
-        viewHodler.connect_portrait.setImageUrl(connectMemberBean.getUserPortrait(),R.drawable.qq);
+        viewHodler.connect_portrait.setImageUrl(connectMemberBean.getUserPortrait(),R.drawable.loading);
         viewHodler.connect_name.setText(connectMemberBean.getUserName());
         viewHodler.connect_phone_number.setText(connectMemberBean.getUserPhone());
         viewHodler.connect_call.setTag(i);

@@ -46,7 +46,7 @@ public class GroupUserInfoActivity extends AppCompatActivity implements View.OnC
                     pro.setVisibility(View.GONE);
                     relativeLayout.setVisibility(View.VISIBLE);
                     GroupMemberInfo groupMemberInfo = ParseJson.getGroupMemberInfo(data);
-                    user_image.setImageUrl(groupMemberInfo.getUserPortrait(),R.drawable.users);
+                    user_image.setImageUrl(groupMemberInfo.getUserPortrait(),R.drawable.loading);
                     System.out.println(groupMemberInfo.getUserPortrait()+"头像");
                     user_name.setText(groupMemberInfo.getUserName());
                     user_email.setText(groupMemberInfo.getUserEmail());

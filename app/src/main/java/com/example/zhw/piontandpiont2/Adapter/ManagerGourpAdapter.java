@@ -56,7 +56,7 @@ public class ManagerGourpAdapter extends BaseAdapter implements View.OnClickList
         }
         //填充数据
         GroupDataBean.MembersBean numbersBean = numbersBeans.get(i);
-        viewHodler.user_pro.setImageUrl(numbersBean.getGroupUserPortrait(),R.drawable.users);
+        viewHodler.user_pro.setImageUrl(numbersBean.getGroupUserPortrait(),R.drawable.loading);
         viewHodler.manager_user_name.setText(numbersBean.getGroupUserName());
         viewHodler.del_Groupuser.setOnClickListener(this);
         viewHodler.del_Groupuser.setTag(i);

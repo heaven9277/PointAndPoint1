@@ -170,7 +170,7 @@ public class MessageNotication {
                 List<NotificationData> notificationDataList = ParseJson.getNotificationData(text);
                 for (int i=0;i<notificationDataList.size();i++){
                     NotificationData notificationData = notificationDataList.get(i);
-                    Cursor cursor = db.query ("usertable",null,null,null,null,null,null);
+                    Cursor cursor = db.query ("messageTable",null,null,null,null,null,null);
                     //判断游标是否为空
                    cursor.moveToFirst();
                     //遍历游标
@@ -182,7 +182,7 @@ public class MessageNotication {
                         String groupName = cursor.getString(7);
                         String groupStatus = cursor.getString(9);
                         System.out.println(userUuid + "aaaaaaaaaa" + groupName + "mmmmmmm");
-                        if (notificationData.getUserUuid().equals(userUuid)&&notificationData.getGroupName().equals(groupName)&&groupStatus.equals("1")){
+                        if (notificationData.getUserUuid().equals(userUuid)&&notificationData.getGroupName().equals(groupName)){
                             isApplicaton=true;
                         }
                     }
