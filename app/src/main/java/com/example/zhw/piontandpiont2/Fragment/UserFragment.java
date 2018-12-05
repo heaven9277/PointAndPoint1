@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.zhw.piontandpiont2.AboutUs;
 import com.example.zhw.piontandpiont2.HomeActivity;
 import com.example.zhw.piontandpiont2.MainActivity;
 import com.example.zhw.piontandpiont2.ProfileActivity;
@@ -61,6 +62,10 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 SendOutLoginThread sendOutLoginThread = new SendOutLoginThread(HomeActivity.user_name);
                 sendOutLoginThread.start();
                 System.out.println("发送退出登陆");
+                break;
+            case R.id.about_our:
+                Intent usActivity = new Intent(getContext(), AboutUs.class);
+                startActivity(usActivity);
                 break;
         }
     }

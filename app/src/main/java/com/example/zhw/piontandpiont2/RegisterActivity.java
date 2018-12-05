@@ -142,10 +142,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             if (status.equals("success")){
                                 Looper.prepare();
                                 Toast.makeText(RegisterActivity.this, ParseJson.getJsonInfo(responseData),Toast.LENGTH_LONG).show();
-                                Looper.loop();
                                 //跳转到登陆页面
                                 Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
                                 startActivity(intent);
+                                Looper.loop();
                             }else{
                                 Looper.prepare();
                                Toast.makeText(RegisterActivity.this, ParseJson.getJsonInfo(responseData),Toast.LENGTH_LONG).show();

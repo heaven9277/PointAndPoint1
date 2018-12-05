@@ -98,8 +98,13 @@ public class MessageNotication {
                 break;
             case 11:
                 //接收用户加入群聊
-                SendFisrtDataThread sendFisrtDataThread = new SendFisrtDataThread(HomeActivity.user_name);
-                sendFisrtDataThread.start();
+                try {
+                    Thread.sleep(2000);
+                    SendFisrtDataThread sendFisrtDataThread = new SendFisrtDataThread(HomeActivity.user_name);
+                    sendFisrtDataThread.start();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 break;
             case 12:
                 //拒绝用户加入群聊

@@ -1,7 +1,6 @@
 package com.example.zhw.piontandpiont2;
 //在地图显示群成员位置界面
 
-
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -20,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -43,18 +43,34 @@ import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
+import com.baidu.mapapi.search.route.BikingRouteResult;
+import com.baidu.mapapi.search.route.DrivingRouteResult;
+import com.baidu.mapapi.search.route.IndoorRouteResult;
+import com.baidu.mapapi.search.route.MassTransitRouteResult;
+import com.baidu.mapapi.search.route.OnGetRoutePlanResultListener;
+import com.baidu.mapapi.search.route.PlanNode;
+import com.baidu.mapapi.search.route.RoutePlanSearch;
+import com.baidu.mapapi.search.route.TransitRouteResult;
+import com.baidu.mapapi.search.route.WalkingRoutePlanOption;
+import com.baidu.mapapi.search.route.WalkingRouteResult;
 import com.example.zhw.piontandpiont2.Bean.GroupLocation;
 import com.example.zhw.piontandpiont2.Listener.MyOrientationListener;
 import com.example.zhw.piontandpiont2.Threadpack.PositionThread;
 import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
 import com.example.zhw.piontandpiont2.Util.ParseJson;
+import com.example.zhw.piontandpiont2.overlayutil.WalkingRouteOverlay;
 import com.loopj.android.image.SmartImageView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GroupPositionActivity extends AppCompatActivity implements View.OnClickListener{
-    private Button back_icon;//返回按钮
+    private Button back_icon,position_add;//返回按钮,菜单按钮
+    private TextView map_common,map_site,map_model_common,map_model_compass;
+    private ImageView btn_walkroute;//路线规划按钮
+    private LinearLayout easy_menu;
+    boolean display=false;//判断是否弹出菜单框
+
     private static ListView lv;
     private static TextView tv_position;//显示位置信息
     private static View headerView;
@@ -76,6 +92,11 @@ public class GroupPositionActivity extends AppCompatActivity implements View.OnC
     public static int a;//获取第a个lontitudeList,latitudeList；
     public static String username;
     public static String groupId;
+
+    RoutePlanSearch mSearch;//路线规划
+    public static LatLng startlatLng,densitylatLng;
+    PlanNode s,e;
+
     public static Handler positionHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -108,8 +129,24 @@ public class GroupPositionActivity extends AppCompatActivity implements View.OnC
         context=this;
         username=ChatActivity.uuid;
         lv = findViewById(R.id.lv);
+        //获取Button,Linearlayout,TexyView，设置点击监听
         back_icon=findViewById(R.id.back_icon);
         back_icon.setOnClickListener(this);
+        btn_walkroute=findViewById(R.id.btn_walkroute);
+        btn_walkroute.setOnClickListener(this);
+        position_add=findViewById(R.id.position_add);
+        position_add.setOnClickListener(this);
+        easy_menu=findViewById(R.id.easy_menu);
+        easy_menu.setOnClickListener(this);
+        map_common=findViewById(R.id.map_common);
+        map_common.setOnClickListener(this);
+        map_site=findViewById(R.id.map_site);
+        map_site.setOnClickListener(this);
+        map_model_common=findViewById(R.id.map_model_common);
+        map_model_common.setOnClickListener(this);
+        map_model_compass=findViewById(R.id.map_model_compass);
+        map_model_compass.setOnClickListener(this);
+
         mMapView =  findViewById(R.id.bmapView);
         tv_position=findViewById(R.id.tv_position);
         geoCoder=GeoCoder.newInstance();
@@ -118,6 +155,7 @@ public class GroupPositionActivity extends AppCompatActivity implements View.OnC
         initMyLoc();
         initThread();
         initMap();
+        initPlan();
     }
 
     private void initThread() {
@@ -183,11 +221,101 @@ public class GroupPositionActivity extends AppCompatActivity implements View.OnC
         myOrientationListener.start();
     }
 
+    //实现路线的规划的监听
+    private void initPlan() {
+        mSearch = RoutePlanSearch.newInstance();
+        System.out.println("ggggggggggggggg");
+        mSearch.setOnGetRoutePlanResultListener(new OnGetRoutePlanResultListener() {
+            @Override
+            public void onGetWalkingRouteResult(WalkingRouteResult walkingRouteResult) {
+                if (walkingRouteResult == null || walkingRouteResult.error !=   SearchResult.ERRORNO.NO_ERROR) {
+                    Toast.makeText(GroupPositionActivity.this, "抱歉，未找到结果", Toast.LENGTH_SHORT).show();
+                }
+                if (walkingRouteResult.error == SearchResult.ERRORNO.AMBIGUOUS_ROURE_ADDR) {
+                    // 起终点或途经点地址有岐义，通过以下接口获取建议查询信息
+                    walkingRouteResult.getSuggestAddrInfo();
+                    return;
+                }
+                if (walkingRouteResult.error == SearchResult.ERRORNO.NO_ERROR) {
+                    //       DrivingRouteLine route = drivingRouteResult.getRouteLines().get(0);
+                    WalkingRouteOverlay overlay = new WalkingRouteOverlay(mBaiduMap);
+                    //       mRouteOverlay = overlay;
+                    mBaiduMap.setOnMarkerClickListener(overlay);
+                    overlay.setData(walkingRouteResult.getRouteLines().get(0));
+                    overlay.addToMap();
+                    overlay.zoomToSpan();
+
+                }
+            }
+
+            @Override
+            public void onGetTransitRouteResult(TransitRouteResult transitRouteResult) {
+
+            }
+
+            @Override
+            public void onGetMassTransitRouteResult(MassTransitRouteResult massTransitRouteResult) {
+
+            }
+
+            @Override
+            public void onGetDrivingRouteResult(DrivingRouteResult drivingRouteResult) {
+            }
+
+            @Override
+            public void onGetIndoorRouteResult(IndoorRouteResult indoorRouteResult) {
+
+            }
+
+            @Override
+            public void onGetBikingRouteResult(BikingRouteResult bikingRouteResult) {
+
+            }
+        });
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.back_icon:
                 finish();
+                break;
+            case R.id.btn_walkroute:
+                mBaiduMap.clear();
+                System.out.println("进入到btn_walkroute的点击事件aaa");
+                startlatLng=new LatLng(23.167918,113.04431);
+                densitylatLng=new LatLng(23.277918,113.0443);
+                s = PlanNode.withLocation(startlatLng);
+                e = PlanNode.withLocation(densitylatLng);
+                mSearch.walkingSearch(new WalkingRoutePlanOption()
+                        .from(s)
+                        .to(e));
+                break;
+            case R.id.position_add:
+                //点击加号显示
+                if(display==false) {
+                    easy_menu.setVisibility(View.VISIBLE);
+                    display = true;
+                }else {
+                    easy_menu.setVisibility(View.GONE);
+                    display = false;
+                }
+                break;
+            case R.id.map_common:
+                //普通地图
+                mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
+                break;
+            case R.id.map_site:
+                //卫星地图
+                mBaiduMap.setMapType(BaiduMap.MAP_TYPE_SATELLITE);
+                break;
+            case R.id.map_model_common:
+                //普通模式
+                locationMode= MyLocationConfiguration.LocationMode.NORMAL;;
+                break;
+            case R.id.map_model_compass:
+                //罗盘模式
+                locationMode= MyLocationConfiguration.LocationMode.COMPASS;
                 break;
         }
     }
@@ -196,7 +324,7 @@ public class GroupPositionActivity extends AppCompatActivity implements View.OnC
     public class MyLocationListener implements BDLocationListener {
         @Override
         public void onReceiveLocation(BDLocation location) {
-            System.out.println("获取得到weizhi信息："+location.getAddrStr());
+            startlatLng=new LatLng(location.getLatitude(),location.getLongitude());
             System.out.println("获取得到经纬度："+location.getLatitude());
             //获取用户所在位置
             user_adress=location.getAddrStr();
@@ -210,13 +338,13 @@ public class GroupPositionActivity extends AppCompatActivity implements View.OnC
             // 设置定位数据
             mBaiduMap.setMyLocationData(locData);
 
+            MyLocationConfiguration configuration
+                    = new MyLocationConfiguration(locationMode, true, mIconLocation);
+            //设置定位图层配置信息，只有先允许定位图层后设置定位图层配置信息才会生效，参见setMyLocationEnabled(boolean);
+            mBaiduMap.setMyLocationConfigeration(configuration);
             if (isFirst) {
+                densitylatLng=new LatLng(location.getLatitude(),location.getLongitude());
                 System.out.println("1111111111111111");
-                MyLocationConfiguration configuration
-                        = new MyLocationConfiguration(locationMode, true, mIconLocation);
-                //设置定位图层配置信息，只有先允许定位图层后设置定位图层配置信息才会生效，参见setMyLocationEnabled(boolean);
-                mBaiduMap.setMyLocationConfigeration(configuration);
-                System.out.println(location.getAddrStr() + "qqq");
                 LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
                 MapStatus.Builder builder = new MapStatus.Builder();
                 builder.target(ll).zoom(18.0f);
@@ -229,7 +357,7 @@ public class GroupPositionActivity extends AppCompatActivity implements View.OnC
             }
 
             //清除所有绘制点
-            mBaiduMap.clear();
+     //       mBaiduMap.clear();
             //绘制点
             List<OverlayOptions> options = new ArrayList<OverlayOptions>();
             //设置群内其他成员的坐标点，并绘制在地图上
@@ -260,6 +388,7 @@ public class GroupPositionActivity extends AppCompatActivity implements View.OnC
         }
     }
 
+    //获取头像
     private static void initheaderView() {
         headerView = LayoutInflater.from(context).inflate(
                 R.layout.map_item_home_header, null);
@@ -288,6 +417,7 @@ public class GroupPositionActivity extends AppCompatActivity implements View.OnC
                         a=(Integer)v.getTag();
                         //当点击头像时定位头像所在的位置
                         LatLng point = new LatLng(Double.parseDouble(latitudeList.get(a)), Double.parseDouble(lontitudeList.get(a)));
+                        startlatLng=point;
                         MapStatus.Builder builder = new MapStatus.Builder();
                         builder.target(point);
                         mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
@@ -325,6 +455,8 @@ public class GroupPositionActivity extends AppCompatActivity implements View.OnC
         ArrayAdapter adapter = new ArrayAdapter(context, R.layout.map_home_item);
         lv.setAdapter(adapter);
     }
+
+    //获取数据
     public static void AddUserPosition(String data){
         List<GroupLocation> groupLocations = new ArrayList<>();
         groupLocations = ParseJson.getGroupLocationData(data);
