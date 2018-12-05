@@ -14,10 +14,10 @@
 
         <com.loopj.android.image.SmartImageView
             android:id="@+id/ivicon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
             android:layout_gravity="top"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="6dp"
             android:background="@drawable/qq" />
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:padding="8dp"
+                android:paddingTop="8dp"
                 android:text="我是大亮" />
             <TextView
                 android:id="@+id/tvcontent"
@@ -38,9 +38,9 @@
                 android:layout_marginLeft="8dp"
                 android:paddingRight="10dp"
                 android:paddingLeft="13dp"
-                android:paddingTop="10dp"
+                android:paddingTop="12dp"
                 android:paddingBottom="10dp"
-                android:background="@drawable/left_chat"
+                android:background="@drawable/balloon_l_selector"
                 android:text="赵大亮好帅！！！"
                 android:gravity="left"/>
         </LinearLayout>
@@ -49,7 +49,6 @@
         android:id="@+id/rigt_el"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:layout_marginRight="5dp">
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -62,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="8dp"
-                android:padding="8dp"
+                android:paddingTop="8dp"
                 android:layout_alignParentRight="true"
                 android:text="我是智永" />
             <TextView
@@ -74,18 +73,18 @@
                 android:layout_marginRight="8dp"
                 android:paddingLeft="8dp"
                 android:paddingRight="14dp"
-                android:paddingTop="10dp"
+                android:paddingTop="12dp"
                 android:paddingBottom="10dp"
-                android:background="@drawable/right_chat"
+                android:background="@drawable/balloon_r_selector"
                 android:text="智永好帅！！！"
                 android:gravity="left"/>
         </RelativeLayout>
         <com.loopj.android.image.SmartImageView
             android:id="@+id/iv_headPhoto"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
             android:layout_gravity="top"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="6dp"
             android:background="@drawable/qq"
             android:layout_alignParentRight="true"/>
     </RelativeLayout>
