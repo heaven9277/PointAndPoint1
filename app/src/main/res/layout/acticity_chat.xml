@@ -60,7 +60,7 @@
             android:scrollbarStyle="outsideOverlay"
             android:scrollbars="vertical"
             android:scrollingCache="false"
-            android:stackFromBottom="true"
+            android:stackFromBottom="false"
             android:transcriptMode="alwaysScroll" >
         </ListView>
     </LinearLayout>
@@ -89,9 +89,16 @@
             android:layout_weight="3"
             android:background="#ffffff"
             android:gravity="center|left"
-            android:padding="8dp"
-            android:textSize="14sp" />
-
+            android:paddingLeft="5dp"
+            android:textSize="16sp" />
+        <ImageView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/team_singlechat_id_expression"
+            android:src="@drawable/chat_expression_bg"/>
         <Button
             android:id="@+id/btn_chat_message_send"
             android:layout_width="0dp"

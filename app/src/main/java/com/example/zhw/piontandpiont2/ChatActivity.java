@@ -1,18 +1,30 @@
 package com.example.zhw.piontandpiont2;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ImageSpan;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,8 +35,11 @@ import com.example.zhw.piontandpiont2.Threadpack.SendChatMessageThread;
 import com.example.zhw.piontandpiont2.Util.DarkStatusBar;
 import com.example.zhw.piontandpiont2.db.QueryData;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ChatActivity extends AppCompatActivity implements View.OnClickListener, KeyboardChangeListener.KeyBoardListener{
     private Button btn,home_add;//群资料
@@ -54,6 +69,11 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     private KeyboardChangeListener mKeyboardChangeListener;
 
     public static String isChatActivity;
+    //表情包
+    private ImageView expression;
+    private int[] imageIds = new int[107];
+    private Dialog builder;
+
     //定义一个handler进行消息接收
     private static Handler chat_handler = new Handler(){
         @Override
@@ -103,6 +123,9 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         chat_title = findViewById(R.id.chat_title);
         group_user_position = findViewById(R.id.group_user_position);
         group_user_connection = findViewById(R.id.group_user_connection);
+        //表情包
+        expression = findViewById(R.id.team_singlechat_id_expression);
+        expression.setOnClickListener(this);
 
         //接收到上一个activity的数据
         Intent intent = getIntent();
@@ -122,7 +145,9 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         lv_chat_dialog = findViewById(R.id.lv_chat_dialog);
         myChatAdapter = new ChatAdapter(this);
         lv_chat_dialog.setAdapter(myChatAdapter);
-
+        if (myChatAdapter.getCount() !=0){
+            lv_chat_dialog.setSelection(myChatAdapter.getCount()-1);
+        }
         btn.setOnClickListener(this);
         home_add.setOnClickListener(this);
         btn_chat_message_send.setOnClickListener(this);
@@ -135,6 +160,9 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         //设置键盘的监听事件
         mKeyboardChangeListener = new KeyboardChangeListener(this);
         mKeyboardChangeListener.setKeyBoardListener(this);
+
+        //listView的底部显示
+        System.out.println("是否显示"+lv_chat_dialog.getLastVisiblePosition()+"......"+lv_chat_dialog.getFirstVisiblePosition());
     }
     @Override
     public void onClick(View v) {
@@ -176,7 +204,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                     break;
             case R.id.btn_chat_message_send://发送
                 String chat_message_content=et_chat_message.getText().toString();
-                if (chat_message_content.equals("")){
+                if (chat_message_content.length() == 0){
                     System.out.println("221234hhdhhdddhdhdhdh");
                     Toast.makeText(this,"内容不能为空",Toast.LENGTH_LONG).show();
                 }
@@ -198,6 +226,9 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                     et_chat_message.setText("");
                 }
                 break;
+            case R.id.team_singlechat_id_expression: //表情包
+                createExpressionDialog();
+                break;
             default :
                 break;
         }
@@ -211,7 +242,88 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
            // ll.setVisibility(ll.VISIBLE);
         }
     }
+    /**
+     * 创建一个表情选择对话框
+     */
+    private void createExpressionDialog() {
+        builder = new Dialog(ChatActivity.this);
+        GridView gridView = createGridView();
+        builder.setContentView(gridView);
+        builder.setTitle("默认表情");
+        builder.show();
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                    long arg3) {
+                Bitmap bitmap = null;
+                bitmap = BitmapFactory.decodeResource(getResources(), imageIds[arg2 % imageIds.length]);
+                ImageSpan imageSpan = new ImageSpan(ChatActivity.this, bitmap);
+                String str = null;
+                if(arg2<10){
+                    str = "f00"+arg2;
+                }else if(arg2<100){
+                    str = "f0"+arg2;
+                }else{
+                    str = "f"+arg2;
+                }
+                SpannableString spannableString = new SpannableString(str);
+                spannableString.setSpan(imageSpan, 0, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                et_chat_message.append(spannableString);
+                builder.dismiss();
+            }
+        });
+    }
+
+    /**
+     * 生成一个表情对话框中的gridview
+     * @return
+     */
+    private GridView createGridView() {
+        final GridView view = new GridView(this);
+        List<Map<String,Object>> listItems = new ArrayList<Map<String,Object>>();
+        //生成107个表情的id，封装
+        for(int i = 0; i < 107; i++){
+            try {
+                if(i<10){
+                    Field field = R.drawable.class.getDeclaredField("f00" + i);
+                    int resourceId = Integer.parseInt(field.get(null).toString());
+                    imageIds[i] = resourceId;
+                }else if(i<100){
+                    Field field = R.drawable.class.getDeclaredField("f0" + i);
+                    int resourceId = Integer.parseInt(field.get(null).toString());
+                    imageIds[i] = resourceId;
+                }else{
+                    Field field = R.drawable.class.getDeclaredField("f" + i);
+                    int resourceId = Integer.parseInt(field.get(null).toString());
+                    imageIds[i] = resourceId;
+                }
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            } catch (SecurityException e) {
+                e.printStackTrace();
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            Map<String,Object> listItem = new HashMap<String,Object>();
+            listItem.put("image", imageIds[i]);
+            listItems.add(listItem);
+        }
+
+        SimpleAdapter simpleAdapter = new SimpleAdapter(this, listItems, R.layout.team_layout_single_expression_cell, new String[]{"image"}, new int[]{R.id.image});
+        view.setAdapter(simpleAdapter);
+        view.setNumColumns(6);
+        view.setBackgroundColor(Color.rgb(214, 211, 214));
+        view.setHorizontalSpacing(1);
+        view.setVerticalSpacing(1);
+        view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        view.setGravity(Gravity.CENTER);
+        return view;
+    }
     public static Handler getChat_handler(){
         return chat_handler;
     }
