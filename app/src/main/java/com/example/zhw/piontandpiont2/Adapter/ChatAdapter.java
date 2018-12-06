@@ -1,6 +1,7 @@
 package com.example.zhw.piontandpiont2.Adapter;
 
 import android.content.Context;
+import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.example.zhw.piontandpiont2.Bean.ChatMessageData;
 import com.example.zhw.piontandpiont2.ChatActivity;
 import com.example.zhw.piontandpiont2.MainActivity;
 import com.example.zhw.piontandpiont2.R;
+import com.example.zhw.piontandpiont2.Util.ExpressionUtil;
 import com.loopj.android.image.SmartImageView;
 
 public class ChatAdapter extends BaseAdapter {
@@ -40,6 +42,7 @@ public class ChatAdapter extends BaseAdapter {
         ViewHolder holder = null;
         LinearLayout left_ll = null;
         RelativeLayout rigt_el = null;
+        String zhengze = "f0[0-9]{2}|f10[0-7]";			//正则表达式，用来判断消息内是否有表情
         if (view==null){
             view = LayoutInflater.from(context).inflate(R.layout.chat_list_item,viewGroup,false);
             holder = new ViewHolder();
@@ -68,7 +71,19 @@ public class ChatAdapter extends BaseAdapter {
 
             holder.ivicon_right.setImageUrl(chatMessageData.getUserPro(),R.drawable.loading);
             holder.tv_name_right.setText(chatMessageData.getUuid());
-            holder.tv_content_right.setText(chatMessageData.getGroupMessage());
+            //表情包
+            try {
+                SpannableString spannableString = ExpressionUtil.getExpressionString(context,chatMessageData.getGroupMessage(), zhengze);
+                System.out.println(spannableString+"jjj");
+                holder.tv_content_right.setText(spannableString);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            } catch (SecurityException e) {
+                e.printStackTrace();
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            }
+           // holder.tv_content_right.setText(chatMessageData.getGroupMessage());
         }else{
             //右边布局隐藏
             holder.left_ll.setVisibility(View.VISIBLE);
@@ -76,7 +91,18 @@ public class ChatAdapter extends BaseAdapter {
 
             holder.ivicon_left.setImageUrl(chatMessageData.getUserPro(),R.drawable.loading);
             holder.tvname.setText(chatMessageData.getUuid());
-            holder.tvcontent.setText(chatMessageData.getGroupMessage());
+          // holder.tvcontent.setText(chatMessageData.getGroupMessage());
+            try {
+                SpannableString spannableString = ExpressionUtil.getExpressionString(context,chatMessageData.getGroupMessage(), zhengze);
+                System.out.println(spannableString+"jjj");
+                holder.tvcontent.setText(spannableString);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            } catch (SecurityException e) {
+                e.printStackTrace();
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            }
         }
         return view;
     }
