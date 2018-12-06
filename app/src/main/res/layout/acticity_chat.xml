@@ -48,7 +48,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:padding="8dp" >
+        android:padding="8dp"
+        android:background="#fffef9">
 
         <ListView
             android:id="@+id/lv_chat_dialog"
