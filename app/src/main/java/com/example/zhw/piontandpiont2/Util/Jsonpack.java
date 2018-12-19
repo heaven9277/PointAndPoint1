@@ -17,6 +17,7 @@ import com.example.zhw.piontandpiont2.Bean.MyProfileToSend;
 import com.example.zhw.piontandpiont2.Bean.OutGroup;
 import com.example.zhw.piontandpiont2.Bean.PositionBean;
 import com.example.zhw.piontandpiont2.Bean.SeachData;
+import com.example.zhw.piontandpiont2.Bean.TimeStamp;
 import com.example.zhw.piontandpiont2.Bean.UserInfo;
 import com.example.zhw.piontandpiont2.Bean.UserLogin;
 import com.example.zhw.piontandpiont2.Bean.UserRegister;
@@ -295,5 +296,13 @@ public class Jsonpack {
         String proJson = gson.toJson(myProfileToSend);
         return proJson;
     }
-
+    /*
+    提醒服务器该条信息已经处理
+     */
+    public static String getTimeStamp(String userUuid,String groupUuid,long timeStamp){
+        TimeStamp timeStamp1 = new TimeStamp(99,userUuid,groupUuid,timeStamp);
+        Gson gson = new Gson();
+        String ptimeJson = gson.toJson(timeStamp1);
+        return ptimeJson;
+    }
 }

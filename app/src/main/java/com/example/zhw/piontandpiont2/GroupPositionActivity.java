@@ -12,6 +12,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -168,6 +169,15 @@ public class GroupPositionActivity extends AppCompatActivity implements View.OnC
     private void initMap() {
         //获取地图控件引用
         mBaiduMap = mMapView.getMap();
+        //触摸地图回调
+        mBaiduMap.setOnMapTouchListener(new BaiduMap.OnMapTouchListener(){
+            @Override
+            public void onTouch(MotionEvent motionEvent) {
+                easy_menu.setVisibility(View.GONE);
+                display = false;
+            }
+        });
+
         // 普通地图
         mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
         mBaiduMap.setMyLocationEnabled(true);
@@ -283,8 +293,8 @@ public class GroupPositionActivity extends AppCompatActivity implements View.OnC
             case R.id.btn_walkroute:
                 mBaiduMap.clear();
                 System.out.println("进入到btn_walkroute的点击事件aaa");
-                startlatLng=new LatLng(23.167918,113.04431);
-                densitylatLng=new LatLng(23.277918,113.0443);
+               // startlatLng=new LatLng(23.167918,113.04431);
+                //densitylatLng=new LatLng(23.277918,113.0443);
                 s = PlanNode.withLocation(startlatLng);
                 e = PlanNode.withLocation(densitylatLng);
                 mSearch.walkingSearch(new WalkingRoutePlanOption()
@@ -413,11 +423,12 @@ public class GroupPositionActivity extends AppCompatActivity implements View.OnC
                 coupon_home_ad_item.setOnClickListener(new View.OnClickListener() {// 每个item的点击事件加在这里
                     @Override
                     public void onClick(View v) {
+                        mBaiduMap.clear();
                         //获取头像所在的位置
                         a=(Integer)v.getTag();
                         //当点击头像时定位头像所在的位置
                         LatLng point = new LatLng(Double.parseDouble(latitudeList.get(a)), Double.parseDouble(lontitudeList.get(a)));
-                        startlatLng=point;
+                        densitylatLng=point;
                         MapStatus.Builder builder = new MapStatus.Builder();
                         builder.target(point);
                         mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));

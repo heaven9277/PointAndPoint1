@@ -52,7 +52,7 @@ public class WalkingRouteOverlay extends OverlayManager {
             for (WalkingRouteLine.WalkingStep step : mRouteLine.getAllStep()) {
                 Bundle b = new Bundle();
                 b.putInt("index", mRouteLine.getAllStep().indexOf(step));
-                if (step.getEntrance() != null) {
+                /*if (step.getEntrance() != null) {
                     overlayList.add((new MarkerOptions())
                             .position(step.getEntrance().getLocation())
                                     .rotate((360 - step.getDirection()))
@@ -73,7 +73,7 @@ public class WalkingRouteOverlay extends OverlayManager {
                                                     .icon(BitmapDescriptorFactory
                                                             .fromAssetWithDpi("Icon_line_node.png")));
 
-                }
+                }*/
             }
         }
         // starting

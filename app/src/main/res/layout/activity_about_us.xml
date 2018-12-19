@@ -35,15 +35,15 @@
         android:layout_marginTop="5dp"
         android:layout_below="@id/linear">
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="@drawable/logo"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:text="点滴之间"
-            android:textSize="30dp"
+            android:textSize="23dp"
             android:gravity="center"
             android:textColor="#009ad6"/>
     </LinearLayout>
@@ -58,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="关于我们的团队?"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="15dp"
             android:textColor="#33a3dc"/>
@@ -66,7 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="六大神兽(详情请见两年后百度，一个特有名的IT团队)"
-            android:textSize="18dp"
+            android:textSize="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="13dp"
@@ -75,7 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="关于我们的App?"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="15dp"
             android:textColor="#33a3dc"/>
@@ -83,7 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="点滴之间是一个基于LBS、百度地图、websocket的android手机，具有定位、通讯、群聊等功能。通过此应用，可以轻松地定位你和你的朋友们所在的位置，让你不再为与朋友走失而烦恼，为旅游组团、志愿者组团、老人孩子走失提供了帮助。"
-            android:textSize="18dp"
+            android:textSize="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="13dp"
@@ -92,7 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="关于软件更新?"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="15dp"
             android:textColor="#33a3dc"/>
@@ -100,7 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="现处于开发阶段，软件更新等功能还未完善开发，敬请期待..."
-            android:textSize="18dp"
+            android:textSize="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="13dp"

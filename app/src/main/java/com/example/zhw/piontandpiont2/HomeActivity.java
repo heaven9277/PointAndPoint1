@@ -81,13 +81,20 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
                    System.out.println("获得数据。。"+ChatFragment.datalilst);
                     myBaseAdapters =ChatFragment.getMyBaseAdapter();
                     System.out.println("你哈皮"+myBaseAdapters);
-                    myBaseAdapters.notifyDataSetChanged();
-                    System.out.println("提示更新。。");
+                    if (myBaseAdapters==null){
 
+                    }else {
+                        myBaseAdapters.notifyDataSetChanged();
+                        System.out.println("提示更新。。");
+                    }
                    //更新数据
-                    DeleteCache deleteCache = new DeleteCache(context);
-                    deleteCache.clear();
-                    deleteCache.remove( MainActivity.user_portrait);
+                    System.out.println("内tong+"+context);
+                    if (context == null){
+                    }else{
+                        DeleteCache deleteCache = new DeleteCache(context);
+                        deleteCache.clear();
+                        deleteCache.remove( MainActivity.user_portrait);
+                    }
                     MainActivity.user_portrait = Jsonpack.getUserPortrait(data);
                     System.out.println("头像。。。。。。。。。。。。。。。。："+MainActivity.user_portrait);
                     System.out.println("是吗？？？？？？？？？？"+isHomeActivity);
@@ -169,6 +176,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        context = this;
         DarkStatusBar.setDarkStatusIcon(this);
         relativeLayout = findViewById(R.id.relativeLayout);
         btn_add = findViewById(R.id.home_add);
@@ -189,7 +197,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
         user_portrait = MainActivity.user_portrait;
         user_h_name = MainActivity.user_h_name;
         System.out.println("结兽皮"+data+"接收到的信息"+user_name+"第一次登陆");
-        context = this;
         initView();
         initListener();
         //发送数据给Fragment
@@ -250,8 +257,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener{
                         menuItem2.setChecked(true);
                         System.out.println("哈哈哈哈"+myMessageBaseAdapter);
                         if (myMessageBaseAdapter==null){
-
                         }else{
+                            MessageFragment.datalilst = QueryData.getData(context);
                             myMessageBaseAdapter.notifyDataSetChanged();
                         }
                         break;

@@ -8,9 +8,12 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.zhw.piontandpiont2.Bean.ChatMessageData;
 import com.example.zhw.piontandpiont2.Bean.MessageNotification;
 import com.example.zhw.piontandpiont2.Bean.NotificationData;
+import com.example.zhw.piontandpiont2.Threadpack.SendTimeStamp;
 import com.example.zhw.piontandpiont2.Util.ParseJson;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class QueryData {
@@ -108,12 +111,17 @@ public class QueryData {
         MessageHelper messageHelper = new MessageHelper(context);
         SQLiteDatabase db = messageHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+       // db.delete("chatMessageTable",null,null);
         //从数据里面得到数据
         //得到外面的对象
         List<MessageNotification> notificationList = ParseJson.getMessagesNotificationData(text);
+        Long[] times;
         for (int i=0;i<notificationList.size();i++){
             //得到里面的消息对象
             List<MessageNotification.MessagesBean> messagesBeans = notificationList.get(i).getMessages();
+            //得到时间
+            times = new Long[messagesBeans.size()];
+            int index = messagesBeans.size();
             for (int j=0;j<messagesBeans.size();j++){
                 //开始将数据插进数据库
                 contentValues.put("uuid",messagesBeans.get(j).getMessageUserId());
@@ -124,7 +132,39 @@ public class QueryData {
                 db.insert("chatMessageTable",null,contentValues);
                 System.out.println("插数据:>>>>>>>>>>>>"+messagesBeans.get(j).getMessageUserId()+notificationList.get(i).getGroupUuid()+messagesBeans.get(j).getMessageContent()+
                         messagesBeans.get(j).getUserPortrait()+" "+messagesBeans.get(j).getMessageUserName());
+                //把每一个消息的时间放进数组
+                times[j] = Long.valueOf(messagesBeans.get(j).getMessageTime());
+                System.out.println(times[j]);
             }
+           if (times.length==1){
+               long time = times[0];//得到最新的消息时间
+               System.out.println("时间："+time+"大小："+messagesBeans.size()+"jjj"+times.length);
+               //对时间的uuid和groupId进行查找
+               for (int k = 0;k<messagesBeans.size();k++) {
+                   if (String.valueOf(time).equals(messagesBeans.get(k).getMessageTime())) {
+                       System.out.println("时间：+" + time);
+                       System.out.println(messagesBeans.get(k).getMessageUserId() + "群组ID：" + notificationList.get(i).getGroupUuid());
+                       //进行消息的时间发送，提醒服务器该条信息已经处理
+                       SendTimeStamp sendTimeStamp = new SendTimeStamp(messagesBeans.get(k).getMessageUserId(), notificationList.get(i).getGroupUuid(), time);
+                       sendTimeStamp.start();
+                   }
+               }
+           }else{
+               //对数组进行排序
+               Arrays.sort(times, Collections.reverseOrder());
+               long time = times[0];//得到最新的消息时间
+               System.out.println("时间："+time+"大小："+messagesBeans.size()+"jjj"+times.length);
+               //对时间的uuid和groupId进行查找
+               for (int k = 0;k<messagesBeans.size();k++){
+                   if (String.valueOf(time).equals(messagesBeans.get(k).getMessageTime())){
+                       System.out.println("时间：+"+time);
+                       System.out.println(messagesBeans.get(k).getMessageUserId()+"群组ID："+notificationList.get(i).getGroupUuid());
+                       //进行消息的时间发送，提醒服务器该条信息已经处理
+                       SendTimeStamp sendTimeStamp = new SendTimeStamp(messagesBeans.get(k).getMessageUserId(),notificationList.get(i).getGroupUuid(),time);
+                       sendTimeStamp.start();
+                   }
+               }
+           }
         }
         db.close();
         System.out.println("开始把收到的信息插进数据库????");

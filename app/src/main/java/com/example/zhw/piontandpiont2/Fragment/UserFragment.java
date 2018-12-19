@@ -17,6 +17,7 @@ import com.example.zhw.piontandpiont2.ProfileActivity;
 import com.example.zhw.piontandpiont2.R;
 import com.example.zhw.piontandpiont2.Threadpack.SendOutLoginThread;
 import com.loopj.android.image.SmartImageView;
+import com.yanzhenjie.album.Album;
 
 
 public class UserFragment extends Fragment implements View.OnClickListener {
@@ -47,6 +48,8 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         tv_title.setText(MainActivity.user_h_name);
         tv_author.setText(MainActivity.sign);
         out_login.setOnClickListener(this);
+        ll_photos.setOnClickListener(this);
+        about_our.setOnClickListener(this);
         System.out.println("进入这里??????????????????????????????????????"+ HomeActivity.isHomeActivity);
         System.out.println("?????"+ MainActivity.user_portrait);
     }
@@ -63,9 +66,12 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 sendOutLoginThread.start();
                 System.out.println("发送退出登陆");
                 break;
-            case R.id.about_our:
-                Intent usActivity = new Intent(getContext(), AboutUs.class);
-                startActivity(usActivity);
+            case R.id.about_our:       //关于我们
+                Intent useActivity = new Intent(getContext(), AboutUs.class);
+                startActivity(useActivity);
+                break;
+            case R.id.ll_photos:
+                Album.startAlbum(this, 0, 9);
                 break;
         }
     }
